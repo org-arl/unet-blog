@@ -29,7 +29,7 @@ A modem driver is simply a [Unet agent](https://www.unetstack.net/unet-agents.ht
 There are several libraries for Java/Groovy that allow RS232 communications. We'll use [jSerialComm](http://fazecast.github.io/jSerialComm/) in our example here.
 
 Let's start putting together a skeleton for it in Groovy:
-```
+```groovy
 import org.arl.fjage.*
 import org.arl.unet.*
 import com.fazecast.jSerialComm.*
@@ -69,7 +69,7 @@ We'll conveniently ignore error handling throughout this blog to keep the code s
 In order to support the Datagram service, the agent must honor a [`DatagramReq`](https://www.unetstack.net/javadoc/org/arl/unet/DatagramReq.html). It should also send a [`DatagramNtf`](https://www.unetstack.net/javadoc/org/arl/unet/DatagramNtf.html) when a frame is received by the modem, and expose a parameter `MTU` that advertises the frame size.
 
 To honor the `DatagramReq`, we modify the `processRequest()` method to send out the proper AT command:
-```
+```groovy
   Message processRequest(Message req) {
     if (req instanceof DatagramReq) {
       String s = "AT+TX:" + req.to + "," + req.data.encodeHex() + "\n"
@@ -82,7 +82,7 @@ To honor the `DatagramReq`, we modify the `processRequest()` method to send out 
 
 ```
 To publish the `MTU` parameter, we simply declare a getter for it:
-```
+```groovy
   int getMTU() {
     return 32         // frame size
   }
@@ -92,7 +92,7 @@ Since our hypothetical modem uses a fixed frame size, we don't need a setter. We
 Now let's look at what we need to do to support the Physical service. We need to support the [`TxFrameReq`](https://www.unetstack.net/javadoc/org/arl/unet/phy/TxFrameReq.html) request, and the [`RxFrameNtf`](https://www.unetstack.net/javadoc/org/arl/unet/phy/RxFrameNtf.html) and [`TxFrameNtf`](https://www.unetstack.net/javadoc/org/arl/unet/phy/TxFrameNtf.html) notifications. Since our modem doesn't support advanced functionality like collision detection, bad frame detection, snooping of frames for other nodes, we don't need to support the rest of the messages. Since the `TxFrameReq` class extends the `DatagramReq`, our `processRequest()` method above already honors these requests!
 
 We add support for the `TxFrameNtf` to be sent the moment we ask the modem to send the frame for us. For this we add a [`OneShotBehavior`](http://org-arl.github.io/fjage/doc/html/behaviors.html) to our 'processMessage()' method:
-```
+```groovy
   Message processRequest(Message req) {
     if (req instanceof DatagramReq) {
       String s = "AT+TX:" + req.to + "," + req.data.encodeHex() + "\n"
@@ -110,7 +110,7 @@ We add support for the `TxFrameNtf` to be sent the moment we ask the modem to se
 The behavior will be executed as soon as the request is processed.
 
 We also need to support a bunch of parameters, which we'll support by implementing some getters:
-```
+```groovy
   boolean getRxEnable() {
     return true
   }
@@ -145,7 +145,7 @@ We also need to support a bunch of parameters, which we'll support by implementi
 ```
 
 The Physical service has two logical channels: CONTROL and DATA. Since our modem does not have multiple modulation schemes or error correction codes, we don't need to differentiate between the two channels. We implement the getters for all the indexed parameters (indexed by the channel):
-```
+```groovy
   int getMTU(int ch) {
     return 32         // frame size
   }
@@ -183,7 +183,7 @@ The Physical service has two logical channels: CONTROL and DATA. Since our modem
   }
 ```
 The only parameter that can be changed is the power level, so we need one setter that sends the appropriate AT command to the modem:
-```
+```groovy
   float setPowerLevel(int ch, float x) {
     plvl = x
     if (plvl < getMinPowerLevel()) plvl = getMinPowerLevel()
@@ -196,7 +196,7 @@ The only parameter that can be changed is the power level, so we need one setter
 ```
 
 So now we can transmit data frames and control the transmit power level. The next thing to do is to be able to receive data frames. To do this, we need to monitor the serial port for unsolicited data. We could do this with an [event-based API](https://github.com/Fazecast/jSerialComm/wiki/Event-Based-Reading-Usage-Example) for performance, but to keep the code here simple, we'll use the [polling API](https://github.com/Fazecast/jSerialComm/wiki/Nonblocking-Reading-Usage-Example) instead. We can set up the polling in a [`CyclicBehavior`](http://org-arl.github.io/fjage/javadoc/index.html?org/arl/fjage/CyclicBehavior.html). To do this, we have to modify our `startup()` method:
-```
+```groovy
   void startup() {
     rs232.openPort()
     add new CyclicBehavior({
@@ -213,7 +213,7 @@ So now we can transmit data frames and control the transmit power level. The nex
 
 ```
 and add a `parseRxData()` method to deal with the data coming in over the RS232 port, and to send out a `RxFrameNtf` if a frame is received:
-```
+```groovy
   String data = ''
 
   void parseRxData(String s) {
@@ -240,7 +240,7 @@ Again, since `RxFrameNtf` class extends `DatagramNtf`, we satify the Datagram se
 ## Loading the modem driver
 
 Now that we have the modem driver ready, all that remains is to run UnetStack and to load the driver. You can manually do this in the shell, or use the `etc/setup.groovy` to load it:
-```
+```groovy
 container.add 'phy', new MyModemDriver()
 ```
 When you run UnetStack, you should be able to see (using the shell) your driver loaded:
