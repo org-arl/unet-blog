@@ -50,19 +50,23 @@ class MyModemDriver extends UnetAgent {
     rs232.openPort()
   }
 
+  void shutdown() {
+    rs232.closePort()
+  }
+
   Message processRequest(Message req) {
     // process frame transmission request here
     return null
   }
 
-  void shutdown() {
-    rs232.closePort()
+  List<Parameter> getParameterList() {
+    return allOf(DatagramParam, PhysicalParam)
   }
 
 }
 ```
 
-What we have in this code is a simple agent that advertises the two services that it supports, and creates a `notify` topic on which it can send it's notifications when a frame is received. It also opens a RS232 port for reading and writing to the modem. When a frame transmission request is made to the agent, the `processRequest()` method will be called, so we'd want to write the code to handle that there.
+What we have in this code is a simple agent that advertises the two services that it supports, two sets of parameters for those services, and creates a `notify` topic on which it can send it's notifications when a frame is received. It also opens a RS232 port for reading and writing to the modem. When a frame transmission request is made to the agent, the `processRequest()` method will be called, so we'd want to write the code to handle that there.
 
 We'll conveniently ignore error handling throughout this blog to keep the code simple.
 
@@ -144,7 +148,7 @@ We also need to support a bunch of parameters, which we'll support by implementi
   }
 ```
 
-The Physical service has two logical channels: CONTROL and DATA. Since our modem does not have multiple modulation schemes or error correction codes, we don't need to differentiate between the two channels. We implement the getters for all the indexed parameters (indexed by the channel):
+The Physical service has two logical channels: CONTROL and DATA. Since our modem does not have multiple modulation schemes or forward error correction (FEC) codes, we don't need to differentiate between the two channels. We implement the getters for all the indexed parameters (indexed by the channel):
 ```groovy
   int getMTU(int ch) {
     return 32         // frame size
@@ -261,8 +265,13 @@ AGREE
 
 There's much more that modem drivers may support, depending on the capabilities of the modem. Once you understand how to write the simple modem driver above, the rest should be straightforward. Here are some additional functionalities that you may want to consider supporting:
 
-* Optional `PRIORITY`, `TTL`, `CANCELATION` capabilities of the [Datagram](https://www.unetstack.net/svc-02-datagram.html) service
-* Optional `TIMED_TX` `TIMESTAMPED_TX` capability of the [Physical](https://www.unetstack.net/svc-10-phy.html) service
-* Populating optional `to`, `protocol`, `timestamp`, `errors` fields of the [`RxFrameNtf`](https://www.unetstack.net/javadoc/org/arl/unet/phy/RxFrameNtf.html)
+* `CONTROL` and `DATA` channels, if the modem supports various levels of modulation/FEC robustness
+* Optional `ClearReq`, `TxRawFrameReq`, `RxFrameStartNtf`, `BadFrameNtf` and `CollisionNtf` messages of the [Physical](https://www.unetstack.net/svc-10-phy.html) service
+* Populating optional `to`, `protocol`, `timestamp` and `errors` fields of the [`RxFrameNtf`](https://www.unetstack.net/javadoc/org/arl/unet/phy/RxFrameNtf.html)
+* More accurate timestamps, if the modem provides a µs accuracy clock for timestamping frames
+* Optional `TIMED_TX` and `TIMESTAMPED_TX` capability of the [Physical](https://www.unetstack.net/svc-10-phy.html) service
+* Optional `PRIORITY`, `TTL` and `CANCELATION` capabilities of the [Datagram](https://www.unetstack.net/svc-02-datagram.html) service
 * [Baseband](https://www.unetstack.net/svc-12-baseband.html) service, if the modem supports acoustic recording or arbitrary signal transmission
 * [Ranging](https://www.unetstack.net/svc-11-ranging.html) service, if the modem supports acoustic ranging
+
+And if your modem supports new functionality and parameters, you can define your own parameters to expose and requests, responses and notifications to offer.
