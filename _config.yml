@@ -26,7 +26,6 @@ theme_settings:
 
   # Scripts / Features
   google_analytics: # Tracking ID, e.g. "UA-000000-01"
-  disqus_shortname:
   katex: true # Enable if using math markup
 
   special_page:
@@ -50,7 +49,6 @@ theme_settings:
   str_next_page: "Next"
   str_previous_page: "Prev"
   str_continue_reading: "Continue reading"
-  str_javascript_required_disqus: "Please enable JavaScript to view comments."
 
   # Colours, typography and padding
   # Open the "_sass > base" folder, and open "_variables.scss"
