@@ -33,6 +33,12 @@
     </script>
     {% endif %}
 
+    <!-- Particles -->
+    {% if page.layout == "home" %}
+    <script src="{{ site.baseurl }}/assets/js/vendor/particles.min.js"></script>
+    <script src="{{ site.baseurl }}/assets/js/particles-network.js"></script>
+    {% endif %}
+
     <!-- Google Analytics -->
     {% if site.theme_settings.google_analytics %}
     <script>

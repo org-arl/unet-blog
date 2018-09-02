@@ -13,6 +13,7 @@
     color: $header-desc-text-color;
     background: $header-desc-background-color no-repeat;
     background-size: $feature-image-size;
+    position: relative;
 
     /* --- Responsive --- */
     @media screen and (max-width: 850px) {
@@ -97,4 +98,16 @@
         }
     }
 
+}
+
+//
+.header-text{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    left: 0;
+}
+
+.header-text h1{
+    margin-top: 10%
 }
