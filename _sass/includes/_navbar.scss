@@ -94,10 +94,14 @@
 @media screen and (max-width: $break) {
     .site-header {
         img.avatar {
-            margin-top: -7px
+            margin-top: 4px
         }
         .site-title {
-            margin-top: 7px;
+            margin-top: 5px;
+        }
+
+        nav a#pull i {
+            margin-top: 8px;
         }
     }
 
