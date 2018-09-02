@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-url: "https://org-arl.github.io/unet-blog/"
+url: "localhost"
 title: Unet Blog # site's title
 description: "The Underwater Networks Project" # used by search engines
 
@@ -63,6 +63,14 @@ theme_settings:
 # PAGINATION
 paginate: 5
 paginate_path: "blog/page:num"
+
+
+# PORTFOLIO
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:name
+
 
 # BUILD SETTINGS
 markdown: kramdown
