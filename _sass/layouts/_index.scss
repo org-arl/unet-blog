@@ -23,7 +23,7 @@
 
     @media screen and (max-width: 600px) {
         background-size: 100% auto;
-        height: 17vh;
+        height: 23vh;
     }
 
     p:last-child {
@@ -117,5 +117,8 @@
 }
 
 .header-text h1{
-    margin-top: 5%
+    margin-top: 5%;
+    @media screen and (max-width: 600px) {
+        margin-top: 2%
+    }
 }
