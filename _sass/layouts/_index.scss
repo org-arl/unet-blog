@@ -4,10 +4,10 @@
   margin: 0;
 }
 .call-out {
-    @extend %padding-medium;
+    // @extend %padding-medium;
     display: inline-block;
     width: 100%;
-    height: 100%;
+    height: 35vh;
     font-size: 1.2em;
     text-align: center;
     color: $header-desc-text-color;
@@ -16,8 +16,14 @@
     position: relative;
 
     /* --- Responsive --- */
-    @media screen and (max-width: 850px) {
+    @media screen and (max-width: 820px) {
         background-size: 100% auto;
+        height: 25vh;
+    }
+
+    @media screen and (max-width: 600px) {
+        background-size: 100% auto;
+        height: 17vh;
     }
 
     p:last-child {
@@ -104,10 +110,12 @@
 .header-text{
     position: absolute;
     top: 0;
-    width: 100%;
     left: 0;
+    width: 100%;
+    pointer-events: none;
+
 }
 
 .header-text h1{
-    margin-top: 10%
+    margin-top: 5%
 }
