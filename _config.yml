@@ -14,7 +14,7 @@ theme_settings:
 
   # Header and footer text
   header_text: > #two or three lines to describe your site
-     <h2>Unet Blog</h2> <br> <p>The Underwater Networks Project</p>
+     <h1>Unet Blog</h1><p>The Underwater Networks Project</p>
   footer_text: >
    Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
 

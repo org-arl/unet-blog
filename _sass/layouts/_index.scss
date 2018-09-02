@@ -1,4 +1,8 @@
 // Header text feature
+.home h1 {
+  font-size: 3.3em;
+  margin: 0;
+}
 .call-out {
     @extend %padding-medium;
     display: inline-block;
