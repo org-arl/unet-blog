@@ -6,7 +6,7 @@ author: Manu Ignatius
 categories: unet
 feature-img: "assets/img/search-map.jpg"
 thumbnail: "assets/img/search-map.jpg"
-tags: [unet nagivation gps]
+tags: [unet, nagivation, gps]
 ---
 
 UnetStack runs on several modems, simulators, and even laptops with sound cards. But what if we have a modem that UnetStack doesn't already run on? And we want it to! Well ... we need to write a driver for that modem. It really isn't that difficult, and this blog will walk you through the basics.

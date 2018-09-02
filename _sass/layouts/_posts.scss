@@ -71,6 +71,17 @@ header {
         @extend %padding-regular;
         padding-bottom: 0;
     }
+
+    .tag-list a {
+      &:link, &:visited {
+        background: rgba($feature-image-text-color, .7);
+      }
+
+      &:hover, &:active {
+        background: $link-color;
+      }
+    }
+
     footer {
         @extend %padding-regular;
         padding-top: 0;
