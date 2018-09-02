@@ -38,7 +38,7 @@ jekyll-theme-basically-basic
 1. Fork and clone the [Unet blog repo](): `git clone git@github.com:org-arl/unet-blog.git`
 2. Install [Jekyll](https://jekyllrb.com/docs/installation/): `gem install jekyll`, check [#1](/issues/1) if you have a problem.
 3. Install the theme's dependencies: `bundle install`
-5. Run the Jekyll server: `jekyll serve --config _dev_config.yml`
+5. Run the Jekyll server: `jekyll serve --config _dev_config.yml` or with `make serve`
 
 
 ## Writing Blog Posts
