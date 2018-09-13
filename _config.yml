@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
-url: "https://org-arl.github.io"
-baseurl: "/unet-blog"
+url: "blog.unetstack.net"
+baseurl: ""
 title: Unet Blog # site's title
 description: "The Underwater Networks Project" # used by search engines
 
