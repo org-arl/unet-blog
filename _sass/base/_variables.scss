@@ -17,7 +17,8 @@ $border-color: rgba(0, 0, 0, 0.1); // rgba recommended if using feature images
 
 // Typography colours
 $text-color: #383838;
-$link-color: $theme-color; // #1ABC9C;
+//$link-color: $theme-color; // #1ABC9C;
+$link-color:#448CD6; //Fix for Issue#10
 $selection-color: #D4D4D4; // visible when highlighting text
 $blockquote-color: #EEF7FA; // $background-color;
 
