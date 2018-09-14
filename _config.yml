@@ -66,6 +66,8 @@ theme_settings:
   # Post navigation
   post_navigation: true
 
+# PERMALINK
+permalink: /:title
 
 # PAGINATION
 paginate: 5

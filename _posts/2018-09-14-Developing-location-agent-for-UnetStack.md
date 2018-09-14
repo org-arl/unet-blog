@@ -11,7 +11,7 @@ tags: [howto, modems, localization, location]
 
 Imagine you are out at sea, doing underwater communications field experiments, with underwater acoustic modems deployed from a boat or a vessel. If you are a researcher, you might be interested in transmitting your custom designed signals to study the underwater channel. If you are commercial company manufacturing modems, you might be testing the localization performance of your modems. Regardless of the application, one of the most valuable metric that can be attached with each and every data frame or signal transmission and reception is the location information of the modems, i.e. geotagging the data (similar to time-stamping data).
 
-![](../assets/img/trial.jpg)
+![](assets/img/trial.jpg)
 
 Since GPS doesn't work underwater, one obvious method is to note down the GPS location of the boat or vessel from where the modems are deployed. However, depending on the deployment scenario, the location of the vessel will change over time and hence this method is error prone. Another (slightly better) method is to use your phone to have a periodic GPS log and sync it with the timestamps of your transmissions, during post processing of your data. While this method gives you a log of your GPS coordinates, merging this with modem logs is an additional step, which we would like to avoid.
 
