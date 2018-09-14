@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Developing a Location agent for UnetStack
-date: 20/09/2018
+title: Developing location agent for UnetStack
+date: 14/09/2018
 author: Manu Ignatius
 categories: howto
 feature-img: "assets/img/search-map.jpg"
@@ -127,7 +127,7 @@ Once the NMEA string is parsed, the latitude and longitude values are stored in 
 > NOTE: Since parsing other NMEA strings are similar to that of `$GPGGA`, the implementation is skipped.
 
 ### Updating `location` parameter of `node` agent
-Now that we have the GPS coordinates, we need to set the `location` parameter of the `node` agent. Since `node` agent stores `location` in local coordinates, we need to convert the GPS coordinates to local coordinates. This can be done using the `GpsLocalFrame` helper class in UnetStack. The simplified code is as follows:
+Now that we have the GPS coordinates, we need to set/update the `location` parameter of the `node` agent. Since `node` agent stores `location` in local coordinates, we need to convert the GPS coordinates to local coordinates. This can be done using the `GpsLocalFrame` helper class in UnetStack. The simplified code is as follows:
 
 ```java
   private void updateLocation () {
@@ -209,12 +209,11 @@ Setters generally have slightly more logic. The simplified version is given belo
     }
   }
 ```
-
 Thats it, the basic implementation of a simple location agent is complete.
 
 ## Loading the location agent
 
-Now that we have the location agent ready, all that we have to do is to load it in UnetStack. It can be done manually by typing:
+Now that we have the location agent ready, all we have to do is to load it in UnetStack. It can be done manually by typing:
 ```groovy
 container.add 'loc', new MyLocation()
 ```
@@ -257,4 +256,4 @@ and also the `node` agent's `location` parameter.
   turnRate = 0
 ```
 
-Once the `location` agent is loaded and running, the modem's will be location aware. Any activity (e.g. transmission, reception etc.) can request the location information from the `node` agent using a [`ParameterReq`](https://www.unetstack.net/javadoc/index.html?org/arl/unet/ParameterReq.html) for geotagging.
+Once the `location` agent is loaded and running, the modem will be location aware. Any agent can request the location information from the `node` agent using a [`ParameterReq`](https://www.unetstack.net/javadoc/index.html?org/arl/unet/ParameterReq.html) for geotagging.
