@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Developing a Location agent for UnetStack
-date: 15/09/2018
+date: 20/09/2018
 author: Manu Ignatius
 categories: howto
 feature-img: "assets/img/search-map.jpg"
@@ -11,11 +11,11 @@ tags: [howto, modems, localization, location]
 
 Imagine you are out at sea, doing underwater communications field experiments, with underwater acoustic modems deployed from a boat or a vessel. If you are a researcher, you might be interested in transmitting your custom designed signals to study the underwater channel. If you are commercial company manufacturing modems, you might be testing the localization performance of your modems. Regardless of the application, one of the most valuable metric that can be attached with each and every data frame or signal transmission and reception is the location information of the modems, i.e. geotagging the data (similar to time-stamping data).
 
-![](assets/img/trial.jpg)
+![](https://github.com/org-arl/unet-blog/blob/master/assets/img/trial.jpg)
 
 Since GPS doesn't work underwater, one obvious method is to note down the GPS location of the boat or vessel from where the modems are deployed. However, depending on the deployment scenario, the location of the vessel will change over time and hence this method is error prone. Another (slightly better) method is to use your phone to have a periodic GPS log and sync it with the timestamps of your transmissions, during post processing of your data. While this method gives you a log of your GPS coordinates, merging this with modem logs is an additional step, which we would like to avoid.
 
-With UnetStack running in the modems, such an application is easy to develop. UnetStack comes equipped with `node` agent and [`NODE_INFO`](https://www.unetstack.net/svc-00-nodeinfo.html) service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. All we have to do is develop a simple [Unet agent](https://www.unetstack.net/unet-agents.html) that will update the `location` parmeter of the `node` agent, in a periodic manner.
+With UnetStack running in the modems, such an application is easy to develop. UnetStack comes equipped with `node` agent and [`NODE_INFO`](https://www.unetstack.net/svc-00-nodeinfo.html) service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. All we have to do is develop a simple [Unet agent](https://www.unetstack.net/unet-agents.html) that will update the `location` parameter of the `node` agent, in a periodic manner.
 
 ## Setup
 The agent can be developed for a variety of scenarios. For the purpose of this blog, we will use one of the test setups that we have used in the past where space was a constraint. We had a TCP/IP network to which all assets where connected and accessible. We used one of our smartphones as the GPS server and connected to the same network.
@@ -27,7 +27,7 @@ The basic flow of the `Location Agent` will be as follows:
 ```
 1. Connect to an available GPS server.
 2. If available, read NMEA streams and look for $GPGGA or $GPRMC strings.
-3. Parse them to retrieve Latitue and Longitude.
+3. Parse them to retrieve latitude and longitude.
 4. Update node agent.
 5. Repeat steps 2 - 4 in user defined interval.
 ```
@@ -49,8 +49,8 @@ public class MyLocation extends UnetAgent {
   int port = 0;
   int locationUpdatePeriod = 1;  // GPS location update period
   
-  double latD = 0.0;    // Latitue in degrees
-  double latM = 0.0;    // Latitue in minutes
+  double latD = 0.0;    // Latitude in degrees
+  double latM = 0.0;    // Latitude in minutes
   double longD = 0.0;   // Longitude in degrees
   double longM = 0.0;   // Longitude in minutes
   
@@ -127,7 +127,7 @@ The next step is to parse the NMEA stream. We parsed `$GPGGA`, `$GNGGA` and `$GP
     longM = Double.parseDouble(lonm);
   }
 ```
-Once the NMEA string is parsed, the lattitue and longitude values are stored in `latD`, `latM`, `longD` and `longM` variables.
+Once the NMEA string is parsed, the latitude and longitude values are stored in `latD`, `latM`, `longD` and `longM` variables.
 > NOTE: Since parsing other NMEA strings are similar to that of `$GPGGA`, the implementation is skipped.
 
 ### Updating `location` parameter of `node` agent
