@@ -11,7 +11,7 @@ tags: [howto, modems, localization, location]
 
 Imagine you are out at sea, doing underwater communications field experiments, with underwater acoustic modems deployed from a boat or a vessel. If you are a researcher, you might be interested in transmitting your custom designed signals to study the underwater channel. If you are commercial company manufacturing modems, you might be testing the localization performance of your modems. Regardless of the application, one of the most valuable metric that can be attached with each and every data frame or signal transmission and reception is the location information of the modems, i.e. geotagging the data (similar to time-stamping data).
 
-![](https://github.com/org-arl/unet-blog/blob/master/assets/img/trial.jpg)
+![](../assets/img/trial.jpg)
 
 Since GPS doesn't work underwater, one obvious method is to note down the GPS location of the boat or vessel from where the modems are deployed. However, depending on the deployment scenario, the location of the vessel will change over time and hence this method is error prone. Another (slightly better) method is to use your phone to have a periodic GPS log and sync it with the timestamps of your transmissions, during post processing of your data. While this method gives you a log of your GPS coordinates, merging this with modem logs is an additional step, which we would like to avoid.
 
@@ -69,16 +69,12 @@ In the `connectToServer()` method, we use the `connect()` method from `socket` l
 ```java
   void connectToServer() {
     clientSocket.connect(new InetSocketAddress(ip, port), timeout);
-    
     locationUpdate = new TickerBehavior(locationUpdatePeriod*1000) {
-      
       @Override
       public void onTick() {
         readNmeaData();
       }
-      
     };
-    
     add(locationUpdate);
   }
 ```
@@ -223,18 +219,18 @@ Now that we have the location agent ready, all that we have to do is to load it 
 container.add 'loc', new MyLocation()
 ```
 When you run UnetStack, you should be able to see (using the shell) your agent and interact with it just like any other agent running in UnetStack.
-```
+```groovy
 > ps
 loc: MyLocation - IDLE
 ```
 The  _IP address_ and _port_ of the server can be set as follows:
-```
+```groovy
 > loc = agent('loc')
 > loc.ip="192.168.1.10"
 > loc.port=7777
 ```
 Once the agent starts receiving NMEA stream, it will update its own GPS coordinates,
-```
+```groovy
 > loc.latD
 1
 > loc.latM
@@ -245,7 +241,7 @@ Once the agent starts receiving NMEA stream, it will update its own GPS coordina
 45.542248
 ```
 and also the `node` agent's `location` parameter.
-```
+```groovy
 > node
 [org.arl.unet.nodeinfo.NodeInfoParam]
   address = 1
