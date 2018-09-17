@@ -34,7 +34,7 @@
     {% endif %}
 
     <!-- Particles -->
-    {% if page.layout == "home" %}
+    {% if page.layout == "home" or page.layout == "search" or page.layout == "page" %}
     <script src="{{ site.baseurl }}/assets/js/vendor/particles.min.js"></script>
     <script src="{{ site.baseurl }}/assets/js/particles-network.js"></script>
     {% endif %}
@@ -53,10 +53,8 @@
             a.src = g;
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
         ga('create', '{{ site.theme_settings.google_analytics }}', 'auto');
         ga('send', 'pageview');
-
     </script>
     {% endif %}
 
