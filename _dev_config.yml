@@ -16,6 +16,10 @@ theme_settings:
   header_text: > #two or three lines to describe your site
      <h1>Unet Blog</h1><p>The Underwater Networks Project</p>
   header_text_feature_image: assets/img/water.jpg
+  search_header_text: > #two or three lines to describe your site
+     <h1>Search</h1><p>What are you looking for?</p>
+  about_header_text: > #two or three lines to describe your site
+     <h1>About</h1>
   footer_text: >
     © Unet Project 2018
 

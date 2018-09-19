@@ -2,16 +2,14 @@
 layout: default
 ---
 
-<article {% if page.feature-img %}class="feature-image"{% endif %}>
-  <header id="main" style="background-image: url('{{ site.baseurl }}/{{ page.feature-img }}')">
-    <h1 id="{{ page.title | default: "" | cgi_escape }}" class="title">
-        {{ page.title }}
-    </h1>
+<div class="home">
+  {% if site.theme_settings.header_text %}
+  <div id="main" class="call-out"
+  style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
+<div class="header-text">{{ site.theme_settings.about_header_text }}</div>
+  </div>
+  {% endif %}
 
-    {% if page.subtitle %}
-    <h2 class="subtitle">{{ page.subtitle }}</h2>
-    {% endif %}
-
-  </header>
+<article>
   <section class="post-content">{{ content }}</section>    
 </article>
