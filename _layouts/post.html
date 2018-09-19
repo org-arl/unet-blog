@@ -9,7 +9,7 @@ layout: default
       {{ page.date | date: "%B %-d, %Y" }}  
       {% if page.author %}   
         {% assign member = site.data.authors[page.author] %}
-          <a rel="member" href="{{member.url}}"> - {{ page.author }}</a>
+        - <a class = "meta" rel="member" href="{{member.url}}">{{ page.author }}</a>
       {% endif %}
       <div class="tag-list">
         {% for tag in page.tags %}

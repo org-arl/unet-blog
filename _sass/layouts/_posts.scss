@@ -17,6 +17,11 @@ article {
     .footnotes {
         font-size: 0.9em;
     }
+    .meta a{
+        &:hover {
+        color: $link-color;
+      }
+    }
 }
 
 footer {
