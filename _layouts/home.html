@@ -27,7 +27,12 @@ layout: default
             </h2>
             <p class="meta">
               {{ post.date | date: "%B %-d, %Y" }}
+                {% if post.author %}
+                - {{ post.author }}
+               {% endif %}
             </p>
+           
+
           </header>
           <div class="excerpt">
               {{ post.excerpt | strip_html | escape }}
