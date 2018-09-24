@@ -19,7 +19,7 @@ Simply put, the following is our objective:
 
 *Given two landmarks at which the underwater acoustic modems are deployed and their locations in Cartesian space is known, and a underwater static or mobile node (e.g. an AUV, underwater robot etc.) equipped with an underwater acoustic modem, the task is to determine the AUV's location in Cartesian space.*
 
-![png](assets/img/output_5_0.png)
+![jpg](assets/img/map-1.jpg)
 
 The figure shown above illustrates the setup that is considered. The blue markers are the landmarks with the known locations where the modems are deployed. These locations can be GPS coordinates at the point of deployment. The red markers show where the unknown location of the target node could be. We refer the node which needs to be localized as the target node. The origin is set at Node 1 and the XY plane is visulaized as shown in the figure above.
 
@@ -119,12 +119,6 @@ node2
 Now, that the network simulator is setup with two known locations of the modem in the local coordinates system, we set out to compute the GPS location of the third node. We need to measure the distance from the two known locations to the modem we are trying to locate. This can be achived using ranging funtionality in UnetStack.
 
 ```python
-def flush_modem(modem):
-    while modem.receive(timeout=1000):
-        pass
-```
-
-```python
 ranging_node1 = node1gw.agentForService(Services.RANGING)
 node1gw.subscribe(ranging_node1)
 ```
@@ -136,32 +130,15 @@ node2gw.subscribe(ranging_node2)
 
 ```python
 ranging_node1 << org_arl_unet_phy.RangeReq(to=3)
-```
-
-    AGREE
-
-```python
 rnf1 = node1gw.receive(RangeNtf, 5000)
 range1 = rnf1.getRange()
-print(str(range1) + ' m')
 ```
-
-    33.83 m
 
 ```python
 ranging_node2 << org_arl_unet_phy.RangeReq(to=3)
-```
-
-    AGREE
-
-```python
 rnf2 = node2gw.receive(RangeNtf, 5000)
 range2 = rnf2.getRange()
-print(str(range2) + ' m')
 ```
-
-    37.83 m
-
 
 The distances are measured using acoustic ranging as shown above and stored in variables `range1` and `range2`.
 
@@ -262,6 +239,6 @@ print((x1, x2, 0.0))
 
 ## Update the map with the computed location
 
-![png](output_47_0.png)
+![jpg](assets/img/map-2.jpg)
 
 The map is updated with the localized node's location with a red circle as shown in the figure above. In conclusion, we saw how easily such a localization application can be developed utilizing UnetStack.
