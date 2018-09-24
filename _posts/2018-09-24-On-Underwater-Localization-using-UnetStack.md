@@ -42,20 +42,31 @@ UnetStack comes equipped with `NodeInfo` agent and `NODE_INFO` service that will
 
 [UnetStack](https://www.unetstack.net/) is an open architecture underwater network stack and simulator. The UnetStack architecture defines a set of software agents that work together to provide a complete underwater networking solution.  For this application, we make use of the `NodeInfo` agent provided by UnetStack. The `NodeInfo` agent provides the node information service by serving as a central repository where the relevant information can be deposited. It manages and maintains node's attribute such as address, location (Cartesian coordinates in meters), speed etc. Below we show the `NodeInfo` agent parameters to get an idea of why such information could be important in developing such applications.
 
-`
-  [org.arl.unet.nodeinfo.NodeInfoParam]
+
+  `[org.arl.unet.nodeinfo.NodeInfoParam]
+
     address = 2
+
     canForward = False
+
     diveRate = 0.0
+
     heading = 0.0
+
     location = [16.721901583485305, 9.975026107393205, 0.0]
+
     mobility = False
+
     nodeName = 2
+
     origin = []
+
     speed = 0.0
+
     time = Sep 24, 2018 12:21:35 PM
-    turnRate = 0.0
-`
+
+    turnRate = 0.0`
+
 
 The above presents the `NodeInfo` parameters. These parameters can be useful in the location application where the location of a mobile node keeps getting updated and needs to be maintained. The location of Node 1 and Node 2 in the above simulation is shown by the Cartesian coordinates in meters.
 
