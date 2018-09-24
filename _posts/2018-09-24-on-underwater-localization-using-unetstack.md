@@ -6,7 +6,7 @@ author: Prasad Anjangi
 categories: howto
 feature-img: "assets/img/localization.jpg"
 thumbnail: "assets/img/localization.jpg"
-tags: [howto, modems, localization, UnetStack, agents, node information, algorithm]
+tags: [howto, modems, localization, agents, node information, algorithm]
 ---
 
 A common problem in mobile robotics deals with answering the question: "Where am I?". If the robot is equipped with GPS (Global Positioning System) receiver, it can be localized accurately. Unfortunately, GPS doesn't work underwater. For GPS to work underwater, the GPS receiver should be able to receive the Radio Frequency (RF) signals from GPS satellites. But RF signals do not propagate well in water and therefore GPS receiver cannot receive the signals underwater. Acoustic communication is the most promising mode of communication underwater. With static reference underwater acoustic modems acting as "satellites" in the ocean, we can localize an underwater robot/vehicle. Although methods are mentioned in literature, none are completely detailed to the point where a useful algorithm to compute the solution in practice is shown to be easily implemented on the underwater acoustic modems.
