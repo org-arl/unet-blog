@@ -9,7 +9,7 @@ thumbnail: "assets/img/localization.jpg"
 tags: [howto, modems, localization, UnetStack, agents, node information, algorithm]
 ---
 
-A common problem in mobile robotics deals with answering the question: "Where am I?". If the robot is equipped with GPS (Global Positioning System) receiver, it can be localized accurately. Unfortunately, GPS doesn't work underwater. For GPS to work underwater, the GPS receiver should be able to receive the Radio Frequency (RF) signals from GPS satellites. But RF signals do not propagate well in water and therefore GPS receiver cannot receive the signals underwater. Acoustic communications is the most promising mode of communication underwater. With static reference underwater acoustic modems acting as "sattelites" in the ocean, we can localize an underwater robot/vehicle. Although methods are mentioned in literature, none are completely detailed to the point where a useful algorithm to compute the solution in practice is shown to be easily implemented on the underwater acoustic modems.
+A common problem in mobile robotics deals with answering the question: "Where am I?". If the robot is equipped with GPS (Global Positioning System) receiver, it can be localized accurately. Unfortunately, GPS doesn't work underwater. For GPS to work underwater, the GPS receiver should be able to receive the Radio Frequency (RF) signals from GPS satellites. But RF signals do not propagate well in water and therefore GPS receiver cannot receive the signals underwater. Acoustic communication is the most promising mode of communication underwater. With static reference underwater acoustic modems acting as "satellites" in the ocean, we can localize an underwater robot/vehicle. Although methods are mentioned in literature, none are completely detailed to the point where a useful algorithm to compute the solution in practice is shown to be easily implemented on the underwater acoustic modems.
 
 The objective of this blog is to present the solution for a simple scenario and demonstrate the simple steps in which localization algorithm can be implemented. For the purpose of this blog, we will use [UnetStack](https://www.unetstack.net/) (an underwater network stack and simulator).
 
@@ -17,13 +17,13 @@ The objective of this blog is to present the solution for a simple scenario and 
 
 Simply put, the following is our objective:
 
-*Given two landmarks at which the underwater acoustic modems are deployed and their locations in Cartesian space is known, and a underwater static or mobile node (e.g. an AUV, underwater robot etc.) equipped with an underwater acoustic modem, the task is to determine the AUV's location in Cartesian space.*
+*Given two landmarks at which the underwater acoustic modems are deployed and their locations in Cartesian space is known, and an underwater static or mobile node (e.g. an AUV, underwater robot etc.) equipped with an underwater acoustic modem, the task is to determine the AUV's location in Cartesian space.*
 
 ![jpg](assets/img/map-1.jpg)
 
-The figure shown above illustrates the setup that is considered. The blue markers are the landmarks with the known locations where the modems are deployed. These locations can be GPS coordinates at the point of deployment. The red markers show where the unknown location of the target node could be. We refer the node which needs to be localized as the target node. The origin is set at Node 1 and the XY plane is visulaized as shown in the figure above.
+The figure shown above illustrates the setup that is considered. The blue markers are the landmarks with the known locations where the modems are deployed. These locations can be GPS coordinates at the point of deployment. The red markers show where the unknown location of the target node could be. We refer the node which needs to be localized as the target node. The origin is set at Node 1 and the XY plane is visualized as shown in the figure above.
 
-Note that atleast three reference nodes/modems are required to uniquely localize the coordinates in the XY plane. Since in this case, we have only two modems (Node 1 and Node 2) acting as the reference nodes, there will be an ambiguity in the location of Node 3 when trying to localize. A convenient assumption we make here is that the target node (Node 3) is only deployed in the right side of the origin (i.e., the abscissa is positive).
+Note that at least three reference nodes/modems are required to uniquely localize the coordinates in the XY plane. Since in this case, we have only two modems (Node 1 and Node 2) acting as the reference nodes, there will be an ambiguity in the location of Node 3 when trying to localize. A convenient assumption we make here is that the target node (Node 3) is only deployed in the right side of the origin (i.e., the abscissa is positive).
 
 The GPS coordinates at these known locations are converted to local cartesian coordinates. Let the GPS locations at which the modems are deployed be:
 
@@ -33,35 +33,25 @@ Node 2 --> (43.933976, 15.443613)
 
 Node 3 --> Target node which needs to be localized
 
-At this point a natural question that arises is how to convert the GPS coordinates to local coordinates.
+At this point, a natural question that arises is how to convert the GPS coordinates to local coordinates.
 
 #### Using `Location` agent in UnetStack
 UnetStack comes equipped with `NodeInfo` agent and `NODE_INFO` service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. A simple Unet agent that will update the location parameter of the node agent, in a periodic manner using the GPS data stream from a GPS server running on terrestrial network is available as part of UnetStack as `Location` agent. The interested reader may find this [blog on developing `Location` agent](https://blog.unetstack.net/Developing-location-agent-for-UnetStack) useful for more details. The `Location` agent converts the GPS coordinates to local coordinate system and maintains it in the `location` parameter of the `NodeInfo` agent.
 
 ## Node agent in UnetStack
 
-[UnetStack](https://www.unetstack.net/) is an open architecture underwater network stack and simulator. The UnetStack architecture defines a set of software agents that work together to provide a complete underwater networking solution.  For this application, we make use of the `NodeInfo` agent provided by UnetStack. The `NodeInfo` agent provides the node information service by serving as a central repository where the relevant information can be deposited. It manages and maintains node's attribute such as address, location (Cartesian coordinates in meters), speed etc. Below we show the `NodeInfo` agent parameters to get an idea of why such information could be important in developing such applications.
+[UnetStack](https://www.unetstack.net/) is an open architecture underwater network stack and simulator. The UnetStack architecture defines a set of software agents that work together to provide a complete underwater networking solution.  For this application, we make use of the `NodeInfo` agent provided by UnetStack. The `NodeInfo` agent provides the node information service by serving as a central repository where the relevant information can be deposited. It manages and maintains the node's attribute such as address, location (Cartesian coordinates in meters), speed etc. Below we show the `NodeInfo` agent parameters to get an idea of why such information could be important in developing such applications.
 
     address = 2
-
     canForward = False
-
     diveRate = 0.0
-
     heading = 0.0
-
     location = [16.721901583485305, 9.975026107393205, 0.0]
-
     mobility = False
-
     nodeName = 2
-
     origin = []
-
     speed = 0.0
-
     time = Sep 24, 2018 12:21:35 PM
-
     turnRate = 0.0
 
 
@@ -69,20 +59,15 @@ The above presents the `NodeInfo` parameters. These parameters can be useful in 
 
 ## Open connection to the modem or real-time simulator
 
-For the purpose of illustration, we deploy a 3-node network in [Unet simulator](https://www.unetstack.net/downloads.html) as per the locations in the above-shown figure. We connect to the Node 1
-running on localhost port 1101 and Node 2 running on localhost port 1102.
+For the purpose of illustration, we deploy a 3-node network in [Unet simulator](https://www.unetstack.net/downloads.html) as per the locations in the above-shown figure. We connect to the Node 1 running on localhost port 1101 and Node 2 running on localhost port 1102.
 
 
 ```python
 from unetpy import *
-```
 
-```python
 node1gw = UnetGateway('localhost', 1101)
 node1 = node1gw.agentForService(Services.NODE_INFO)
-```
 
-```python
 node2gw = UnetGateway('localhost', 1102)
 node2 = node2gw.agentForService(Services.NODE_INFO)
 ```
@@ -126,25 +111,19 @@ node2
 
 ## Ranging to measure distances
 
-Now, that the network simulator is setup with two known locations of the modem in the local coordinates system, we set out to compute the GPS location of the third node. We need to measure the distance from the two known locations to the modem we are trying to locate. This can be achived using ranging funtionality in UnetStack.
+Now, that the network simulator is set up with two known locations of the modem in the local coordinates system, we set out to compute the GPS location of the third node. We need to measure the distance from the two known locations to the modem we are trying to locate. This can be achieved using ranging functionality in UnetStack.
 
 ```python
 ranging_node1 = node1gw.agentForService(Services.RANGING)
 node1gw.subscribe(ranging_node1)
-```
-
-```python
-ranging_node2 = node2gw.agentForService(Services.RANGING)
-node2gw.subscribe(ranging_node2)
-```
-
-```python
 ranging_node1 << org_arl_unet_phy.RangeReq(to=3)
 rnf1 = node1gw.receive(RangeNtf, 5000)
 range1 = rnf1.getRange()
 ```
 
 ```python
+ranging_node2 = node2gw.agentForService(Services.RANGING)
+node2gw.subscribe(ranging_node2)
 ranging_node2 << org_arl_unet_phy.RangeReq(to=3)
 rnf2 = node2gw.receive(RangeNtf, 5000)
 range2 = rnf2.getRange()
@@ -156,7 +135,7 @@ The distances are measured using acoustic ranging as shown above and stored in v
 
 #### Geometric circle intersection method
 
-The Geometric circle intersection method is widely used in literature. Conceptually, the idea is straightforward. Referring to figure above, there are two circles that can be formed with the reference modems at the center. There are only two possible location where these circles can intersect. As noted before, a third reference modem can remove this ambiguity, however, in the asence of the thrid reference modem, the two possible locations are shown with red marker in the figure at the two intersection points of the circle. With the assumption that the unknown node is deployed only
+The Geometric circle intersection method is widely used in literature. Conceptually, the idea is straightforward. Referring to the figure above, there are two circles that can be formed with the reference modems at the center. There are only two possible location where these circles can intersect. As noted before, a third reference modem can remove this ambiguity, however, in the absence of the third reference modem, the two possible locations are shown with red marker in the figure at the two intersection points of the circle. With the assumption that the unknown node is deployed only
 on one side of the XY plane, the position of the target node can be computed uniquely.
 
 Let us denote the unknown/target node's (Node 3) location be $(x_1, x_2)$.
