@@ -38,6 +38,7 @@ The basic flow of the `Location Agent` will be as follows:
 In the `startup()` method of UnetStack, the agent tries to connect to a GPS server. The _IP address_ and _port_ of the GPS server can either be preconfigured or let the user configure later. The `connectToServer()` method can also be called when there is a change in any of the parameters (e.g. _IP address_, _port_).
 
 > NOTE: The code provided in this blog is a simple version for illustration. Error checks or retries/timeouts are omitted from the code to keep it clean.
+> Full code is available in [Unet Contrib](https://github.com/org-arl/unet-contrib) repo [here](https://github.com/org-arl/unet-contrib/tree/master/contrib/Location).
 
 ```java
 import org.arl.fjage.*;
