@@ -1,12 +1,12 @@
 ---
 layout: post
-title: On Underwater Localization using UnetStack
+title: On underwater localization using UnetStack
 date: 24/9/2018
 author: Prasad Anjangi
 categories: howto
 feature-img: "assets/img/localization.jpg"
 thumbnail: "assets/img/localization.jpg"
-tags: [howto, modems, localization, UnetStack, agents, node information, algorithm]
+tags: [howto, modems, localization, agents, node information, algorithm]
 ---
 
 A common problem in mobile robotics deals with answering the question: "Where am I?". If the robot is equipped with GPS (Global Positioning System) receiver, it can be localized accurately. Unfortunately, GPS doesn't work underwater. For GPS to work underwater, the GPS receiver should be able to receive the Radio Frequency (RF) signals from GPS satellites. But RF signals do not propagate well in water and therefore GPS receiver cannot receive the signals underwater. Acoustic communication is the most promising mode of communication underwater. With static reference underwater acoustic modems acting as "satellites" in the ocean, we can localize an underwater robot/vehicle. Although methods are mentioned in literature, none are completely detailed to the point where a useful algorithm to compute the solution in practice is shown to be easily implemented on the underwater acoustic modems.
@@ -138,21 +138,21 @@ The distances are measured using acoustic ranging as shown above and stored in v
 The Geometric circle intersection method is widely used in literature. Conceptually, the idea is straightforward. Referring to the figure above, there are two circles that can be formed with the reference modems at the center. There are only two possible location where these circles can intersect. As noted before, a third reference modem can remove this ambiguity, however, in the absence of the third reference modem, the two possible locations are shown with red marker in the figure at the two intersection points of the circle. With the assumption that the unknown node is deployed only
 on one side of the XY plane, the position of the target node can be computed uniquely.
 
-Let us denote the unknown/target node's (Node 3) location be $(x_1, x_2)$.
+Let us denote the unknown/target node's (Node 3) location be $$(x_1, x_2)$$.
 
-The known positions of the Node 1 is denoted by $(a_1, a_2)$ and Node 2 by $(b_1, b_2)$.
+The known positions of the Node 1 is denoted by $$(a_1, a_2)$$ and Node 2 by $$(b_1, b_2)$$.
 
-The measured distances to Node 3 from Node 1 and Node 2 are denoted by $r_1$ and $r_2$ respectively.
+The measured distances to Node 3 from Node 1 and Node 2 are denoted by $$r_1$$ and $$r_2$$ respectively.
 
-Given the above information, two seconnd order equations in two variables $x_1$ and $x_2$ can be written as follows:
+Given the above information, two seconnd order equations in two variables $$x_1$$ and $$x_2$$ can be written as follows:
 
-$(x_1-a_1)^2 + (x_2-a_2)^2 - r_1^2 = 0$
+$$(x_1-a_1)^2 + (x_2-a_2)^2 - r_1^2 = 0$$
 
 and
 
-$(x_1-b_1)^2 + (x_2-b_2)^2 - r_2^2 = 0$
+$$(x_1-b_1)^2 + (x_2-b_2)^2 - r_2^2 = 0$$
 
-We use the symbolic manipulation toolbox `sympy` in python to compute the analytic expression for computing $(x_1, x_2)$. The details are as given below:
+We use the symbolic manipulation toolbox `sympy` in python to compute the analytic expression for computing $$(x_1, x_2)$$. The details are as given below:
 
 
 ```python
@@ -163,21 +163,21 @@ from sympy import *
 x1, x2, a1, a2, b1, b2, r1, r2 = symbols('x1 x2 a1 a2 b1 b2 r1 r2')
 ```
 
-Write the variable $x_1$ in terms of all other known parameters and variable $x_2$
+Write the variable $$x_1$$ in terms of all other known parameters and variable $$x_2$$
 
 
 ```python
 x1 = ((a1**2 - b1**2) + (a2**2 - b2**2) - (r1**2 - r2**2) -2*x2*(a2-b2))/(2*(a1-b1))
 ```
 
-Compute the expression for $x_2$ symbolically
+Compute the expression for $$x_2$$ symbolically
 
 
 ```python
 expr = solveset(Eq((x1 - a1)**2 + (x2 - a2)**2 - r1**2, 0), x2)
 ```
 
-Now we know the expression for $x_2$ in terms of all known parameters. Therefore, it's value can be computed using substitution as shown below:
+Now we know the expression for $$x_2$$ in terms of all known parameters. Therefore, it's value can be computed using substitution as shown below:
 
 
 ```python
@@ -186,7 +186,7 @@ x2_sol = list(expr.subs([(a1, node1.location[0]), (a2, node1.location[1]), \
            (r1, range1), (r2, range2)]).evalf())
 ```
 
-There are two possible solutions. The decision is based on the value of $x_1$, since our modem which is being localized lies on the right side of the y-axis, we take the decision based on the sign of $x_1$.
+There are two possible solutions. The decision is based on the value of $$x_1$$, since our modem which is being localized lies on the right side of the y-axis, we take the decision based on the sign of $$x_1$$.
 
 
 ```python
@@ -196,7 +196,7 @@ x2_sol
     [-27.7651073424558, 30.1984110020781]
 
 
-The value of $x_1$ is computed for both values of computed $x_2$.
+The value of $$x_1$$ is computed for both values of computed $$x_2$$.
 
 ```python
 x1_sol = []
