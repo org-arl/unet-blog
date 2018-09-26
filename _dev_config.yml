@@ -1,5 +1,6 @@
 # SITE CONFIGURATION
-url: "localhost"
+#url: "localhost"
+url: "blog.unetstack.net"
 baseurl: ""
 title: Unet Blog # site's title
 description: "The Underwater Networks Project" # used by search engines
