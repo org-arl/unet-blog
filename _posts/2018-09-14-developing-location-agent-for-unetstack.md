@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Developing location agent for UnetStack
 date: 14/09/2018
 author: Manu Ignatius
