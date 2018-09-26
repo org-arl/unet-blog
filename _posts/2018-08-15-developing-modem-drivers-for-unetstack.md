@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: Developing modem drivers for UnetStack
 date: 15/8/2018
 author: Mandar Chitre

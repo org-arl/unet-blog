@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: On underwater localization using UnetStack
 date: 24/9/2018
 author: Prasad Anjangi
