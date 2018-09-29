@@ -10,19 +10,20 @@ thumbnail: "assets/img/transponder.jpg"
 tags: [howto, modems, localization, agents, ranging, algorithm]
 ---
 
+## AUV-to-transponder range estimation application using UnetStack
+
 It is a common practice to attach a transponder to various underwater assets (both static and mobile) for short and long term field deployments. These transponders can act as a beacon that can be utilized for localization. An underwater vehicle (e.g. AUV, ROV) will be able to do sequential ranging to find the location of the transponder during a search and rescue operation.
 
 Normally, specialized transmitters are required to send a signal to these transponders to trigger a response. However, due to the software defined nature of Subnero modems, it is fairly easy to develop an application that will query a transponder and calculate the range information.
 
 
-In this post, we showcase a fully functional transponder ranging application used to ping an Applied Acoustics 219A transponder and calculate the range to it from the recorded signal. This work has been presented in [_M. Chitre, R. Bhatnagar, M. Ignatius, and S. Suman, “Baseband signal processing with UnetStack,” in Underwater Communications Networking (UComms 2014), (Sestri Levante, Italy), September 2014. (Invited)_](http://arl.nus.edu.sg/twiki6/pub/ARL/BibEntries/sdmodem.pdf).
+In this post, we showcase a fully functional transponder ranging application used to ping an [Applied Acoustics 219A](https://www.ashtead-technology.com/rental-equipment/aa-219-micro-beacon/) transponder and calculate the range to it from the recorded signal. This work has been presented in [_M. Chitre, R. Bhatnagar, M. Ignatius, and S. Suman, “Baseband signal processing with UnetStack,” in Underwater Communications Networking (UComms 2014), (Sestri Levante, Italy), September 2014. (Invited)_](http://arl.nus.edu.sg/twiki6/pub/ARL/BibEntries/sdmodem.pdf).
 
 An Applied Acoustics 219A transponder is set to receive a 22 kHz tonal. We send a 5 ms long 22 kHz pulse without preamble (preambleID set to 0) using a `TxBasebandSignalReq` from UnetStack's _baseband_ service. This will trigger a response at 30.5 kHz after a fixed delay of 30 ms. We also initiate a 500 ms long baseband signal recording using `RecordBasebandSignalReq` to make sure the modem records long enough to have the response from the pinger for a range of 300m.
 
 The captured signal is then Hilbert transformed to do envelop detection. We use thresholding to find the start of the received signal. We also retrieves the `txTime` from `txntf`. Using these two timings, we calculate the range to the transponder.
 
-This application is developed using Jupyter Notebook, in Python using the UnetPy framework. The notebook can be found [here](https://github.com/org-arl/unet-contrib/tree/master/contrib/TransponderRanger).
-
+This application is developed using Jupyter Notebook, in Python using the UnetPy framework.
 
 ```python
 import numpy as np
