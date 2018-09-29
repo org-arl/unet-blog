@@ -10,8 +10,6 @@ thumbnail: "assets/img/transponder.jpg"
 tags: [howto, modems, localization, agents, ranging, algorithm]
 ---
 
-## AUV-to-transponder range estimation application using UnetStack
-
 It is a common practice to attach a transponder to various underwater assets (both static and mobile) for short and long term field deployments. These transponders can act as a beacon that can be utilized for localization. An underwater vehicle (e.g. AUV, ROV) will be able to do sequential ranging to find the location of the transponder during a search and rescue operation.
 
 Normally, specialized transmitters are required to send a signal to these transponders to trigger a response. However, due to the software defined nature of Subnero modems, it is fairly easy to develop an application that will query a transponder and calculate the range information.
