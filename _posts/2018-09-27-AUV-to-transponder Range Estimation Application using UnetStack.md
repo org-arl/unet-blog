@@ -21,7 +21,7 @@ An Applied Acoustics 219A transponder is set to receive a 22 kHz tonal. We send 
 
 The captured signal is then Hilbert transformed to do envelop detection. We use thresholding to find the start of the received signal. We also retrieves the `txTime` from `txntf`. Using these two timings, we calculate the range to the transponder.
 
-This application is developed using Jupyter Notebook, in Python using the UnetPy framework.
+This application is developed using Jupyter Notebook, in Python using the UnetPy framework. The notebook can be found [here](https://github.com/org-arl/unet-contrib/tree/master/contrib/TransponderRanger).
 
 
 ```python
