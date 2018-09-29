@@ -1,5 +1,15 @@
+---
+layout: post
+comments: true
+title: AUV-to-transponder range estimation application using UnetStack
+date: 27/9/2018
+author: Manu Ignatius
+categories: howto
+feature-img: "assets/img/transponder.jpg"
+thumbnail: "assets/img/transponder.jpg"
+tags: [howto, modems, localization, agents, ranging, algorithm]
+---
 
-## AUV-to-transponder Range Estimation Application using UnetStack
 It is a common practice to attach a transponder to various underwater assets (both static and mobile) for short and long term field deployments. These transponders can act as a beacon that can be utilized for localization. An underwater vehicle (e.g. AUV, ROV) will be able to do sequential ranging to find the location of the transponder during a search and rescue operation.
 
 Normally, specialized transmitters are required to send a signal to these transponders to trigger a response. However, due to the software defined nature of Subnero modems, it is fairly easy to develop an application that will query a transponder and calculate the range information.
@@ -120,7 +130,7 @@ vlines(rxStart, color='purple')
 ![img](../assets/img/bokeh_plot_3.png)
 
 ### Calculating the range
-Now that we have the `txTime` and `rxTime`, we can calculate the range.
+Now that we have the `txTime` and `rxTime`, we can calculate the range. For the purpose of this blog, this test was conducted in a 2.5m x 2m x 2m water tank.
 
 
 ```python
