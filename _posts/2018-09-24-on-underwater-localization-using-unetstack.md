@@ -56,7 +56,7 @@ node2 = node2gw.agentForService(Services.NODE_INFO)
 If we are connected to the modem, we can now access the agents and services that the modem provides. Let us try this with the `NodeInfo` agent. What you'll see here depends on the network that is deployed in the simulator.
 
 ```python
-node1
+print(node1)
 ```
 
     [org.arl.unet.nodeinfo.NodeInfoParam]
@@ -74,7 +74,7 @@ node1
 
 
 ```python
-node2
+print(node2)
 ```
 
     [org.arl.unet.nodeinfo.NodeInfoParam]
