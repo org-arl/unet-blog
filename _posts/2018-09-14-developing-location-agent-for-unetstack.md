@@ -16,12 +16,12 @@ Imagine you are out at sea, doing underwater communications field experiments, w
 
 Since GPS doesn't work underwater, one obvious method is to note down the GPS location of the boat or vessel from where the modems are deployed. However, depending on the deployment scenario, the location of the vessel will change over time and hence this method is error prone. Another (slightly better) method is to use your phone to have a periodic GPS log and sync it with the timestamps of your transmissions, during post processing of your data. While this method gives you a log of your GPS coordinates, merging this with modem logs is an additional step, which we would like to avoid.
 
-With UnetStack running in the modems, such an application is easy to develop. UnetStack comes equipped with `node` agent and [`NODE_INFO`](https://www.unetstack.net/svc-00-nodeinfo.html) service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. All we have to do is develop a simple [Unet agent](https://www.unetstack.net/unet-agents.html) that will update the `location` parameter of the `node` agent, in a periodic manner.
+With UnetStack running in the modems, such an application is easy to develop. UnetStack comes equipped with `node` agent and [`NODE_INFO`](https://www.unetstack.net/svc-00-nodeinfo.html){:target="_blank"} service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. All we have to do is develop a simple [Unet agent](https://www.unetstack.net/unet-agents.html){:target="_blank"} that will update the `location` parameter of the `node` agent, in a periodic manner.
 
 ## Setup
 The agent can be developed for a variety of scenarios. For the purpose of this blog, we will use one of the test setups that we have used in the past where space was a constraint. We had a TCP/IP network to which all assets where connected and accessible. We used one of our smartphones as the GPS server and connected to the same network.
 
-There are many apps that support running a GPS server in your smartphone. For our past trials, we have used [GPS Sharing for Windows Sensor](https://play.google.com/store/apps/details?id=com.michaelchourdakis.windows7gpssharing&hl=en) app, that will stream the GPS NMEA strings to a user specified TCP port.
+There are many apps that support running a GPS server in your smartphone. For our past trials, we have used [GPS Sharing for Windows Sensor](https://play.google.com/store/apps/details?id=com.michaelchourdakis.windows7gpssharing&hl=en){:target="_blank"} app, that will stream the GPS NMEA strings to a user specified TCP port.
 
 ## A simple location agent
 The basic flow of the `Location Agent` will be as follows:
@@ -39,7 +39,7 @@ The basic flow of the `Location Agent` will be as follows:
 In the `startup()` method of UnetStack, the agent tries to connect to a GPS server. The _IP address_ and _port_ of the GPS server can either be preconfigured or let the user configure later. The `connectToServer()` method can also be called when there is a change in any of the parameters (e.g. _IP address_, _port_).
 
 > NOTE: The code provided in this blog is a simple version for illustration. Error checks or retries/timeouts are omitted from the code to keep it clean.
-> Full code is available in [Unet Contrib](https://github.com/org-arl/unet-contrib) repo [here](https://github.com/org-arl/unet-contrib/tree/master/contrib/Location).
+> Full code is available in [Unet Contrib](https://github.com/org-arl/unet-contrib){:target="_blank"} repo [here](https://github.com/org-arl/unet-contrib/tree/master/contrib/Location){:target="_blank"}.
 
 ```java
 import org.arl.fjage.*;
@@ -67,7 +67,7 @@ public class MyLocation extends UnetAgent {
 ```
 
 ### Connecting to GPS server
-In the `connectToServer()` method, we use the `connect()` method from `socket` library to connect to the server. Once connected, we read the NMEA data in a periodic manner using a [`TickerBehavior`](http://org-arl.github.io/fjage/doc/html/behaviors.html):
+In the `connectToServer()` method, we use the `connect()` method from `socket` library to connect to the server. Once connected, we read the NMEA data in a periodic manner using a [`TickerBehavior`](http://org-arl.github.io/fjage/doc/html/behaviors.html){:target="_blank"}:
 ```java
   void connectToServer() {
     clientSocket.connect(new InetSocketAddress(ip, port), timeout);
@@ -258,4 +258,4 @@ and also the `node` agent's `location` parameter.
   turnRate = 0
 ```
 
-Once the `location` agent is loaded and running, the modem will be location aware. Any agent can request the location information from the `node` agent using a [`ParameterReq`](https://www.unetstack.net/javadoc/index.html?org/arl/unet/ParameterReq.html) for geotagging.
+Once the `location` agent is loaded and running, the modem will be location aware. Any agent can request the location information from the `node` agent using a [`ParameterReq`](https://www.unetstack.net/javadoc/index.html?org/arl/unet/ParameterReq.html){:target="_blank"} for geotagging.
