@@ -1,6 +1,5 @@
 ---
 layout: post
-comments: true
 title: On underwater localization using UnetStack
 date: 24/9/2018
 author: Prasad Anjangi
@@ -10,9 +9,9 @@ thumbnail: "assets/img/localization.jpg"
 tags: [howto, modems, localization, agents, node information, algorithm]
 ---
 
-A common problem in mobile robotics deals with answering the question: "Where am I?". If the robot is equipped with GPS (Global Positioning System) receiver, it can be localized accurately. Unfortunately, GPS doesn't work underwater. For GPS to work underwater, the GPS receiver should be able to receive the Radio Frequency (RF) signals from GPS satellites. But RF signals do not propagate well in water and therefore GPS receiver cannot receive the signals underwater. Acoustic communication is the most promising mode of communication underwater. With static reference underwater acoustic modems acting as "satellites" in the ocean, we can localize an underwater robot/vehicle. Although methods are mentioned in literature, none are completely detailed to the point where a useful algorithm to compute the solution in practice is shown to be easily implemented on the underwater acoustic modems.
+A common problem in mobile robotics deals with answering the question: "Where am I?". If the robot is equipped with GPS (Global Positioning System) receiver, it can be localized accurately. Unfortunately, GPS doesn't work underwater. For GPS to work underwater, the GPS receiver should be able to receive the Radio Frequency (RF) signals from GPS satellites. But RF signals do not propagate well in water and therefore GPS receiver cannot receive the signals underwater. Acoustic communication is the most promising mode of communication underwater. With static reference underwater acoustic modems acting as "satellites" in the ocean, we can localize an underwater robot/vehicle.
 
-The objective of this blog is to present the solution for a simple scenario and demonstrate the simple steps in which localization algorithm can be implemented. For the purpose of this blog, we will use [UnetStack](https://www.unetstack.net/) (an underwater network stack and simulator).
+The objective of this blog is to present the solution for this problem considering a simple scenario and demonstrate the simple steps in which localization algorithm can be implemented. For the purpose of this blog, we will use [UnetStack](https://www.unetstack.net/) (an underwater network stack and simulator).
 
 ## Objective
 
@@ -38,25 +37,6 @@ At this point, a natural question that arises is how to convert the GPS coordina
 
 #### Using `Location` agent in UnetStack
 UnetStack comes equipped with `NodeInfo` agent and `NODE_INFO` service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. A simple Unet agent that will update the location parameter of the node agent, in a periodic manner using the GPS data stream from a GPS server running on terrestrial network is available as part of UnetStack as `Location` agent. The interested reader may find this [blog on developing `Location` agent](https://blog.unetstack.net/Developing-location-agent-for-UnetStack) useful for more details. The `Location` agent converts the GPS coordinates to local coordinate system and maintains it in the `location` parameter of the `NodeInfo` agent.
-
-## Node agent in UnetStack
-
-[UnetStack](https://www.unetstack.net/) is an open architecture underwater network stack and simulator. The UnetStack architecture defines a set of software agents that work together to provide a complete underwater networking solution.  For this application, we make use of the `NodeInfo` agent provided by UnetStack. The `NodeInfo` agent provides the node information service by serving as a central repository where the relevant information can be deposited. It manages and maintains the node's attribute such as address, location (Cartesian coordinates in meters), speed etc. Below we show the `NodeInfo` agent parameters to get an idea of why such information could be important in developing such applications.
-
-    address = 2
-    canForward = False
-    diveRate = 0.0
-    heading = 0.0
-    location = [16.721901583485305, 9.975026107393205, 0.0]
-    mobility = False
-    nodeName = 2
-    origin = []
-    speed = 0.0
-    time = Sep 24, 2018 12:21:35 PM
-    turnRate = 0.0
-
-
-The above presents the `NodeInfo` parameters. These parameters can be useful in the location application where the location of a mobile node keeps getting updated and needs to be maintained. The location of Node 1 and Node 2 in the above simulation is shown by the Cartesian coordinates in meters.
 
 ## Open connection to the modem or real-time simulator
 
@@ -109,6 +89,8 @@ node2
       speed = 0.0
       time = Sep 24, 2018 2:02:23 PM
       turnRate = 0.0
+
+The above presents the `NodeInfo` parameters for the specific nodes, Node 1 and Node 2. These parameters can be useful in the localization application, where the location of a mobile node keeps getting updated and needs to be maintained. The location of Node 1 and Node 2 in the above simulation is shown by the Cartesian coordinates in meters.
 
 ## Ranging to measure distances
 
@@ -232,3 +214,5 @@ print((x1, x2, 0.0))
 ![jpg](assets/img/map-2.jpg)
 
 The map is updated with the localized node's location with a red circle as shown in the figure above. In conclusion, we saw how easily such a localization application can be developed utilizing UnetStack.
+
+For interested reader, the jupyter notebook with the complete code in Python can be found at this [link](https://github.com/org-arl/unet-contrib/blob/bts/contrib/Positioning/localization.ipynb).
