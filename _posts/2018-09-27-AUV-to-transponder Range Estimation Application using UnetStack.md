@@ -15,7 +15,7 @@ It is a common practice to attach a transponder to various underwater assets (bo
 Normally, specialized transmitters are required to send a signal to these transponders to trigger a response. However, due to the software defined nature of Subnero modems, it is fairly easy to develop an application that will query a transponder and calculate the range information.
 
 
-In this post, we showcase a fully functional transponder ranging application used to ping an [Applied Acoustics 219A](https://www.ashtead-technology.com/rental-equipment/aa-219-micro-beacon/) transponder and calculate the range to it from the recorded signal. This work has been presented in [_M. Chitre, R. Bhatnagar, M. Ignatius, and S. Suman, “Baseband signal processing with UnetStack,” in Underwater Communications Networking (UComms 2014), (Sestri Levante, Italy), September 2014. (Invited)_](http://arl.nus.edu.sg/twiki6/pub/ARL/BibEntries/sdmodem.pdf).
+In this post, we showcase a fully functional transponder ranging application used to ping an [Applied Acoustics 219A](https://www.ashtead-technology.com/rental-equipment/aa-219-micro-beacon/){:target="_blank"} transponder and calculate the range to it from the recorded signal. This work has been presented in [_M. Chitre, R. Bhatnagar, M. Ignatius, and S. Suman, “Baseband signal processing with UnetStack,” in Underwater Communications Networking (UComms 2014), (Sestri Levante, Italy), September 2014. (Invited)_](http://arl.nus.edu.sg/twiki6/pub/ARL/BibEntries/sdmodem.pdf){:target="_blank"}.
 
 An Applied Acoustics 219A transponder is set to receive a 22 kHz tonal. We send a 5 ms long 22 kHz pulse without preamble (preambleID set to 0) using a `TxBasebandSignalReq` from UnetStack's _baseband_ service. This will trigger a response at 30.5 kHz after a fixed delay of 30 ms. We also initiate a 500 ms long baseband signal recording using `RecordBasebandSignalReq` to make sure the modem records long enough to have the response from the pinger for a range of 300m.
 
@@ -30,16 +30,12 @@ from arlpy.plot import *
 from unetpy import *
 ```
 
-
-
 ### Connect to the modem
 Using the unetpy gateway, connect to the modem's IP address and subscribe to `physical` agent.
-
 
 ```python
 modem = UnetGateway('192.168.1.75')
 ```
-
 
 ```python
 phy = modem.agent('phy')
@@ -67,8 +63,7 @@ def flush_modem():
 ```
 
 ### Generate the signal to be transmitted
-We use the [`cw`](https://arlpy.readthedocs.io/en/latest/signal.html#arlpy.signal.cw) function from arlpy signal processing toolbox to generate a 5 ms long 22 kHz tonal.
-
+We use the [`cw`](https://arlpy.readthedocs.io/en/latest/signal.html#arlpy.signal.cw){:target="_blank"} function from arlpy signal processing toolbox to generate a 5 ms long 22 kHz tonal.
 
 ```python
 tx = asig.cw(22000, sigLen, txFs).tolist()
@@ -109,7 +104,7 @@ psd(rxS, fs=rxFs)
 ### Identifying receive time
 The next step is to identify the first sample from the received signal. For this, we shift the received signal by txTime + sigLen, generate a Hilbert envelop of the remaining signal and do a threshold detection. Both `txStart` and `rxStart` is marked in the plot.
 
-The Hilbert envelop is generated using the [envelop](https://arlpy.readthedocs.io/en/latest/signal.html#arlpy.signal.envelope) function from arlpy signal processing toolbox.
+The Hilbert envelop is generated using the [envelop](https://arlpy.readthedocs.io/en/latest/signal.html#arlpy.signal.envelope){:target="_blank"} function from arlpy signal processing toolbox.
 
 ```python
 shift = (txStart+sigLen*3)
@@ -149,7 +144,6 @@ print ("Range = {0:.2f} m".format(soundSpeed * travelTime))
 
 ### Appendix: Behind the scenes
 To look at what is happening behind the scenes, we plot the shifted signal, PSD of the shifted signal and the envelop of the shifted signal.
-
 
 ```python
 plot(rxShifted, fs=rxFs, maxpts = rxFs)
