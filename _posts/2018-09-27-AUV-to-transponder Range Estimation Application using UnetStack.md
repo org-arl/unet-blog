@@ -146,9 +146,7 @@ vlines(rxStart, color='purple')
 
 ![img](../assets/img/bokeh_plot_4.png)
 ### Calculating the range
-Now that we have the `txTime` and `rxTime`, we can calculate the range. This test was conducted at Adriatic sea, during BTS 2018.
-
-![img](../assets/img/testing.jpg)
+Now that we have the `txTime` and `rxTime`, we can calculate the range.
 
 ```python
 print ('Tx Start = ', txStart, 's')
@@ -163,8 +161,11 @@ print ("Range = {0:.2f} m".format(soundSpeed * travelTime/2))
     Round trip time =  0.00967708333333333 s
     Range = 7.35 m
 
+The values given above, is from a test conducted at the Adriatic sea, during BTS 2018.
 
+![img](../assets/img/testing.jpg)
 
+### Once done, shutdown the modem
 ```python
 modem.shutdown()
 ```
