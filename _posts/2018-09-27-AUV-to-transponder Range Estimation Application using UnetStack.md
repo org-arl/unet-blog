@@ -1,5 +1,13 @@
-
-## AUV-to-transponder range estimation application using UnetStack
+---
+layout: post
+title: AUV-to-transponder range estimation application using UnetStack
+date: 27/9/2018
+author: Manu Ignatius
+categories: howto
+feature-img: "assets/img/transponder.jpg"
+thumbnail: "assets/img/transponder.jpg"
+tags: [howto, modems, localization, agents, ranging, algorithm]
+---
 
 It is a common practice to attach a transponder to various underwater assets (both static and mobile) for short and long term field deployments. These transponders can act as a beacon that can be utilized for localization. An underwater vehicle (e.g. AUV, ROV) will be able to do sequential ranging to find the location of the transponder during a search and rescue operation.
 
