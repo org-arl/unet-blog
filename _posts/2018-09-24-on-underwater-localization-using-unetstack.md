@@ -129,6 +129,7 @@ Although, we prefer the first method since it can be easily scaled when there ar
 Let the local coordinates of the target node be denoted by a vector $$\mathbf{x}$$ and the known positions of the $$i^{\text{th}}$$ reference node be denoted by vector $$\mathbf{p}_i$$. The range measured from the $$i^{\text{th}}$$ reference node to the target node is denoted by $$r_i$$.
 
 Now, we can formulate an optimization objective to minimize the sum of squared error and try to estimate an optimal value of $$\mathbf{x}$$. The problem is formulated as shown below:
+
 $$
 \mathbf{x}^* = \arg\min_\mathbf{x} \sum_i \left(\left|\;\mathbf{x}-\mathbf{p}_i\;\right|-r_i\right)^2
 $$
