@@ -28,9 +28,9 @@ Note that at least three reference nodes/modems are required to uniquely localiz
 
 The GPS coordinates at these known locations are converted to local cartesian coordinates. Let the GPS locations at which the modems are deployed be:
 
-Node 1 --> (43.933887, 15.443404) --> Origin
+Node 1 --> (43.933777, 15.443508) --> Origin
 
-Node 2 --> (43.933976, 15.443613)
+Node 2 --> (43.933901, 15.443539)
 
 Node 3 --> Target node which needs to be localized
 
@@ -83,7 +83,7 @@ print(node2)
       canForward = False
       diveRate = 0.0
       heading = 0.0
-      location = [16.721901583485305, 9.975026107393205, 0.0]
+      location = [2.4141898796660826, 13.78562671598047, 0.0]
       mobility = False
       nodeName = 2
       origin = []
@@ -116,6 +116,45 @@ range2 = rnf2.getRange()
 The distances are measured using acoustic ranging as shown above and stored in variables `range1` and `range2`.
 
 ## Localization algorithm
+
+There are more than one way to compute the location of the third node. We present below two methods:
+
+- Minimization of squared error
+
+- Geometric circle intersection
+
+Although, we prefer the first method since it can be easily scaled when there are more number of reference nodes with known locations are available.
+
+#### Minimization of squared error
+
+Let the local coordinates of the target node be denoted by a vector $$\mathbf{x}$$ and the known positions of the $$i^{\text{th}}$$ reference node be denoted by vector $$\mathbf{p}_i$$. The range measured from the $$i^{\text{th}}$$ reference node to the target node is denoted by $$r_i$$.
+
+Now, we can formulate an optimization objective to minimize the sum of squared error and try to estimate an optimal value of $$\mathbf{x}$$. The problem is formulated as shown below:
+
+$$
+\mathbf{x}^* = \arg\min_\mathbf{x} \sum_i \left(\left|\;\mathbf{x}-\mathbf{p}_i\;\right|-r_i\right)^2
+$$
+
+The above problem can be implemented in `python` and solved using using methods in `scipy` module as shown below;
+
+```python
+import math
+from scipy.optimize import minimize
+
+def norm(x):
+    return math.sqrt(np.sum(x**2))
+
+def cost(x):
+    loc = np.asarray(locations)
+    return (norm(x-loc[0])-range1)**2 + (norm(x-loc[1])-range2)**2
+
+soln = minimize(cost, (-10,20))
+print(list(soln.x))
+```
+
+    [-19.608792834527456, 6.4265057515711765]
+
+The above shown is the local coordinate found by solving the optimization problem. Next we will compare this solution with the geometric circle intersention method and finally update this computed location on the map.
 
 #### Geometric circle intersection method
 
@@ -177,7 +216,7 @@ There are two possible solutions. The decision is based on the value of $$x_1$$,
 x2_sol
 ```
 
-    [-27.7651073424558, 30.1984110020781]
+    [6.4265057515711765, 30.1984110020781]
 
 
 The value of $$x_1$$ is computed for both values of computed $$x_2$$.
@@ -198,7 +237,7 @@ x1_sol.append( x1.subs([(a1, node1.location[0]), (a2, node1.location[1]), \
 x1_sol
 ```
 
-    [19.3278998926915, -15.2487662763113]
+    [-19.608792834527456, -15.2487662763113]
 
 ```python
 index = [idx for idx, val in enumerate(x1_sol) if val >= 0][0]
@@ -207,7 +246,7 @@ x2 = x2_sol[index]
 print((x1, x2, 0.0))
 ```
 
-    (19.3278998926915, -27.7651073424558, 0.0)
+    (-19.608792834527456, 6.4265057515711765, 0.0)
 
 
 ## Update the map with the computed location
