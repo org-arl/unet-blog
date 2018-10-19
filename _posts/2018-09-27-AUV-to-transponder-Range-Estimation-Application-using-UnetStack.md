@@ -1,5 +1,6 @@
 ---
 layout: post
+comments: true
 title: AUV-to-transponder range estimation application using UnetStack
 date: 27/9/2018
 author: Manu Ignatius
