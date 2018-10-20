@@ -26,6 +26,7 @@ This application is developed using Jupyter Notebook, in Python using the UnetPy
 
 ```python
 import numpy as np
+import scipy.signal as sig
 import arlpy.signal as asig
 from arlpy.plot import *
 from unetpy import *
@@ -53,7 +54,6 @@ Before starting passband recording, we need to set the passband block size using
 txFs = 192000              # Sa/s
 sigLen = 5e-3              # s
 timeout = 5000             # ms
-threshold = 0.3
 soundSpeed = 1520          # m/s
 triggerSig = 22000         # Hz
 transponderDelay = 30e-3   # s
@@ -115,10 +115,15 @@ psd(rxS, fs=rxFs)
 
 ![img](../assets/img/bokeh_plot_2.png)
 
-
+In order to isolate the response signal, we pass it through a bandpass filter.
+```python
+hb = sig.firwin(127, [30000, 31000], pass_zero=False, fs=rxFs)
+rxS1 = asig.lfilter0(hb, 1, rxS)
+# plot(rxS1, fs=rxFs, maxpts=rxFs)
+```
 
 ### Identifying receive time
-The next step is to identify the first sample from the received signal. For this, we shift the start of the received signal by txStart + transponderDelay, generate a Hilbert envelop of the remaining signal and do a threshold detection. Both `txStart` and `rxStart` is marked in the plot.
+The next step is to identify the first sample from the received signal. For this, we shift the start of the received signal by txStart + transponderDelay, generate a Hilbert envelop of the remaining signal and do a threshold (which is half of sample with maximum value) detection. Both `txStart` and `rxStart` is marked in the plot.
 
 The Hilbert envelop is generated using the [envelop](https://arlpy.readthedocs.io/en/latest/signal.html#arlpy.signal.envelope) function from arlpy signal processing toolbox.
 
@@ -127,7 +132,7 @@ The Hilbert envelop is generated using the [envelop](https://arlpy.readthedocs.i
 start = txStart+transponderDelay
 newRx = rxS[int(start*rxFs):]
 env = asig.envelope(newRx)
-edge = np.argwhere(env>threshold)[0,0]
+edge = np.argwhere(env>np.max(env)/2)[0,0]
 ```
 
 
