@@ -41,7 +41,7 @@ modem_t modem = modem_open_eth(ip_address, 1100);
 ## Examples of basic operations
 Once a connection is open to the modem, the user can write code to develop their own applications. Sample code in `C`, `Python` and `Groovy/Java` on how to connect to the modem and perform basic operations are available [here](https://github.com/org-arl/unet-contrib/tree/master/contrib/Examples) for reference. Few basic operations are listed below and explained if the code is developed in `Groovy`:
 
-1. **Transmit a frame containing data using FH-BFSK modulation (default CONTROL) scheme.**
+1) **Transmit a frame containing data using FH-BFSK modulation (default CONTROL) scheme.**
 
 ```java
 // Look for agents providing physical service
@@ -80,7 +80,7 @@ Finally, the message is sent to the UnetStack running on the modem which transmi
 modem.send(msg)
 ```
 
-2. **Transmit a frame containing data using OFDM modulation (default DATA) scheme.**
+2) **Transmit a frame containing data using OFDM modulation (default DATA) scheme.**
 
 ```java
 // Look for agents providing physical service
@@ -92,7 +92,7 @@ modem.send(msg)
 
 This code is similar to the one explained above for the CONTROL scheme, except that the message is created with the type DATA instead of CON- TROL.
 
-3. **Transmit a baseband signal.**
+3) **Transmit a baseband signal.**
 
 Sometimes a user might want to create their own signal with custom modulation scheme and transmit using the modem. This is possible with the modem running UnetStack. The user can create a baseband signal as an array with alternate real and imaginary values and the standard Unet API can be used to transmit this baseband signal. An example code for performing such an operation is as shown below:
 
@@ -162,7 +162,7 @@ msg.recipient = bb
 modem.send(msg)
 ```
 
-4. **Record a baseband signal.**
+4) **Record a baseband signal.**
 
 Finally, it is also possible to record a baseband signal. Upon a request to record the baseband signal, the modem records a passband signal and converts it to the appropriate baseband signal and returns it to the user. This operation is as shown below:
 
