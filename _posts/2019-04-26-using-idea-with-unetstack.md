@@ -5,8 +5,8 @@ title: Using IntelliJ IDEA with UnetStack
 date: 26/4/2019
 author: Arnav Dhamija
 categories: howto
-feature-img: "assets/img/electronics.jpg"
-thumbnail: "assets/img/electronics.jpg"
+feature-img: "assets/img/intellij.jpg"
+thumbnail: "assets/img/intellij.jpg"
 tags: [howto, agents, unetstack]
 ---
 
@@ -40,7 +40,7 @@ In the next screen you will have to choose the name of your project. Let's call 
 
 ![](assets/img/idea-setup/3.png)
 
-Once you've completed all these steps, you will notice that IDEA has created a new directory with they name of your project with the following directories:
+Once you've completed all these steps, you will notice that IDEA has created a new directory with the name of your project with the following directories:
 
 ```
 src/
