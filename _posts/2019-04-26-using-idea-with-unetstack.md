@@ -71,7 +71,7 @@ Create a new Groovy in the `src/` directory of your project by right-clicking th
 
 In this example, the agent we're writing will be called `AwesomeAgent`. The code for the same is below. For more information about writing agents, refer to the Unet [documentation](https://www.unetstack.net/unet-agents.html).
 
-```
+```groovy
 import org.arl.fjage.Message
 import org.arl.unet.UnetAgent
 
@@ -101,11 +101,13 @@ class AwesomeAgent extends UnetAgent {
 
 This is a simple `UnetAgent` which will print "Hello world!" on setup and do nothing else.
 
-__NOTE:__ If you have source files in directories other than `src/` you will NEED to inform IDEA about this by right-clicking the other directories and then going to __Mark Directory as > Sources Root__. Otherwise, IDEA will not be able to correctly add these files to the module's classpath.
+__NOTE 1:__ If you have source files in directories other than `src/` you will NEED to inform IDEA about this by right-clicking the other directories and then going to __Mark Directory as > Sources Root__. Otherwise, IDEA will not be able to correctly add these files to the module's classpath.
+
+__NOTE 2:__ If you want IDEA to statically check your code while typing, add the `@CompileStatic` annotation to the line above the definition of your Groovy class.
 
 After doing so, we need to write a simulation script to check if everything is working. For keeping the code organised, create a new `sim/` directory and create a new Groovy script in this directory. Let's call it `simple_sim.groovy`. We will write a very simple simulation script as shown below:
 
-```
+```groovy
 import org.arl.unet.link.ReliableLink
 import org.arl.unet.sim.channels.ProtocolChannelModel
 
