@@ -22,7 +22,7 @@ theme_settings:
   about_header_text: > #two or three lines to describe your site
      <h1>About</h1>
   footer_text: >
-    © Unet Project 2018
+    © Unet Project
 
   # Icons
   rss: true  # Make sure you created a feed.xml with feed.xml layout
