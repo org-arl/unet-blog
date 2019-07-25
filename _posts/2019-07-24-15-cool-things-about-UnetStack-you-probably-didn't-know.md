@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: 15 Cool things about UnetStack you probably didn't know
+title: 12 cool things about UnetStack simulator you probably didn't know
 date: 24/7/2019
 author: Mandar Chitre, Manu Ignatius
 categories: howto
@@ -10,53 +10,21 @@ thumbnail: "assets/img/water.jpg"
 tags: [howto, agents, unetstack]
 ---
 
-1. [Using agent names in shell](#head1)
-2. [Accessing current simulation count](#head2)
-3. [Accessing platform time and clock time](#head3)
-4. [Suppressing simulation progress](#head4)
-5. [Calculating distances between nodes](#head5)
-6. [Programmatically stopping a simulation](#head6)
-7. [Setting log level of the simulation agent](#head7)
-8. [Specifying relative paths for files](#head8)
-9. [Redefining closures in the shell](#head9)
-10. [Working with GPS coordinates](#head10)
-11. [Distributing nodes randomly](#head11)
-12. [Encoding and decoding PDUs](#head12)
-13. [Using MATLAB to plot results](#head13)
-14. [Using a visual debugger in agent development](#head14)
-15. [Using a groovy shell to create files](#head15)
+1. [Accessing current simulation count](#head1)
+2. [Accessing platform time and clock time](#head2)
+3. [Suppressing simulation progress](#head3)
+4. [Calculating distances between nodes](#head4)
+5. [Programmatically stopping a simulation](#head5)
+6. [Setting log level of the simulation agent](#head6)
+7. [Specifying relative paths for files](#head7)
+8. [Working with GPS coordinates](#head8)
+9. [Distributing nodes randomly](#head9)
+10. [Encoding and decoding PDUs](#head10)
+11. [Using MATLAB to plot results](#head11)
+12. [Using a visual debugger in agent development](#head12)
 
 
-## <a name="head1"></a>1. Using agent names in shell
-
-Throughout the documentation, you find agents referred to as `phy`, `link`, etc. instead of `agent('phy')`, `agent('link')`, etc. This works simply because the shell initialization scripts assign the later to the former:
-
-```groovy
-phy = agent('phy');
-link = agent('link');
-  :
-  :
-```
-
-This allows for a simpler syntax in the shell, such as:
-```groovy
-phy << new DatagramReq(...)
-phy.MTU
-  :
-  :
-```
-
-rather than:
-```groovy
-agent('phy') << new DatagramReq(...)
-agent('phy').MTU
-  :
-  :
-```
-
-If you create and add your own agents to the stack, you may wish to add similar variables to the shell by adding the declarations to `etc/fshrc.groovy` (and ensuring that this file is added as an initialization script when the shell agent is created).
-
-## <a name="head2"></a> 2. Accessing current simulation count
+## <a name="head1"></a> 1. Accessing current simulation count
 The current simulation `count` can be accessed using the count variable in a simulation script. For example:
 ```groovy
 //! Simulation: Demo of using simulation count
@@ -70,7 +38,7 @@ The current simulation `count` can be accessed using the count variable in a sim
 }
 ```
 
-## <a name="head3"></a> 3. Accessing platform time and clock time
+## <a name="head2"></a> 2. Accessing platform time and clock time
 The platform time (discrete event or real-time) can be accessed using the `time()` closure in a simulation script. The clock time can be accessed using the `clock()` closure. Both closures provide time in seconds from some arbitrary origin. For example:
 ```groovy
 //! Simulation: Demo of clock()
@@ -83,14 +51,14 @@ simulate 10.hours {
 println "10 hours worth of simulation completed in ${clock()-t0} seconds"
 ```
 
-## <a name="head4"></a> 4. Suppressing simulation progress
+## <a name="head3"></a> 3. Suppressing simulation progress
 By default, the simulation progress is displayed on the terminal for Mac OS X and Linux. For Windows, due to lack of support in Cygwin for ANSI terminal sequences, this is disabled. Should you wish to suppress the display of simulation progress, set the variable `showProgress` in your simulation script to be `false`:
 
 ```groovy
 showProgress = false
 ```
 
-## <a name="head5"></a> 5. Calculating distances between nodes
+## <a name="head4"></a> 4. Calculating distances between nodes
 A closure `distance()` is available in the simulation script to compute distance between two locations:
 ```groovy
 def location1 = [0, 0, 0]
@@ -98,7 +66,7 @@ def location2 = [300.m, 1.km, 0]
 println distance(location1, location2)
 ```
 
-## <a name="head6"></a> 6. Programmatically stopping a simulation
+## <a name="head5"></a> 5. Programmatically stopping a simulation
 You can stop a simulation from your simulation agent by calling the `stop()` closure. For example:
 ```groovy
 //! Simulation: Demo of stop()
@@ -116,13 +84,13 @@ simulate {
 }
 ```
 
-## <a name="head7"></a> 7. Setting log level of the simulation agent
+## <a name="head6"></a> 6. Setting log level of the simulation agent
 A simple way to change log level of the simulation agent is via the `logLevel` variable in the simulation script. For example:
 ```groovy
 logLevel = java.logging.Level.ALL
 ```
 
-## <a name="head8"></a> 8. Specifying relative paths for files
+## <a name="head7"></a> 7. Specifying relative paths for files
 When a simulation is run, a `home` variable is defined to point to the simulator installation directory. This is useful to refer to common files:
 ```groovy
 // set up node 1 with stack loaded from the common setup.groovy file
@@ -135,22 +103,7 @@ Another variable `script` is defined to point to the simulation script file bein
 run "${script.parent}/settings.groovy"
 ```
 
-## <a name="head9"></a> 9. Redefining closures in the shell
-To avoid the mistakes from accidentally overwriting closures in the shell, by default, the shell disallows redefining previously defined closures. For example:
-```groovy
-> host = 1
-java.lang.RuntimeException: Closure host is read only
-```
-since `host` is a predefined closure that resolves host names to addresses. If we wanted to redefine the closure, we can do so by setting the `protection` variable in the shell to `false`:
-```groovy
-> protection = false;
-> host = 1
-1
-> println host
-1
-> protection = true;
-```
-## <a name="head10"></a> 10. Working with GPS coordinates
+## <a name="head8"></a> 8. Working with GPS coordinates
 Sometimes it is useful to work with GPS coordinates for node locations, but the simulator uses a local coordinate frame. Here’s how to easily convert from one to another.
 
 First create a local coordinate system with a specified origin:
@@ -176,7 +129,7 @@ or convert from local frame to GPS coordinates:
 
 There are other options for GPS coordinate formats too (e.g. degrees, minutes, seconds).
 
-## <a name="head11"></a> 11. Distributing nodes randomly
+## <a name="head9"></a> 9. Distributing nodes randomly
 Often, in simulations, we wish to distribute nodes randomly in a given area. Here’s how to do that in a simulation script:
 ```groovy
 //! Simulation: Demo of randomly deployed nodes
@@ -195,7 +148,7 @@ simulate {
 }
 ```
 
-## <a name="head12"></a> 12. Encoding and decoding PDUs
+## <a name="head10"></a> 10. Encoding and decoding PDUs
 When implementing protocols, we often need to assemble and parse PDUs. To ease this task, we have a PDU utility class to help. We first define a class with our PDU format:
 ```groovy
  import java.nio.ByteOrder
@@ -239,7 +192,7 @@ data = pdu.decode(bytes)
 ```
 For further information, see PDU API documentation.
 
-## <a name="head13"></a> 13. Using MATLAB to plot results
+## <a name="head11"></a> 11. Using MATLAB to plot results
 The samples provided with UnetStack show how to plot results (e.g. `samples/aloha/plot-results.groovy`) using a Groovy script. Sometimes you may wish to use other tools such as MATLAB to analyze the results. To do this, you’ll need to extract relevant results from the log file and then load them in MATLAB.
 
 For example, let us assume that you just ran the `samples/aloha/aloha.groovy` simulation and have the log files in the `logs` directory. You can extract the relevant STATS lines from the log file and reformat into a CSV file that MATLAB can load:
@@ -265,7 +218,7 @@ The output should look like this:
 
 ![](assets/img/aloha-matlab.png)
 
-## <a name="head14"></a> 14. Using a visual debugger in agent development
+## <a name="head12"></a> 12. Using a visual debugger in agent development
 While the Unet IDE does not have an integrated debugger, it is possible to use a debugger from another IDE (e.g. [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Eclipse](https://eclipse.org/downloads/)) with UnetStack. The basic steps are outlined below, but the exact details depend on the IDE used:
 
 - Downloaded and install the IDE with Groovy support.
@@ -274,16 +227,3 @@ While the Unet IDE does not have an integrated debugger, it is possible to use a
 - Start a debugging session.
 More details for using IntelliJ IDEA can be found [here](https://blog.unetstack.net/using-idea-with-unetstack).
 
-## <a name="head15"></a> 15. Using a groovy shell to create files
-There are times when you have access to a Groovy shell, but not direct access to the scripts folder or the filesystem to create a new Groovy script (or to modify an existing script). An example is, if you are out in the field, connected to a device running UnetStack using a primitive interface such as RS232. You can still use the Groovy shell to create a file in the scripts folder. The syntax is:
-
-```groovy
-file("abcd.groovy").text="print 'hello sea 1'\\nprint 'hello sea 2'"
-```
-
-This will create (or modify if there is an existing file) a file with the content:
-```groovy
-print 'hello sea 1'
-print 'hello sea 2'
-```
-> NOTE: Make sure you use two '\\' for '\n'
