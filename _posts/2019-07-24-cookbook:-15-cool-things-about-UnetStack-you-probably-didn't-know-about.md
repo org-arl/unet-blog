@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: Cookbook\: 15 Cool things about UnetStack you probably didn't know about
+title: Cookbook - 15 Cool things about UnetStack you probably didn't know about
 date: 24/7/2019
 author: Mandar Chitre, Manu Ignatius
 categories: howto
