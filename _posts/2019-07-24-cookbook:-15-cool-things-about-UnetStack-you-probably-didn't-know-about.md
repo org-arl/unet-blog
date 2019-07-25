@@ -278,7 +278,7 @@ More details for using IntelliJ IDEA can be found [here](https://blog.unetstack.
 There are times when you have access to a Groovy shell, but not direct access to the scripts folder or the filesystem to create a new Groovy script (or to modify an existing script). An example is, if you are out in the field, connected to a device running UnetStack using a primitive interface such as RS232. You can still use the Groovy shell to create a file in the scripts folder. The syntax is:
 
 ```
-file("abcd.groovy").text="print 'hello sea 1'\nprint 'hello sea 2'"
+file("abcd.groovy").text="print 'hello sea 1'\\nprint 'hello sea 2'"
 ```
 
 This will create (or modify if there is an existing file) a file with the content:
@@ -286,4 +286,4 @@ This will create (or modify if there is an existing file) a file with the conten
 print 'hello sea 1'
 print 'hello sea 2'
 ```
-> NOTE: Make sure you use two '\' for '\n'
+> NOTE: Make sure you use two '\\' for '\n'
