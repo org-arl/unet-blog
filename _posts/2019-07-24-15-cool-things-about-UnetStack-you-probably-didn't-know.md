@@ -213,7 +213,6 @@ Then open MATLAB and load the data in MATLAB, and plot it:
 >> xlabel('Offered Load');
 ```
 
-
 The output should look like this:
 
 ![](assets/img/aloha-matlab.png)
