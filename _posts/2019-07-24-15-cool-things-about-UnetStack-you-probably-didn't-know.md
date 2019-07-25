@@ -31,7 +31,7 @@ tags: [howto, agents, unetstack]
 
 Throughout the documentation, you find agents referred to as `phy`, `link`, etc. instead of `agent('phy')`, `agent('link')`, etc. This works simply because the shell initialization scripts assign the later to the former:
 
-```
+```groovy
 phy = agent('phy');
 link = agent('link');
   :
@@ -39,7 +39,7 @@ link = agent('link');
 ```
 
 This allows for a simpler syntax in the shell, such as:
-```
+```groovy
 phy << new DatagramReq(...)
 phy.MTU
   :
@@ -47,7 +47,7 @@ phy.MTU
 ```
 
 rather than:
-```
+```groovy
 agent('phy') << new DatagramReq(...)
 agent('phy').MTU
   :
@@ -58,7 +58,7 @@ If you create and add your own agents to the stack, you may wish to add similar 
 
 ## <a name="head2"></a> 2. Accessing current simulation count
 The current simulation `count` can be accessed using the count variable in a simulation script. For example:
-```
+```groovy
 //! Simulation: Demo of using simulation count
 
 [...].each { p ->
@@ -72,7 +72,7 @@ The current simulation `count` can be accessed using the count variable in a sim
 
 ## <a name="head3"></a> 3. Accessing platform time and clock time
 The platform time (discrete event or real-time) can be accessed using the `time()` closure in a simulation script. The clock time can be accessed using the `clock()` closure. Both closures provide time in seconds from some arbitrary origin. For example:
-```
+```groovy
 //! Simulation: Demo of clock()
 
 def t0 = clock()
@@ -86,13 +86,13 @@ println "10 hours worth of simulation completed in ${clock()-t0} seconds"
 ## <a name="head4"></a> 4. Suppressing simulation progress
 By default, the simulation progress is displayed on the terminal for Mac OS X and Linux. For Windows, due to lack of support in Cygwin for ANSI terminal sequences, this is disabled. Should you wish to suppress the display of simulation progress, set the variable `showProgress` in your simulation script to be `false`:
 
-```
+```groovy
 showProgress = false
 ```
 
 ## <a name="head5"></a> 5. Calculating distances between nodes
 A closure `distance()` is available in the simulation script to compute distance between two locations:
-```
+```groovy
 def location1 = [0, 0, 0]
 def location2 = [300.m, 1.km, 0]
 println distance(location1, location2)
@@ -100,7 +100,7 @@ println distance(location1, location2)
 
 ## <a name="head6"></a> 6. Programmatically stopping a simulation
 You can stop a simulation from your simulation agent by calling the `stop()` closure. For example:
-```
+```groovy
 //! Simulation: Demo of stop()
 
 import org.arl.fjage.TickerBehavior
@@ -118,31 +118,31 @@ simulate {
 
 ## <a name="head7"></a> 7. Setting log level of the simulation agent
 A simple way to change log level of the simulation agent is via the `logLevel` variable in the simulation script. For example:
-```
+```groovy
 logLevel = java.logging.Level.ALL
 ```
 
 ## <a name="head8"></a> 8. Specifying relative paths for files
 When a simulation is run, a `home` variable is defined to point to the simulator installation directory. This is useful to refer to common files:
-```
+```groovy
 // set up node 1 with stack loaded from the common setup.groovy file
 node '1', address: 1, stack: "$home/etc/setup.groovy"
 ```
 
 Another variable `script` is defined to point to the simulation script file being executed. This can be used to find the directory containing the script file, if other files in the same directory need to be referenced:
-```
+```groovy
 // load a settings file from the same directory as the script
 run "${script.parent}/settings.groovy"
 ```
 
 ## <a name="head9"></a> 9. Redefining closures in the shell
 To avoid the mistakes from accidentally overwriting closures in the shell, by default, the shell disallows redefining previously defined closures. For example:
-```
+```groovy
 > host = 1
 java.lang.RuntimeException: Closure host is read only
 ```
 since `host` is a predefined closure that resolves host names to addresses. If we wanted to redefine the closure, we can do so by setting the `protection` variable in the shell to `false`:
-```
+```groovy
 > protection = false;
 > host = 1
 1
@@ -154,12 +154,12 @@ since `host` is a predefined closure that resolves host names to addresses. If w
 Sometimes it is useful to work with GPS coordinates for node locations, but the simulator uses a local coordinate frame. Here’s how to easily convert from one to another.
 
 First create a local coordinate system with a specified origin:
-```
+```groovy
 > gps = new org.arl.unet.utils.GpsLocalFrame(1.289545, 103.849972);
 ```
 
 Then convert node GPS coordinates to local frame (coordinates in meters):
-```
+```groovy
 > gps.toLocal(1.29, 103.85)               // decimal degrees
 [3.1161606856705233, 50.311549937515956]
 > gps.toLocal(1, 17.4, 103, 51)           // degrees, decimal minutes
@@ -167,7 +167,7 @@ Then convert node GPS coordinates to local frame (coordinates in meters):
 ```
 
 or convert from local frame to GPS coordinates:
-```
+```groovy
 > gps.toGps(1000.m, 500.m)                // decimal degrees
 [1.2940668245170857, 103.85895741597328]
 > gps.toGpsDM(1000.m, 500.m)              // degrees, decimal minutes
@@ -178,7 +178,7 @@ There are other options for GPS coordinate formats too (e.g. degrees, minutes, s
 
 ## <a name="head11"></a> 11. Distributing nodes randomly
 Often, in simulations, we wish to distribute nodes randomly in a given area. Here’s how to do that in a simulation script:
-```
+```groovy
 //! Simulation: Demo of randomly deployed nodes
 
 platform = org.arl.fjage.RealTimePlatform
@@ -197,7 +197,7 @@ simulate {
 
 ## <a name="head12"></a> 12. Encoding and decoding PDUs
 When implementing protocols, we often need to assemble and parse PDUs. To ease this task, we have a PDU utility class to help. We first define a class with our PDU format:
-```
+```groovy
  import java.nio.ByteOrder
  import org.arl.unet.PDU
 
@@ -215,7 +215,7 @@ When implementing protocols, we often need to assemble and parse PDUs. To ease t
 ```
 
 We can then encode and decode PDUs easily using this class:
-```
+```groovy
 > pdu = new MyPDU();
 > bytes = pdu.encode([type: 7, data: 42])
 [7, 1, 0, 0, 0, 42, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]
@@ -224,7 +224,7 @@ We can then encode and decode PDUs easily using this class:
 ```
 In some cases, it is convenient to define a PDU without explicitly defining a new class. In that case, we can create an anonymous class with the standard Java syntax, or using the Groovy extensions syntax shown here:
 
-```
+```groovy
 def pdu = PDU.withFormat {
   length(16)                     // 16 byte PDU
   order(ByteOrder.BIG_ENDIAN)    // byte ordering is big endian
@@ -244,12 +244,12 @@ The samples provided with UnetStack show how to plot results (e.g. `samples/aloh
 
 For example, let us assume that you just ran the `samples/aloha/aloha.groovy` simulation and have the log files in the `logs` directory. You can extract the relevant STATS lines from the log file and reformat into a CSV file that MATLAB can load:
 
-```
+```groovy
 bash$ grep STATS logs/trace.nam | sed 's/.=//g' | sed 's/^# STATS: //' > logs/results.txt
 ```
 
 Then open MATLAB and load the data in MATLAB, and plot it:
-```
+```groovy
 >> load logs/results.txt
 >> x = 0:0.05:2;
 >> plot(x, x.*exp(-2*x))
@@ -277,12 +277,12 @@ More details for using IntelliJ IDEA can be found [here](https://blog.unetstack.
 ## <a name="head15"></a> 15. Using a groovy shell to create files
 There are times when you have access to a Groovy shell, but not direct access to the scripts folder or the filesystem to create a new Groovy script (or to modify an existing script). An example is, if you are out in the field, connected to a device running UnetStack using a primitive interface such as RS232. You can still use the Groovy shell to create a file in the scripts folder. The syntax is:
 
-```
+```groovy
 file("abcd.groovy").text="print 'hello sea 1'\\nprint 'hello sea 2'"
 ```
 
 This will create (or modify if there is an existing file) a file with the content:
-```
+```groovy
 print 'hello sea 1'
 print 'hello sea 2'
 ```
