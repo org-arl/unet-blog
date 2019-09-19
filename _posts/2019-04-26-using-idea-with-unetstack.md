@@ -43,7 +43,7 @@ In the next screen you will have to choose the name of your project. Let's call 
 Once you've completed all these steps, you will notice that IDEA has created a new directory with the name of your project with the following directories:
 
 ```
-src/
+src/..
 MyAwesomeAgent.iml
 ```
 
@@ -65,11 +65,11 @@ We can now start writing our agent.
 
 ## Writing the Agent
 
-Create a new Groovy in the `src/` directory of your project by right-clicking the `src` directory in Project pane in IDEA.
+Create a new Groovy Class in the `src/` directory of your project by right-clicking the `src` directory in Project pane in IDEA.
 
 ![](assets/img/idea-setup/project.png)
 
-In this example, the agent we're writing will be called `AwesomeAgent`. The code for the same is below. For more information about writing agents, refer to the Unet [documentation](https://www.unetstack.net/unet-agents.html).
+In this example, the agent we're writing will be called `AwesomeAgent.groovy`. The code for it is below. For more information about writing agents, refer to the Unet [documentation](https://www.unetstack.net/unet-agents.html).
 
 ```groovy
 import org.arl.fjage.Message
@@ -105,9 +105,10 @@ __NOTE 1:__ If you have source files in directories other than `src/` you will N
 
 __NOTE 2:__ If you want IDEA to statically check your code while typing, add the `@CompileStatic` annotation to the line above the definition of your Groovy class.
 
-After doing so, we need to write a simulation script to check if everything is working. For keeping the code organised, create a new `sim/` directory and create a new Groovy script in this directory. Let's call it `simple_sim.groovy`. We will write a very simple simulation script as shown below:
+After doing so, we need to write a simulation script to check if everything is working. For keeping the code organized, create a new `sim/` directory and create a new Groovy script in this directory. Let's call it `simple_sim.groovy`. We will write a very simple simulation script as shown below:
 
 ```groovy
+import org.arl.fjage.RealTimePlatform
 import org.arl.unet.link.ReliableLink
 import org.arl.unet.sim.channels.ProtocolChannelModel
 
@@ -126,14 +127,13 @@ simulate {
 
 Now we will have to configure our IDE to run this script by adding a new configuration. For doing so, click the "Add New Configuration" button at the top-right of the IDE:
 
-
 ![](assets/img/idea-setup/7.png)
 
 Select "Application" on the following screen.
 
 ![](assets/img/idea-setup/config.png)
 
-After choosing a suitable name for this configuration, set the "Main class" to `GroovyBoot`. The "Program arguments" will need to be set according to the path of your simulation script. As our simulation script is located in the `sim/` directory, we will need to fill in `cls://org.arl.unet.sim.initrc sim/simple_sim.groovy` over here.
+After choosing a suitable name for this configuration, set the "Main class" to `org.arl.fjage.shell.GroovyBoot`. The "Program arguments" will need to be set according to the path of your simulation script.  As our simulation script is located in the `sim/` directory, we will need to fill in `cls://org.arl.unet.sim.initrc sim/simple_sim.groovy` over here.
 
 Take note of the "Working directory" path as we will need this later.
 
@@ -141,7 +141,7 @@ In the end, your configuration window should look like this:
 
 ![](assets/img/idea-setup/8.png)
 
-Great! Now let's try to run our simulation by pressing the play button in the top right! 
+Great! Now let's try to run our simulation by pressing the play button in the top right!
 
 If you've been following all the steps perfectly so far, you should be greeted with the following error:
 
