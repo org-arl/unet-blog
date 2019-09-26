@@ -9,7 +9,7 @@ description: "The Underwater Networks Project" # used by search engines
 theme_settings:
   # Meta
   title: Unet # blog's title
-  avatar: assets/img/unet.png
+  avatar: assets/img/unet.ana
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
@@ -30,7 +30,7 @@ theme_settings:
   stack_exchange:  "https://stackoverflow.com/questions/tagged/unetstack"
 
   # Scripts / Features
-  google_analytics: # Tracking ID, e.g. "UA-000000-01"
+  google_analytics: "UA-52885583-1" # Tracking ID, e.g. "UA-000000-01"
   katex: true # Enable if using math markup
 
   navbar_links:
