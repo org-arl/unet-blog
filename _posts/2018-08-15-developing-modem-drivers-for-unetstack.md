@@ -27,7 +27,7 @@ and one unsolicited notification:
 
 ## The modem driver
 
-A modem driver is simply a [Unet agent](https://www.unetstack.net/unet-agents.html) that supports the [Physical](https://www.unetstack.net/svc-10-phy.html) and [Datagram](https://www.unetstack.net/svc-02-datagram.html) services.
+A modem driver is simply a [Unet agent](https://unetstack.net/handbook/unet-handbook_unetstack_basics.html) that supports the [Physical](https://unetstack.net/handbook/unet-handbook_physical_service.html) and [Datagram](https://unetstack.net/handbook/unet-handbook_datagram_service.html) services.
 
 There are several libraries for Java/Groovy that allow RS232 communications. We'll use [jSerialComm](http://fazecast.github.io/jSerialComm/) in our example here.
 
@@ -73,7 +73,7 @@ What we have in this code is a simple agent that advertises the two services tha
 
 We'll conveniently ignore error handling throughout this blog to keep the code simple.
 
-In order to support the Datagram service, the agent must honor a [`DatagramReq`](https://www.unetstack.net/javadoc/org/arl/unet/DatagramReq.html). It should also send a [`DatagramNtf`](https://www.unetstack.net/javadoc/org/arl/unet/DatagramNtf.html) when a frame is received by the modem, and expose a parameter `MTU` that advertises the frame size.
+In order to support the Datagram service, the agent must honor a [`DatagramReq`](https://www.unetstack.net/javadoc/3.0/org/arl/unet/DatagramReq.html). It should also send a [`DatagramNtf`](https://www.unetstack.net/javadoc/3.0/org/arl/unet/DatagramNtf.html) when a frame is received by the modem, and expose a parameter `MTU` that advertises the frame size.
 
 To honor the `DatagramReq`, we modify the `processRequest()` method to send out the proper AT command:
 ```groovy
@@ -96,9 +96,9 @@ To publish the `MTU` parameter, we simply declare a getter for it:
 ```
 Since our hypothetical modem uses a fixed frame size, we don't need a setter. We'll deal with generating `DatagramNtf` a little later.
 
-Now let's look at what we need to do to support the Physical service. We need to support the [`TxFrameReq`](https://www.unetstack.net/javadoc/org/arl/unet/phy/TxFrameReq.html) request, and the [`RxFrameNtf`](https://www.unetstack.net/javadoc/org/arl/unet/phy/RxFrameNtf.html) and [`TxFrameNtf`](https://www.unetstack.net/javadoc/org/arl/unet/phy/TxFrameNtf.html) notifications. Since our modem doesn't support advanced functionality like collision detection, bad frame detection, snooping of frames for other nodes, we don't need to support the rest of the messages. Since the `TxFrameReq` class extends the `DatagramReq`, our `processRequest()` method above already honors these requests!
+Now let's look at what we need to do to support the Physical service. We need to support the [`TxFrameReq`](https://www.unetstack.net/javadoc/3.0/org/arl/unet/phy/TxFrameReq.html) request, and the [`RxFrameNtf`](https://www.unetstack.net/javadoc/3.0/org/arl/unet/phy/RxFrameNtf.html) and [`TxFrameNtf`](https://www.unetstack.net/javadoc/3.0/org/arl/unet/phy/TxFrameNtf.html) notifications. Since our modem doesn't support advanced functionality like collision detection, bad frame detection, snooping of frames for other nodes, we don't need to support the rest of the messages. Since the `TxFrameReq` class extends the `DatagramReq`, our `processRequest()` method above already honors these requests!
 
-We add support for the `TxFrameNtf` to be sent the moment we ask the modem to send the frame for us. For this we add a [`OneShotBehavior`](http://org-arl.github.io/fjage/doc/html/behaviors.html) to our 'processMessage()' method:
+We add support for the `TxFrameNtf` to be sent the moment we ask the modem to send the frame for us. For this we add a [`OneShotBehavior`](https://fjage.readthedocs.io/en/latest/behaviors.html#one-shot-behavior) to our 'processMessage()' method:
 ```groovy
   Message processRequest(Message req) {
     if (req instanceof DatagramReq) {
@@ -202,7 +202,7 @@ The only parameter that can be changed is the power level, so we need one setter
   }
 ```
 
-So now we can transmit data frames and control the transmit power level. The next thing to do is to be able to receive data frames. To do this, we need to monitor the serial port for unsolicited data. We could do this with an [event-based API](https://github.com/Fazecast/jSerialComm/wiki/Event-Based-Reading-Usage-Example) for performance, but to keep the code here simple, we'll use the [polling API](https://github.com/Fazecast/jSerialComm/wiki/Nonblocking-Reading-Usage-Example) instead. We can set up the polling in a [`CyclicBehavior`](http://org-arl.github.io/fjage/javadoc/index.html?org/arl/fjage/CyclicBehavior.html). To do this, we have to modify our `startup()` method:
+So now we can transmit data frames and control the transmit power level. The next thing to do is to be able to receive data frames. To do this, we need to monitor the serial port for unsolicited data. We could do this with an [event-based API](https://github.com/Fazecast/jSerialComm/wiki/Event-Based-Reading-Usage-Example) for performance, but to keep the code here simple, we'll use the [polling API](https://github.com/Fazecast/jSerialComm/wiki/Nonblocking-Reading-Usage-Example) instead. We can set up the polling in a [`CyclicBehavior`](https://fjage.readthedocs.io/en/latest/behaviors.html#cyclic-behavior). To do this, we have to modify our `startup()` method:
 ```groovy
   void startup() {
     rs232.openPort()
@@ -269,12 +269,12 @@ AGREE
 There's much more that modem drivers may support, depending on the capabilities of the modem. Once you understand how to write the simple modem driver above, the rest should be straightforward. Here are some additional functionalities that you may want to consider supporting:
 
 * `CONTROL` and `DATA` channels, if the modem supports various levels of modulation/FEC robustness
-* Optional `ClearReq`, `TxRawFrameReq`, `RxFrameStartNtf`, `BadFrameNtf` and `CollisionNtf` messages of the [Physical](https://www.unetstack.net/svc-10-phy.html) service
-* Populating optional `to`, `protocol`, `timestamp` and `errors` fields of the [`RxFrameNtf`](https://www.unetstack.net/javadoc/org/arl/unet/phy/RxFrameNtf.html)
+* Optional `ClearReq`, `TxRawFrameReq`, `RxFrameStartNtf`, `BadFrameNtf` and `CollisionNtf` messages of the [Physical](https://unetstack.net/handbook/unet-handbook_physical_service.html) service
+* Populating optional `to`, `protocol`, `timestamp` and `errors` fields of the [`RxFrameNtf`](https://www.unetstack.net/javadoc/3.0/org/arl/unet/phy/RxFrameNtf.html)
 * More accurate timestamps, if the modem provides a µs accuracy clock for timestamping frames
-* Optional `TIMED_TX` and `TIMESTAMPED_TX` capability of the [Physical](https://www.unetstack.net/svc-10-phy.html) service
-* Optional `PRIORITY`, `TTL` and `CANCELATION` capabilities of the [Datagram](https://www.unetstack.net/svc-02-datagram.html) service
-* [Baseband](https://www.unetstack.net/svc-12-baseband.html) service, if the modem supports acoustic recording or arbitrary signal transmission
-* [Ranging](https://www.unetstack.net/svc-11-ranging.html) service, if the modem supports acoustic ranging
+* Optional `TIMED_TX` and `TIMESTAMPED_TX` capability of the [Physical](https://unetstack.net/handbook/unet-handbook_physical_service.html) service
+* Optional `PRIORITY`, `TTL` and `CANCELATION` capabilities of the [Datagram](https://unetstack.net/handbook/unet-handbook_datagram_service.html) service
+* [Baseband](https://unetstack.net/handbook/unet-handbook_baseband_service.html) service, if the modem supports acoustic recording or arbitrary signal transmission
+* [Ranging](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html) service, if the modem supports acoustic ranging
 
 And if your modem supports new functionality and parameters, you can define your own parameters to expose and requests, responses and notifications to offer.
