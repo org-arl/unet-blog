@@ -9,7 +9,7 @@ description: "The Underwater Networks Project" # used by search engines
 theme_settings:
   # Meta
   title: Unet # blog's title
-  avatar: assets/img/unet.ana
+  avatar: assets/img/unet.png
   favicon: assets/favicon.ico
   gravatar: # Email MD5 hash
 
