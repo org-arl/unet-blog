@@ -24,7 +24,7 @@ Unet audio also supports transmission and reception of JANUS (NATO communication
 
 #### 2. UnetSocket API
 
-The newly introduced [UnetSocket API](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html) provides an easy-to-use software interface to integrate your applications with UnetStack. Those of you familiar with socket programming will find the API a breeze to learn. While providing simplicity, the API also offers you access to all the features in UnetStack, from transfer data files over multihop Unets to controlling the timings of transmissions accurately.
+The newly introduced [UnetSocket API](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html){:target="_blank"} provides an easy-to-use software interface to integrate your applications with UnetStack. Those of you familiar with socket programming will find the API a breeze to learn. While providing simplicity, the API also offers you access to all the features in UnetStack, from transfer data files over multihop Unets to controlling the timings of transmissions accurately.
 
 The UnetSocket API is not only available to Java or Groovy programmers, but also to Python users, enabling access to UnetStack-based modems directly from Python applications. You can now design your signals in a Jupyter notebook, transmit them straight from the cell, and receive and plot the signals in an output cell! Julia, Javascript and C programmers can leverage the fjåge gateways to integrate their applications with UnetStack.
 
@@ -32,7 +32,7 @@ The UnetSocket API is not only available to Java or Groovy programmers, but also
 
 #### 3. Portals
 
-UnetStack3 introduces [portals](https://unetstack.net/handbook/unet-handbook_portals.html) to create tunnels that can transparently carry TCP connections, UDP packets, or RS232 data across an underwater network. Portals are easy to setup and configure on demand, with just a couple of commands on the shell.
+UnetStack3 introduces [portals](https://unetstack.net/handbook/unet-handbook_portals.html){:target="_blank"} to create tunnels that can transparently carry TCP connections, UDP packets, or RS232 data across an underwater network. Portals are easy to setup and configure on demand, with just a couple of commands on the shell.
 
 #### 4. Customizable address space
 
@@ -40,7 +40,7 @@ As underwater bandwidth is scarce, it is important that we use it sparingly. Une
 
 #### 5. Short-circuiting
 
-In a traditional network stack, every layer adds it own headers and takes up valuable bandwidth. UnetStack3 agents are much smarter! Agents recognize when their functionality is not required for a specific transaction, and use a technology we call [_short-circuiting_](https://unetstack.net/handbook/unet-handbook_datagram_service.html#_short_circuit_delivery) to avoid the overhead of their headers. This not only saves bandwidth, but also processing power in energy-sensitive applications!
+In a traditional network stack, every layer adds it own headers and takes up valuable bandwidth. UnetStack3 agents are much smarter! Agents recognize when their functionality is not required for a specific transaction, and use a technology we call [_short-circuiting_](https://unetstack.net/handbook/unet-handbook_datagram_service.html#_short_circuit_delivery){:target="_blank"} to avoid the overhead of their headers. This not only saves bandwidth, but also processing power in energy-sensitive applications!
 
 ![Short-circuit](assets/img/shortcircuit.png){:class="img-responsive" width="700"}
 
@@ -52,7 +52,7 @@ The new ECLink agent in UnetStack provides improved performance and reliability 
 
 #### 7. Web-based IDE and simulator
 
-The Unet simulator now comes with a web-based [integrated development environment](https://unetstack.net/handbook/unet-handbook_writing_simulation_scripts.html#_integrated_development_environment) (IDE) to help you develop and test your networking protocols interactively. The simulator can be switched to a discrete-event simulation mode to run hundreds of hours of simulation time in minutes, enabling you to collect statistics on your protocol performance rapidly.
+The Unet simulator now comes with a web-based [integrated development environment](https://unetstack.net/handbook/unet-handbook_writing_simulation_scripts.html#_integrated_development_environment){:target="_blank"} (IDE) to help you develop and test your networking protocols interactively. The simulator can be switched to a discrete-event simulation mode to run hundreds of hours of simulation time in minutes, enabling you to collect statistics on your protocol performance rapidly.
 
 ![IDE](assets/img/ide.png){:class="img-responsive"}
 
@@ -66,13 +66,13 @@ All UnetStack agents now propagate the time-to-live and priority attributes in d
 
 #### 10. Web-based management & scripting
 
-UnetStack-based modems provide a web-based management console so that you can manage your network in the field from your browser. The console features a [powerful shell](https://unetstack.net/handbook/unet-handbook_unetstack_basics.html) to automate repeated and error-prone operations in the field.
+UnetStack-based modems provide a web-based management console so that you can manage your network in the field from your browser. The console features a [powerful shell](https://unetstack.net/handbook/unet-handbook_unetstack_basics.html){:target="_blank"} to automate repeated and error-prone operations in the field.
 
 ![IDE](assets/img/scripting.png){:class="img-responsive"}
 
 #### 11. Shell extensions
 
-UnetStack also leverages the new fjåge [shell extension](https://fjage.readthedocs.io/en/latest/shell.html#shell-extensions) mechanism to provide users with powerful easy-to-use commands, and on-modem documentation that can be accessed in the field. Shell extensions also enables users of legacy interfaces, such as AT commands, to access the full functionality of UnetStack.
+UnetStack also leverages the new fjåge [shell extension](https://fjage.readthedocs.io/en/latest/shell.html#shell-extensions){:target="_blank"} mechanism to provide users with powerful easy-to-use commands, and on-modem documentation that can be accessed in the field. Shell extensions also enables users of legacy interfaces, such as AT commands, to access the full functionality of UnetStack.
 
 #### 12. Connector framework
 
@@ -90,4 +90,4 @@ Newly introduced lifecycle management messages enable Unet agents to support plu
 
 #### 15. Unet handbook
 
-There's so much that UnetStack can do, that we had to write a whole book about it! This free e-book provides a comprehensive hands-on guide for you to learn all about UnetStack3. Check out the [Unet handbook](http://unetstack.net/handbook) today!
+There's so much that UnetStack can do, that we had to write a whole book about it! This free e-book provides a comprehensive hands-on guide for you to learn all about UnetStack3. Check out the [Unet handbook](http://unetstack.net/handbook){:target="_blank"} today!
