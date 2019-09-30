@@ -10,7 +10,7 @@ thumbnail: "assets/img/unetstack3-banner.jpg"
 tags: [unetstack]
 ---
 
-Since the first public release of UnetStack in 2013, we have been steadily adding features and improving ease of use. UnetStack3 is a major milestone in the evolution of UnetStack, debuting a software-defined modem that can run on your laptop or on an embedded computer, and adding new features such as web-based development tools, easy-to-use application programming interfaces (APIs), support for languages such as Python, Javascript, C and Julia, higher performance networking protocols, and many under-the-hood architectural enhancements. Alongside UnetStack3, we also released the Unet handbook -- a resource to help you master underwater networking and harness the full power of UnetStack3.
+Since the first public release of UnetStack in 2013, we have been steadily adding features and improving ease of use. UnetStack3 is a major milestone in the evolution of UnetStack, debuting a software-defined modem that can run on your laptop or on an embedded computer, and adding new features such as web-based development tools, easy-to-use application programming interfaces (APIs), JANUS support, support for languages such as Python, Javascript, C and Julia, higher performance networking protocols, and many under-the-hood architectural enhancements. Alongside UnetStack3, we also released the Unet handbook -- a resource to help you master underwater networking and harness the full power of UnetStack3.
 
 ![UnetStack](https://unetstack.net/img/UnetStack3.png){:class="img-responsive" width="1024"}
 
@@ -19,6 +19,8 @@ Let's take a brief look at some of the new features:
 #### 1. Unet audio
 
 Unet audio is a software-defined open-architecture acoustic modem (SDOAM) that runs on your laptop, or on any Linux-based embedded computer with a sound card. It uses the sound card to transmit and receive sound, transforming your computer into a full-fleged acoustic modem! You get the full flexibility of UnetStack on the modem, allowing you to experiment with novel communication techniques, as well as developing and testing acoustic networking protocols with ease.
+
+Unet audio also supports transmission and reception of JANUS (NATO communications standard) frames.
 
 #### 2. UnetSocket API
 
