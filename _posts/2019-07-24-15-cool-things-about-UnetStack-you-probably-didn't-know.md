@@ -218,10 +218,10 @@ The output should look like this:
 ![](assets/img/aloha-matlab.png)
 
 ## <a name="head12"></a> 12. Using a visual debugger in agent development
-While the Unet IDE does not have an integrated debugger, it is possible to use a debugger from another IDE (e.g. [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Eclipse](https://eclipse.org/downloads/)) with UnetStack. The basic steps are outlined below, but the exact details depend on the IDE used:
+While the Unet Simulator does not have an integrated debugger, it is possible to use a debugger from another IDE (e.g. [IntelliJ IDEA](https://www.jetbrains.com/idea/) or [Eclipse](https://eclipse.org/downloads/)) with UnetStack. The basic steps are outlined below, but the exact details depend on the IDE used:
 
 - Downloaded and install the IDE with Groovy support.
-- Create a Groovy project and added all UnetStack jars as external libraries. You should find the jars in the UnetIDE.app/Contents/Java folder on Mac OS X, or the app folder on Linux or Windows.
+- Create a Groovy project and add all UnetStack jars as external libraries. You should find the jars in the `lib` folder.
 - Create a configuration with main class org.arl.fjage.shell.GroovyBoot and arguments cls://org.arl.unet.sim.initrc followed by the simulation script filename.
 - Start a debugging session.
 More details for using IntelliJ IDEA can be found [here](https://blog.unetstack.net/using-idea-with-unetstack).
