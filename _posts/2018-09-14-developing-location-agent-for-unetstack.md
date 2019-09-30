@@ -16,7 +16,7 @@ Imagine you are out at sea, doing underwater communications field experiments, w
 
 Since GPS doesn't work underwater, one obvious method is to note down the GPS location of the boat or vessel from where the modems are deployed. However, depending on the deployment scenario, the location of the vessel will change over time and hence this method is error prone. Another (slightly better) method is to use your phone to have a periodic GPS log and sync it with the timestamps of your transmissions, during post processing of your data. While this method gives you a log of your GPS coordinates, merging this with modem logs is an additional step, which we would like to avoid.
 
-With UnetStack running in the modems, such an application is easy to develop. UnetStack comes equipped with `node` agent and [`NODE_INFO`](https://www.unetstack.net/svc-00-nodeinfo.html){:target="_blank"} service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. All we have to do is develop a simple [Unet agent](https://www.unetstack.net/unet-agents.html){:target="_blank"} that will update the `location` parameter of the `node` agent, in a periodic manner.
+With UnetStack running in the modems, such an application is easy to develop. UnetStack comes equipped with [`node`](https://unetstack.net/handbook/unet-handbook_node_information.html){:target="_blank"} agent and `NODE_INFO` service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. All we have to do is develop a simple [Unet agent](https://unetstack.net/handbook/unet-handbook_developing_your_own_agents.html){:target="_blank"} that will update the `location` parameter of the `node` agent, in a periodic manner.
 
 ## Setup
 The agent can be developed for a variety of scenarios. For the purpose of this blog, we will use one of the test setups that we have used in the past where space was a constraint. We had a TCP/IP network to which all assets where connected and accessible. We used one of our smartphones as the GPS server and connected to the same network.
@@ -67,7 +67,7 @@ public class MyLocation extends UnetAgent {
 ```
 
 ### Connecting to GPS server
-In the `connectToServer()` method, we use the `connect()` method from `socket` library to connect to the server. Once connected, we read the NMEA data in a periodic manner using a [`TickerBehavior`](http://org-arl.github.io/fjage/doc/html/behaviors.html){:target="_blank"}:
+In the `connectToServer()` method, we use the `connect()` method from `socket` library to connect to the server. Once connected, we read the NMEA data in a periodic manner using a [`TickerBehavior`](https://fjage.readthedocs.io/en/latest/behaviors.html){:target="_blank"}:
 ```java
   void connectToServer() {
     clientSocket.connect(new InetSocketAddress(ip, port), timeout);
@@ -258,4 +258,4 @@ and also the `node` agent's `location` parameter.
   turnRate = 0
 ```
 
-Once the `location` agent is loaded and running, the modem will be location aware. Any agent can request the location information from the `node` agent using a [`ParameterReq`](https://www.unetstack.net/javadoc/index.html?org/arl/unet/ParameterReq.html){:target="_blank"} for geotagging.
+Once the `location` agent is loaded and running, the modem will be location aware. Any agent can request the location information from the `node` agent using a [`ParameterReq`](https://unetstack.net/javadoc/3.0/org/arl/unet/ParameterReq.html){:target="_blank"} for geotagging.
