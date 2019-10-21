@@ -25,15 +25,13 @@ MATLAB is widely known as a high-quality environment for any work that invlolves
 
 #### 1. Set up MATLAB to use Java 1.8
 
-UnetStack3 uses Java 1.8, and so we need to ensure MATLAB uses Java 1.8 or higher as well. Up until MATLAB 2017b, it ships with Java 1.7. In order to check the version of java your MATLAB is using you can simpy enter the following in the MATLAB console:
+UnetStack3 uses Java 1.8, and so we need to ensure MATLAB uses Java 1.8 or higher as well. Up until MATLAB 2017b, it ships with Java 1.7. In order to check the version of java your MATLAB is using you can simply enter the following in the MATLAB console:
 
 ```matlab
 version -java
 ```
 
 In case, the your MATLAB is not using Java 1.8, it is easy to switch it to use Java 1.8. Follow the steps below:
-
-Find out your Java 1.8 home directory:
 
 Find out your Java 1.8 home directory:
 
@@ -157,6 +155,8 @@ Since, we are receiving this message in MATLAB, we can utilize it to extract and
 ```matlab
 plot(ntf.getSignal())
 ```
+
+![jpg](assets/img/recording.jpg)
 
 ### Example of transmitting a frame
 
