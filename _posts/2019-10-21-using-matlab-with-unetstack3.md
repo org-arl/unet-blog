@@ -21,7 +21,7 @@ MATLAB is widely known as a high-quality environment for any work that invlolves
 - Transmit a baseband signal
 - Transmit a passband signal
 
-## Setup your MATLAB to use UnetStack3
+### Setup your MATLAB to use UnetStack3
 
 #### 1. Set up MATLAB to use Java 1.8
 
@@ -93,7 +93,7 @@ Of course, when doing this, use your actual folders, not `/home/myname/...`.
 
 And restart MATLAB once you've edited the static classpath. If you type `javaclasspath` in MATLAB, you should be able to see these files on the static classpath. All the UnetStack JAVA APIs can be directly accessed in MATLAB once the jars are included in the `javaclasspath`. In the rest of this article we will show few examples of accessing the UnetStack Java APIs from MATLAB and interaction with UnetStack.
 
-## Create a unet socket connection
+### Create a unet socket connection
 
 In MATLAB, open a unet socket connection to the modem (e.g. 192.168.0.42):
 
@@ -104,7 +104,7 @@ In MATLAB, open a unet socket connection to the modem (e.g. 192.168.0.42):
 The `sock` object can be used to send and receive datagrams as explained in more detail in the [unet handbook](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html).
 
 
-## Access the gateway class
+### Access the gateway class
 
 It is easy to get access to the gateway class and it's methods as shown below:
 
@@ -158,7 +158,7 @@ Since, we are receiving this message in MATLAB, we can utilize it to extract and
 plot(ntf.getSignal())
 ```
 
-## Example of transmitting a frame
+### Example of transmitting a frame
 
 The code snippet below is an example for transmitting a frame
 
@@ -182,7 +182,7 @@ if isjava(rsp) && rsp.getPerformative() == org.arl.fjage.Performative.AGREE
 end
 ```
 
-## Example of receiving a frame
+### Example of receiving a frame
 
 The code snippet below should be run on the receiver modem,
 
@@ -201,7 +201,7 @@ ntf =
 RxFrameNtf:INFORM[type:CONTROL from:200 rxTime:6066483160 rssi:-2.6 cfo:0.0 ber:3/432]
 ```
 
-## Example of recording a signal
+### Example of recording a signal
 
 ```matlab
 % subscribe to the agent providing the baseband service
@@ -226,7 +226,7 @@ end
 plot(ntf.getSignal())
 ```
 
-## Example of transmitting a baseband signal
+### Example of transmitting a baseband signal
 
 ```matlab
 % load the baseband signal
@@ -256,7 +256,7 @@ if isjava(rsp) && rsp.getPerformative() == org.arl.fjage.Performative.AGREE
 end
 ```
 
-## Example of transmitting a passband signal
+### Example of transmitting a passband signal
 
 ```matlab
 % load the passband signal
@@ -289,7 +289,7 @@ if isjava(rsp) && rsp.getPerformative() == org.arl.fjage.Performative.AGREE
 end
 ```
 
-## Close the socket connection
+### Close the socket connection
 
 To close the socket connection
 
