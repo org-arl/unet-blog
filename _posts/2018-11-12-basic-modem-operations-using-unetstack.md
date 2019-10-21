@@ -15,21 +15,23 @@ The ease of implementation and development of applications as needed by research
 ## UnetStack overview
 The UnetStack architecture defines a set of software agents that work together to provide a complete underwater networking solution. *Agents* play the role that layers play in [traditional network stacks](https://en.wikipedia.org/wiki/OSI_model). However, as the agents are not organized in any enforced hierarchy, they are free to interact in any way suitable to meet application needs. This promotes low-overhead protocols and cross-layer information sharing. The stack runs on a Java virtual machine and [fjage](https://org-arl.github.io/fjage/doc/html/introduction.html) source agent framework. A detailed documentation of UnetStack is [here](https://www.unetstack.net/docs.html).
 
-## Gateway functionality to interact with modem
-fjage provides a *Gateway* class. This class provides the user to communicate with the agents running in UnetStack on the modem. This class is utilized and the APIs are developed for the user to build their application upon. The APIs to interact with the modem from any computer are available in `Java/Groovy`, `C` and `Python`.
+## UnetSocket to interact with modem
+UnetStack provides *UnetSocket* class. The UnetSocket class internally utilizes the  *Gateway* class provided by fjage. The UnetSocket interface is very similar to the standard socket interface that can be found in TCP/IP networking and provides the user an easy to to transmit datagrams using the modem. Gateway class which can be accessed using UnectSocket provides the user to communicate with the agents running in UnetStack on the modem. This class is utilized and the APIs are developed for the user to build their application upon. The APIs to interact with the modem from any computer are available in `Java/Groovy`, `C` and `Python`.
 
-In order to open a connection to the modem (assuming the computer and modem are on a TCP/IP network) using Gateway class, the modem’s IP address and the port number are needed. The UnetStack runs on port number 1100 by default. An example in `Groovy` to open this connection is as shown below:
+In order to open a connection to the modem (assuming the computer and modem are on a TCP/IP network) using UnetSocket class, the modem’s IP address and the port number are needed. The UnetStack runs on port number 1100 by default. An example in `Groovy` to open this connection is as shown below:
 
 ```java
-Gateway modem = new Gateway(ip_address, 1100)
+sock = new UnetSocket(ip_address, 1100)
+modem = sock.getGateway()
 ```
-
-The instance `modem` created can then be used to access all the methods provided by the Gateway class to interact with the modem. The Gateway class methods are documented [here](http://org-arl.github.io/fjage/javadoc/).
+The `sock` object created can be used to send datagrams and receive datagrams. A more detailed explanation can be found in the [unet handbook](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html).
+The instance `modem` created can be used to access all the methods provided of the Gateway class to interact with the agents running on the modem. The Gateway class methods are documented [here](http://org-arl.github.io/fjage/javadoc/).
 
 Note that the same interfaces are also available in `Python` and `C`. For example, to open a connection to the modem using `Python`:
 
 ```python
-modem = UnetGateway(ip_address, 1100)
+sock = UnetSocket(ip_address, 1100)
+modem = sock.getGateway()
 ```
 
 and in `C`:
