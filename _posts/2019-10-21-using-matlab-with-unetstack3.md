@@ -156,7 +156,7 @@ Since, we are receiving this message in MATLAB, we can utilize it to extract and
 plot(ntf.getSignal())
 ```
 
-![jpg](assets/img/recording.jpg)
+![jpg](assets/img/recording.png)
 
 ### Example of transmitting a frame
 
