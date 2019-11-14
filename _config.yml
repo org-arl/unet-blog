@@ -28,6 +28,8 @@ theme_settings:
   rss: true  # Make sure you created a feed.xml with feed.xml layout
   github: "org-arl/unet-contrib"
   stack_exchange:  "https://stackoverflow.com/questions/tagged/unetstack"
+  twitter:  "@unetstack"
+  youtube:  "UCnwSva23AuUCFPqgI0kPvdw"
 
   # Scripts / Features
   google_analytics: "UA-52885583-1" # Tracking ID, e.g. "UA-000000-01"
