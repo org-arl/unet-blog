@@ -30,8 +30,6 @@ UnetStack 3.1 ships with several pre-configured dashboards for modem nodes:
 - **Speed Test** enabled you to quickly measure link performance.
 - **Configurations** dashboard (beta version) provides a visual way to configure various options and agents in the stack.
 
-In addition to the pre-configured dashboards, users may develop their own dashboards easily. Watch out of an upcoming blog article on developing your own UnetStack dashboard!
-
 #### 2. Localization framework and a new ranging agent
 
 Underwater acoustic modems are used not only communication, but often also for acoustic ranging. The introduction of a localization framework in UnetStack eases the development of underwater positioning and tracking networks, enabling ranging, navigation, and tracking of underwater sensor, robots, and even divers. The framework not only supports UnetStack-based modems in the underwater network, but also treats other devices such as commercial off-the-shelf (COTS) transponders and pingers as Unet nodes. This enables legacy and low-power nodes to be easily integrated into an underwater positioning network. UnetStack now also supports broadcast ranging, allowing multiple underwater nodes to be localized with a single query transmission.
@@ -46,9 +44,9 @@ While underwater positioning networks may be used for many applications, we high
 
 #### 3. Redefined routing service
 
-The routing service in UnetStack has served us well for the past decade. However, as our networks become more heterogenous, and the demands on routing more complex, we felt the need to rethink how routing works. With the emergence of underwater disruption-tolerent networks (DTNs)[^1], routers need to make decisions based on the time-to-live (TTL) of datagrams being routed. Cross-layer optimization often requires routing information to be generated or consumed in parts of the network stack not traditionally involved in routing.
+The routing service in UnetStack has served us well for the past decade. However, as our networks become more heterogeneous, and the demands on routing more complex, we felt the need to rethink how routing works. With the emergence of underwater disruption-tolerant networks (DTNs)[^1], routers need to make decisions based on the time-to-live (TTL) of datagrams being routed. Cross-layer optimization often requires routing information to be generated or consumed in parts of the network stack not traditionally involved in routing.
 
-The new routing service allows dynamic creation, maintainence, query, and consumption of routes by other agents, and helps meet complex demands from optimized underwater network protocols.
+The new routing service allows dynamic creation, maintenance, query, and consumption of routes by other agents, and helps meet complex demands from optimized underwater network protocols.
 
 #### 4. Link state information
 
@@ -64,7 +62,7 @@ To improve the performance of UDP links over WiFi networks, we have now reimplem
 
 #### 6. Wormholes
 
-The fjåge agent framework forms the backbone of a Unet node, enabling communication between intelligent agents that cooperate to provide the network and application functionality for that node. All agents in one Unet node live in one fjåge _universe_, and can seamlessly communicate with each other. However, agents in diffent nodes live in different fjåge universes, and typically only communicate with peer agents on other nodes using protocols implemented over Unet links. UnetStack 3.1 introduces the concept of _wormholes_ that connect multiple fjåge universes over a Unet link, allowing all agents in multiple nodes to transparently talk to each other!
+The fjåge agent framework forms the backbone of a Unet node, enabling communication between intelligent agents that cooperate to provide the network and application functionality for that node. All agents in one Unet node live in one fjåge _universe_, and can seamlessly communicate with each other. However, agents in different nodes live in different fjåge universes, and typically only communicate with peer agents on other nodes using protocols implemented over Unet links. UnetStack 3.1 introduces the concept of _wormholes_ that connect multiple fjåge universes over a Unet link, allowing all agents in multiple nodes to transparently talk to each other!
 
 Sounds cool, but why would I want to do this? The usefulness of this is best understood with a couple of real-world examples:
 
@@ -78,13 +76,13 @@ Sounds cool, but why would I want to do this? The usefulness of this is best und
 
 The cooperative communication example above is not just a _gedanken_ experiment, but a patent-pending technique that has been demonstrated to work well in practice. The _Unity agent_ is a premium agent, available on UnetStack 3.1, that implements a refined version of the above cooperative communications strategy. It allows users to transparently implement spatial diversity with a set of COTS UnetStack-based underwater acoustic modems, each with only a single-receiver.
 
-What does it mean in practice? Say, you're on a ship, you have an AUV deployed in an area, and you've been receiving status updates from the AUV every few minutes. The AUV moves into an area where the connectivity is poor, and you can no longer successfully receive the status reports. If you have a second modem available on the ship, you deploy it from another part of the ship. Or maybe there is a gateway buoy deployed nearby with a modem, and you can connect to it's modem. Either way, Unity magically uses the information from both modems to recover connectivity to the AUV!
+What does it mean in practice? Say, you're on a ship, you have an AUV deployed in an area, and you've been receiving status updates from the AUV every few minutes. The AUV moves into an area where the connectivity is poor, and you can no longer successfully receive the status reports. If you have a second modem available on the ship, you deploy it from another part of the ship. Or maybe there is a gateway buoy deployed nearby with a modem, and you can connect to its modem. Either way, Unity magically uses the information from both modems to recover connectivity to the AUV!
 
 If you happen to be lucky enough to have more than two modems, Unity can use the information from all available modems to improve communication performance.
 
 #### 8. New fragmentation/reassembly framework
 
-Fragmentation and reassembly is often needed by many protocol agents in a network stack. Rather than have each of the agents implement the functionality individually, UnetStack now provides a fragmentation/reassembly framework that makes implemeting protocols with large MTUs easy. For example, to fragment a large byte array `data` into fragments of size `FRAGMENT_SIZE`, we simply do:
+Fragmentation/reassembly is often needed by many protocol agents in a network stack. Rather than have each of the agents implement the functionality individually, UnetStack now provides a fragmentation/reassembly framework that makes implementing protocols with large MTUs easy. For example, to fragment a large byte array `data` into fragments of size `FRAGMENT_SIZE`, we simply do:
 ```java
 Fragmenter frag = new SimpleFragmenter(data, FRAGMENT_SIZE);
 while (frag.hasMoreFragments()) {
@@ -111,11 +109,11 @@ Here, we used the `SimpleFragmenter` that breaks the data into a series of short
 
 #### 9. Adoption of fjåge parameters
 
-UnetStack introduced the concept of [parameters](https://unetstack.net/handbook/unet-handbook_developing_your_own_agents.html) to allow easy configuration and status reporting of agent. Since fjåge 1.7, the fjåge agent framework also adopted the concept of parameters. To provide seamless operation with other fjåge-based frameworks (e.g. [fjåge sentuator](https://github.com/org-arl/fjage-sentuator)), UnetStack 3.1 adopts the parameter implementation provided by fjåge.
+UnetStack introduced the concept of [parameters](https://unetstack.net/handbook/unet-handbook_developing_your_own_agents.html) to allow easy configuration and status reporting for agents. Since fjåge 1.7, the fjåge agent framework also adopted the concept of parameters. To provide seamless operation with other fjåge-based frameworks (e.g. [fjåge sentuator](https://github.com/org-arl/fjage-sentuator)), UnetStack 3.1 adopts the parameter implementation provided by fjåge.
 
-**Breaking change**: The adoption of fjåge parameters by UnetStack means that every UnetStack agent that uses parameters must explicitly import `org.arl.fjage.param.*`.
+**Breaking change**: The adoption of fjåge parameters by UnetStack means that the `Parameter` interface must explicitly imported from fjåge (`org.arl.fjage.param.Parameter`), and `org.arl.fjage.param.ParameterReq` be used in preference to `org.arl.unet.ParameterReq`.
 
-While this breaking change may be a small inconvenience, this is a small one-time cost to pay for the benfits this provides in terms of compatibility with other projects. Additionally, fjåge parameters provide some useful functionality beyond the older UnetStack parameters. For example, when listing parameters, you can now easily differentiate between read-write (denoted with `=`) and read-only (denoted with `⤇`) parameters:
+While this breaking change may be a small inconvenience, this is a small one-time cost to pay for the benefits this provides in terms of compatibility with other projects. Additionally, fjåge parameters provide some useful functionality beyond the older UnetStack parameters. For example, when listing parameters, you can now easily differentiate between read-write (denoted with `=`) and read-only (denoted with `⤇`) parameters:
 ```
 > uwlink
 « Erasure coded link »
