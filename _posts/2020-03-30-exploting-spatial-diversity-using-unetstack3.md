@@ -16,7 +16,7 @@ Though it has been a buzzword over the past several years in the terrestrial rad
 
 *Multiple communication nodes deployed at spatially distinct locations can receive independent copies of the same information. This group of receiver nodes can act as a combined spatial diversity receiver when they cooperate by sharing copies of information. We term this distributed spatial diversity. The framework supporting this patent-pending technique is implemented in UnetStack 3.1 and is referred to as `Unity`.*
 
-![Overview](../assets/img/sd.png){:class="img-responsive" width="1024"}
+![Overview](../assets/img/sd.png)
 
 An illustration of the general overview of such a receiver system is shown above and few terminologies might help for further discussion:
 
