@@ -32,17 +32,17 @@ Consider a case where you are on a ship with a modem deployed and you've been re
 
 If you have a second modem available on the ship, you deploy it from another part of the ship. Or maybe there is a gateway buoy deployed nearby with a modem, and you can connect to its modem. Either way, the distributed spatial diversity technique (`Unity`) magically uses the information from both modems to recover connectivity to the AUV! 
 
-### So how to use Unity in UnetStack 3.1?
+### So how to use `Unity` in UnetStack 3.1?
 
 The `Unity` is implemented as a premium agent and is available with the latest UnetStack 3.1 release. It allows users to transparently implement spatial diversity with a set of COTS UnetStack-based underwater acoustic modems, each with only a single receiver.
 
 Configuring and using the `Unity` agent to exploit spatial diversity is easy with just two simple steps:
 
 1. Setup the receiver nodes to cooperate.
-2. Load and enable the `Unity` agent on the main receiver.
+2. Add the `Unity` agent on the main receiver.
 
 
-######  Set up for receiver nodes to cooperate (an example): 
+#### 1. Set up for receiver nodes to cooperate (an example): 
 
 To set up the group of receivers to cooperate over a short-range network, we use [`Wormhole`](https://unetstack.net/handbook/unet-handbook_preface.html)  agent provided in the latest release UnetStack 3.1.  Transmitter node makes a transmission that is heard at all the receiver nodes. However, none of the nodes are able to successfully recover the information received, as the communication link is noisy.  In order to share the received noisy signals among the receivers, we can connect the receiver nodes using a `Wormhole`. A connection over a UDP link over a WiFi network is established by adding just a few lines of code on the receiver nodes as shown below:
 
@@ -65,7 +65,7 @@ wormhole.broadcast = [topic(phy), topic(phy, Physical.SNOOP)]
 ```
 The above line of code is added only on the assisting receivers to forward only the messages received on the `Physical` agent's topic to be sent over the `Wormhole` link.
 
-###### Add Unity agent on the main receiver:
+#### 2. Add the `Unity` agent on the main receiver:
 
 Now that the receiver nodes are ready to cooperate, we can go ahead and add the `Unity` agent on the main receiver node. 
 
