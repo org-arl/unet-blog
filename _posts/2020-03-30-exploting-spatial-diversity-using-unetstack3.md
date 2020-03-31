@@ -96,21 +96,3 @@ Once the assisters node addresses are set, as shown above, the `Unity` agent is 
 
 
 **NOTE**: We will be sharing white papers and material detailing the protocol implemented once it is available. Until then, for keen readers and folks interested in knowing more details on learning and using this technology, please get in touch by emailing at [info@subnero.com](https://subnero.com/contact/). 
-
-
-
-
-
-
-
-
-```
-
-
-
-
-
-
-
-
-
