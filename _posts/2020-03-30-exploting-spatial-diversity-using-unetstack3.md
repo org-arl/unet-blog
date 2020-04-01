@@ -34,7 +34,7 @@ If you have a second modem available on the ship, you deploy it from another par
 
 ### So how to use `Unity` in UnetStack 3.1?
 
-The `Unity` is implemented as a premium agent and is available with the latest UnetStack 3.1 release. It allows users to transparently implement spatial diversity with a set of COTS UnetStack-based underwater acoustic modems, each with only a single receiver.
+`Unity` is available as a premium agent and requires UnetStack 3.1 and higher.
 
 Configuring and using the `Unity` agent to exploit spatial diversity is easy with just two simple steps:
 
