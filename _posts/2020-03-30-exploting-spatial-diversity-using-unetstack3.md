@@ -51,7 +51,7 @@ container.add 'udp', new UdpLink()
 container.add 'wormhole', new WormHole()
 wormhole.dsp = 'udp'
 ```
-Line number (1) adds a [`UdpLink`](https://unetstack.net/handbook/unet-handbook_wired_and_over_the_air_links.html) agent that implements a link protocol over UDP/IP for use over wired/wireless IP networks. The next step is to add the `Wormhole` agent and make it utilize the infrastructure provided by the `UdpLink` agent to allow the agents residing on receivers nodes to transparently talk to each other!
+Line (1) adds a [`UdpLink`](https://unetstack.net/handbook/unet-handbook_wired_and_over_the_air_links.html) agent that implements a link protocol over UDP/IP for use over wired/wireless IP networks. 
 
 Line number (2) adds a `Wormhole` agent which allows the [fjåge](https://fjage.readthedocs.io/en/latest/) messages to be sent between containers over a [Unet link](https://unetstack.net/handbook/unet-handbook_introduction.html).
 
