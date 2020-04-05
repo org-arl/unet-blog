@@ -10,7 +10,7 @@ thumbnail: "assets/img/sd/sd-unet.jpg"
 tags: [howto, spatial diversity, cooperative communication, robustness, data rate, performance boost]
 ---
 
-Spatial diversity techniques that are used in terrestrial networks usually utilize multiple antennas on the same device to improve link quality and reliability. Similarly, having multiple hydrophones/transducers on the same underwater node might help with the same but comes with the cost of a significant increase in the size due to the spatial separation that might be needed between transducers.  Although it has proved and delivered tangible benefits to the end-user in the terrestrial wireless networks,  much is not talked about practical spatial diversity systems in underwater wireless networks. Can we exploit a similar technique to make underwater wireless networks faster and more reliable and make that long-range communication link "just work"? With the capability to exploit distributed spatial diversity, yes you can!
+Spatial diversity techniques that are used in terrestrial networks usually utilize multiple antennas on the same device to improve link quality and reliability. Similarly, having multiple hydrophones/transducers on the same underwater node might help with the same but comes with the cost of a significant increase in the size due to the spatial separation that might be needed between transducers. Can we exploit a similar technique to make underwater wireless networks faster and more reliable and make that long-range communication link "just work"? With the capability to exploit distributed spatial diversity, yes you can! 
 
 ### What's the key idea involved in distributed spatial diversity ?
 
@@ -130,4 +130,4 @@ unity >> RxFrameNtf:INFORM[type:CONTROL from:232 rxTime:4223375002 location:651.
 
 In this, simple example the assisting receiver was able to successfully decode the frame and it helped the main receiver via sharing this information. This is also called *Selection diversity*. The other cases where `Unity` agent will prove useful is where both assisting receiver and main receiver could not decode the frame successfully. In such cases, the information in `BadFrameNtf` messages (e.g., log-likelihood ratios of each received bit) is used to combine the information from both receivers and the `Unity` agent tries to decode the frame. This is also termed as `Diversity combining`.
 
-The ability to utilize selection diversity and diversity combining  at  the  same  time  is  extremely  advantageous  in practice. This results in significant performance improvement in terms of data rate and reliability. 
+The ability to utilize selection diversity and diversity combining  at  the  same  time  is  extremely  advantageous  in practice. This technique delivers tangible benefits to a user in terms of data rate and reliability over an underwater wireless link.
