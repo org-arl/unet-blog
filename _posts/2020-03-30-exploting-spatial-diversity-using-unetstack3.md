@@ -10,7 +10,7 @@ thumbnail: "assets/img/sd/sd-unet.jpg"
 tags: [howto, spatial diversity, cooperative communication, robustness, data rate, performance boost]
 ---
 
-Spatial diversity techniques that are used in terrestrial networks usually utilize multiple antennas on the same device to improve link quality and reliability. Similarly, having multiple hydrophones/transducers on the same underwater node might help with the same but comes with a cost of significant increase in the size due to the spatial separation that might be needed between transducers.  Although, it has proved and delivered tangible benefits to the end-user in the terrestrial wireless networks,  much is not talked about practical spatial diversity systems in underwater wireless networks. Can we exploit a similar technique to make underwater wireless networks faster and more reliable and make that long-range communication link "just work" ? With the capability to exploit distributed spatial diversity, yes you can!
+Spatial diversity techniques that are used in terrestrial networks usually utilize multiple antennas on the same device to improve link quality and reliability. Similarly, having multiple hydrophones/transducers on the same underwater node might help with the same but comes with the cost of a significant increase in the size due to the spatial separation that might be needed between transducers.  Although it has proved and delivered tangible benefits to the end-user in the terrestrial wireless networks,  much is not talked about practical spatial diversity systems in underwater wireless networks. Can we exploit a similar technique to make underwater wireless networks faster and more reliable and make that long-range communication link "just work"? With the capability to exploit distributed spatial diversity, yes you can!
 
 ### What's the key idea involved in distributed spatial diversity ?
 
@@ -23,7 +23,7 @@ An illustration of the general overview of such a receiver system is shown above
 - *Main receiver:* A node that acts as the main receiver in a group of receiver nodes. It is the main receiver's responsibility to decode the information.
 - *Assisting receiver:* A node that acts as an assisting receiver in a group of receiver nodes. It is the assisting receiver's responsibility to forward the relevant information to the main receiver.
 
-The two assisting receiver nodes are in cahoots with the main receiver to cooperatively share the information. This sharing of information usually happens over a short-range wired or wireless network (e.g., WiFi, TCP/IP, UDP/IP). Although, nothing stops one from using a different technology for sharing information.
+The assisting receiver nodes are in cahoots with the main receiver to cooperatively share the information. This sharing of information usually happens over a short-range wired or wireless network (e.g., WiFi, TCP/IP, UDP/IP). Although, nothing stops one from using a different technology for sharing information.
 
 ### What's the immediate practical advantage one can see ?
 
@@ -74,6 +74,8 @@ The above line of code is added only on the assisting receivers  as shown below 
 
 ![Overview](../assets/img/sd/sd-5.png)
 
+That's all there is to set up the receiver nodes to share the information and cooperate (in this case over a `UdpLink`). With this set up any message received on the `Physical` agent's topic on the assisting receiver will also be available at the main receiver. This will become clearer through an example in the last section.
+
 #### 2. Add the `Unity` agent on the main receiver:
 
 Now that the receiver nodes are ready to cooperate, we can go ahead and add the `Unity` agent on the main receiver node.
@@ -97,11 +99,13 @@ receivers to decode packets.
 ```
 The `assisters` parameter is used to store the node addresses of the assisting receivers that are assisting the main receiver. The user might also want to change the default value of `maxAssisterRange` if the furthest assisting receiver to the main receiver is at a distance larger than 100 m.
 
+For example, in out three simulated modems, the node address of the assisting receiver is 31 and therefore we should set:
+
 ```groovy
 unity.assisters = [31]
 unity.enable = true
 ```
-Once the assisters node addresses are set, as shown above, the `Unity` agent is enabled. And voila, you are ready to see the benefits of cooperating receivers in terms of reliability and effective data rate. An example is shown below:
+Once the assisters node addresses are set, as shown above, the `Unity` agent is enabled. And voila, you are ready to see the benefits of cooperating receivers in terms of reliability and effective data rate. An example of the output in the web interface with three simulated modems is as shown below:
 
 ![Overview](../assets/img/sd/sd-6.png)
 
@@ -109,19 +113,21 @@ Once the assisters node addresses are set, as shown above, the `Unity` agent is 
 
 Now that we are all set up with an assisting receiver and a main receiver cooperating over a `UdpLink`, we would like to see an example of `Unity` in action. Although, we will not be able to demonstrate all the scenarios in which `Unity` will be beneficial, we can show how it works and what to expect out of it. 
 
-Let us transmit a packet from the transmitter node by sending a simple `TxFrameReq` message to the `Physical` agent as shown below:
+Let us transmit a frame from the transmitter node by sending a simple `TxFrameReq` message to the `Physical` agent as shown below:
 
 ![Overview](../assets/img/sd/sd-7.png)
 
-The transmitted frame broadcasted in the network and for the purpose of this demonstration, I have changed a modulation scheme parameter on the main receiver to make sure it cannot decode the received frame successfully and hence you see a `BadFrameNtf` message on the main receiver. But notice that the assisting receiver successfully decoded the received frame and it was forwarded over to the main receiver via the `wormhole`. This is seen as 
+The transmitted frame is broadcasted in the network and for the purpose of this demonstration, the modulation scheme parameter on the main receiver is changed to make sure it cannot decode the received frame successfully and therefore you see a `BadFrameNtf` message (meaning the frame was not successfully decoded) on the main receiver. But notice that the assisting receiver successfully decoded the received frame and it was forwarded over to the main receiver via the `wormhole`. This can be observed in the shell output:
 ```
 phy@31 >> RxFrameNtf:INFORM[type:CONTROL from:232 rxTime:5456805687 (3 bytes)]
 ```
-on the main receiver. The `Unity` agent now utilizes this message from the assisting receiver to publish the frame on main receiver's `Physical` agent's topic as shown below:
+on the main receiver. Notice that this information sharing happened transparently due to our initial set up where all messages getting published on assisting receivers `Physical` agent (recognized by `phy@31` at the main receiver) are being received on the main receiver. 
+
+The `Unity` agent now utilizes this message from the assisting receiver to publish the frame on main receiver's `Physical` agent's topic as shown below:
 ```
 unity >> RxFrameNtf:INFORM[type:CONTROL from:232 rxTime:4223375002 location:651.0,140.0,-5.0 (3 bytes)]
 ```
 
-This is the case where the assister receiver was able to successfully decode the frame and it helped the main receiver by sharing this information. This is also called *Selection diversity*. The other cases where `Unity` agent will prove useful is where both assisting receiver and main receiver could not decode the frame successfully, however, the information in `BadFrameNtf` messages (e.g., log-likelihood ratios of each received bit) is used to combine the information from both receivers and the `Unity` agent tries to decode the packet again. This is also termed as `Diversity combining`.
+In this, simple example the assisting receiver was able to successfully decode the frame and it helped the main receiver via sharing this information. This is also called *Selection diversity*. The other cases where `Unity` agent will prove useful is where both assisting receiver and main receiver could not decode the frame successfully. In such cases, the information in `BadFrameNtf` messages (e.g., log-likelihood ratios of each received bit) is used to combine the information from both receivers and the `Unity` agent tries to decode the frame. This is also termed as `Diversity combining`.
 
-The ability to utilize selection diversity and diversity combining  at  the  same  time  is  extremely  advantageous  in practice. This results in significant performance improvement in terms of data rate and reliability.
+The ability to utilize selection diversity and diversity combining  at  the  same  time  is  extremely  advantageous  in practice. This results in significant performance improvement in terms of data rate and reliability. 
