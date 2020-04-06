@@ -129,3 +129,10 @@ header {
         vertical-align: middle;
     }
 }
+
+// Remove scrollbars in code if not needed
+
+.highlight table {
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
