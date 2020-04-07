@@ -10,7 +10,7 @@ thumbnail: "assets/img/unetstack3.1.jpg"
 tags: [unetstack]
 ---
 
-UnetStack 3.0, released at the end of September last year, was a major milestone in the evolution of UnetStack. We are now excited to release the next installment of features and performance enhancements in the form of UnetStack 3.1. Apart from performance enhancements and bug fixes, UnetStack 3.1 brings significant feature upgrades to the link, ranging and routing services, new concepts such as _wormholes_ and distributed spatial diversity, a new fragmentation-reassembly framework, and improved user interface in the form of _dashboards_.
+UnetStack 3.0, released at the end of September last year, was a major milestone in the evolution of UnetStack. We are now excited to release the next installment of features and performance enhancements in the form of UnetStack 3.1. Apart from performance enhancements and bug fixes, UnetStack 3.1 brings significant feature upgrades to the [link](https://unetstack.net/handbook/unet-handbook_single_hop_links.html), [ranging](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html) and [routing](https://unetstack.net/handbook/unet-handbook_routing_and_route_maintenance.html) services, new concepts such as [_wormholes_](https://unetstack.net/handbook/unet-handbook_wormholes.html) and [distributed spatial diversity](exploting-spatial-diversity-using-unetstack3), a new fragmentation-reassembly framework, and improved user interface in the form of _dashboards_.
 
 Let's take a brief look at some of the new features:
 
@@ -74,7 +74,7 @@ Sounds cool, but why would I want to do this? The usefulness of this is best und
 
 #### 7. Unity (distributed spatial diversity)
 
-The cooperative communication example above is not just a _gedanken_ experiment, but a patent-pending technique that has been demonstrated to work well in practice. The [_Unity agent_](2020-03-30-exploting-spatial-diversity-using-unetstack3) is a premium agent, available on UnetStack 3.1, that implements a refined version of the above cooperative communications strategy. It allows users to transparently implement spatial diversity with a set of COTS UnetStack-based underwater acoustic modems, each with only a single-receiver.
+The cooperative communication example above is not just a _gedanken_ experiment, but a patent-pending technique that has been demonstrated to work well in practice. The [_Unity agent_](exploting-spatial-diversity-using-unetstack3) is a premium agent, available on UnetStack 3.1, that implements a refined version of the above cooperative communications strategy. It allows users to transparently implement spatial diversity with a set of COTS UnetStack-based underwater acoustic modems, each with only a single-receiver.
 
 What does it mean in practice? Say, you're on a ship, you have an AUV deployed in an area, and you've been receiving status updates from the AUV every few minutes. The AUV moves into an area where the connectivity is poor, and you can no longer successfully receive the status reports. If you have a second modem available on the ship, you deploy it from another part of the ship. Or maybe there is a gateway buoy deployed nearby with a modem, and you can connect to its modem. Either way, Unity magically uses the information from both modems to recover connectivity to the AUV!
 

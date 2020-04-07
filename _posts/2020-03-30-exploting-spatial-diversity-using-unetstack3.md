@@ -1,16 +1,16 @@
 ---
 layout: post
 comments: true
-title: Exploiting Dsitributed Spatial Diversity Using UnetStack
+title: Exploiting Distributed Spatial Diversity Using UnetStack
 date: 30/03/2020
 author: Prasad Anjangi
 categories: howto
 feature-img: "assets/img/sd/sd-unet.jpg"
-thumbnail: "assets/img/sd/sd-unet.jpg"
+thumbnail: "assets/img/sd/sd-unet-tn.jpg"
 tags: [howto, spatial diversity, cooperative communication, robustness, data rate, performance boost]
 ---
 
-Spatial diversity techniques that are used in terrestrial networks usually utilize multiple antennas on the same device to improve link quality and reliability. Similarly, having multiple hydrophones/transducers on the same underwater node might help with the same but comes with the cost of a significant increase in the size due to the spatial separation that might be needed between transducers. Can we exploit a similar technique to make underwater wireless networks faster and more reliable and make that long-range communication link "just work"? With the capability to exploit distributed spatial diversity, yes you can! 
+Spatial diversity techniques that are used in terrestrial networks usually utilize multiple antennas on the same device to improve link quality and reliability. Similarly, having multiple hydrophones/transducers on the same underwater node might help with the same but comes with the cost of a significant increase in the size due to the spatial separation that might be needed between transducers. Can we exploit a similar technique to make underwater wireless networks faster and more reliable and make that long-range communication link "just work"? With the capability to exploit distributed spatial diversity, yes you can!
 
 ### What's the key idea involved in distributed spatial diversity ?
 
@@ -111,7 +111,7 @@ Once the assisters node addresses are set, as shown above, the `Unity` agent is 
 
 ### Now that we are set up, what to expect ?
 
-Now that we are all set up with an assisting receiver and a main receiver cooperating over a `UdpLink`, we would like to see an example of `Unity` in action. Although, we will not be able to demonstrate all the scenarios in which `Unity` will be beneficial, we can show how it works and what to expect out of it. 
+Now that we are all set up with an assisting receiver and a main receiver cooperating over a `UdpLink`, we would like to see an example of `Unity` in action. Although, we will not be able to demonstrate all the scenarios in which `Unity` will be beneficial, we can show how it works and what to expect out of it.
 
 Let us transmit a frame from the transmitter node by sending a simple `TxFrameReq` message to the `Physical` agent as shown below:
 
@@ -121,7 +121,7 @@ The transmitted frame is broadcasted in the network and for the purpose of this 
 ```
 phy@31 >> RxFrameNtf:INFORM[type:CONTROL from:232 rxTime:5456805687 (3 bytes)]
 ```
-on the main receiver. Notice that this information sharing happened transparently due to our initial set up where all messages getting published on assisting receivers `Physical` agent (recognized by `phy@31` at the main receiver) are being received on the main receiver. 
+on the main receiver. Notice that this information sharing happened transparently due to our initial set up where all messages getting published on assisting receivers `Physical` agent (recognized by `phy@31` at the main receiver) are being received on the main receiver.
 
 The `Unity` agent now utilizes this message from the assisting receiver to publish the frame on main receiver's `Physical` agent's topic as shown below:
 ```
