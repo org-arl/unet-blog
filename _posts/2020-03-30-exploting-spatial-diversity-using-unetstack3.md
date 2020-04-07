@@ -99,7 +99,7 @@ receivers to decode packets.
 ```
 The `assisters` parameter is used to store the node addresses of the assisting receivers that are assisting the main receiver. The user might also want to change the default value of `maxAssisterRange` if the furthest assisting receiver to the main receiver is at a distance larger than 100 m.
 
-For example, in out three simulated modems, the node address of the assisting receiver is 31 and therefore we should set:
+For example, in our three simulated modems, the node address of the assisting receiver is 31 and therefore we should set:
 
 ```groovy
 unity.assisters = [31]
