@@ -10,6 +10,8 @@ thumbnail: "assets/img/unetstack3.1.jpg"
 tags: [unetstack]
 ---
 
+<p style="text-align: center;"><a href="https://youtu.be/qFEYA1DlffI" target="_blank" style="font-size: 20px; text-decoration: none;">[ Watch a short video about what's new in UnetStack 3.1 ]</a></p>
+
 UnetStack 3.0, released at the end of September last year, was a major milestone in the evolution of UnetStack. We are now excited to release the next installment of features and performance enhancements in the form of UnetStack 3.1. Apart from performance enhancements and bug fixes, UnetStack 3.1 brings significant feature upgrades to the [link](https://unetstack.net/handbook/unet-handbook_single_hop_links.html){:target="_unethandbook"}, [ranging](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html){:target="_unethandbook"} and [routing](https://unetstack.net/handbook/unet-handbook_routing_and_route_maintenance.html){:target="_unethandbook"} services, new concepts such as [_wormholes_](https://unetstack.net/handbook/unet-handbook_wormholes.html){:target="_unethandbook"} and [distributed spatial diversity](exploting-spatial-diversity-using-unetstack3){:target="_unetblog"}, a new fragmentation-reassembly framework, and improved user interface in the form of _dashboards_.
 
 Let's take a brief look at some of the new features:
