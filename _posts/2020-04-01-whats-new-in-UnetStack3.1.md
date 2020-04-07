@@ -10,7 +10,7 @@ thumbnail: "assets/img/unetstack3.1.jpg"
 tags: [unetstack]
 ---
 
-UnetStack 3.0, released at the end of September last year, was a major milestone in the evolution of UnetStack. We are now excited to release the next installment of features and performance enhancements in the form of UnetStack 3.1. Apart from performance enhancements and bug fixes, UnetStack 3.1 brings significant feature upgrades to the [link](https://unetstack.net/handbook/unet-handbook_single_hop_links.html), [ranging](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html) and [routing](https://unetstack.net/handbook/unet-handbook_routing_and_route_maintenance.html) services, new concepts such as [_wormholes_](https://unetstack.net/handbook/unet-handbook_wormholes.html) and [distributed spatial diversity](exploting-spatial-diversity-using-unetstack3), a new fragmentation-reassembly framework, and improved user interface in the form of _dashboards_.
+UnetStack 3.0, released at the end of September last year, was a major milestone in the evolution of UnetStack. We are now excited to release the next installment of features and performance enhancements in the form of UnetStack 3.1. Apart from performance enhancements and bug fixes, UnetStack 3.1 brings significant feature upgrades to the [link](https://unetstack.net/handbook/unet-handbook_single_hop_links.html){:target="_unethandbook"}, [ranging](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html){:target="_unethandbook"} and [routing](https://unetstack.net/handbook/unet-handbook_routing_and_route_maintenance.html){:target="_unethandbook"} services, new concepts such as [_wormholes_](https://unetstack.net/handbook/unet-handbook_wormholes.html){:target="_unethandbook"} and [distributed spatial diversity](exploting-spatial-diversity-using-unetstack3){:target="_unetblog"}, a new fragmentation-reassembly framework, and improved user interface in the form of _dashboards_.
 
 Let's take a brief look at some of the new features:
 
@@ -32,7 +32,7 @@ UnetStack 3.1 ships with several pre-configured dashboards for modem nodes:
 
 #### 2. Localization framework and a new ranging agent
 
-Underwater acoustic modems are used not only communication, but often also for [acoustic ranging](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html). The introduction of a localization framework in UnetStack eases the development of underwater positioning and tracking networks, enabling ranging, navigation, and tracking of underwater sensor, robots, and even divers. The framework not only supports UnetStack-based modems in the underwater network, but also treats other devices such as commercial off-the-shelf (COTS) transponders and pingers as Unet nodes. This enables legacy and low-power nodes to be easily integrated into an underwater positioning network. UnetStack now also supports broadcast ranging, allowing multiple underwater nodes to be localized with a single query transmission.
+Underwater acoustic modems are used not only communication, but often also for [acoustic ranging](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html){:target="_unethandbook"}. The introduction of a localization framework in UnetStack eases the development of underwater positioning and tracking networks, enabling ranging, navigation, and tracking of underwater sensor, robots, and even divers. The framework not only supports UnetStack-based modems in the underwater network, but also treats other devices such as commercial off-the-shelf (COTS) transponders and pingers as Unet nodes. This enables legacy and low-power nodes to be easily integrated into an underwater positioning network. UnetStack now also supports broadcast ranging, allowing multiple underwater nodes to be localized with a single query transmission.
 
 While underwater positioning networks may be used for many applications, we highlight a few examples to excite your imagination:
 
@@ -44,25 +44,25 @@ While underwater positioning networks may be used for many applications, we high
 
 #### 3. Redefined routing service
 
-The [routing service](https://unetstack.net/handbook/unet-handbook_routing_and_route_maintenance.html) in UnetStack has served us well for the past decade. However, as our networks become more heterogeneous, and the demands on routing more complex, we felt the need to rethink how routing works. With the emergence of underwater disruption-tolerant networks (DTNs)[^1], routers need to make decisions based on the time-to-live (TTL) of datagrams being routed. Cross-layer optimization often requires routing information to be generated or consumed in parts of the network stack not traditionally involved in routing.
+The [routing service](https://unetstack.net/handbook/unet-handbook_routing_and_route_maintenance.html){:target="_unethandbook"} in UnetStack has served us well for the past decade. However, as our networks become more heterogeneous, and the demands on routing more complex, we felt the need to rethink how routing works. With the emergence of underwater disruption-tolerant networks (DTNs)[^1], routers need to make decisions based on the time-to-live (TTL) of datagrams being routed. Cross-layer optimization often requires routing information to be generated or consumed in parts of the network stack not traditionally involved in routing.
 
 The new routing service allows dynamic creation, maintenance, query, and consumption of routes by other agents, and helps meet complex demands from optimized underwater network protocols.
 
 #### 4. Link state information
 
-Dynamic routing and DTNs often require link state information to make optimal decisions. The [link service](https://unetstack.net/handbook/unet-handbook_single_hop_links.html) in UnetStack has now been updated to enable link agents to publish link state (up/down) and link quality information. The default set of link agents in UnetStack have also been upgraded to publish link state/quality information when available.
+Dynamic routing and DTNs often require link state information to make optimal decisions. The [link service](https://unetstack.net/handbook/unet-handbook_single_hop_links.html){:target="_unethandbook"} in UnetStack has now been updated to enable link agents to publish link state (up/down) and link quality information. The default set of link agents in UnetStack have also been upgraded to publish link state/quality information when available.
 
 In addition to basic link state information, the `ECLink` agent in the premium stack now provides[^2] data transfer progress details for each peer node as indexed parameters. Since `ECLink` datagrams are often very large, this functionality enables client agents to closely monitor the progress of their data transfers.
 
 #### 5. Enhanced UDP links
 
-The [`UDPLink` agent](https://unetstack.net/handbook/unet-handbook_wired_and_over_the_air_links.html) provides Unet links over an UDP/IP network. In UnetStack 3.0, the UDP links were based on the UDP multicast functionality of IP networks. While this functionality worked well with wired networks, many WiFi routers implement UDP multicast poorly. As a result, on many WiFi networks, we saw high packet loss for UDP multicast packets, and consequently large retransmission overhead for UDP links.
+The [`UDPLink` agent](https://unetstack.net/handbook/unet-handbook_wired_and_over_the_air_links.html){:target="_unethandbook"} provides Unet links over an UDP/IP network. In UnetStack 3.0, the UDP links were based on the UDP multicast functionality of IP networks. While this functionality worked well with wired networks, many WiFi routers implement UDP multicast poorly. As a result, on many WiFi networks, we saw high packet loss for UDP multicast packets, and consequently large retransmission overhead for UDP links.
 
 To improve the performance of UDP links over WiFi networks, we have now reimplemented the UDP link agent to use a combination of UDP broadcast and unicast. UDP links now also support fragmentation/reassembly, data compression, and erasure correction coding. As a result, UDP links now support large MTUs, and retain good performance over WiFi networks and wired networks. As a bonus, Unet nodes now benefit from IP routing functionality, allowing Unet nodes to be transparently distributed across the Internet.
 
 #### 6. Wormholes
 
-The fjåge agent framework forms the backbone of a Unet node, enabling communication between intelligent agents that cooperate to provide the network and application functionality for that node. All agents in one Unet node live in one fjåge _universe_, and can seamlessly communicate with each other. However, agents in different nodes live in different fjåge universes, and typically only communicate with peer agents on other nodes using protocols implemented over Unet links. UnetStack 3.1 introduces the concept of [_wormholes_](https://unetstack.net/handbook/unet-handbook_wormholes.html) that connect multiple fjåge universes over a Unet link, allowing all agents in multiple nodes to transparently talk to each other!
+The fjåge agent framework forms the backbone of a Unet node, enabling communication between intelligent agents that cooperate to provide the network and application functionality for that node. All agents in one Unet node live in one fjåge _universe_, and can seamlessly communicate with each other. However, agents in different nodes live in different fjåge universes, and typically only communicate with peer agents on other nodes using protocols implemented over Unet links. UnetStack 3.1 introduces the concept of [_wormholes_](https://unetstack.net/handbook/unet-handbook_wormholes.html){:target="_unethandbook"} that connect multiple fjåge universes over a Unet link, allowing all agents in multiple nodes to transparently talk to each other!
 
 Sounds cool, but why would I want to do this? The usefulness of this is best understood with a couple of real-world examples:
 
@@ -74,7 +74,7 @@ Sounds cool, but why would I want to do this? The usefulness of this is best und
 
 #### 7. Unity (distributed spatial diversity)
 
-The cooperative communication example above is not just a _gedanken_ experiment, but a patent-pending technique that has been demonstrated to work well in practice. The [_Unity agent_](exploting-spatial-diversity-using-unetstack3) is a premium agent, available on UnetStack 3.1, that implements a refined version of the above cooperative communications strategy. It allows users to transparently implement spatial diversity with a set of COTS UnetStack-based underwater acoustic modems, each with only a single-receiver.
+The cooperative communication example above is not just a _gedanken_ experiment, but a patent-pending technique that has been demonstrated to work well in practice. The [_Unity agent_](exploting-spatial-diversity-using-unetstack3){:target="_unetblog"} is a premium agent, available on UnetStack 3.1, that implements a refined version of the above cooperative communications strategy. It allows users to transparently implement spatial diversity with a set of COTS UnetStack-based underwater acoustic modems, each with only a single-receiver.
 
 What does it mean in practice? Say, you're on a ship, you have an AUV deployed in an area, and you've been receiving status updates from the AUV every few minutes. The AUV moves into an area where the connectivity is poor, and you can no longer successfully receive the status reports. If you have a second modem available on the ship, you deploy it from another part of the ship. Or maybe there is a gateway buoy deployed nearby with a modem, and you can connect to its modem. Either way, Unity magically uses the information from both modems to recover connectivity to the AUV!
 
@@ -109,7 +109,7 @@ Here, we used the `SimpleFragmenter` that breaks the data into a series of short
 
 #### 9. Adoption of fjåge parameters
 
-UnetStack introduced the concept of [parameters](https://unetstack.net/handbook/unet-handbook_developing_your_own_agents.html) to allow easy configuration and status reporting for agents. Since fjåge 1.7, the fjåge agent framework also adopted the concept of parameters. To provide seamless operation with other fjåge-based frameworks (e.g. [fjåge sentuator](https://github.com/org-arl/fjage-sentuator)), UnetStack 3.1 adopts the parameter implementation provided by fjåge.
+UnetStack introduced the concept of [parameters](https://unetstack.net/handbook/unet-handbook_developing_your_own_agents.html){:target="_unethandbook"} to allow easy configuration and status reporting for agents. Since fjåge 1.7, the fjåge agent framework also adopted the concept of parameters. To provide seamless operation with other fjåge-based frameworks (e.g. [fjåge sentuator](https://github.com/org-arl/fjage-sentuator){:target="_blank"}), UnetStack 3.1 adopts the parameter implementation provided by fjåge.
 
 **Breaking change**: The adoption of fjåge parameters by UnetStack means that the `Parameter` interface must explicitly imported from fjåge (`org.arl.fjage.param.Parameter`), and `org.arl.fjage.param.ParameterReq` be used in preference to `org.arl.unet.ParameterReq`.
 
@@ -155,5 +155,5 @@ Other than the major features listed above, UnetStack 3.1 has many under-the-hoo
 
 ##### Footnotes:
 
-[^1]: While projects such as [Underwater DTN](https://github.com/shortstheory/underwater-dtn) have successfully implemented DTNs using UnetStack, the official DTN support for UnetStack is still under development, and should be available in an upcoming release soon.
+[^1]: While projects such as [Underwater DTN](https://github.com/shortstheory/underwater-dtn){:target="_blank"} have successfully implemented DTNs using UnetStack, the official DTN support for UnetStack is still under development, and should be available in an upcoming release soon.
 [^2]: The link data transfer progress functionality is provided by `ECLink` on an experimental basis, and not part of the link service definition at present. As the use cases for the consumption of this information mature, we expect to add this functionality to the link service definition. This will allow other agents to provide similar functionality in a uniform way.
