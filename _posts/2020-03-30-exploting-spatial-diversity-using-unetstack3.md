@@ -5,7 +5,7 @@ title: Exploiting Distributed Spatial Diversity Using UnetStack
 date: 30/03/2020
 author: Prasad Anjangi
 categories: howto
-feature-img: "assets/img/sd/sd-unet.jpg"
+feature-img: "assets/img/sd/sd-unet-banner.jpg"
 thumbnail: "assets/img/sd/sd-unet-tn.jpg"
 tags: [howto, spatial diversity, cooperative communication, robustness, data rate, performance boost]
 ---
