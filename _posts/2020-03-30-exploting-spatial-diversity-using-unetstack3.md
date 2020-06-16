@@ -14,7 +14,7 @@ Spatial diversity techniques that are used in terrestrial networks usually utili
 
 ### What's the key idea involved in distributed spatial diversity ?
 
-*Multiple communication nodes deployed at spatially distinct locations can receive independent copies of the same information. This group of receiver nodes can act as a combined spatial diversity receiver when they cooperate by sharing copies of information. We term this distributed spatial diversity. The framework supporting this patent-pending technique is implemented in UnetStack 3.1 and is referred to as _Unity_.*
+*Multiple communication nodes deployed at spatially distinct locations can receive independent copies of the same information. This group of receiver nodes can act as a combined spatial diversity receiver when they cooperate by sharing copies of information. We term this distributed spatial diversity. The framework supporting this patent-pending technique is implemented in UnetStack 3.1 and is referred to as Unity.*
 
 ![Overview](../assets/img/sd/sd.png)
 An illustration of the general overview of such a receiver system is shown above and few terminologies might help for further discussion:
