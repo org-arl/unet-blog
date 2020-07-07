@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: What's so "super" about Super-TDMA ?
+title: What's so "super" about Super-TDMA ? 
 date: 06/07/2020
 author: Prasad Anjangi
 categories: howto
@@ -10,7 +10,7 @@ thumbnail: "assets/img/stdms/stdma-unet.jpg"
 tags: [howto, tdma, medium access control, long propagation delays, throughput, performance boost]
 ---
 
-Needless to say that underwater acoustic (UWA) networks might play a key role in many areas including marine, offshore and subsea industries in the future. There have been tremendous and impressive technological advances in underwater acoustic communications and networking field. The one that caught my attention and brought about a clear difference in the novel approaches that are needed to deal with challenges in UWA networks was the "exploitation" of large propagation delays that exist in UWA networks. Do you know that it is possible to achieve as much as 50% higher network throughput with specific network geometries and protocols in UWA networks when compared to radio-frequency (RF) based terrestrial wireless networks? It is an interesting and surprising fact that has led to further exploration of such techniques in practical settings. In this blog, without delving too much into the nitty-gritty details, let's try and understand; where that advantage comes from, through an example technique (*Super-TDMA*). We will try and understand the key idea behind this technique  and let's see why it is "super".
+Needless to say that underwater acoustic (UWA) networks might play a key role in many areas including marine, offshore and subsea industries in the future. There have been tremendous and impressive technological advances in underwater acoustic communications and networking field. The one that caught my attention and brought about a clear difference in the novel approaches that are needed to deal with challenges in UWA networks was the "exploitation" of large propagation delays that exist in UWA networks. Do you know that it is possible to achieve as much as 50% higher network throughput with specific network geometries and protocols in UWA networks when compared to radio-frequency (RF) based terrestrial wireless networks? It is an interesting and surprising fact that has led to further exploration of such techniques in practical settings. In this blog, without delving too much into the nitty-gritty details, let's try and understand, where that advantage comes from, through an example technique (*Super-TDMA*). We will try and understand the key idea behind this technique  and let's see why it is "super".
 
 ### Long propagation delays
 
@@ -50,7 +50,7 @@ This can be easily visualized [2][3]. Take a look at the figure below where the 
 
 ### Can we simulate such a schedule in UnetSim ?
 
-Yes, of course, let's do that next. It is easy to implement a 3 node equilateral network geometry with the above-mentioned high throughput schedule in UnetSim. The sample code as `e3-network.groovy `is provided here. Let us go through the code a bit to try and understand how it is implemented.
+Yes, of course, let's do that next. It is easy to implement a 3 node equilateral network geometry with the above-mentioned high throughput schedule in UnetSim. The sample code as `e3-network.groovy `is provided here.
 
 ```groovy
 //! Simulation: Equilateral triangle network
@@ -78,7 +78,7 @@ import static org.arl.unet.Services.*
 ///////////////////////////////////////////////////////////////////////////////
 // settings
 
-def slot = 422.ms               // default packet length is about 345 ms
+def slot = 423.ms               // default packet length is about 345 ms
 def range = 650.m               // about slot x 1540 m/s
 def time = 15.minutes           // simulation time
 def schedule = [[2, 3, 0, 0],   // schedule from [1]
@@ -125,25 +125,87 @@ RX:                     ${trace.rxCount}
 Offered load:           ${trace.offeredLoad.round(3)}
 Throughput:             ${trace.throughput.round(3)}"""
 ```
+Let us go through some of the code snippets from the above script to try and understand different components of the implementation.
 
-First we set the distance between the nodes to be 650 m. With sound speed in water to be approximately 1540 m/s, the slot length turns out to be 422 ms which is set as can be seen in the code. The simulation time is set to 15 minutes and the high-throughput schedule is given as an input. The rest is pretty simple. The three network nodes are deployed at appropriate coordinates to form an equilateral triangle. The frame duration of the DATA channel packet is set to be smaller than the time slot length, i.e., we need to make sure that the frame length and data rate is such that the packet duration is smaller than 422 ms. Once we set this up, the packets are transmitted from each node in a `TickerBehavior` as per the schedule. Now, let's run this and look at the result:
+First we set the distance between the nodes to be 650 m. With sound speed in water to be approximately 1540 m/s, the propagation delay on any link turns out to be 423 ms. Therefore, the slot duration is set to 423 ms. The simulation time is set to 15 minutes and the high-throughput schedule structured as a matrix is given as an input to all three nodes in the network. 
+
+```groovy
+def slot = 423.ms               // default packet length is about 345 ms
+def range = 650.m               // about slot x 1540 m/s
+def time = 15.minutes           // simulation time
+def schedule = [[2, 3, 0, 0],   // schedule from [1]
+                [0, 0, 1, 3],
+                [0, 1, 0, 2]]
+```
+
+The rest is pretty simple. The three network nodes are deployed at appropriate coordinates to form an equilateral triangle. 
+
+```groovy
+  def n = []
+  n << node('1', address: 1, location: [0, 0, 0])
+  n << node('2', address: 2, location: [range, 0, 0])
+  n << node('3', address: 3, location: [0.5*range, 0.866*range, 0])
+```
+
+Next, the frame duration of the `DATA` channel is set to be smaller than the time slot length, i.e., we need to make sure that the frame length and data rate is such that the frame duration is smaller than 423 ms. 
+
+```groovy
+def phy = agentForService PHYSICAL
+phy[Physical.DATA].frameLength = phy[Physical.CONTROL].frameLength
+```
+The first line in the above code looks for an agent providing `PHYSICAL` service. There are two logical channels that are provided by `phy` agent for transmission of frames, the `CONTROL` channel (lower data rate) and the `DATA` channel (higher data rate) by default. In the second line, we set the frame length (in bytes) of the `DATA` channel to a much lower value to let the frame duration reduce to a value lower than the time slot length.
+
+Once we set this up, the `DATA` channel packets are transmitted from each node in a `TickerBehavior` as per the schedule. 
+
+```groovy
+add new TickerBehavior(1000*slot, {
+  def slen = schedule[i].size()
+  def s = schedule[i][(tickCount-1)%slen]
+  if (s) phy << new TxFrameReq(to: s, type: Physical.DATA)
+})
+```
+Every 423 ms (slot duration), the code inside this behavior checks if the node needs to transmit and requests `phy` agent to transmit a `DATA` frame if it has to.
+
+Now, let's run this simulation script and look at the results:
 
 ```term
 Equilateral triangle network
 ----------------------------
 Internode distance:     650 m
-Slot length:            422 ms
+Slot length:            423 ms
 Simulation time:        900 s
-TX:                     3198
-RX:                     3011
-Offered load:           1.375
-Throughput:             1.295
+TX:                     3189
+RX:                     3026
+Offered load:           1.372
+Throughput:             1.301
 
-1 simulation completed in 2.615 seconds
+1 simulation completed in 3.526 seconds
 ```
-The network capacity as we learned earlier is 1.5 (see [1] for more details). Although, in this network, our offered load is less than that since the packet duration is slightly lesser than the time slot duration and hence they are not fully utilized. And therefore, we see a reduced throughput but still 29.5% larger than what can be achieved traditionally. The fact that the practical frame durations used in underwater networks are comparable to the propagation delays led to this gain in throughput. This is remarkable and we should aspire to harness such knowledge of propagation delays in networks when designing performant protocols for higher throughput.
+The results summarize the setup, i.e., the distance between the nodes (650 m), the slot duration (423 ms) and simulation time (900 s) that was used in this simulation. The frame duration in this simulation is set to 387 ms. The number of packets that were transmitted and received are tabulated in the results. Let us interpret these results in a bit detail to understand the advantage of this schedule. But before we delve into this, here is a definition to keep in mind for calculating throughput.
 
-There is much more to this topic and to learn about all that, the following are just a few references that scratch the surface.
+**Normalized Throughput:** *The normalized throughput of the network is measured as the total number of bits of information successfully received by all nodes in the network per unit time, normalized by data rate.*
+
+Therefore, for this simulation, the throughput can be approximately computed as following:
+```
+Throughput = (no. of packets received x frame duration) / simulation time
+```
+Notice, that we had 900 s of simulation time, which implies we had approximately 900/0.423 = 2128 time slots. In traditional TDMA, since only one transmission is allowed per time slot, there would have been 2128 successful transmissions and receptions if all went well. That would result in a normalized throughput of (2128*0.387)/900 = 0.9154.
+
+On the other hand, for the Super-TDMA schedule, there were 3026 successful receptions in the same 2128 time slots. This implies a throughput of (3026*0.387)/900 = 1.3012. Therefore the throughput is about 42 % larger than what can be achieved traditionally. Moreover, the normalized throughput greater than 1 suggests that there are more than one reception per time slot. This is remarkable or as we say it "super" and we should aspire to harness such knowledge of propagation delays in networks when designing performant protocols for higher throughput.
+
+### Practical challenges
+There are important practical challenges to be mindful of when trying to implement such timing-sensitive protocols on communicating nodes. 
+
+***Guard times, slot duration and frame duration:*** 
+You may have observed that the frame durations were slightly less than the time slot duration in this simulated setup. This was not a conscious choice in this simulation. However, in reality, since such schedules demand the frequent transitions between transmission and reception slots, the hardware and/or software should be able to deal with it. The time slots and the guard intervals need to be chosen carefully to maximize the utilization efficiency of the time slot, and hence the transmission to reception switching times in a node is important in selecting the time slot lengths and in minimizing the guard times [3][7]. 
+
+***Time slot synchronization among nodes:*** 
+Time slots on all the nodes must be accurately synchronized for such protocols to work. Regular exchange of clock information among the nodes in the network may be required (depending on the quality of the clock) to maintain time synchronization. 
+
+***Random network topologies and mobile nodes:***
+The schedule that we studied together here was for a special network geometry where all the network nodes were static. In practice, this is of course not the case. We may have random network topologies and even mobile nodes in the network. Computing schedules for such practical networks utilizing what we have learned from this special network is an active field of research. 
+
+There is much more to this topic and to learn about all that, the following are just a few references that scratch the surface. The list of papers here is by no means exhaustive and are just a few related pointers to get started on this topic. The interested readers encouraged to refer to the references within these papers as well to get more exhaustive literature on this topic.
 
 *[1] M. Chitre, M. Motani, and S. Shahabudeen, “Throughput of networks with large propagation delays,” IEEE Journal of Oceanic Engineering, vol. 37, no. 4, pp. 645--658, 2012.*
 
@@ -156,3 +218,5 @@ There is much more to this topic and to learn about all that, the following are 
 *[5] S. Lmai, M. Chitre, C. Laot, and S. Houcke, “Throughput-efficient Super-TDMA MAC Transmission Schedules in Ad hoc Linear Underwater Acoustic Networks,” IEEE Journal of Oceanic Engineering, vol. 42, no. 1, pp. 156--174, 2017.*
 
 *[6] . Noh, P. Wang, U. Lee, D. Torres, and M. Gerla, “DOTS: A propagation delay-aware opportunistic MAC protocol for underwater sensor networks,” inProc. 18th IEEE Int. Conf. Network Protocols, 2010, pp. 183–192.*
+
+*[7] P. Anjangi and M. Chitre, “Propagation-Delay-Aware Unslotted Schedules with Variable Packet Duration for Underwater Acoustic Networks,” IEEE Journal of Oceanic Engineering, vol. 42, no. 4, pp. 977--993, 2017.*
