@@ -12,7 +12,7 @@ tags: [howto, tdma, medium access control, long propagation delays, throughput, 
 
 Underwater acoustic (UWA) networks will play a key role in many areas including marine, offshore and subsea industries in the future. There have been tremendous and impressive technological advances in underwater acoustic communications and networking field. The one that caught my attention and brought about a clear difference in the novel approaches that are needed to deal with challenges in UWA networks was the "exploitation" of large propagation delays that exist in UWA networks. 
 
-Do you know that it is possible to achieve as much as 50% higher network throughput with specific network geometries and protocols in UWA networks when compared to radio-frequency (RF) based terrestrial wireless networks? 
+Do you know that it is possible to achieve as much as 50% higher network throughput (normalized) with specific network geometries and protocols in UWA networks when compared to radio-frequency (RF) based terrestrial wireless networks?
 
 It is an interesting and surprising fact that has led to further exploration of such techniques in practical settings. In this blog, let's try and understand, where that advantage comes from, through an example technique (*Super-TDMA*). We will try and understand the key idea behind this technique and let's see why it is "super".
 
