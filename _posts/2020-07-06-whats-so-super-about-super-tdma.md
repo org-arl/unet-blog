@@ -20,7 +20,7 @@ Let us first understand what is meant by a long propagation delay. Specifically,
 
 ### Traditional TDMA
 
-It is easiest to show how the long propagation delay can be harnessed to achieve higher throughput using a simple contention-free medium access control technique called Time Division Multiple Access (TDMA). In traditional TDMA protocols, every node in the network is assigned a fixed time slot in which it can transmit information. Appropriate amounts of guard time in each time slot must be left to make sure the intended receiver node receives the message successfully. As you can imagine, this protocol may not be great in networks that suffer from long propagation delays, right ?
+It is easiest to show how the long propagation delay can be harnessed to achieve higher throughput using a simple contention-free medium access control technique called [Time Division Multiple Access (TDMA)](https://en.wikipedia.org/wiki/Time-division_multiple_access). In traditional TDMA protocols, every node in the network is assigned a fixed time slot in which it can transmit information. Appropriate amounts of guard time in each time slot must be left to make sure the intended receiver node receives the message successfully. As you can imagine, this protocol may not be great in networks that suffer from long propagation delays, right ?
 
 ![Overview](../assets/img/stdma/stdma-ttdma.png)
 Consider a large 10 km network, i.e., the farthest distance between a transmitter and receiver node is 10 km. In this case, for a message to reach the farthest receiving node, it may take approximately ~ 7 seconds (see above figure). If the message duration is 1 second long, the channel utilization efficiency is 1/8 which is 12.5% and not very impressive.
