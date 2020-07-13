@@ -10,7 +10,7 @@ thumbnail: "assets/img/stdms/stdma-unet.jpg"
 tags: [howto, tdma, medium access control, long propagation delays, throughput, performance boost]
 ---
 
-Underwater acoustic (UWA) networks will play a key role in many areas including marine, offshore and subsea industries in the future. There have been tremendous and impressive technological advances in underwater acoustic communications and networking field. The one that caught my attention and brought about a clear difference in the novel approaches that are needed to deal with challenges in UWA networks was the "exploitation" of large propagation delays that exist in UWA networks. 
+Underwater acoustic (UWA) networks are already playing a key role in many areas including marine, offshore and subsea industries. There have been tremendous and impressive technological advances in underwater acoustic communications and networking field. The one that caught my attention and brought about a clear difference in the novel approaches that are needed to deal with challenges in UWA networks was the "exploitation" of large propagation delays that exist in UWA networks. 
 
 Do you know that it is possible to achieve as much as 50% higher network throughput (normalized) with specific network geometries and protocols in UWA networks when compared to radio-frequency (RF) based terrestrial wireless networks?
 
