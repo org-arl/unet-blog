@@ -38,7 +38,7 @@ The key idea involved in Super-TDMA is visualized in the figure below. Since the
 If the transmissions and receptions are carefully scheduled to occur in different slots, it turns out that much higher throughput is achievable.
 
 ![Overview](../assets/img/stdma/stdma-stdma.png)
-Note that in traditional TDMA protocol a significant amount of time in each slot is left vacant, however, in protocols employing the exploitation of large propagation delays, such large guard times are not needed.
+Note that in traditional TDMA protocol, a significant amount of time in each slot is left vacant. However, in protocols employing the exploitation of large propagation delays, such large guard times are not needed.
 
 #### Example network geometry - an equilateral triangle
 
