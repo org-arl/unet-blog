@@ -6,7 +6,7 @@ date: 06/07/2020
 author: Prasad Anjangi
 categories: howto
 feature-img: "assets/img/stdma/stdma-unet.jpg"
-thumbnail: "assets/img/stdms/stdma-unet.jpg"
+thumbnail: "assets/img/stdma/stdma-unet.jpg"
 tags: [howto, tdma, medium access control, long propagation delays, throughput, performance boost]
 ---
 
