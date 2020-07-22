@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: What's so "super" about Super-TDMA ? 
+title: What's so &quot;super&quot; about Super-TDMA ?
 date: 06/07/2020
 author: Prasad Anjangi
 categories: howto
@@ -10,7 +10,7 @@ thumbnail: "assets/img/stdma/stdma-unet.jpg"
 tags: [howto, tdma, medium access control, long propagation delays, throughput, performance boost]
 ---
 
-Underwater acoustic (UWA) networks are already playing a key role in many areas including marine, offshore and subsea industries. There have been tremendous and impressive technological advances in underwater acoustic communications and networking field. The one that caught my attention and brought about a clear difference in the novel approaches that are needed to deal with challenges in UWA networks was the "exploitation" of large propagation delays that exist in UWA networks. 
+Underwater acoustic (UWA) networks are already playing a key role in many areas including marine, offshore and subsea industries. There have been tremendous and impressive technological advances in underwater acoustic communications and networking field. The one that caught my attention and brought about a clear difference in the novel approaches that are needed to deal with challenges in UWA networks was the "exploitation" of large propagation delays that exist in UWA networks.
 
 Do you know that it is possible to achieve as much as 50% higher network throughput (normalized) with specific network geometries and protocols in UWA networks when compared to radio-frequency (RF) based terrestrial wireless networks?
 
@@ -31,9 +31,9 @@ Consider a large 10 km network, i.e., the farthest distance between a transmitte
 
 ### Super TDMA
 
-The key idea involved in Super-TDMA is visualized in the figure below. Since the message duration is much shorter than the propagation delay, a natural question arises. 
+The key idea involved in Super-TDMA is visualized in the figure below. Since the message duration is much shorter than the propagation delay, a natural question arises.
 
-*Can a message be scheduled to be transmitted in one slot and be received in a different slot ?* 
+*Can a message be scheduled to be transmitted in one slot and be received in a different slot ?*
 
 If the transmissions and receptions are carefully scheduled to occur in different slots, it turns out that much higher throughput is achievable.
 
@@ -48,7 +48,7 @@ Let us consider an example network geometry and work out a high throughput sched
 
 In such a network, the amount of time taken for a message to reach from any one node to another node will be the same. It is shown, that in such special networks, a throughput that is 50% higher than what can be achieved in RF-based terrestrial wireless networks can be achieved. Here is an example of such a schedule [1]:
 ![schedule1](../assets/img/stdma/stdma-schedule-1.png)
-The actions that each node in the network needs to take are represented by rows. For example, according to the schedule above node 1 transmits to node 2 in the first time slot, node 1 transmits to node 3 in the second time slot, and so on. Note that the schedule is presented only until four-time slots and this fully describes the schedule since these networks have properties of having periodic schedules where the same schedule is repeated again. 
+The actions that each node in the network needs to take are represented by rows. For example, according to the schedule above node 1 transmits to node 2 in the first time slot, node 1 transmits to node 3 in the second time slot, and so on. Note that the schedule is presented only until four-time slots and this fully describes the schedule since these networks have properties of having periodic schedules where the same schedule is repeated again.
 ![schedule2](../assets/img/stdma/stdma-schedule-2.png)
 This can be easily visualized [2][3]. Take a look at the figure below where the above-mentioned schedule is repeated for 12-time slots or 3 periods. The line segments in black represent transmissions whereas the line segments in blue represent receptions. The line segments in dotted red are the interfering packets. It is interesting to see that most of these interfering packets are aligned in a time slot and such time slots are utilized for transmissions. This is an essential principle using which algorithms can be developed for much more complex network geometries. This idea opens up tremendous possibilities in designing practical techniques for medium access control in networks with large propagation delays.
 
@@ -131,7 +131,7 @@ Throughput:             ${trace.throughput.round(3)}"""
 ```
 Let us go through some of the code snippets from the above script to try and understand different components of the implementation.
 
-First we set the distance between the nodes to be 650 m. With sound speed in water to be approximately 1540 m/s, the propagation delay on any link turns out to be 423 ms. Therefore, the slot duration is set to 423 ms. The simulation time is set to 15 minutes and the high-throughput schedule structured as a matrix is given as an input to all three nodes in the network. 
+First we set the distance between the nodes to be 650 m. With sound speed in water to be approximately 1540 m/s, the propagation delay on any link turns out to be 423 ms. Therefore, the slot duration is set to 423 ms. The simulation time is set to 15 minutes and the high-throughput schedule structured as a matrix is given as an input to all three nodes in the network.
 
 ```groovy
 def slot = 423.ms               // default packet length is about 345 ms
@@ -142,7 +142,7 @@ def schedule = [[2, 3, 0, 0],   // schedule from [1]
                 [0, 1, 0, 2]]
 ```
 
-The rest is pretty simple. The three network nodes are deployed at appropriate coordinates to form an equilateral triangle. 
+The rest is pretty simple. The three network nodes are deployed at appropriate coordinates to form an equilateral triangle.
 
 ```groovy
   def n = []
@@ -151,7 +151,7 @@ The rest is pretty simple. The three network nodes are deployed at appropriate c
   n << node('3', address: 3, location: [0.5*range, 0.866*range, 0])
 ```
 
-Next, the frame duration of the `DATA` channel is set to be smaller than the time slot length, i.e., we need to make sure that the frame length and data rate is such that the frame duration is smaller than 423 ms. 
+Next, the frame duration of the `DATA` channel is set to be smaller than the time slot length, i.e., we need to make sure that the frame length and data rate is such that the frame duration is smaller than 423 ms.
 
 ```groovy
 def phy = agentForService PHYSICAL
@@ -159,7 +159,7 @@ phy[Physical.DATA].frameLength = phy[Physical.CONTROL].frameLength
 ```
 The first line in the above code looks for an agent providing `PHYSICAL` service. There are two logical channels that are provided by `phy` agent for transmission of frames, the `CONTROL` channel (lower data rate) and the `DATA` channel (higher data rate) by default. In the second line, we set the frame length (in bytes) of the `DATA` channel to a much lower value to let the frame duration reduce to a value lower than the time slot length.
 
-Once we set this up, the `DATA` channel packets are transmitted from each node in a `TickerBehavior` as per the schedule. 
+Once we set this up, the `DATA` channel packets are transmitted from each node in a `TickerBehavior` as per the schedule.
 
 ```groovy
 add new TickerBehavior(1000*slot, {
@@ -198,16 +198,16 @@ Notice, that we had 900 s of simulation time, which implies we had approximately
 On the other hand, for the Super-TDMA schedule, there were 3026 successful receptions in the same 2128 time slots. This implies a throughput of (3026*0.387)/900 = 1.3012. Therefore the throughput is about 42 % larger than what can be achieved traditionally. Moreover, the normalized throughput greater than 1 suggests that there are more than one reception per time slot. This is remarkable or as we say it "super" and we should aspire to harness such knowledge of propagation delays in networks when designing performant protocols for higher throughput.
 
 ### Practical challenges
-There are important practical challenges to be mindful of when trying to implement such timing-sensitive protocols on communicating nodes. 
+There are important practical challenges to be mindful of when trying to implement such timing-sensitive protocols on communicating nodes.
 
-***Guard times, slot duration and frame duration:*** 
-You may have observed that the frame durations were slightly less than the time slot duration in this simulated setup. This was not a conscious choice in this simulation. However, in reality, since such schedules demand the frequent transitions between transmission and reception slots, the hardware and/or software should be able to deal with it. The time slots and the guard intervals need to be chosen carefully to maximize the utilization efficiency of the time slot, and hence the transmission to reception switching times in a node is important in selecting the time slot lengths and in minimizing the guard times [3][7]. 
+***Guard times, slot duration and frame duration:***
+You may have observed that the frame durations were slightly less than the time slot duration in this simulated setup. This was not a conscious choice in this simulation. However, in reality, since such schedules demand the frequent transitions between transmission and reception slots, the hardware and/or software should be able to deal with it. The time slots and the guard intervals need to be chosen carefully to maximize the utilization efficiency of the time slot, and hence the transmission to reception switching times in a node is important in selecting the time slot lengths and in minimizing the guard times [3][7].
 
-***Time slot synchronization among nodes:*** 
-Time slots on all the nodes must be accurately synchronized for such protocols to work. Regular exchange of clock information among the nodes in the network may be required (depending on the quality of the clock) to maintain time synchronization. 
+***Time slot synchronization among nodes:***
+Time slots on all the nodes must be accurately synchronized for such protocols to work. Regular exchange of clock information among the nodes in the network may be required (depending on the quality of the clock) to maintain time synchronization.
 
 ***Random network topologies and mobile nodes:***
-The schedule that we studied together here was for a special network geometry where all the network nodes were static. In practice, this is of course not the case. We may have random network topologies and even mobile nodes in the network. Computing schedules for such practical networks utilizing what we have learned from this special network is an active field of research. 
+The schedule that we studied together here was for a special network geometry where all the network nodes were static. In practice, this is of course not the case. We may have random network topologies and even mobile nodes in the network. Computing schedules for such practical networks utilizing what we have learned from this special network is an active field of research.
 
 There is much more to this topic and to learn about all that, the following are just a few references that scratch the surface. The list of papers here is by no means exhaustive and are just a few related pointers to get started on this topic. The interested readers encouraged to refer to the references within these papers as well to get more exhaustive literature on this topic.
 

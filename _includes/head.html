@@ -2,10 +2,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="{{ post.title }}" />
+    <meta name="twitter:title" content="{{ page.title }}" />
     <meta name="twitter:site" content="@unetstack" />
-    <meta name="twitter:image" content="{{ post.feature-img }}" />
     <meta name="twitter:creator" content="@unetstack" />
+    <meta name="twitter:image" content="https://{{ site.baseurl | prepend: site.url }}/{{ page.feature-img }}" />
+     <meta name="twitter:description" content="{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
+
+    <meta property="og:title" content="{{ page.title }}" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}" />
+    <meta property="og:image" content="https://{{ prepend: site.baseurl | prepend: site.url }}/{{ page.feature-img }}" />
+    <meta property="og:description" content="{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
 
     <!-- Main JS (navbar.js, katex_init.js)-->
     <script defer=true src="{{ site.baseurl }}/assets/js/main.min.js"></script>
@@ -16,11 +23,8 @@
     <!--Favicon-->
     <link rel="shortcut icon" href="{{ site.baseurl }}/{{ site.theme_settings.favicon }}" type="image/x-icon">
 
-    <!-- Canonical -->
-    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
-
     <!-- RSS -->
-    <link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}" href="{{ site.url }}/{{ site.baseurl }}//feed.xml"/>
+    <link rel="alternate" type="application/atom+xml" title="{{ site.theme_settings.title }}" href="{{ site.url }}/{{ site.baseurl }}/feed.xml"/>
 
     <!-- Font Awesome -->
     <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
