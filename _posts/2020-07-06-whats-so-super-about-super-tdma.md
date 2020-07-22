@@ -26,7 +26,7 @@ Let us first understand what is meant by a long propagation delay. Specifically,
 
 It is easiest to show how the long propagation delay can be harnessed to achieve higher throughput using a simple contention-free medium access control technique called [Time Division Multiple Access (TDMA)](https://en.wikipedia.org/wiki/Time-division_multiple_access). In traditional TDMA protocols, every node in the network is assigned a fixed time slot in which it can transmit information. Appropriate amounts of guard time in each time slot must be left to make sure the intended receiver node receives the message successfully. As you can imagine, this protocol may not be great in networks that suffer from long propagation delays, right?
 
-![Overview](../assets/img/stdma/stdma-ttdma.png)
+![ttdma](../assets/img/stdma/stdma-ttdma.png)
 Consider a large 10 km network, i.e., the farthest distance between a transmitter and receiver node is 10 km. In this case, for a message to reach the farthest receiving node, it may take approximately ~ 7 seconds (see above figure). If the message duration is 1 second long, the channel utilization efficiency is 1/8 which is 12.5% and not very impressive.
 
 ### Super TDMA
@@ -37,19 +37,19 @@ The key idea involved in Super-TDMA is visualized in the figure below. Since the
 
 If the transmissions and receptions are carefully scheduled to occur in different slots, it turns out that much higher throughput is achievable.
 
-![Overview](../assets/img/stdma/stdma-stdma.png)
+![stdma](../assets/img/stdma/stdma-stdma.png)
 Note that in traditional TDMA protocol, a significant amount of time in each slot is left vacant. However, in protocols employing the exploitation of large propagation delays, such large guard times are not needed.
 
 #### Example network geometry - an equilateral triangle
 
 Let us consider an example network geometry and work out a high throughput schedule to inculcate this key point in our mind. For this example, let us consider 3 nodes in a network forming an equilateral triangle.
 
-![Overview](../assets/img/stdma/stdma-equi-2.jpeg)
+![equi](../assets/img/stdma/stdma-equi-2.jpeg)
 
 In such a network, the amount of time taken for a message to reach from any one node to another node will be the same. It is shown, that in such special networks, a throughput that is 50% higher than what can be achieved in RF-based terrestrial wireless networks can be achieved. Here is an example of such a schedule [1]:
-![Overview](../assets/img/stdma/stdma-schedule-1.png)
+![schedule1](../assets/img/stdma/stdma-schedule-1.png)
 The actions that each node in the network needs to take are represented by rows. For example, according to the schedule above node 1 transmits to node 2 in the first time slot, node 1 transmits to node 3 in the second time slot, and so on. Note that the schedule is presented only until four-time slots and this fully describes the schedule since these networks have properties of having periodic schedules where the same schedule is repeated again. 
-![Overview](../assets/img/stdma/stdma-schedule-2.png)
+![schedule2](../assets/img/stdma/stdma-schedule-2.png)
 This can be easily visualized [2][3]. Take a look at the figure below where the above-mentioned schedule is repeated for 12-time slots or 3 periods. The line segments in black represent transmissions whereas the line segments in blue represent receptions. The line segments in dotted red are the interfering packets. It is interesting to see that most of these interfering packets are aligned in a time slot and such time slots are utilized for transmissions. This is an essential principle using which algorithms can be developed for much more complex network geometries. This idea opens up tremendous possibilities in designing practical techniques for medium access control in networks with large propagation delays.
 
 ### Can we simulate such a schedule in UnetSim ?
