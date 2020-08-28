@@ -236,6 +236,6 @@ We have a recording in `z` now. We can check if we see the 9.5 kHz signal in the
 julia> psd(z)
 ```
 
-![](assets/img/Julia/psd1.png)
+![](assets/img/julia/psd1.png)
 
 And there it is!
