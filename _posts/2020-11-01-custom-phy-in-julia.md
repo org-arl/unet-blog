@@ -5,8 +5,8 @@ title: Harnessing the power of Julia in UnetStack — Part II
 date: 01/11/2020
 author: Mandar Chitre
 categories: howto
-feature-img: "assets/img/custom-julia-phy.png"
-thumbnail: "assets/img/custom-julia-phy.png"
+feature-img: "assets/img/custom-julia-phy-1.png"
+thumbnail: "assets/img/custom-julia-phy-1.png"
 tags: [howto, julia, unetstack, modems, phy, agents]
 ---
 
