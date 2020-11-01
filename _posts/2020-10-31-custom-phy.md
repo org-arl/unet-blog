@@ -343,7 +343,7 @@ private byte[] composePDU(int from, int to, int protocol, byte[] data) {
 }
 ```
 
-The `transmit()` method simply converts the buffer into a signal and makes a `TxBasebandSignalReq` request to Yoda PHY to do the transmission. It adds the transmission request to the cache so that a notification can be sent to the requester when the transmission is completed.
+The `transmit()` method simply converts the buffer into a signal and makes a `TxBasebandSignalReq` request to Yoda PHY to do the transmission. It adds the transmission request to the temporary store so that a notification can be sent to the requester when the transmission is completed.
 
 ```groovy
 private boolean transmit(int ch, byte[] buf, Message req) {
