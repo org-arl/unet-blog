@@ -134,7 +134,7 @@ private byte[] signal2bytes(float[] signal, int start) {
       double s0re = 0                 // real path of matched filter for f0
       double s0im = 0                 // imaginary path of matched filter for f0
       double s1re = 0                 // real path of matched filter for f1
-      double s1im = 0                 // imaginary path of matched filter for f0
+      double s1im = 0                 // imaginary path of matched filter for f1
       for (int k = 0; k < SAMPLES_PER_SYMBOL; k++) {
         float re = signal[p++]
         float im = signal[p++]
@@ -290,7 +290,7 @@ We often require our node address. Rather than ask the `node` agent each time, w
 private NodeAddressCache addrCache = new NodeAddressCache(this, true)
 ```
 
-We also need to keep a cache of pending transmission requests, so that when Yoda PHY informs us that the transmission is complete, we can inform our client (agent who sent us the transmission request) that the transmission was completed:
+We also need to keep a temporarily store pending transmission requests, so that when Yoda PHY informs us that the transmission is complete, we can inform our client (agent who sent us the transmission request) that the transmission was completed:
 ```groovy
 private Map<String,Message> pending = [:]
 ```
