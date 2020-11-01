@@ -10,11 +10,7 @@ thumbnail: "assets/img/julia/julia.jpg"
 tags: [howto, julia, unetstack]
 ---
 
-
-
 Over the past year, I’ve fallen in love with Julia. Now most of my acoustics, signal processing, data analysis, and machine learning research is done in Julia. So it’s natural for me to ask how I can use Julia with UnetStack, as a lot of that research eventually finds its way into underwater networks via UnetStack. In this 2-part article, we’ll explore 2 different ways to get Julia and UnetStack to work seamlessly together.
-
-
 
 ### Using Julia with UnetStack
 
@@ -23,11 +19,9 @@ There are essentially two different ways for using Julia with UnetStack, dependi
 1. Interfacing with UnetStack from a Julia script or application.
 2. Using algorithms written in Julia from a UnetStack agent.
 
-In this article, we will explore option 1, where we write Julia code that needs to interface with UnetStack. In the follow-up article (part II), we will learn how to run Julia code from a UnetStack agent written in Java or Groovy.
+In this article, we will explore option 1, where we write Julia code that needs to interface with UnetStack. In the [follow-up article (part II)]({% post_url 2020-11-01-custom-phy-in-julia %}), we will learn how to run Julia code from a UnetStack agent written in Java or Groovy.
 
 So let’s get started...
-
-
 
 ### UnetSocket API
 
@@ -115,8 +109,6 @@ true
 
 That was easy!
 
-
-
 ### Working with the UnetSockets.jl and Fjage.jl
 
 The Julia API to UnetStack is implemented as two packages:
@@ -144,8 +136,6 @@ search: UnetSocket UnetSockets
 
 ```
 
-
-
 ### Baseband signal processing in Julia
 
 In the previous example, we broadcasted a “hello world” message, but with just one `unet audio` modem running, there wasn’t anyone to receive it. If you have multiple modems, or multiple laptops to run `unet audio` on, you should be able to receive that message on the other modems. However, it is more likely that you’d want to harness the power of Julia for generating some signals to transmit using UnetStack’s [baseband service](https://unetstack.net/handbook/unet-handbook_baseband_service.html), or process signal received by the modem. Let’s try some examples of this next.
@@ -161,8 +151,6 @@ pkg> add SignalAnalysis
 pkg> # press backspace to get back to Julia prompt
 julia>
 ```
-
-
 
 #### Baseband signal transmission
 
@@ -203,8 +191,6 @@ AGREE
 ```
 
 You should hear the chirp loud and clear!
-
-
 
 #### Baseband signal reception
 
