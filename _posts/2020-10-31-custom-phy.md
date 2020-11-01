@@ -10,7 +10,7 @@ thumbnail: "assets/img/custom-phy.png"
 tags: [howto, unetstack, modems, phy, agents]
 ---
 
-UnetStack enables software-defined open architecture modems (SDOAMs). While such modems come with one or more implementations of physical layers (PHY) for your use, there are times when you may wish to develop your own PHY. Perhaps it is because you have a special environment that demands a unique PHY, or because you want to interoperate with another modem. Or maybe you just want to try your hands at implementing communication techniques. Whatever the reason, I have often been asked for advise on how to go about writing a custom PHY. In this article, I will walk you through the process of implementing a simple PHY from scratch.
+UnetStack enables software-defined open architecture modems (SDOAMs). While such modems come with one or more implementations of physical layers (PHY) for your use, there are times when you may wish to develop your own PHY. Perhaps it is because you have a special environment that demands a unique PHY, or because you want to interoperate with another modem. Or maybe you just want to try your hands at implementing communication techniques. Whatever the reason, I have often been asked for advice on how to go about writing a custom PHY. In this article, I will walk you through the process of implementing a simple PHY from scratch.
 
 ### Background
 
