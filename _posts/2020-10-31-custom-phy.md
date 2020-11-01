@@ -16,7 +16,7 @@ UnetStack enables software-defined open architecture modems (SDOAMs). While such
 
 In an acoustic communication system, the PHY is responsible for converting data bits into an acoustic signal to be transmitted through the channel, and the received signal back into data bits. In UnetStack based modems, this functionality is usually provided by the `phy` agent. The `phy` agent implements the [PHYSICAL service](https://unetstack.net/handbook/unet-handbook_physical_service.html), and other agents such as `uwlink`, `mac` and `ranging` use this service to provide communication and navigation services to the user (and to others agents in the network stack).
 
-At this point, it may be useful to fire up a [Unet audio](https://unetstack.net/#downloads) instance, or connect to a UnetStack powered modem if you're lucky enough to have one handy.
+At this point, it may be useful to fire up a [Unet audio](https://unetstack.net/#downloads) instance, or connect to a UnetStack powered modem if you've one handy.
 
 ```bash
 $ bin/unet -c audio
