@@ -10,7 +10,7 @@ thumbnail: "assets/img/custom-phy.png"
 tags: [howto, unetstack, modems, phy, agents]
 ---
 
-UnetStack enables software-defined open architecture modems (SDOAMs). While such modems come with one or more implementations of physical layers (PHY) for your use, there are times when you may wish to develop your own PHY. Perhaps it is because you have a special environment that demands a unique PHY, or because you want to interoperate with another modem. Or maybe you just want to try your hands at implementing a communication techniques. Whatever the reason, I have often been asked for advise on how to go about writing a custom PHY. In this article, I will walk you through a the process of implementing a simple PHY from scratch.
+UnetStack enables software-defined open architecture modems (SDOAMs). While such modems come with one or more implementations of physical layers (PHY) for your use, there are times when you may wish to develop your own PHY. Perhaps it is because you have a special environment that demands a unique PHY, or because you want to interoperate with another modem. Or maybe you just want to try your hands at implementing communication techniques. Whatever the reason, I have often been asked for advise on how to go about writing a custom PHY. In this article, I will walk you through the process of implementing a simple PHY from scratch.
 
 ### Background
 
@@ -205,7 +205,7 @@ final int MTU = 8
 final int RTU = MTU
 ```
 
-We'll be needing the Yoda PHY (`phy`) agent often, so we save a reference to it in an attibute `bbsp` (baseband service provider). We subscribe to notifications from Yoda PHY, and also configure it to provide us acoustic signals when it detects a frame:
+We'll be needing the Yoda PHY (`phy`) agent often, so we save a reference to it in an attribute `bbsp` (baseband service provider). We subscribe to notifications from Yoda PHY, and also configure it to provide us acoustic signals when it detects a frame:
 ```groovy
 private final AgentID bbsp = agent('phy')       // Yoda PHY
 
@@ -221,7 +221,7 @@ void startup() {
 }
 ```
 
-By setting the `modulation` parameters for both CONTROL and DATA channels to `'none'`, we have instructed Yoda not to process the received frames. By setting `basebandRx` parameter to true, we have asked Yoda PY to send us the baseband signal each time a CONTROL or DATA frame is detected. The `basebandExtra` parameter is set to the number of samples in our frame, so that Yoda PHY knows how long a signal to record for us.
+By setting the `modulation` parameters for both CONTROL and DATA channels to `'none'`, we have instructed Yoda not to process the received frames. By setting `basebandRx` parameter to true, we have asked Yoda PHY to send us the baseband signal each time a CONTROL or DATA frame is detected. The `basebandExtra` parameter is set to the number of samples in our frame, so that Yoda PHY knows how long a signal to record for us.
 
 Yoda PHY detects acoustic signals in the channel by detecting unique preamble signals transmitted just before CONTROL and DATA frames. These signals are included in the recordings and therefore our modulated signal starts a few samples into the signal buffer. To find out exactly how long the preamble signals are (can be configured using Yoda PHY parameters), we ask Yoda PHY for a copy of the preamble and extract the length:
 ```groovy
@@ -437,7 +437,7 @@ We turn on `fullduplex` so that we can transmit and receive on the same device. 
 
 To test the agent, we make a transmission:
 ```bash
-> phy << new TxFrameReq(data: [1,2,3])
+> phy2 << new TxFrameReq(data: [1,2,3])
 AGREE
 phy2 >> TxFrameNtf:INFORM[txTime:19013099]
 phy2 >> RxFrameNtf:INFORM[type:CONTROL from:1 rxTime:19039936 rssi:-49.1 (3 bytes)]
@@ -475,3 +475,7 @@ In this article, we have seen how to write a simple custom PHY agent. We intenti
 In a practical system, you may wish to replace the communication scheme (`bytes2signal()` and `signal2bytes()` methods) with something more sophisticated, including FEC coding. You may also want to use a stronger error detection scheme (CRC rather than parity bits). You'd perhaps also want to consider supporting variable `MTU` and some of the optional features of the PHYSICAL service (e.g. timed transmission, timestamping, etc).
 
 If you find that Java or Groovy doesn't meet your signal processing needs, you may consider writing the `bytes2signal()` and `signal2bytes()` methods in C (using [JNI](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/)) or in Julia (my preferred choice! -- blog article on this coming up shortly...)
+
+> **TIP**
+>
+> With Unet audio, C or Julia calls from Java work seamlessly. However, if you're running on a real modem, chances are that the modem's JVM sandbox won't let you run non-JVM code directly. If you have a coprocessor on your modem, you can run the `phy2` agent on the coprocessor in a fjåge slave container, and you will have no JVM sandbox restrictions. Alternatively you can run the `phy2` agent even on your laptop, as long as the laptop is connected over Ethernet to thr modem. To start a slave container, just install the Unet community edition on the coprocessor/laptop, and start Unet with `bin/unet sh <ipaddr> 1100` where `<ipaddr>` is replaced by the IP address of your modem, and port 1100 is the API port set on the modem.
