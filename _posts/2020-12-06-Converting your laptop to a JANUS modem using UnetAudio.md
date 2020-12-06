@@ -51,18 +51,6 @@ You should hear the transmission from your computer speaker! If you don’t, che
 
 TODO: 
 
-### Using a single laptop
-The above examples assume you have two separate machines that you are using as modem. It is also possible to run two instances of UnetAudio in a single machine. However, you will need two separate sound cards to be used for separate modems.
-
-If you are on a mac, once you have connected two sound cards (with mics and speakers) and tested them separately, select the the first sound card by clicking the speaker icon on the top right of your screen. Then open a terminal and start the first instance of UnetAudio. Verify that the correct output is selected by sending a test transmission.
-
-```
-> tell 0, 'hello sea!'
-AGREE
-```
-
-Now, select the second sound card from the top right of the screen as your output device. Open another terminal and start the second instance of UnetAudio. It should automatically use the second sound card as the hardware for this instance. Now you have two instances of UnetAudio running on single machine being able to exchange messages between each other using separate tx & rx channels.
-
 ## Advantages of using UnetAudio
 ### Portability
 Even if you happen to own some UnetStack-compatible acoustic modems, testing with a modem means setting up a dedicated test setup, equipment etc. in a confined water body and dealing with the logistics. With UnetAudio, you can test from the comfort of your seat. When you are ready to deploy in a modem, all you have to do is simply copy the code over to the UnetStack-compatible modem and the UnetStack framework takes care of the rest for you.
