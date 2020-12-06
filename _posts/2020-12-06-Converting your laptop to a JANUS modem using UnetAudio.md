@@ -58,9 +58,6 @@ Even if you happen to own some UnetStack-compatible acoustic modems, testing wit
 ### Educational tool
 Even the cheapest of the underwater acoustic modems comes at a cost and may not be the best option to invest in, if the intended purpose is teaching. UnetAudio community edition is free for academic and research use. Students can use their laptops as modems to learn about underwater communications and networking.
 
-### Support for multiple modulation schemes
-UnetAudio supports multiple modulation schemes such as FH-BFSK, JANUS, OFDM that are fully customizable by the user the same way a UnetStack enabled modem is.
-
 ### JANUS compatibility
 Since we use a sound card as the base hardware, UnetAudio provides as acoustic modem that has a centre frequency of 12 kHz. This is the band of operation where the current JANUS specifications are defined. You can check the various details of the modem by typing the following in the webshell:
 
