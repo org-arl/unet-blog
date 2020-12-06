@@ -47,7 +47,7 @@ AGREE
 
 You should hear the transmission from your computer speaker! If you don’t, check your speaker volume and try again.
 
-## Transmitting & receiving using JANUS protocols
+## Transmitting & receiving using JANUS standard
 
 TODO: 
 
