@@ -49,7 +49,33 @@ You should hear the transmission from your computer speaker! If you don’t, che
 
 ## Transmitting & receiving using JANUS standard
 
-TODO: 
+UnetAudio has the ability to transmit and receive using JANUS frames. You can verify this by typing the following on the terminal.
+
+```
+> phy[3].janus
+true
+```
+
+This means that physicial layer scheme 3 supports JANUS functionality.
+
+> NOTE: UnetAudio supports various physical layer modulation/demodulation and FEC schemes. Details are available in the [Unet handbook](https://unetstack.net/handbook/unet-handbook.html).
+
+The JANUS-specific messages supported are:
+- TxJanusFrameReq ⇒ AGREE / REFUSE / FAILURE — transmit a JANUS frame
+- RxJanusFrameNtf — sent to agent’s topic when a JANUS frame is received
+
+In order to transmit a JANUS encoded message directly from physical later, the user can type:
+
+```
+> phy << new TxJanusFrameReq()
+AGREE
+phy >> TxFrameNtf:INFORM[type:#3 txTime:503786432]
+```
+
+This broadcasts an empty frame of type JANUS. You should hear the actual transmission through the laptop/computer speaker.
+
+TODO:
+
 
 ## Advantages of using UnetAudio
 ### Portability
