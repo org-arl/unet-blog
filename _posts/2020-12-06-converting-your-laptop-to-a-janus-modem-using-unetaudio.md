@@ -16,12 +16,12 @@ Along with developing the app or the protocol, a common step is to simulate its 
 
 ## What is Unet audio?
 
-![](../assets/img/unetaudio/Unetaudio-logo.png)
+![](../assets/img/unetaudio/unetaudio-logo.png)
 
 
 **Unet audio** is one of the software-defined open architecture modems (SDOAMs) that is built using UnetStack technologies that let users convert their computers to an acoustic modem. It uses a computer's sound card along with the speaker and microphone as the hardware to transmit and receive data or signals as instructed by the user.
 
-![](../assets/img/unetaudio/Unetaudio-block.png)
+![](../assets/img/unetaudio/unetaudio-block.png)
 
 **Unet audio Block Diagram**
 
@@ -43,7 +43,7 @@ Modem web: http://localhost:8080/
 AGREE
 ```
 
-![](../assets/img/unetaudio/Unetaudio-webif.png)
+![](../assets/img/unetaudio/unetaudio-webif.png)
 
 You should hear the transmission from your computer speaker! If you don’t, check your speaker volume and try again.
 
@@ -90,7 +90,7 @@ Since we use a sound card as the base hardware, Unet audio provides as acoustic 
 ```
 > phy
 ```
-![](../assets/img/unetaudio/Unetaudio-phy.png)
+![](../assets/img/unetaudio/unetaudio-phy.png)
 
 
 
