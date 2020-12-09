@@ -69,52 +69,21 @@ Provides software-defined physical layer communication services (including error
   RTU ⤇ 31
 
 [org.arl.unet.phy.PhysicalParam]
-  busy ⤇ false
   maxPowerLevel ⤇ 0.0
   minPowerLevel ⤇ -138.0
   propagationSpeed = 1500.0
-  refPowerLevel ⤇ 0.0
   rxEnable = true
-  rxSensitivity ⤇ 0.0
-  time = 4167772
-  timestampedTxDelay = 1.0
 
 [org.arl.yoda.ModemParam]
   adcrate ⤇ 48000.0
-  bbsblk ⤇ 6000
-  bbscnt = 0
-  bpfilter = true
-  clockCalib = 1.0
   dacrate ⤇ 96000.0
-  downconvRatio = 4.0
-  fan = false
-  fanctl = 45.0
   fullduplex = false
-  gain = 0.0
-  hpc = false
-  inhibit = 120
-  isc = true
   loopback = false
   model ⤇ Unet audio
-  mute = true
-  noise ⤇ -105.6
-  npulses = 1
-  pbsblk = 65536
-  pbscnt = 0
-  post = null
-  poweramp = false
-  preamp = true
-  pulsedelay = 0
-  serial ⤇ unetaudio
-  standby = 15
-  upconvRatio ⤇ 8.0
   vendor ⤇ UnetStack
-  voltage ⤇ 0.0
-  wakeupdelay = 400
-  wakeuplen = 8000
 ```
 
-> NOTE: For brevity, we have omitted the baseband service and scheduler service parameters in the listing above. Even then, there are many parameters that allow you to configure the SDOAM. We cannot cover each parameter in detail here, but we encourage you to explore the help pages for the parameters by simply typing `help phy` followed by the parameter name.
+> NOTE: For brevity, we have omitted the baseband service, scheduler service parameters and some of the non-relevant parameters in the listings given in this article. Even then, there are many parameters that allow you to configure the SDOAM. We cannot cover each parameter in detail here, but we encourage you to explore the help pages for the parameters by simply typing `help phy` followed by the parameter name.
 
 Unet audio defines three types of frames:
 
@@ -128,10 +97,6 @@ To get the details of each type of frame, you can use indexed parameters. For ge
 > phy[1]
 « PHY »
 
-[org.arl.unet.DatagramParam]
-  MTU ⤇ 13
-  RTU ⤇ 13
-
 [org.arl.unet.phy.PhysicalChannelParam]
   dataRate ⤇ 70.588234
   errorDetection ⤇ true
@@ -140,9 +105,6 @@ To get the details of each type of frame, you can use indexed parameters. For ge
   frameDuration ⤇ 2.04
   frameLength = 18
   janus = false
-  llr = false
-  maxFrameLength ⤇ 796
-  powerLevel = -42.0
 
 [org.arl.yoda.FhbfskParam]
   chiplen = 1
@@ -152,15 +114,6 @@ To get the details of each type of frame, you can use indexed parameters. For ge
   scrambler = 0
   sync = true
   tukey = true
-
-[org.arl.yoda.ModemChannelParam]
-  basebandExtra = 0
-  basebandRx = false
-  modulation = fhbfsk
-  preamble = (480 samples)
-  test = false
-  threshold = 0.25
-  valid ⤇ true
 ```
 
 Similarly, typing `phy[3]` will list the parameters of JANUS frame.
@@ -168,10 +121,6 @@ Similarly, typing `phy[3]` will list the parameters of JANUS frame.
 ```
 > phy[3]
 « PHY »
-
-[org.arl.unet.DatagramParam]
-  MTU ⤇ 0
-  RTU ⤇ 0
 
 [org.arl.unet.phy.PhysicalChannelParam]
   dataRate ⤇ 58.181816
@@ -181,9 +130,6 @@ Similarly, typing `phy[3]` will list the parameters of JANUS frame.
   frameDuration ⤇ 1.1
   frameLength = 8
   janus = true
-  llr = false
-  maxFrameLength ⤇ 796
-  powerLevel = -42.0
 
 [org.arl.yoda.FhbfskParam]
   chiplen = 1
@@ -193,15 +139,6 @@ Similarly, typing `phy[3]` will list the parameters of JANUS frame.
   scrambler = 0
   sync = true
   tukey = true
-
-[org.arl.yoda.ModemChannelParam]
-  basebandExtra = 0
-  basebandRx = false
-  modulation = fhbfsk
-  preamble = (2400 samples)
-  test = false
-  threshold = 0.0
-  valid ⤇ true
 ```
 
 The first difference you will notice between the three is the `phy.janus` parameter which is set to `false` for the CONTROL channel and `true` for JANUS channel. The settings `phy.janus` &  `modulation = fhbfsk` sets up the modulation for JANUS.
