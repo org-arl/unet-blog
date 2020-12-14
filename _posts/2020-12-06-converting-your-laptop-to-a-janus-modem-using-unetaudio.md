@@ -19,7 +19,7 @@ Along with developing the app or the protocol, a common step is to simulate its 
 ![](../assets/img/unetaudio/unetaudio-logo.png)
 
 
-**Unet audio** is one of the software-defined open architecture modems (SDOAMs) that is built using UnetStack technologies that let users convert their computers to an acoustic modem. It uses a computer's sound card along with the speaker and microphone as the hardware to transmit and receive data or signals as instructed by the user.
+**Unet audio** is one of the software-defined open architecture modems (SDOAMs) that is built using UnetStack technologies that let users convert their computers to an acoustic modem. It uses a computer's sound card (or any sound card attached to a computer) along with its speaker and microphone as the hardware to transmit and receive data or signals as instructed by the user.
 
 ![](../assets/img/unetaudio/unetaudio-block.png)
 
