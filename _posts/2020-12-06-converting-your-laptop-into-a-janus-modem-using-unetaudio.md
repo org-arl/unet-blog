@@ -224,3 +224,5 @@ Unet audio provides an easy method for researchers, teachers and students to con
 Even if you happen to own some UnetStack compatible acoustic modems, testing with a modem means setting up a dedicated test setup & equipment, access to a water body and dealing with the logistics. With Unet audio, you can develop and test from the comfort of your seat. Additionally, Unet audio provides an SDOAM that covers the frequency band of operation as defined by the JANUS specifications.
 
 This post only gives you a glimpse of how you can do JANUS transmissions and receptions using Unet audio. There are many more interesting things you can do like transmit and receive the raw baseband signals from a `*.wav` file and plot a spectrogram to verify the signal is indeed JANUS compliant ([as illustrated here](https://stackoverflow.com/questions/65027940/how-do-i-record-janus-signal-as-wav-file)), or setup a network of SDOAMs that uses JANUS as their physical layer.
+
+- [OCEANS'19 JANUS Tutorial - Highlights Video](https://www.youtube.com/watch?v=PpVggzkmwbQ&ab_channel=Subnero)
