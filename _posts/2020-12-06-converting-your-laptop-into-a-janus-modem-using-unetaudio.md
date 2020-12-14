@@ -214,6 +214,17 @@ You can check the content of the received frame by typing:
 [1]
 ```
 
+Similarly, if you want to transmit 2 bytes of data, you can set the `phy.frameLength` parameter to `10` and transmit an array of 2 bytes as:
+
+```
+> phy[3].frameLength=10
+10
+> phy << new TxJanusFrameReq(data:[1,2])
+AGREE
+phy >> TxFrameNtf:INFORM[type:#3 txTime:398270432]
+
+```
+
 It is that simple to set up an SODAM on your laptop/computer and transmit and receive acoustic communication signals using Unet audio.
 
 
