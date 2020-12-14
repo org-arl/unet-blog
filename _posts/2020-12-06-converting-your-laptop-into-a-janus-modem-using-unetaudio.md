@@ -91,7 +91,7 @@ Unet audio defines three types of frames:
 - DATA frame = 2
 - JANUS frame = 3
 
-To get the details of each type of frame, you can use indexed parameters. For getting the details of CONTROL channel, type `phy[1]`.
+To get the details of each type of frame, you can use indexed parameters. For getting the details of CONTROL channel, type `phy[1]` (or `phy[CONTROL]`).
 
 ```
 > phy[1]
