@@ -12,7 +12,7 @@ tags: [howto, unetaudio, unetstack, modems, phy, janus]
 
 Imagine you are developing an application for an underwater use case such as messaging or file transfer and you intend to eventually deploy the app on a network of [JANUS](http://www.januswiki.com/) compliant modems in the field. Or you may be developing a new routing protocol that is intended to work on a network of JANUS compliant modems. Or you might be a university Professor designing an exercise for your students to learn about underwater communications and networking.
 
-Along with developing the app or the protocol, a common step is to simulate its performance using simulators like UnetSim. However, before deploying the app on actual modems and going to the field for testing, you want to make sure it works on actual devices as intended. If you are in a classroom, having a hardware component that can actually transmit and receive the frames would be extremely useful. This is where [Unet audio](https://unetstack.net/) comes handy.
+Along with developing the app or the protocol, a common step is to simulate its performance using simulators like [UnetSim](https://unetstack.net/handbook/unet-handbook_getting_started.html#_setting_up_a_simple_simulated_network). However, before deploying the app on actual modems and going to the field for testing, you want to make sure it works on actual devices as intended. If you are in a classroom, having a hardware component that can actually transmit and receive the frames would be extremely useful. This is where [Unet audio](https://unetstack.net/) comes in handy.
 
 ## What is Unet audio?
 
