@@ -146,7 +146,7 @@ The first difference you will notice between the three is the `phy.janus` parame
 The other key parameters to take note of:
 - `fmin = 9520.0`, `fstep = 160.0` and `hops = 13` are the modulation parameters to setup `fhbfsk` as required by JANUS.
 - `fec = 7` chooses `ICONV2` from the `fecList`, to set up UnetStack to use the Interleaved Convolution Code (2:1) as required by JANUS
-- `threshold = 0.0` indicates that reception of JANUS frames is disabled
+- `threshold = 0.0` indicates that the reception of JANUS frames is disabled by turning off the detector
 
 Notice how they are different between the CONTROL channel and the JANUS channel. As a result, the data rate provided by the CONTROL channel is different from that of the JANUS channel.
 
