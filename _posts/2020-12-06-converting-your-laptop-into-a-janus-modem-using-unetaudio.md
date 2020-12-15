@@ -14,7 +14,7 @@ Imagine you are developing an application for an underwater use case such as mes
 
 Along with developing the app or the protocol, a common step is to simulate its performance using simulators like [UnetSim](https://unetstack.net/handbook/unet-handbook_getting_started.html#_setting_up_a_simple_simulated_network). However, before deploying the app on actual modems and going to the field for testing, you want to make sure it works on actual devices as intended. If you are in a classroom, having a hardware component that can actually transmit and receive the frames would be extremely useful. This is where [Unet audio](https://unetstack.net/) comes in handy.
 
-<p align="center"><iframe width="640" height="360" src="https://www.youtube.com/embed/8bR5uV_h5hM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+<p align="center"><iframe width="720" height="360" src="https://www.youtube.com/embed/8bR5uV_h5hM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
 ## What is Unet audio?
 
