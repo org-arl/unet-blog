@@ -3,7 +3,7 @@ layout: post
 comments: true
 title: Converting your laptop into a JANUS modem using Unet audio
 date: 06/12/2020
-author: Manu Ignatius, Mandar Chitre
+author: Manu Ignatius
 categories: howto
 feature-img: "assets/img/unetaudio/unetaudio.jpg"
 thumbnail: "assets/img/unetaudio/unetaudio.jpg"
@@ -18,7 +18,7 @@ Along with developing the app or the protocol, a common step is to simulate its 
 
 ## What is Unet audio?
 
-<p align="center"><img src="../assets/img/unetaudio/unetaudio-logo.png" style="zoom:60%;"/></p>
+<p align="center"><img src="../assets/img/unetaudio/unetaudio-logo.png" style="zoom:50%;"/></p>
 
 
 **Unet audio** is one of the software-defined open architecture modems (SDOAMs) that is built using UnetStack technologies that let users convert their computers to an acoustic modem. It uses a computer's sound card (or any sound card attached to a computer) along with its speaker and microphone as the hardware to transmit and receive data or signals as instructed by the user.
