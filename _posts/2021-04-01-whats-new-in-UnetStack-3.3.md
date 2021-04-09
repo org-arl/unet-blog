@@ -12,7 +12,7 @@ tags: [unetstack]
 
 It is April again, and that means it is time for the next release of UnetStack! We are excited to bring several new features to you -- a new JSON event logging framework for automated analysis of multi-agent protocols, support for signal strength and ambient noise level reporting in the Unet simulator, and experimental support for Julia agents! In addition, UnetStack 3.3 also incorporates numerous enhancements, bug fixes and performance improvements.
 
-<!--p style="text-align: center;"><a href="https://youtu.be/qFEYA1DlffI" target="_blank" style="font-size: 20px; text-decoration: none;">[ Watch a short video about what's new in UnetStack 3.1 ]</a></p-->
+<!--p style="text-align: center;"><a href="https://youtu.be/qFEYA1DlffI" target="_blank" style="font-size: 20px; text-decoration: none;">[ Watch a short video about what's new in UnetStack 3.3 ]</a></p-->
 
 Let's take a brief look at the key new and exciting features:
 
@@ -146,4 +146,5 @@ There are many other enhancements, bug fixes and performance improvements in Une
 - Added `NodeInfo` service parameters for `roll` and `pitch`, allowing UnetStack on autonomous underwater vehicles (AUVs) to use orientation information in making intelligent decisions.
 - On modems supporting low power _sleep mode_, an `AboutToSleepNtf` message is broadcasted before a modem goes to sleep, enabling agents to do housekeeping before taking a nap.
 - Add `eternity` as an alias for `forever` for sleep scheduling shell commands.
+- Improved communication performance for UdpLink and acoustic OFDM links.
 - Added support for 32x upsampling and 16x decimation to support additional frequency bands of operation.
