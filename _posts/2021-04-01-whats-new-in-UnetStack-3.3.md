@@ -48,7 +48,7 @@ All the default agents in UnetStack 3.3 are now compliant with the JSON event lo
 
 #### 2. Automated trace analysis tool (experimental)
 
-To illustrate the power of the event logging framework, we have built a simple [viztrace tool](https://github.com/org-arl/unet-contrib/tree/master/tools/viztrace) to automatically draw sequence diagrams from a JSON trace file. The tool is written in Julia, and will require a working installation of [Julia](https://julialang.org/downloads/) on your machine to run.
+To illustrate the power of the event logging framework, we have built a simple [viztrace tool](https://github.com/org-arl/unet-contrib/tree/master/tools/viztrace) to automatically draw sequence diagrams from a JSON trace file. The tool is written in Julia, and will require a working installation of [Julia](https://julialang.org/downloads/) along with packages `ArgParse` as well as `JSON` on your machine to run.
 
 To illustrate the power of the tool, let us simulate a simple [2-node network](https://unetstack.net/handbook/unet-handbook_getting_started.html) and make a range measurment from node A to B. On node A:
 
