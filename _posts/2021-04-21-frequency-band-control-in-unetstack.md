@@ -148,11 +148,11 @@ We can alter the above parameters to use a band anywhere between 6kHz and 18kHz,
 To complete the picture of bandwidth control, it must be noted that the signal that is transmitted not only has a data modulated portion, but also a detection preamble at the start. This is usually a pseudo random noise signal or m-sequences, hyperbolic chirp (HFM) etc that has good auto correlation properties. 
 
 [Preamble class](https://unetstack.net/javadoc/3.3/org/arl/yoda/Preamble.html) provides both the above types of preambles via the methods such as mseq()(..), hfmUpSweep(..), hfmDownSweep(..).
-allows controlling the bandwidth and centre frequency of the preamble.
+It allows controlling the bandwidth and centre frequency of the preamble.
 
-Lets look at one of them
+Let's look at one of them
 `public static Preamble hfmDownSweep(int len, int sps, float fc)`
-- `len` is the number of baseband samples. 
+- `len` is the number of baseband samples
 - `sps` controls the bandwidth
   Preamble bandwidth = baseband bandwidth/sps. Note that sps must be an integer.
   Thus for Unet audio, sps=4 creates a bandwidth of 12kHz/4 = 3kHz.
@@ -170,7 +170,7 @@ To transmit this preamble alone (with no additional signal)
 > phy << new TxBasebandSignalReq(preamble: 3)
 ```
 
-In the diag scope, lets look at the Passband PSD. With an appropriate trigger, you may get something as follows. It clearly shows the centre of 15kHz and the bandwidth of 3kHz.
+In the diag scope, lets look at the passband PSD. With an appropriate trigger, you may get something as follows. It clearly shows the centre of 15kHz and the bandwidth of 3kHz.
 
 <p align="center"><img src="../assets/img/freqBandControl/preamble.png" style="zoom:50%;"/></p>
 
