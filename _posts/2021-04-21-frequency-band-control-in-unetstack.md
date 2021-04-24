@@ -33,6 +33,7 @@ Another reason may be due to acoustic underwater channel characteristics. A most
 
 Multiple Access is another case where users may want to control the band used in each modem. One common multiple access method is Frequency Domain Multiple Access (FDMA). In this scheme, different modems or modem pairs may be allocated a different frequency band for transmission to avoid collision. Simultaneous transmission-reception by two or more different and colocated modem pairs are possible using FDMA. 
 
+Sometimes, there may be a frequency band the user may want to exclude from usage, due to it being occupied by other sources, noise etc. 
 
 ## Understanding baseband signal generation, transmission 
 
@@ -121,9 +122,10 @@ The default modem parameters are set as follows to achieve this.
 
 `phy[2].bw=0.5` will reduce the active carriers by half, so a bandwidth of 12kHz. Thus together, the used bandwidth will go from 20kHz to 32kHz.
 
-For Unet audio, the same settings will shift the center by 1kHz to 13kHz with a bandwidth of 6kHz. Therefore from 10kHz to 16kHz.
+For Unet audio, the same settings will shift the center by 1kHz to 13kHz with a bandwidth of 6kHz. Therefore from 10kHz to 16kHz, this is seen below (plvl=-25, trigger -70, may vary for user).
 
-<<Show PSD image>>
+<p align="center"><img src="../assets/img/freqBandControl/ofdm-psd.png" style="zoom:50%;"/></p>
+
 
 The usage and meaning of other parameters for OFDM is covered in other blogs (<<Reference>>).
 
@@ -139,7 +141,12 @@ By default you may see in the Unet audio modem
   fstep = 160.0
   hops = 13
 ```
-So it starts from 9520 Hz and goes to 9520 + 13 x 160  = 11600 Hz 
+
+So it starts from 9520 Hz and goes to 9520 + 2(13-1) x 160  = 13360 Hz as seen below
+
+
+<p align="center"><img src="../assets/img/freqBandControl/fhbfsk-psd.png" style="zoom:50%;"/></p>
+
 
 We can alter the above parameters to use a band anywhere between 6kHz and 18kHz, which is the computationally feasible band of the Unet audio modem. 
 
@@ -175,6 +182,10 @@ In the diag scope, lets look at the passband PSD. With an appropriate trigger, y
 <p align="center"><img src="../assets/img/freqBandControl/preamble.png" style="zoom:50%;"/></p>
 
 The user can also generate and set custom preambles. 
+
+## Excluding a band in OFDM
+
+(TBD)
 
 ## Conclusion
 
