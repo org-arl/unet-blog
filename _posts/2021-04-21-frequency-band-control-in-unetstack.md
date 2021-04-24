@@ -91,6 +91,8 @@ The following will send out a 1s BPSK signal at a half the highest rate possible
 Passband PSD plot from the diagnostics scope showing the main frequencies at 9kHz and 15kHz implying use of 6kHz bandwidth
 <p align="center"><img src="../assets/img/freqBandControl/bpsk-low.png" style="zoom:50%;"/></p>
 
+Note that in the strict sense, unless a band limiting RRC (Raised Root Cosine) filter or equivalent is used, the effective bandwidth does not reduce correctly for BPSK with random binary data. The proper implementation of BPSK or general PSK is not aimed in this blog.
+
 The above is intended to give the reader a flavour of how frequency band used changes with signals. The reader no doubt will be interested in testing different types of modulation schemes, and using the PSD scope, the frequency band used can be visualized. Surely it can also be estimated from communication theory.
 
 ## OFDM frequency band control
@@ -153,7 +155,7 @@ The effective bandwidth can be roughly taken as fstep x hops x 2.
 We can alter the above parameters to use a band anywhere between 6kHz and 18kHz, which is the computationally feasible band of the Unet audio modem. 
 
 Note that just as in OFDM, if there is a frequency band to be avoided, we can position the used band to the "left" or "right" of it by adjusting `fmin`, `fstep` and `hops`.
- 
+
 
 ## Control of Preamble bandwidth
 
