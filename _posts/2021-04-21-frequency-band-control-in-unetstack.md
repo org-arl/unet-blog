@@ -130,7 +130,7 @@ For Unet audio, the same settings will shift the centre by 1kHz to 13kHz with a 
 
 Note that if there is a frequency band to be avoided, we can position the used band to the "left" or "right" of it by adjusting `nc`, `dc0` and `bw`. Note that going far away from the ideal transducer resonance region will reduce transmission efficiency. 
 
-The usage and meaning of other parameters for OFDM is covered in other blogs (<< add Reference >>).
+The usage and meaning of parameters can be found in [Command Reference](https://unetstack.net/handbook/unet-handbook.html#_command_reference)
 
 ## FHBFSK frequency band control
 
