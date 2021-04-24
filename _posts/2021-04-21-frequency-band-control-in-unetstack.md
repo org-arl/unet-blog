@@ -5,7 +5,7 @@ title: Frequency band control using UnetStack
 date: 21/04/2021
 author: Shiraz S
 categories: howto
-feature-img: "feature-img: "assets/img/freqBandControl/title.png"
+feature-img: "assets/img/freqBandControl/title.png"
 thumbnail: "assets/img/freqBandControl/title.png"
 tags: [howto, unetstack, modems, phy, frequency, band, fdma]
 ---
