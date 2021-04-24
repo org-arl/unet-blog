@@ -161,7 +161,7 @@ Note that just as in OFDM, if there is a frequency band to be avoided, we can po
 
 To complete the picture of bandwidth control, it must be noted that the signal that is transmitted not only has a data modulated portion, but also a detection preamble at the start. This is usually a pseudo random noise signal or m-sequences, hyperbolic chirp (HFM) etc that has good auto correlation properties. 
 
-[Preamble class](https://unetstack.net/javadoc/3.3/org/arl/yoda/Preamble.html) provides both the above types of preambles via the methods such as mseq()(..), hfmUpSweep(..), hfmDownSweep(..).
+[Preamble class](https://unetstack.net/javadoc/3.3/org/arl/yoda/Preamble.html) provides both the above types of preambles via the methods such as mseq(..), hfmUpSweep(..), hfmDownSweep(..).
 It allows controlling the bandwidth and centre frequency of the preamble.
 
 Let's look at one of them
