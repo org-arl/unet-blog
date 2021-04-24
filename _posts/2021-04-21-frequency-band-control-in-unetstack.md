@@ -17,7 +17,7 @@ An underwater acoustic modem essentially sends out sound signals underwater to t
 For standard medium frequency Subnero modems, the fundamental centre frequency `C=24kHz`.
 The baseband complex signals are clocked out via the DAC (Digital to Analog Converter) at the rate of `R=24000 samples/s`, which translates to a total bandwidth of `B=24kHz` (we shall omit the details of wireless communication theory in this blog). So the band goes from 12kHz to 36kHz.
 
-For unet audio, the centre frequency `C=12kHz`, the complex baseband rate `R=12000` and the total bandwidth `B=12kHz`. So it goes from 6kHz to 18kHz.
+For Unet audio, the centre frequency `C=12kHz`, the complex baseband rate `R=12000` and the total bandwidth `B=12kHz`. So it goes from 6kHz to 18kHz.
 
 For the illustrations in this blog we shall use Unet audio mainly. Change `C`, `R` and `B` according to the modem applicable to the reader.
 
@@ -25,7 +25,7 @@ The reader should install Unet and Unet audio and try out some basic examples to
 
 ### The need to control centre frequency and bandwidth 
 
-Acoustic modems transmit physical sound waves via a trasducer, typically a piezo electric device. Such sound emitters have an ideal resonance frequency F and a Q factor of the order of 0.3. This means that the efficient region of the frequencies it can transmit centres around the resonance frequency with a bandwidth of about 0.3 x F. Q may be higher or lower depending on the exact transducer.
+Acoustic modems transmit physical sound waves via a transducer, typically a piezo electric device. Such sound emitters have an ideal resonance frequency F and a Q factor of the order of 0.3. This means that the efficient region of the frequencies it can transmit centres around the resonance frequency with a bandwidth of about 0.3 x F. Q may be higher or lower depending on the exact transducer.
 
 The transducer in medium range Subnero modem has a transducer with a resonance close to 26kHz << check>>. The recommended default bandwidth is B=12kHz which is half of the computationally possible bandwidth of 24kHz. Thus an effective transmit modulation scheme can be set such that the centre `C=26kHz` and `B=12kHz`.
 
@@ -37,7 +37,7 @@ Sometimes, there may be a frequency band the user may want to exclude from usage
 
 ## Understanding baseband signal generation, transmission 
 
-Its good to have a basic understanding of how baseband signals are created and their frequency content. We can try out how it works in Subnero Modems using some examples.
+It's good to have a basic understanding of how baseband signals are created and their frequency content. We can try out how it works in Subnero Modems using some examples.
 
 We shall use Binary Phase Shift Keying (BPSK) for this exercise.
 
@@ -118,16 +118,17 @@ The default modem parameters are set as follows to achieve this.
   nc = 1024
 ```
 
-`phy.dc0=85` shifts the center by approximately `2000Hz`. Carriers go from -512 to +512 to span the band 12kHz to 36kHz. `85/512 ~= 1/6`, so the center will shift roughly by `1/6` of 12kHz = 2000Hz (the positive half band) to 26kHz from 24kHz.
+`phy.dc0=85` shifts the centre by approximately `2000Hz`. Carriers go from -512 to +512 to span the band 12kHz to 36kHz. `85/512 ~= 1/6`, so the centre will shift roughly by `1/6` of 12kHz = 2000Hz (the positive half band) to 26kHz from 24kHz.
 
 `phy[2].bw=0.5` will reduce the active carriers by half, so a bandwidth of 12kHz. Thus together, the used bandwidth will go from 20kHz to 32kHz.
 
-For Unet audio, the same settings will shift the center by 1kHz to 13kHz with a bandwidth of 6kHz. Therefore from 10kHz to 16kHz, this is seen below (plvl=-25, trigger -70, may vary for user).
+For Unet audio, the same settings will shift the centre by 1kHz to 13kHz with a bandwidth of 6kHz. Therefore from 10kHz to 16kHz, this is seen below (plvl=-25, trigger -70, may vary for user).
 
 <p align="center"><img src="../assets/img/freqBandControl/ofdm-psd.png" style="zoom:50%;"/></p>
 
+Note that if there is a frequency band to be avoided, we can position the used band to the "left" or "right" of it by adjusting `nc`, `dc0` and `bw`. Note that going far away from the ideal transducer resonance region will reduce transmission efficiency. 
 
-The usage and meaning of other parameters for OFDM is covered in other blogs (<<Reference>>).
+The usage and meaning of other parameters for OFDM is covered in other blogs (<< add Reference >>).
 
 ## FHBFSK frequency band control
 
@@ -142,13 +143,17 @@ By default you may see in the Unet audio modem
   hops = 13
 ```
 
-So it starts from 9520 Hz and goes to 9520 + 2(13-1) x 160  = 13360 Hz as seen below
+So it starts from 9520 Hz and goes to 9520 + 160 x (13-1) x 2  = 13360 Hz as seen below. 
+The effective bandwidth can be roughly taken as fstep x hops x 2.
 
 
 <p align="center"><img src="../assets/img/freqBandControl/fhbfsk-psd.png" style="zoom:50%;"/></p>
 
 
 We can alter the above parameters to use a band anywhere between 6kHz and 18kHz, which is the computationally feasible band of the Unet audio modem. 
+
+Note that just as in OFDM, if there is a frequency band to be avoided, we can position the used band to the "left" or "right" of it by adjusting `fmin`, `fstep` and `hops`.
+ 
 
 ## Control of Preamble bandwidth
 
@@ -177,15 +182,12 @@ To transmit this preamble alone (with no additional signal)
 > phy << new TxBasebandSignalReq(preamble: 3)
 ```
 
-In the diag scope, lets look at the passband PSD. With an appropriate trigger, you may get something as follows. It clearly shows the centre of 15kHz and the bandwidth of 3kHz.
+In the diag scope, let us look at the passband PSD. With an appropriate trigger, you may get something as follows. It clearly shows the centre of 15kHz and the bandwidth of 3kHz.
 
 <p align="center"><img src="../assets/img/freqBandControl/preamble.png" style="zoom:50%;"/></p>
 
 The user can also generate and set custom preambles. 
 
-## Excluding a band in OFDM
-
-(TBD)
 
 ## Conclusion
 
