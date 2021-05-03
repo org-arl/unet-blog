@@ -16,7 +16,7 @@ An underwater acoustic modem essentially sends out sound signals underwater to t
 
 For readers using Unet audio, the centre frequency C = 12 kHz, the complex baseband rate R = 12000 and the total bandwidth B = 12 kHz. So it goes from 6 kHz to 18 kHz.
 
-For readers using a UnetStack-based modem such as Subnero [M25M series](https://subnero.com/products/modem.html) modems, the fundamental centre frequency C = 24 kHz. The baseband complex signals are clocked out via the DAC (Digital to Analog Converter) at the rate of R = 24000 samples/s, which translates to a total bandwidth of B = 24 kHz (we shall omit the details of wireless communication theory in this blog). So the band goes from 12 kHz to 36 kHz. 
+For readers using a UnetStack-based modem such as Subnero [M25M series](https://subnero.com/products/modem.html) modems, the fundamental centre frequency C = 24 kHz. The baseband complex signals are clocked out via the DAC (Digital to Analog Converter) at the rate of R = 24000 samples/s, which translates to a total bandwidth of B = 24 kHz (we shall omit the details of wireless communication theory in this blog). So the band goes from 12 kHz to 36 kHz. However, not all of this bandwidth is supported by the transducer, and so the actual usable bandwidth is typically smaller, 20 - 32 kHz (12 kHz) for the Subnero [M25M series](https://subnero.com/brochures/Subnero-Modem-Specifications-v4.0.pdf) modems.
 
 For the illustrations in this blog we shall use Unet audio mainly. Change C, R and B according to the modem applicable to the reader.
 
