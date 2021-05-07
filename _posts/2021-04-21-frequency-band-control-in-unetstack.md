@@ -125,8 +125,7 @@ The default modem parameters are set as follows to achieve this.
   nc = 1024
 ```
 
-`phy.dc0=85` shifts the center by approximately 2000 Hz. Carriers go from -512 to +512 to span the band from 12 kHz to 36 kHz. 85/512 ~= 1/6, so the center will shift roughly by 1/6 of 12 kHz = 2000 Hz (
-the positive half band) to 26 kHz from 24 kHz.
+`phy.dc0=85` shifts the center by approximately 2000 Hz. Carriers go from -512 to +512 to span the band from 12 kHz to 36 kHz. *85/512 ~= 1/6*, so the center will shift roughly by 1/6 of 12 kHz = 2000 Hz (the positive half band) to 26 kHz from 24 kHz.
 
 
 `phy[2].bw = 0.5` will reduce the active carriers by half, so a bandwidth of 12 kHz. Thus together, the used bandwidth will go from 20kHz to 32kHz.
