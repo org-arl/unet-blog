@@ -29,7 +29,7 @@ node.heading = 45
 node.speed = 10
 ```
 
-![](../assets/img/mobility/node.jpg)
+![](assets/img/mobility/node.jpg)
 
 Most [channel models](https://unetstack.net/handbook/unet-handbook_modems_and_channel_models.html#_channel_models) in UnetStack take into account the distance between the nodes for calculating successful receptions. Hence simulating the motion of nodes in a network simulation can be very useful to measure and verify network behavior and performance more accurately.
 
@@ -51,7 +51,7 @@ n.motionModel = [
 ]
 ```
 
-![list](../assets/img/mobility/list.jpg)
+![list](assets/img/mobility/list.jpg)
 
 The utility method `MotionModel.lawnmower` helps to generate this `List` for a set of Setpoint `Map` of properties for a lawnmower pattern of motion.
 
@@ -84,7 +84,7 @@ n.motionModel = { ts ->
 
 > NOTE: Once a Setpoint is returned with its `duration` set to `null`, then it is assumed that the motion is complete and the simulator will stop calling the `motionModel` closure.
 
-![closure](../assets/img/mobility/closure.jpg)
+![closure](assets/img/mobility/closure.jpg)
 
 More complex logic can also be implemented inside such closures including communicating with other Agents and even other nodes.
 
