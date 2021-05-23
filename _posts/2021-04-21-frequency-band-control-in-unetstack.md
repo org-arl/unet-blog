@@ -16,7 +16,7 @@ An underwater acoustic modem essentially sends out sound signals underwater to t
 
 For readers using Unet audio, the center frequency *C = 12 kHz*, the complex baseband rate *R = 12000* and the total bandwidth *B = 12 kHz*. So it goes from 6 kHz to 18 kHz.
 
-For readers using a UnetStack-based modem such as Subnero [M25M series](https://subnero.com/products/modem.html) modems, the default centre frequency *C = 24 kHz*. The baseband complex signals are clocked out via the DAC (Digital to Analog Converter) at the rate of *R = 24000 samples/s*, which translates to a total bandwidth of *B = 24 kHz* (we shall omit the details of wireless communication theory in this blog). So the band goes from 12 kHz to 36 kHz. However, not all of this bandwidth is supported by the transducer, and so the actual usable bandwidth is typically smaller, 20 - 32 kHz (12 kHz) for the Subnero [M25M series](https://subnero.com/brochures/Subnero-Modem-Specifications-v4.0.pdf) modems.
+For readers using a UnetStack-based modem such as Subnero [M25M series](https://subnero.com/products/modem.html) modems, the default centre frequency *C = 24 kHz*. The baseband complex signals are clocked out via the DAC (Digital to Analog Converter) at the rate of *R = 24000 samples/s*, which translates to a total bandwidth of *B = 24 kHz* (we shall omit the details of wireless communication theory in this blog). So the band goes from 12 kHz to 36 kHz. However, not all of this bandwidth is supported by the transducer, and so the actual usable bandwidth is typically smaller, 20 - 32 kHz (12 kHz).
 
 For the illustrations in this blog post, we shall use Unet audio mainly. Change *C*, *R*, and *B* according to the modem applicable to the reader.
 
@@ -33,71 +33,6 @@ Another reason may be due to acoustic underwater channel characteristics. A most
 Multiple Access is another case where users may want to control the band used in each modem. One common multiple access method is Frequency Domain Multiple Access (FDMA). In this scheme, different modems or modem pairs may be allocated a different frequency band for transmission to avoid a collision. Simultaneous transmission-reception by two or more different and colocated modem pairs is possible using FDMA. 
 
 Sometimes, there may be a frequency band the user may want to exclude from usage, due to it being occupied by other sources, noise, etc. 
-
-## Understanding baseband signal generation, transmission 
-
-Readers may skip this section if you only want to know how to adjust FH-BFSK or OFDM parameters of a UnetStack-based modem.
-
-The purpose of this section is to provide a basic understanding of how baseband signals are created and their frequency content. We can try out how it works in UnetStack-based modems using some examples.
-
-We shall use Binary Phase Shift Keying (BPSK) for this exercise.
-
-Create a baseband complex signal as follows. A complex baseband signal point `[1,0]` refers to the real and imaginary components of one baseband sample. So in the following signal, all imaginary values are 0.
-
-```
-> s = [1,0]*12000
-[1, 0, 1, 0, 1, 0, 1, 0, 1, 0, 1 <<snip>> 0, 1, 0, 1, 0, 1, 0, 1, 0, 1, 0]
-
-```
-
-Transmit this 1s long signal (12000 samples at a sample rate of 12 kHz).
-
-```
-> phy << new TxBasebandSignalReq(signal: s)
-AGREE
-phy >> TxFrameStartNtf:INFORM[txTime:100610682 txDuration:1000416]
-phy >> TxFrameNtf:INFORM[txTime:100593099]
-```
-
-You should hear a tone sent out by the Unet audio running on the laptop.
-
-Passband PSD (power spectral density) plot from Diagnostic Scope dashboard on the UnetStack web interface shows this carrier-only signal at nearly 12 kHz.
-
-(settings used: `plvl = -25`, plot trigger set to -60, you can experiment with power and trigger to get a snapshot depending on your environment)
-
-![](../assets/img/freqBandControl/tone.png)
-
-The following will send out a 1s BPSK signal with a constellation (-1, 1) at the highest rate possible, i.e., every alternating complex sample is (+1,0) followed by (-1,0). 
-
-```
-> s = [1,0, -1, 0]*6000
-[1, 0, -1, 0, 1, 0, -1, 0, 1, 0, <<snip>> -1, 0, 1, 0, -1, 0, 1, 0, -1, 0]
-
-> phy << new TxBasebandSignalReq(signal: s)
-
-```
-
-Passband PSD plot from the Diagnostic Scope dashboard showing the main frequencies at 6 kHz and 18 kHz implying full use of the band 6 to 18 kHz.
-
-![](../assets/img/freqBandControl/bpsk-high.png)
-
-The following will send out a 1s BPSK signal at half the highest rate possible. 
-
-```
-> s = [1,0, 1, 0, -1, 0, -1, 0]*3000
-[1, 0, -1, 0, 1, 0, -1, 0, 1, 0, <<snip>> -1, 0, 1, 0, -1, 0, 1, 0, -1, 0]
-
-> phy << new TxBasebandSignalReq(signal: s)
-
-```
-
-Passband PSD plot from the diagnostics scope showing the main frequencies at 9 kHz and 15 kHz implying use of 6 kHz bandwidth
-
-![](../assets/img/freqBandControl/bpsk-low.png)
-
-Note that in the strict sense, unless a band-limiting RRC (Raised Root Cosine) filter or equivalent is used, the effective bandwidth does not reduce correctly for BPSK with random binary data. The proper implementation of BPSK or general PSK is not aimed in this blog.
-
-The above is intended to give the reader a flavor of how the frequency band used changes with signals. The reader no doubt will be interested in testing different types of modulation schemes and using the PSD scope, the frequency band used can be visualized. Surely it can also be estimated from communication theory.
 
 ## OFDM frequency band control
 
