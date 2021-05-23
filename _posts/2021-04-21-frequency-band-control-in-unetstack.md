@@ -10,29 +10,19 @@ thumbnail: "assets/img/freqBandControl/title.png"
 tags: [howto, unetstack, modems, phy, frequency, band, fdma]
 ---
 
-## The basics
-
-An underwater acoustic modem essentially sends out sound signals underwater to transmit information. The typical transmit processing takes in the user's binary data and after error correction encoding, modulates a carrier according to some modulation scheme such as OFDM or FHBFSK, the details of which the reader can understand from other sources. 
-
-For readers using Unet audio, the center frequency *C = 12 kHz*, the complex baseband rate *R = 12000* and the total bandwidth *B = 12 kHz*. So it goes from 6 kHz to 18 kHz.
-
-For readers using a UnetStack-based modem such as Subnero [M25M series](https://subnero.com/products/modem.html) modems, the default centre frequency *C = 24 kHz*. The baseband complex signals are clocked out via the DAC (Digital to Analog Converter) at the rate of *R = 24000 samples/s*, which translates to a total bandwidth of *B = 24 kHz* (we shall omit the details of wireless communication theory in this blog). So the band goes from 12 kHz to 36 kHz. However, not all of this bandwidth is supported by the transducer, and so the actual usable bandwidth is typically smaller, 20 - 32 kHz (12 kHz).
-
-For the illustrations in this blog post, we shall use Unet audio mainly. Change *C*, *R*, and *B* according to the modem applicable to the reader.
-
-The reader may wish to install Unet and Unet audio and try out some basic examples to make sure it is working. The following sections can be tried out in Unet audio.
-
 ### The need to control center frequency and bandwidth 
 
 Acoustic modems transmit physical sound waves via a transducer, typically a piezoelectric device. Such sound emitters have an ideal resonance frequency *F* and a *Q* factor of the order of 0.3. This means that the efficient region of the frequencies it can transmit centers around the resonance frequency with a bandwidth of about *0.3 x F*. *Q* may be higher or lower depending on the exact transducer.
 
-The transducer in the medium-range Subnero modem (M25M) has a transducer with a resonance close to 26 kHz. The computationally possible bandwidth is 24 kHz as mentioned earlier, but not all of this bandwidth is feasible for the transducer. Thus the recommended default bandwidth is B = 12 kHz, which is half of the total possible. Thus an effective transmit modulation scheme can be set such that the center *C = 26 kHz* and *B = 12 kHz*.
+The transducer in the Subnero [M25M series](https://subnero.com/products/modem.html) modems has a resonance close to 26 kHz. The computationally possible bandwidth is 24 kHz, but not all of this bandwidth is feasible for the transducer. Thus the recommended default bandwidth is B = 12 kHz, which is half of the total possible. Thus an effective transmit modulation scheme can be set such that the center *C = 26 kHz* and *B = 12 kHz*.
 
 Another reason may be due to acoustic underwater channel characteristics. A most basic property is that higher frequencies get absorbed more and in general have a lower transmission range. For this or other reasons related to the channel, the modem user may want to customize the frequencies transmitted by the modem. 
 
 Multiple Access is another case where users may want to control the band used in each modem. One common multiple access method is Frequency Domain Multiple Access (FDMA). In this scheme, different modems or modem pairs may be allocated a different frequency band for transmission to avoid a collision. Simultaneous transmission-reception by two or more different and colocated modem pairs is possible using FDMA. 
 
 Sometimes, there may be a frequency band the user may want to exclude from usage, due to it being occupied by other sources, noise, etc. 
+
+> The reader may wish to install Unet audio and try out some basic examples in the following sections. 
 
 ## OFDM frequency band control
 
