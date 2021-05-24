@@ -130,4 +130,4 @@ The user can also generate and set custom preambles.
 
 ## Conclusion
 
-There is a need to control the frequency band of operation in acoustic modems and we have seen how easy it is to control it in both OFDM and FHBFSK schemes in the UnetStack-based modems. For other custom modulation schemes, the user can adopt methods based on the simple BPSK illustration provided above.
+There is a need to control the frequency band of operation in acoustic modems and we have seen how easy it is to control it in both OFDM and FHBFSK schemes in the UnetStack-based modems.
