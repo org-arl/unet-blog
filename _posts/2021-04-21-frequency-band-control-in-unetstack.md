@@ -10,8 +10,6 @@ thumbnail: "assets/img/freqBandControl/title.png"
 tags: [howto, unetstack, modems, phy, frequency, band, fdma]
 ---
 
-### The need to control center frequency and bandwidth 
-
 Acoustic modems transmit physical sound waves via a transducer, typically a piezoelectric device. Such sound emitters have an ideal resonance frequency *F* and a *Q* factor of the order of 0.3. This means that the efficient region of the frequencies it can transmit centers around the resonance frequency with a bandwidth of about *0.3 x F*. *Q* may be higher or lower depending on the exact transducer.
 
 The transducer in the Subnero [M25M series](https://subnero.com/products/modem.html) modems has a resonance close to 26 kHz. The computationally possible bandwidth is 24 kHz, but not all of this bandwidth is feasible for the transducer. Thus the recommended default bandwidth is B = 12 kHz, which is half of the total possible. Thus an effective transmit modulation scheme can be set such that the center *C = 26 kHz* and *B = 12 kHz*.
