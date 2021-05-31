@@ -16,7 +16,7 @@ Since transducers are electromechanical devices, transmitting at high power clos
 
 UnetStack enabled Subnero modems that are in the [standalone configuration](https://subnero.com/products/wnc-m25mss3.html) comes installed with a depth sensor. Additional sensors like [GPS, compass](https://subnero.com/products/sensors.html) etc. are available as optional upgrades. However, a depth sensor is not a standard sensor on an [embedded configuration](https://subnero.com/products/wnc-m25mse3.html) modem which is the typical configuration you will install in an AUV. That doesn't mean that the modem cannot have access to the location information. Let us a take a look at how a user would use this information to decide when to transmit and when not to do it, from a modem that is installed in an AUV.
 
-<p align="center"><img src="./assets/img/intelligent/auv.png"></p>
+<p align="center"><img src="../assets/img/intelligent/auv.png"></p>
 <p align="center">Figure 1: AUV internal connection</p>
 
 
@@ -35,7 +35,7 @@ tell 0, 'OK'
 
 To execute this from a script, you can create a new file from the `scripts` tab in the UnetStack's web interface.
 
-<p align="center"><img src="./assets/img/intelligent/script-ui.png"></p>
+<p align="center"><img src="../assets/img/intelligent/script-ui.png"></p>
 <p align="center">Figure 2. UnetStack's web interface</p>
 
 
