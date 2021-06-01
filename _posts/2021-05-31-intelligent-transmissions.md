@@ -5,8 +5,8 @@ title: Scheduling transmissions intelligently in UnetStack enabled modems
 date: 31/5/2021
 author: Manu Ignatius
 categories: howto
-feature-img: "assets/img/intelligent/feature.jpg"
-thumbnail: "assets/img/intelligent/feature.jpg"
+feature-img: "assets/img/intelligent/intelligent.jpg"
+thumbnail: "assets/img/intelligent/intelligent.jpg"
 tags: [unetstack]
 ---
 
