@@ -10,11 +10,11 @@ thumbnail: "assets/img/intelligent/feature.jpg"
 tags: [unetstack]
 ---
 
-UnetStack powered acoustic modems provide extreme flexibility to the user to automate processes such as transmission of data frames (e.g. position updates) or signals, decision making after reception etc. enabling a hands-off approach to test various deployment scenarios. If you are using a program or a script to transmit and receive from your SDOAM, it is often good to know your location (latitude, longitude and depth), to make decisions such as when to transmit, what power level to use etc. This is not a big problem if your acoustic modem is deployed in a fixed location. However, if the modem is installed in a mobile underwater asset like an autonomous underwater vehicle (AUV), such decisions are crucial.
+UnetStack powered acoustic modems provide extreme flexibility to the user to automate processes such as transmission of data frames (e.g. position updates) or signals, decision making after reception etc. enabling a hands-off approach to test various deployment scenarios. If you are using a program or a script to transmit and receive from your software defined open architecture acoustic modem (SDOAM), it is often good to know your location (latitude, longitude and depth), to make decisions such as when to transmit, what power level to use etc. This is not a big problem if your acoustic modem is deployed in a fixed location. However, if the modem is installed in a mobile underwater asset like an autonomous underwater vehicle (AUV), such decisions are crucial.
 
 Since transducers are electromechanical devices, transmitting at high power closer to the water surface will cause cavitation that will result in a bad communication link. This may even damage the transducer. Additionally, if you are close to a receiving modem, transmitting at high power may saturate the receiver thereby causing the receiver to not being able to decipher your messages.
 
-UnetStack enabled Subnero modems that are in the [standalone configuration](https://subnero.com/products/wnc-m25mss3.html) comes installed with a depth sensor. Additional sensors like [GPS, compass](https://subnero.com/products/sensors.html) etc. are available as optional upgrades. However, a depth sensor is not a standard sensor on an [embedded configuration](https://subnero.com/products/wnc-m25mse3.html) modem which is the typical configuration you will install in an AUV. That doesn't mean that the modem cannot have access to the location information. Let us a take a look at how a user would use this information to decide when to transmit and when not to do it, from a modem that is installed in an AUV.
+UnetStack enabled Subnero modems in [standalone configuration](https://subnero.com/products/wnc-m25mss3.html) come with a depth sensor (with option to add sensors like [GPS, compass](https://subnero.com/products/sensors.html) etc.). Let us a take a look at how a user would use this information to decide when to transmit and when not to, from a modem that is installed in an AUV.
 
 <p align="center"><img src="../assets/img/intelligent/auv.png"></p>
 <p align="center">Figure 1: AUV internal connection</p>
@@ -62,25 +62,32 @@ In UnetStack, the `NODE_INFO` service provides a single place to collate node-re
 
 > NOTE: Depth is indicated as 0 (surface), -1 (1 m depth from surface), -2 (2 m depth from surface) and so on. See [Section 5.6](https://unetstack.net/handbook/unet-handbook_setting_up_small_networks.html#_node_locations_coordinate_systems) of the unet handbook for a discussion on origin, location and coordinate systems.
 
-What if your modem does not have a depth sensor and you would like to use the sensor data from your AUV? In this case, you will have to run a program in the AUV's SBC to get the location data from AUV's sensors and use Unet socket APIs to update the `node.location` parameter, periodically. A pseudo code (in python) for doing this is as follows. This can easily be adapted in C or other languages.
+What if your modem does not have a depth sensor (e.g. [embedded configuration](https://subnero.com/products/wnc-m25mse3.html)) and you would like to use the sensor data from your AUV? In this case, you will have to run a program in the AUV's SBC to get the location data from AUV's sensors and use Unet socket APIs to update the `node.location` parameter, periodically. A pseudo code (in python) for doing this is as follows. This can easily be adapted in C or other languages.
 
 ```python
-from unetpy import UnetSocket
+from unetpy import *
 import time
 
 port = 1100
 ip_address = 'modem IP'
 
 sock = UnetSocket(ip_address, port)
-while (1)
-{
+
+while get_auv_depth() < 0:
   depth = get_auv_depth()
   lat = get_auv_lat()
   lon = get_auv_lon()
-  node = modem.agentForService(Services.NODE_INFO)
+  node = sock.agentForService(Services.NODE_INFO)
   node.location=[lat, lon, depth]
   time.sleep(1)
-}
+
 sock.close()
 ```
-TODO: Verify the correctness of python pseudo code
+
+> NOTE: User will have to replace the above code with appropriate function calls to get the AUV sensor data.
+
+The above examples can easily be adapted to check the range to a receiver (using [`range`](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html) command) and adjust the transmit power level accordingly, to avoid saturating a receiver.
+
+## Conclusion
+
+While acoustic modems were traditionally used as simple devices to transmit and receive data, UnetStack enabled SDOAMs provide features to intelligently manage transmission and reception of data frames as well as signals based on various deployment scenarios.
