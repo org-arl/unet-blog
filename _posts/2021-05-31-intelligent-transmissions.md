@@ -14,7 +14,7 @@ UnetStack powered acoustic modems provide extreme flexibility to the user to aut
 
 Since transducers are electromechanical devices, transmitting at high power closer to the water surface will cause cavitation that will result in a bad communication link. This may even damage the transducer. Additionally, if you are close to a receiving modem, transmitting at high power may saturate the receiver thereby causing the receiver to not being able to decipher your messages.
 
-UnetStack enabled Subnero modems in [standalone configuration](https://subnero.com/products/wnc-m25mss3.html) come with a depth sensor (with option to add sensors like [GPS, compass](https://subnero.com/products/sensors.html) etc.). Let us take a look at how a user would use this information to decide when to transmit and when not to, from a modem that is installed in an AUV.
+Some SDOAMs like the Subnero modems in [standalone configuration](https://subnero.com/products/wnc-m25mss3.html) come with a depth sensor (with the option to add more sensors like [GPS, compass](https://subnero.com/products/sensors.html) etc.). Let us take a look at how a user would use this information to decide when to transmit and when not to, from a modem that is installed in an AUV.
 
 <p align="center"><img src="../assets/img/intelligent/auv.png"></p>
 <p align="center">Figure 1: AUV internal connection</p>
@@ -60,7 +60,7 @@ In UnetStack, the `NODE_INFO` service provides a single place to collate node-re
 }
 ```
 
-> NOTE: Depth is indicated as 0 (surface), -1 (1 m depth from the surface), -2 (2 m depth from the surface), and so on. See [Section 5.6](https://unetstack.net/handbook/unet-handbook_setting_up_small_networks.html#_node_locations_coordinate_systems) of the unet handbook for a discussion on origin, location, and coordinate systems.
+> NOTE: Depth is indicated as 0 (at water surface), -1 (1 m below the water surface), -2 (2 m below the water surface), and so on. See [Section 5.6](https://unetstack.net/handbook/unet-handbook_setting_up_small_networks.html#_node_locations_coordinate_systems) of the unet handbook for a discussion on origin, location, and coordinate systems.
 
 What if your modem does not have a depth sensor (e.g. [embedded configuration](https://subnero.com/products/wnc-m25mse3.html)) and you would like to use the sensor data from your AUV? In this case, you will have to run a program in the AUV's SBC to get the location data from AUV's sensors and use Unet socket APIs to update the `node.location` parameter, periodically. A pseudo-code (in python) for doing this is as follows. This can easily be adapted in C or other languages.
 
