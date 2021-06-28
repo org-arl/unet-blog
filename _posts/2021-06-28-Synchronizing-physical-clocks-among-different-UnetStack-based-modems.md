@@ -33,7 +33,7 @@ There are two major problems to be addressed to synchronize clocks among differe
 
 # Compensating for clock offset
 
-The `Ranging` agent in UnetStack running on the modem generates the clock offset information based on the message exchanges when range measurement is performed on the modem that initiates ranging. The clock offset between the two modems is populated in the ranging agent's parameter `ranging[host('B')].offset`. Where `host('B')` is the node address of modem B. More details on this can be found ![here](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html). 
+The `Ranging` agent in UnetStack running on the modem generates the clock offset information based on the message exchanges when range measurement is performed on the modem that initiates ranging. The clock offset between the two modems is populated in the ranging agent's parameter `ranging[host('B')].offset`. Where `host('B')` is the node address of modem B. More details on this can be found [here](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html). 
 
 Once, the clock offset is known, it can be used to adjust the time locally to synchronize the physical time (`phy.time`). However, if a low-drift clock is not used, there is a possibility that the clocks tick at different rates, and clocks drift faster. Let us take a look at how we can compensate for the clock drift next.
 
