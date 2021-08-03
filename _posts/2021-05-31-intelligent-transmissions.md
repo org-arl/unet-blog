@@ -62,7 +62,7 @@ In UnetStack, the `NODE_INFO` service provides a single place to collate node-re
 
 > NOTE: Depth is indicated as 0 (at water surface), -1 (1 m below the water surface), -2 (2 m below the water surface), and so on. See [Section 5.6](https://unetstack.net/handbook/unet-handbook_setting_up_small_networks.html#_node_locations_coordinate_systems) of the unet handbook for a discussion on origin, location, and coordinate systems.
 
-What if your modem does not have a depth sensor (e.g. [embedded configuration](https://subnero.com/products/wnc-m25mse3.html)) and you would like to use the sensor data from your AUV? In this case, you will have to run a program in the AUV's SBC to get the location data from AUV's sensors and use Unet socket APIs to update the `node.location` parameter, periodically. A pseudo-code (in python) for doing this is as follows. This can easily be adapted in C or other languages.
+What if your modem does not have a depth sensor (e.g. [embedded configuration](https://subnero.com/products/wnc-m25mse3.html)) and you would like to use the sensor data from your AUV? In this case, you will have to run a program in the AUV's SBC to get the location data from AUV's sensors and use Unet socket APIs to update the `node.location` parameter, periodically. A pseudo-code (in python) for doing this is as follows. 
 
 ```python
 from unetpy import *
@@ -71,17 +71,63 @@ import time
 port = 1100
 ip_address = 'modem IP'
 
+# Open a unet socket connection to modem
 sock = UnetSocket(ip_address, port)
 
+# Get the agent which provide NODE_INFO service
+node = sock.agentForService(Services.NODE_INFO)
+
+# Update depth when available
 while get_auv_depth() < 0:
   depth = get_auv_depth()
   lat = get_auv_lat()
   lon = get_auv_lon()
-  node = sock.agentForService(Services.NODE_INFO)
   node.location=[lat, lon, depth]
   time.sleep(1)
 
+# Close the socket
 sock.close()
+```
+
+The above code can easily be adapted in other languages such as C. A pseudo-code (in C) for the same is as follows:
+
+```c
+float depth;
+float lat;
+float lon;
+unetsocket_t sock;
+fjage_aid_t node;
+int port = 1100
+const char* ip_address = 'modem IP'
+
+// Open a unet socket connection to modem
+sock = unetsocket_open(ip_address, port);
+fjage_gw_t gw = unetsocket_get_gateway(sock);
+
+// Get the agent which provides SHELL service
+fjage_aid_t aid = unetsocket_agent_for_service(sock, "org.arl.fjage.shell.Services.SHELL");
+
+// Update depth when available
+while (get_auv_depth() < 0) {
+  // NOTE: floattostring(), get_auv_depth(), get_auv_lat(), get_auv_lon() to be implemented by user
+  depth = floattostring(get_auv_depth()); 
+  lat = floattostring(get_auv_lat());
+  lon = floattostring(get_auv_lon());
+  char* cmd;
+  asprintf(&cmd, "node.location=[%s, %s, %s]", slat, slon, sdepth);
+  fjage_msg_t msg = fjage_msg_create("org.arl.fjage.shell.ShellExecReq", FJAGE_REQUEST);
+  fjage_msg_set_recipient(msg, aid);
+  fjage_msg_add_string(msg, "cmd", cmd);
+  fjage_msg_t rsp = fjage_request(gw, msg, 1000);
+  if (rsp != NULL) fjage_msg_destroy(rsp);
+  free(cmd);
+  sleep(1);
+}
+
+fjage_aid_destroy(aid);
+
+// Close the socket
+unetsocket_close(sock);
 ```
 
 > NOTE: The user will have to replace the above code with appropriate function calls to get the AUV sensor data.
