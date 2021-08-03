@@ -92,6 +92,8 @@ sock.close()
 The above code can easily be adapted in other languages such as C. A pseudo-code (in C) for the same is as follows:
 
 ```c
+#define BUF_SIZE 12
+
 unetsocket_t sock;
 fjage_aid_t node;
 int port = 1100
@@ -106,14 +108,15 @@ fjage_aid_t aid = unetsocket_agent_for_service(sock, "org.arl.fjage.shell.Servic
 
 // Update depth when available
 while (get_auv_depth() < 0) {
-  
-  N = 10; // maximum number of characters to retain in float
-  char depth[N], lat[N], lon[N];
 
-  // NOTE: floattostring(), get_auv_depth(), get_auv_lat(), get_auv_lon() to be implemented by user
-  depth = floattostring(get_auv_depth());
-  lat = floattostring(get_auv_lat());
-  lon = floattostring(get_auv_lon());
+  // NOTE: get_auv_depth(), get_auv_lat(), get_auv_lon() to be implemented by user
+  char depth[BUF_SIZE] = {0};
+  char lat[BUF_SIZE] = {0};
+  char lon[BUF_SIZE] = {0};
+  snprintf(depth, BUF_SIZE, "%f", get_auv_depth());
+  snprintf(lat, BUF_SIZE, "%f", get_auv_lat());
+  snprintf(lon, BUF_SIZE, "%f", get_auv_lon());
+  
   char* cmd;
   asprintf(&cmd, "node.location=[%s, %s, %s]", slat, slon, sdepth);
   fjage_msg_t msg = fjage_msg_create("org.arl.fjage.shell.ShellExecReq", FJAGE_REQUEST);
@@ -122,8 +125,6 @@ while (get_auv_depth() < 0) {
   fjage_msg_t rsp = fjage_request(gw, msg, 1000);
   if (rsp != NULL) fjage_msg_destroy(rsp);
   free(cmd);
-  sleep(1);
-  
 }
 
 fjage_aid_destroy(aid);
