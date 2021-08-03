@@ -106,10 +106,11 @@ fjage_aid_t aid = unetsocket_agent_for_service(sock, "org.arl.fjage.shell.Servic
 
 // Update depth when available
 while (get_auv_depth() < 0) {
+  
+  N = 10; // maximum number of characters to retain in float
+  char depth[N], lat[N], lon[N];
+
   // NOTE: floattostring(), get_auv_depth(), get_auv_lat(), get_auv_lon() to be implemented by user
-  char depth[10];
-  char lat[10];
-  char lon[10];
   depth = floattostring(get_auv_depth());
   lat = floattostring(get_auv_lat());
   lon = floattostring(get_auv_lon());
@@ -122,6 +123,7 @@ while (get_auv_depth() < 0) {
   if (rsp != NULL) fjage_msg_destroy(rsp);
   free(cmd);
   sleep(1);
+  
 }
 
 fjage_aid_destroy(aid);
