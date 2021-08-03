@@ -92,9 +92,6 @@ sock.close()
 The above code can easily be adapted in other languages such as C. A pseudo-code (in C) for the same is as follows:
 
 ```c
-float depth;
-float lat;
-float lon;
 unetsocket_t sock;
 fjage_aid_t node;
 int port = 1100
@@ -110,7 +107,10 @@ fjage_aid_t aid = unetsocket_agent_for_service(sock, "org.arl.fjage.shell.Servic
 // Update depth when available
 while (get_auv_depth() < 0) {
   // NOTE: floattostring(), get_auv_depth(), get_auv_lat(), get_auv_lon() to be implemented by user
-  depth = floattostring(get_auv_depth()); 
+  char depth[10];
+  char lat[10];
+  char lon[10];
+  depth = floattostring(get_auv_depth());
   lat = floattostring(get_auv_lat());
   lon = floattostring(get_auv_lon());
   char* cmd;
