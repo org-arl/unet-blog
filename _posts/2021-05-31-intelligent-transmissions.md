@@ -118,7 +118,7 @@ while (get_auv_depth() < 0) {
   snprintf(lon, BUF_SIZE, "%f", get_auv_lon());
   
   char* cmd;
-  asprintf(&cmd, "node.location=[%s, %s, %s]", slat, slon, sdepth);
+  asprintf(&cmd, "node.location=[%s, %s, %s]", lat, lon, depth);
   fjage_msg_t msg = fjage_msg_create("org.arl.fjage.shell.ShellExecReq", FJAGE_REQUEST);
   fjage_msg_set_recipient(msg, aid);
   fjage_msg_add_string(msg, "cmd", cmd);
