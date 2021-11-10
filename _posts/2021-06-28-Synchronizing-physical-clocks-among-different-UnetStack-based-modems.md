@@ -173,5 +173,5 @@ m = (phytimeB[noOfMeasurments-1] - phytimeB[0])/(phytimeA[noOfMeasurments-1] - p
 ```
 Now based on the computed slope (m), the modem A or modem B's `clockCalib` parameter can be set accordingly to match the other modem's clock as explained in previous section. 
 
-Note the parameters used in the all the above code snippets such as `interval` and `noOfMeasurements` can be varied as per the user's need. The code snippets shown in this blog is to serve as a reference only.
+> NOTE: The parameters used in all the code snippets shown in this blog such as `interval` and `noOfMeasurements` can be varied as per the user's need. The code snippets are to serve as reference only.
 
