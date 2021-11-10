@@ -10,7 +10,7 @@ thumbnail: "assets/img/stdma/stdma-unet.jpg"
 tags: [howto, time synchronization, clock drift, accurate clocks, clock offset]
 ---
 
-All UnetStack enabled modems have a Real-time Clock (RTC) to keep track of time using a precise quartz crystal. A separate microsecond counter in software is also maintained and is provided by `phy.time` parameter.
+All UnetStack enabled modems have a Real-time Clock (RTC) to keep track of modem's system time using a precise quartz crystal. A separate microsecond counter is provided by `phy.time` for `Physical` agent in UnetStack.
 
 Although this frequency of the crystal quartz is reasonably stable, it is impossible to guarantee that all the crystals of different computers will operate at _exactly_ the same frequency. A crystal oscillator (XO) is an electronic circuit that uses the mechanical resonance of a vibrating piezoelectric crystal to create an electrical signal with the desired frequency. The resonant frequency depends on size, shape, elasticity, and the speed of sound in the material. Due to manufacturing tolerances, these properties are not identical across manufactured crystals, and so different crystals designed for the same nominal frequency produce slightly different frequency signals. Furthermore, as the operating temperature of the crystal changes, its material properties change, and so does its resonant frequency. These differences in frequency are tiny, but over long periods, the differences accumulate and cause the clocks to drift.
 
