@@ -10,14 +10,14 @@ thumbnail: "assets/img/stdma/stdma-unet.jpg"
 tags: [howto, time synchronization, clock drift, accurate clocks, clock offset]
 ---
 
-All UnetStack enabled modems have a “real-time clock” to keep track of time using a precise quartz crystal. Based on the defined frequency of this quartz, software running on the modem can precisely monitor the internal physical time given by parameter `phy.time` in the modem. 
+All UnetStack enabled modems have a Real-time Clock (RTC) to keep track of modem's system time. A separate microsecond counter is provided by `phy.time` for `Physical` agent in UnetStack.
 
-Although this frequency of the crystal quartz is reasonably stable, it is impossible to guarantee that all the crystals of different computers will operate at _exactly_ the same frequency. A crystal oscillator (XO) is an electronic circuit that uses the mechanical resonance of a vibrating piezoelectric crystal to create an electrical signal with the desired frequency. The resonant frequency depends on size, shape, elasticity, and the speed of sound in the material. Due to manufacturing tolerances, these properties are not identical across manufactured crystals, and so different crystals designed for the same nominal frequency produce slightly different frequency signals. Furthermore, as the operating temperature of the crystal changes, its material properties change, and so does its resonant frequency. These differences in frequency are tiny, but over long periods, the differences accumulate and cause the clocks to drift.
+Although the clock (i.e., the hardware source of `phy.time`) is reasonably stable, it is impossible to guarantee that all the crystals of different computers will operate at _exactly_ the same frequency. A crystal oscillator (XO) is an electronic circuit that uses the mechanical resonance of a vibrating piezoelectric crystal to create an electrical signal with the desired frequency. The resonant frequency depends on size, shape, elasticity, and the speed of sound in the material. Due to manufacturing tolerances, these properties are not identical across manufactured crystals, and so different crystals designed for the same nominal frequency produce slightly different frequency signals. Furthermore, as the operating temperature of the crystal changes, its material properties change, and so does its resonant frequency. These differences in frequency are tiny, but over long periods, the differences accumulate and cause the clocks to drift.
 
 There are different oscillator types that exist to chose from including OCXOs, TCXOs, and XOs. The crystal controlled clock oscillator (XO) is a device that achieves its temperature stability from the quartz crystal's inherent temperature stability.
 A temperature compensated crystal oscillator (TCXO) is a crystal oscillator with a temperature-sensitive reactance circuit in its oscillation loop to compensate the frequency-temperature characteristics inherent to the crystal unit. An OCXO is a crystal oscillator which is temperature controlled by a mini internal oven. This type of oscillator has a temperature controlling circuit to maintain a consistent temperature of the crystal and other key components. OCXOs are typically used when greater temperature stability is required. While this type of oscillator has a tenfold improvement over a TCXO for temperature vs. frequency stability, the OCXO tends to be higher in price and consumes more power.
 
-> For example, UnetStack-based Subnero modems can be optionally upgraded to use [low-drift clocks](https://subnero.com/products/sensors.html). Such clocks provide much better time stability and are suitable for such applications where time synchronization over long periods of time is critical.
+> NOTE: For example, UnetStack-based Subnero modems can be optionally upgraded to use [low-drift clocks](https://subnero.com/products/sensors.html). Such clocks provide much better time stability and are suitable for such applications where time synchronization over long periods of time is critical.
 
 Now, when there is a possibility of clock drift, it is not easy for having multiple spatially separated modems with synchronized physical clocks. So the question arises, if the synchronization of physical clocks across different UnetStack enabled modems is needed, how do we synchronize them with each other?
 
@@ -30,6 +30,8 @@ There are two major problems to be addressed to synchronize clocks among differe
 2. Modem clocks tick at different rates causing a *clock drift* as shown in figure below:
 
 ![Clock drift between two modems](../assets/img/clock/clock-drift.png)
+
+> NOTE: The 20% clock drift shown in the figure is for illustration purpose only. In practice, the clock drift is expected to be much smaller in parts per million.
 
 # Compensating for clock offset
 
@@ -132,4 +134,46 @@ phy.clockCalib = mB/mA
 
 ```
 
-Note the parameters used in the above code snippet such as `interval` and `noOfMeasurements` can be varied as per the user's need. The code snippet shown in this blog is to serve as a reference only.
+> NOTE: The RTCs are long-term synchronized through mechanism such as Network Time Protocol (NTP) and therefore provide stability for clock calibration.
+
+# Calibrating clock without relying on RTC
+
+In the earlier section we relied on NTP to provide stability to the RTC clock which was used as a reference for clock calibration. However, in cases where there is no such means (e.g. NTP) to provide long-term synchronization for RTC, we can measure and compare the clocks of the two modems directly. In this section, we describe through a simple python script on how one can achieve this. 
+
+_On user's machine_:
+
+```python
+import time
+from unetpy import *
+
+# open a UnetSocket to modem A
+modemA = UnetSocket("modemA-IP", 1100)
+
+# open a UnetSocket to modem B
+modemB = UnetSocket("modemB-IP", 1100)
+
+# get physical agent ids on modem A and B
+phyA = modemA.agent("phy")
+phyB = modemB.agent("phy")
+
+# measure phy.time on both modem A and modem B
+
+interval = 3600 # 1 hour in seconds
+
+noOfMeasurements = 24
+
+phytimeA = []
+phytimeB = []
+
+for i in range(noOfMeasurements):
+	phytimeA.append(phyA.time)
+	phytimeB.append(phyB.time)
+	time.sleep(interval)
+
+# compute slope based on measurements
+m = (phytimeB[noOfMeasurments-1] - phytimeB[0])/(phytimeA[noOfMeasurments-1] - phytimeA[0]) # slope
+```
+Now based on the computed slope (m), we can set either modem A or modem B's `clockCalib` parameter to match the clock rate of the other modem. Therefore, we can either set `phy.clockCalib = m` on modem A (or) set `phy.clockCalib = 1/m` on modem B to match the clock rates.
+
+> NOTE: The parameters used in all the code snippets shown in this blog such as `interval` and `noOfMeasurements` can be varied as per the user's need. The code snippets are to serve as reference only.
+
