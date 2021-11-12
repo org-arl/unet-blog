@@ -171,7 +171,7 @@ for i in range(noOfMeasurements):
 	time.sleep(interval)
 
 # compute slope based on measurements
-m = (phytimeB[noOfMeasurments-1] - phytimeB[0])/(phytimeA[noOfMeasurments-1] - phytimeA[0]) // slope
+m = (phytimeB[noOfMeasurments-1] - phytimeB[0])/(phytimeA[noOfMeasurments-1] - phytimeA[0]) # slope
 ```
 Now based on the computed slope (m), we can set either modem A or modem B's `clockCalib` parameter to match the clock rate of the other modem. Therefore, we can either set `phy.clockCalib = m` on modem A (or) set `phy.clockCalib = 1/m` on modem B to match the clock rates.
 
