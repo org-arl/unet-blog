@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: Project Sabine - Low-cost DIY underwater modem using COTS components and Unet audio
+title: Low-cost DIY underwater modem using COTS components and Unet audio
 date: 20/9/2022
 author: Manu Ignatius, Sukanta K. Hazra
 categories: howto
@@ -11,26 +11,55 @@ tags: [howto, unetaudio, unetstack, modems, phy, janus, sabine]
 ---
 
 ## Introduction
-A true Software-Defined Open Architecture Modem (SDOAM) can easily be extended to run on various hardware platforms with minimal efforts to address different use cases. In the article titled [Converting your laptop into a JANUS modem using Unet audio](https://blog.unetstack.net/converting-your-laptop-into-a-janus-modem-using-unetaudio), we saw how UnetStack, a true SDOAM, can be used to turn your laptop into an acoustic modem. In this article, we will show how you can build a low-cost, DIY underwater acoustic modem using only COTS components and Unet audio. The goal of this article is to demonstrate the approach and basic steps one can use to build an acoustic modem using Unet audio We encourage the user to use the principles illustrated to build other versions that improves the build quality or performance.
+In the article titled [Converting your laptop into a JANUS modem using Unet audio](https://blog.unetstack.net/converting-your-laptop-into-a-janus-modem-using-unetaudio), we saw how UnetStack, a Software-Defined Open Architecture Modem (SDOAM), can be used to turn your laptop into an acoustic modem. A true SDOAM can easily be extended to run on various hardware platforms with different types of physical layers (e.g. Acoustic, optical, RF) with minimal efforts to address different use cases. In this article, we will show how you can build a low-cost (< USD 300) , DIY underwater acoustic modem using only Commercial Off-The-Shelf (COTS) components and Unet audio. The goal of this article is to demonstrate the approach and basic steps one can use to build a low cost acoustic modem using Unet audio. We encourage the user to build on these principles to build create versions of the DIY modem.
 
-## Motivation and proposed solution
-Most commercially available modems are beyond the reach of a technology enthusiast or a hobbyist underwater roboticist, due to their price point. However, applications such as DIY AUVs (e.g. [The Singapore AUV Challenge](https://sauvc.org/)), low-cost swarms, etc. need low-cost underwater acoustic modems to realize their true potential. While there have been projects like the [AHOI modem](https://dl.acm.org/doi/10.1145/3376921), [SeaModem](https://ieeexplore.ieee.org/document/7271721), [Seatrac](https://ieeexplore.ieee.org/document/7271578), all of them has a hardware component associated with it. This means the user needs to spend time building the hardware, which can be cumbersome and time-consuming. Adding additional hardware to a micro-AUV can be challenging due to space and power limitations. Ensuring long-term support for these can also be tricky, depending on the author's prior commitments.
+## Motivation and Approach
+Most commercially available modems are beyond the reach of a technology enthusiast or a hobbyist underwater roboticist, due to their price point. However, applications such as DIY underwater vehicles (e.g. for [The Singapore AUV Challenge](https://sauvc.org/)), low-cost swarms, etc. need low-cost underwater modems to realize their true potential. While there have been projects like the [AHOI modem](https://dl.acm.org/doi/10.1145/3376921), [SeaModem](https://ieeexplore.ieee.org/document/7271721), [Seatrac](https://ieeexplore.ieee.org/document/7271578), all of them has a hardware component associated with it. This means the user needs to spend time building the hardware, which can be cumbersome and time-consuming. Adding additional hardware to a micro-AUV can be challenging due to space and power limitations. Ensuring long-term support for these can also be tricky, depending on the creator's other commitments.
 
-All of the above constitute a large barrier of entry for anyone looking to use one of the existing projects to build on.
+These are some of the challenges for anyone looking to use one of the existing projects to build on.
 
-Project Sabine addresses these by using Unet audio in a commonly available hardware platform such as Raspberry Pi and using its sound card to transmit and receive using an underwater speaker and mic. This approach allows the user to run Unet audio in their single board computer (SBC) thereby avoiding the need for a dedicated digital hardware. The analog electronics can then be chosen based on the application. By using UnetStack, the user gets access to all the developer tools and the extendability to build their own protocols on top of the acoustic modem. Long term support is guaranteed due to the use of UnetStack community edition.
+Unet audio being a true SDOAM addresses these by using a commonly available hardware platform such as Raspberry Pi and using its sound card to transmit and receive using an underwater speaker and mic. This approach allows the user to run Unet audio in their single board computer (SBC) thereby avoiding the need for dedicated digital hardware (e.g. SBC, FPGA). The audio amplifiers can then be chosen based on the use case. By using Unet audio, the user gets access to all the developer tools and the extendability to build their protocols on top of the DIY modem. Long term support is guaranteed since UnetStack is actively developed by both academia ([ARL](http://arl.nus.edu.sg/)) and industry ([Subnero](https://subnero.com/)).
 
-## Hardware selection
+## Overview of the DIY modem
 
-The overview of the modem architecture is as shown in figure 1.
+A modem has three main functions
 
-TODO: Image
+1. Convert user-given data to signals and transmit it to the receiver.
+2. Decode the signals received at the receiver to recover the original data.
+3. Configure various parameters to get the best communication performance.
 
+To transmit a message, the user can use the various interfaces provided by Unet audio such as the web interface, shell, or various APIs in a variety of computer languages such as Java, Groovy, Python, C, Julia, Javascript, etc. The same interfaces can be used to configure various communication parameters to achieve the best performance in a given environment.
+
+> NOTE: UnetStack refers to a collection of technologies for extending networks underwater of which Unet audio is one of the components. An interested user may refer to the [Unet handbook](https://unetstack.net/handbook/unet-handbook_unet_basics.html) to gain a deeper understanding of it.
+
+The user-provided data is then converted to passband signals in Unet audio. This includes transport and network layer processing (as required), fragmentation and reassembly, forward error correction (FEC), modulation, and demodulation depending on the communication scheme used. The passband signal (digital) is then converted to an analog signal using a sound card and passed through a power amplifier before being fed to the transducer/underwater speaker for transmission through the medium.
+
+On the receive side, the signal is received using a hydrophone/underwater mic, converted to a digital signal using a sound card's mic in port, and digitally processed to detect and decode the data from the signal using Unet audio. On successful decoding, the data is passed back to the user. If the decoding fails, an appropriate notification is provided to the user.
+
+So the main hardware components of an SDOAM will be an SBC to run Unet audio, a sound card (with speaker out and mic in), audio amplifiers, and speaker and mic. The following sections list the hardware chain for both the transmit and receive chains.
+
+### Transmit chain
+
+Connect the speaker output from the sound card (either a discrete or USB sound card connected to an SBC) to the amplifier module input. The amplifier output is then connected to the underwater speaker. Depending on the amplifier used, it can be powered using the USB output of the RPi or a 12V battery.
+
+<p align="center"><img width="70%" src="../assets/img/sabine/txc.png"/></p>
+<p align="center"><em>Transmit chain</em></p>
+
+### Receive chain
+
+For the receiver side, the underwater microphone is connected directly to the mic in of the soundcard of the SBC.
+
+<p align="center"><img width="70%" src="../assets/img/sabine/rxc.png"/></p>
+<p align="center"><em>Receive chain</em></p>
+
+
+
+## Hardware Selection
 
 
 ### Digital Hardware
 
-One of the most important hardware component of an SDOAM is the digital hardware that runs the software. We have selected a Raspberry Pi (3b+) due to its popularity, low cost, ease of availability and community support to be the digital hardware to run Unet audio. A USB sound card connected to the Rapberry Pi is used as the data acquisition system. The speaker output acts as the digital-to-analog (DAC) convertor and the mic (or line in? TODO) in acts as the analog-to-digital convertor (ADC). Based on the sound cards specification, our modems bandwidth will be from TODO to TODO.
+One of the most important hardware components of an SDOAM is the digital hardware that runs Unet audio. We have selected a Raspberry Pi (3b+) due to its popularity, low cost, ease of availability, and community support to be the digital hardware to run Unet audio. This can easily be swapped with any similar SBCs that have an arm processor running Linux on it. A USB sound card connected to the Raspberry Pi is used as the data acquisition system.
 
 > NOTE: The internal audio output was not used as it is disabled by default during setup.
 
@@ -44,12 +73,12 @@ One of the most important hardware component of an SDOAM is the digital hardware
 
 ### Transmit Chain
 
-The next step is the selection of the power amplifier and the transducer. In order to keep the costs down, we have decided to use an underwater speaker [JH001](http://www.jiaxiangwang.com/spen/product.htm) along with a COTS power amplifier.
+The next step is the selection of the amplifier and the transducer/underwater speaker. To keep the costs down, we have chosen an underwater speaker [JH001](http://www.jiaxiangwang.com/spen/product.htm) for the transmitter.
 
 <p align="center"><img width="50%" src="../assets/img/sabine/tx.png"/></p>
 <p align="center"><em>JH001 Underwater Speaker</em></p>
 
-Since the JH001 can output up to 30 W of power, we have used both TODO and TODO with success. Most standard TDA series (e.g. TDA2030) mono amplifiers should work fine. The user may choose the power amplifier depending on your application.
+Most standard TDA series (e.g. TDA2030) mono amplifiers should work fine as the audio amplifier. We have selected the TDA2030A for use with our DIY setup. The user may choose an amplifier that meets your application.
 
 
 
@@ -60,25 +89,25 @@ Since the JH001 can output up to 30 W of power, we have used both TODO and TODO 
 
 ### Receive Chain
 
-For the input chain, we use an electret microphone connected to the sound card.
+For the receive chain, we have used a simple electret microphone, waterproofed with household materials, connected to the sound card to receive signals.
 
 <p align="center"><img width="50%" src="../assets/img/sabine/mic.png"/></p>
 <p align="center"><em>Electret Microphones</em></p>
 
-Before deploying these underwater, we will need to waterproof them. The items we need to waterproof the mic are as follows.
+The items used to waterproof the mic are listed below:
 
-1. Chair bush: To be used as the backing for the mics. choose a size that fits the electret microphone tightly. Usually available in local hardware stores.
+1. Chair bush: To be used as the backing for the mics. Choose a size that fits the electret microphone tightly. These are usually available in local hardware stores.
 2. Cling wrap: For waterproofing the front of the electret microphone. The thinner the better.
 3. Glue gun with glue stick: Used for waterproofing.
 4. 3.5mm mono audio jack: Connector for the sound card. If unable to find a mono jack, we can use a standard stereo jack as well. Either use only the left channel or short both the channels. Both schemes work.
-5. Wires: To connect the mic to sound card.
+5. Wires: To connect the mic to the sound card.
 
 <p align="center"><img width="70%" src="../assets/img/sabine/comp.png"/></p>
 <p align="center"><em>Components for waterproofing</em></p>
 
 ### Waterproofing
 
-One of the terminals of the electret microphone is connected to the case, and is the ground terminal. Connect that to the audio jack ground. The other terminal is output and is connected to the other two (or one in case of mono) connectors of the audio jack.
+One of the terminals of the electret microphone is connected to the case and is the ground terminal. Connect that to the audio jack ground. The other terminal is output and is connected to the other two (or one in case of mono) connectors of the audio jack.
 
 <p align="center"><img width="40%" src="../assets/img/sabine/connect.png"/></p>
 <p align="center"><em>Mic pinout</em></p>
@@ -88,9 +117,9 @@ One of the terminals of the electret microphone is connected to the case, and is
 
 
 
-To waterproof the microphone, use a chair bush of size that fits tightly around it. Make a hole in the closed part of the bush just large enough for the wire. Put the wire through the hole and then pour a sufficient quantity of hot glue to create a good seal and push in the microphone. The microphone should be pushed in in a way that it protrudes out a bit, just enough for the black diaphram at the front to protrude out a bit from the bush. Let the hot glue dry.
+To waterproof the microphone, use a chair bush of size that fits tightly around it. Make a hole in the closed part of the bush just large enough for the wire. Put the wire through the hole and then pour a sufficient quantity of hot glue to create a good seal and push in the microphone. The microphone should be pushed in in a way that it protrudes out a bit, just enough for the black diaphragm at the front to protrude out a bit from the bush. Let the hot glue dry.
 
-Next wrap some cling wrap to waterproof the front portion. You can pour some hot glue on the outside surface of the bush and then wrap the cling wrap over the front of the microphone making sure that there is no gap between the cling wrap and the black diaphragm. If there is air gap, then the performance might be affected.
+Next, wrap some cling wrap to waterproof the front portion. You can pour some hot glue on the outside surface of the bush and then wrap the cling wrap over the front of the microphone making sure that there is no gap between the cling wrap and the black diaphragm. If there is an air gap, then the performance might be affected.
 
 <p align="center"><img width="50%" src="../assets/img/sabine/hydrophone1.png"/></p>
 <p align="center"><img width="50%" src="../assets/img/sabine/hydrophone2.png"/></p>
@@ -98,35 +127,21 @@ Next wrap some cling wrap to waterproof the front portion. You can pour some hot
 
 
 
-## Putting them all together
-
-### Transmit chain
-
-Connect the speaker output from the USB audio adapter to the amplifier module input and the amplifier output to the underwater speaker. Depending on the power amplifier used, it can be powered using the USB output of the RPi or a 12V motorcycle battery.
-
-<p align="center"><img width="70%" src="../assets/img/sabine/txc.png"/></p>
-<p align="center"><em>Transmit chain</em></p>
-
-### Receive chain
-
-The electret microphone is connected to the USB audio adapter plugged into the RPI.
-
-<p align="center"><img width="70%" src="../assets/img/sabine/rxc.png"/></p>
-<p align="center"><em>Receive chain</em></p>
 
 ### Bill of materials
 
-| Item                                    | Qty  | Cost |
-| --------------------------------------- | ---- | ---- |
-| Raspberry Pi                            | 1    |      |
-| USB sound card for RPi                  | 1    |      |
-| Power amplifier                         | 1    |      |
-| Underwater speaker                      | 1    |      |
-| Electret microphone                     | 1    |      |
-| 3.5mm audio jack                        | 2    |      |
-| Bush, glue gun, glue stick, cling wrap, | 1    |      |
+| Item                                    | Qty  | Cost (USD) |
+| --------------------------------------- | ---- | ---------- |
+| Raspberry Pi                            | 1    | 129.00     |
+| USB sound card for RPi                  | 1    | 0.87       |
+| Power amplifier                         | 1    | 0.45       |
+| Underwater speaker                      | 1    | 95.50      |
+| Electret microphone                     | 1    | 0.99       |
+| 3.5mm audio jack                        | 2    | 1.36       |
+| Bush, glue gun, glue stick, cling wrap, | 1    | < 20       |
+| __Total__                               |      | 292.72     |
 
-> NOTE: It is recommended to get more than 1 for the electret microphone, audio jacks etc. in case of damage during assembly
+> NOTE: It is recommended to get more than 1 for the electret microphone, audio jacks, etc. in case of damage during assembly
 
 ## Software installation
 
@@ -145,8 +160,8 @@ The electret microphone is connected to the USB audio adapter plugged into the R
 
 #### Audio
 
-1. Plug-in a USB Audio Card into your Raspberry Pi
-2. Power-on your Raspberry Pi
+1. Plug the USB audio card into your Raspberry Pi
+2. Power on your Raspberry Pi
 3. Ensure that the USB Audio Card is detected using `aplay -l`
 
 ```
@@ -156,7 +171,7 @@ card 1: Audio [USB Audio], device 0: USB Audio [USB Audio]
   Subdevices: 0/1
   Subdevice #0: subdevice #0
 ```
-4. Disable the RaspberyPi onboard sound card , by commenting out the line `dtparam=audio=on` in `/boot/config.txt`
+4. Disable the RaspberyPi onboard sound card, by commenting out the line `dtparam=audio=on` in `/boot/config.txt`
 
 ```
 > sudo nano /boot/config.txt
@@ -221,38 +236,91 @@ sudo ldconfig
 
 ### Run UnetStack
 
-1. Get the UnetAudio Community distribution for RaspberryPi
-2. Copy the `unet-community-3.1.0.tgz` file to the Raspberry Pi
-3. Unzip the file `tar -xvzf unet-community-pi-3.1.0.tgz`
-4. Go to the `~/unet-3.1.0` directory
-5. Run UnetAudio `bin/unet -c audio`
+1. Get the UnetAudio Community distribution for RaspberryPi from [here](https://github.com/org-arl/unet-doc/raw/master/docs/downloads/unet-community-pi-3.1.0.tgz)
+2. Copy the `unet-community-3.x.x.tgz` file to the Raspberry Pi
+3. Unzip the file `tar -xvzf unet-community-pi-3.x.x.tgz`
+4. Go to the `~/unet-3.x.x` directory
+5. Run UnetAudio using  `bin/unet -c audio`
 
-Once `Unet audio` is running, user can access the web interface by typing the IP address of your RPi on a browser.
+This will give you a command shell for the user to interact with Unet audio.
 
-## Testing and results
+## Taking it for a spin
 
-A simple test setup was created as shown below with two Raspberry Pis, one was configured as a transmitter and the other as a receiver.
+Once the Raspberry PI is set up as above, connect the various hardware components to form the transmit and receive chains. For our testing, we have one setup for transmission and one for the reception.
 
-TODO: Figure
+<p align="center"><img width="80%" src="../assets/img/sabine/modem.jpg"/></p>
+<p align="center"><em>Transmitter and Receiver Components</em></p>
 
-The following commands were used to transmit data.
+Once we have both setups ready, we need to make sure we are generating the frequencies that the hardware can transmit. If we look at the frequency response of the underwater speaker (provided by the vendor), we can see that the frequency response is from 2 kHz to 8 kHz.
+
+<p align="center"><img width="80%" src="../assets/img/sabine/freq.png"/></p>
+<p align="center"><em>Frequency response of JH001</em></p>
+
+
+
+We will need to configure Unet audio to use a frequency band within this space so that the speaker can convert the signals generated by Unet audio to acoustic energy. Unet audio uses frequency hopping [BFSK](https://en.wikipedia.org/wiki/Frequency-shift_keying) as its default communication scheme. The default parameters are as follows:
 
 ```
-> tell, "hello unet"
+> phy[1]
+« PHY »
+
+...
+
+[org.arl.unet.phy.fhbfsk.ModulationParam]
+  chiplen = 1
+  fmin = 9440
+  fstep = 160
+  hops = 13
+  offset = 0
+  sync = true
 ```
 
-It was received at the receiver as shown below:
+The first tone denoted by `fmin` starts at 9440 Hz, with 13 hops of 160 Hz each. This will be outside the frequency band of our underwater speaker. Hence, we will need to configure it to start after 3.5 kHz and end before 6 kHz. Hence we set the following parameters in the command line.
 
 ```
-TODO
+> phy[1].fmin = 4700
+4700
+> phy[1].fstep = 80
+80
 ```
 
-TODO: Tonal transmission, arbitrary waveform transmission and rx using TC4013.
+This will give us a starting frequency of 4700 Hz and a bandwidth of 1040 Hz. Now we are ready to transmit and receive.
 
+Depending on the environment of deployment, the transmit power level can also be adjusted as follows (A value of 0 denotes the maximum power).
 
+```
+> plvl -15
+OK
+```
 
-## Conclusion
+To get a notification of a reception, use the following command on the receiver side.
 
-Using Unet audio, we have illustrated how to build a simple DIY acoustic modem that is of low cost. 
+```
+> subscribe phy
+```
 
+Now we can transmit a simple byte stream of `1,2,3` using the following command on the shell.
 
+```
+> phy << new TxFrameReq(data:[1,2,3])
+AGREE
+phy >> TxFrameNtf:INFORM[type:CONTROL txTime:71663975]
+```
+
+You will also be able to hear the transmission from the underwater speaker.
+
+Once received and decoded, the following message will be printed in the shell of the receiver side.
+
+```
+phy >> RxFrameStartNtf:INFORM[type:DATA rxTime:79709541 rxDuration:3880000 detector:0.27]
+phy >> RxFrameNtf:INFORM[type:CONTROL from:1 rxTime:78466374 rssi:-29.8 cfo:0.0 (3 bytes)]
+```
+
+The data can be verified by typing the following.
+
+```
+> ntf.data
+[1, 2, 3]
+```
+
+Congratulations, you have successfully made the first transmission and reception using your DIY acoustic modem.
