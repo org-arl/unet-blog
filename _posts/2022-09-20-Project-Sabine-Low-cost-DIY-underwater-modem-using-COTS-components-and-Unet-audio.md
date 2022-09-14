@@ -2,7 +2,7 @@
 layout: post
 comments: true
 title: Low-cost DIY underwater modem using COTS components and Unet audio
-date: 20/9/2022
+date: 14/9/2022
 author: Manu Ignatius, Sukanta K. Hazra
 categories: howto
 feature-img: "assets/img/sabine/sabine-cover.jpg"
