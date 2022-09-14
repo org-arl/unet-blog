@@ -18,7 +18,7 @@ Most commercially available modems are beyond the reach of a technology enthusia
 
 These are some of the challenges for anyone looking to use one of the existing projects to build on.
 
-Unet audio being a true SDOAM addresses these by using a commonly available hardware platform such as Raspberry Pi and using its sound card to transmit and receive using an underwater speaker and mic. This approach allows the user to run Unet audio in their single board computer (SBC) thereby avoiding the need for dedicated digital hardware (e.g. SBC, FPGA). The audio amplifiers can then be chosen based on the use case. By using Unet audio, the user gets access to all the developer tools and the extendability to build their protocols on top of the DIY modem. Long term support is guaranteed since UnetStack is actively developed by both academia ([ARL](http://arl.nus.edu.sg/)) and industry ([Subnero](https://subnero.com/)).
+Unet audio being a true SDOAM addresses these by using a commonly available hardware platform such as Raspberry Pi and using its sound card to transmit and receive using an underwater speaker and microphone. This approach allows the user to run Unet audio in their single board computer (SBC) thereby avoiding the need for dedicated digital hardware (e.g. SBC, FPGA). The audio amplifiers can then be chosen based on the use case. By using Unet audio, the user gets access to all the developer tools and the extendability to build their protocols on top of the DIY modem. Long term support is guaranteed since UnetStack is actively developed by both academia ([ARL](http://arl.nus.edu.sg/)) and industry ([Subnero](https://subnero.com/)).
 
 ## Overview of the DIY modem
 
@@ -59,7 +59,7 @@ For the receiver side, the underwater microphone is connected directly to the mi
 
 ### Digital Hardware
 
-One of the most important hardware components of an SDOAM is the digital hardware that runs Unet audio. We have selected a Raspberry Pi (3b+) due to its popularity, low cost, ease of availability, and community support to be the digital hardware to run Unet audio. This can easily be swapped with any similar SBCs that have an arm processor running Linux on it. A USB sound card connected to the Raspberry Pi is used as the data acquisition system.
+One of the most important hardware components of an SDOAM is the digital hardware that runs Unet audio. We have selected a Raspberry Pi (3b+) due to its popularity, low cost, ease of availability, and community support to be the digital hardware to run Unet audio. This can easily be swapped with any similar SBCs that have an arm processor running Linux on it. A [USB sound card](https://www.aliexpress.com/item/4000598865391.html) connected to the Raspberry Pi is used as the data acquisition system.
 
 > NOTE: The internal audio output was not used as it is disabled by default during setup.
 
