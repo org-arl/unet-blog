@@ -24,8 +24,8 @@ Unet audio being a true SDOAM addresses these by using a commonly available hard
 
 A modem has three main functions
 
-1. Convert user-given data to signals and transmit it to the receiver.
-2. Decode the signals received at the receiver to recover the original data.
+1. Convert user-given data to a signal and transmit it to the receiver.
+2. Decode the signal received at the receiver to recover the original data.
 3. Configure various parameters to get the best communication performance.
 
 To transmit a message, the user can use the various interfaces provided by Unet audio such as the web interface, shell, or various APIs in a variety of computer languages such as Java, Groovy, Python, C, Julia, Javascript, etc. The same interfaces can be used to configure various communication parameters to achieve the best performance in a given environment.
