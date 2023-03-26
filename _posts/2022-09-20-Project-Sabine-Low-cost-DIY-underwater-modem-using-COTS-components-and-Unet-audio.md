@@ -20,7 +20,8 @@ These are some of the challenges for anyone looking to use one of the existing p
 
 Unet audio being a true SDOAM addresses these by using a commonly available hardware platform such as Raspberry Pi and using its sound card to transmit and receive using an underwater speaker and microphone. This approach allows the user to run Unet audio in their single board computer (SBC) thereby avoiding the need for dedicated digital hardware (e.g. SBC, FPGA). The audio amplifiers can then be chosen based on the use case. By using Unet audio, the user gets access to all the developer tools and the extendability to build their protocols on top of the DIY modem. Long term support is guaranteed since UnetStack is actively developed by both academia ([ARL](http://arl.nus.edu.sg/)) and industry ([Subnero](https://subnero.com/)).
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iu5tRlNhxdY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+<iframe width="720" height="360" src="https://www.youtube.com/embed/iu5tRlNhxdY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 <p align="center"><em>Workshop on building a DIY underwater modem during <a target="_blank" href="https://sauvc.org/">The Singapore AUV Challenge</a></em></p>
 
 
