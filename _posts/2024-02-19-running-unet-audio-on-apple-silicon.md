@@ -30,7 +30,7 @@ UnetStack 3 requires Java 8 to be installed on your computer. With the macOS on 
 
 Unet audio additionally requires [portaudio](https://www.portaudio.com/) to be installed on your computer. [Homebrew](https://https://brew.sh/) is a great package manager for macOS, and you can use it to install portaudio.
 
-The architecture of the Java 8 (`x86` or `aarch64`) that you have installed on your computer will determine which version of portaudio you need to use. The following table shows the compatibility between the architecture of the Mac, Java 8, and portaudio:
+The architecture of Java 8 that you have installed on your computer will determine which version of portaudio you need to use. The following table shows the compatibility between the architecture of the Mac, Java 8, and portaudio:
 
 |       Computer CPU       | Java 8 Architecture | Portaudio Architecture |
 |:------------------------:|:-------------------:|:----------------------:|
