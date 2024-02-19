@@ -95,7 +95,7 @@ When you run Unet audio for the first time, macOS will flag the dynamic librarie
 
 ![Unet audio Security](/assets/img/unetaudio-security.png){: width="50%" }
 
-You will need to be permitted to run these libraries. You can do this by going to `System Preferences` -> `Security & Privacy` -> `General` and clicking on `Allow Anyway` next to the message that says that the libraries were blocked from running.
+You will need to permit running these libraries. You can do this by going to `System Preferences` -> `Security & Privacy` -> `General` and clicking on `Allow Anyway` next to the message that says that the libraries were blocked from running.
 
 ![Unet audio Security](/assets/img/unetaudio-security-allow.png){: width="70%" }
 
