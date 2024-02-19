@@ -18,7 +18,7 @@ Unet audio binds to your computer's operating system and uses the built-in audio
 
 Until UnetStack 3 Community release v3.4.3, Unet audio was only supported on Linux and macOS on the Intel **x86** architecture. However, with the release of Apple Silicon, and the popularity of Mac computers with the M1/2/3 chips, we have been working to make Unet audio available on the **ARM** architecture.
 
-We are happy to announce that Unet audio is now available on macOS running on Apple Silicon, from [Unet Community v3.4.4]https://unetstack.net/#downloads) onwards.
+We are happy to announce that Unet audio is now available on macOS running on Apple Silicon, from [Unet Community v3.4.4](https://unetstack.net/#downloads) onwards.
 
 ## Setup Unet audio on Macs with Apple Silicon
 
