@@ -14,7 +14,7 @@ tags: [howto, unetaudio, unetstack]
 
 ![Unet audio](/assets/img/unetaudio.png)
 
-Unet audio binds to your computer's operating system and use the built-in audio services to send and receive audio from the sound card. This means that some of the libraries used by Unet audio needs to be compiled for the specific operating system and architecture.
+Unet audio binds to your computer's operating system and uses the built-in audio services to send and receive audio from the sound card. This means that some of the libraries used by Unet audio need to be compiled for the specific operating system and architecture.
 
 Until UnetStack 3 Community release v3.4.3, Unet audio was only supported on Linux and macOS on the Intel **x86** architecture. However, with the release of Apple Silicon, and the popularity of Mac computers with the M1/2/3 chips, we have been working to make Unet audio available on the **ARM** architecture.
 
