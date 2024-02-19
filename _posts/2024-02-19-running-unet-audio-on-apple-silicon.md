@@ -99,7 +99,7 @@ You will need to permit running these libraries. You can do this by going to `Sy
 
 ![Unet audio Security](/assets/img/unetaudio-security-allow.png){: width="70%" }
 
-When you run Unet audio again, you will be prompted to permit to run the libraries. Click on `Open` to permit to run the libraries.
+When you run Unet audio again, you will be prompted to permit running the libraries. Click on `Open` to permit running the libraries.
 
 ![Unet audio Security](/assets/img/unetaudio-security-open.png){: width="50%" }
 
