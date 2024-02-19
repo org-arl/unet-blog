@@ -10,7 +10,7 @@ thumbnail: "assets/img/mbp.jpg"
 tags: [howto, unetaudio, unetstack]
 ---
 
-[Unet audio](https://unetstack.net/handbook/unet-handbook.html#_transmitting_and_recording_arbitrary_acoustic_waveforms) is a great tool for using and testing Unet implementations using UnetStack. Unet audio uses your computer's sound card as an acoustic modem. Almost the entire functionality of UnetStack is available in Unet audio, so you can easily [develop and test Unet Agents](https://unetstack.net/handbook/unet-handbook.html#_developing_your_own_agents), try out [communications algorithms](https://blog.unetstack.net/custom-phy), and even test your scripts and programs written to interact with UnetStack without needing any extra hardware.
+[Unet audio](https://unetstack.net/handbook/unet-handbook.html#_transmitting_and_recording_arbitrary_acoustic_waveforms) is a great educational tool for using and testing Unet implementations using UnetStack. Unet audio uses your computer's sound card as an acoustic modem. Almost the entire functionality of UnetStack is available in Unet audio, so you can easily [develop and test Unet Agents](https://unetstack.net/handbook/unet-handbook.html#_developing_your_own_agents), try out [communications algorithms](https://blog.unetstack.net/custom-phy), and even test your scripts and programs written to interact with UnetStack without needing any extra hardware.
 
 ![Unet audio](/assets/img/unetaudio.png)
 
