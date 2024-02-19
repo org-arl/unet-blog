@@ -103,7 +103,7 @@ When you run Unet audio again, you will be prompted to permit running the librar
 
 ![Unet audio Security](/assets/img/unetaudio-security-open.png){: width="50%" }
 
-You might have to run the `bin/unet audio` command again after permitting the libraries to run. You should only have to do this once, and Unet audio will run without any issues in the future.
+You might have to run the `bin/unet audio` command again after permitting the libraries to run. You should only have to do this once, and Unet audio will run without any issues after that.
 
 ---
 
