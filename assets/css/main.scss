@@ -2,3 +2,100 @@
 ---
 
 @import "type-on-strap";
+
+/*Blog listing styles*/
+.bloglist-wrapper {
+  display: none;
+  position: fixed;
+  flex-direction: column;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 520px;
+  min-width: 320px;
+  height: 100vh;
+  padding: 0.3rem 2rem;
+  font-size: 1rem;
+  background-color: rgba(255, 255, 255, 0.96);
+  box-shadow: -2px 0 6px 2px rgba(0,0,0,0.15);
+  z-index: 10;
+}
+.bloglist-wrapper.active {
+  display: flex;
+}
+.bloglist-wrapper header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  color: #000;
+}
+.bloglist-wrapper h3 {
+  flex: none;
+}
+.bloglist-wrapper .bloglist {
+  flex: 1;
+  margin-left: 0;
+  min-height: 0;
+  overflow-y: auto;
+  list-style-type: none;
+}
+.post-teaser.bloglist-btn {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 14px;
+  padding-bottom: 14px;
+  border: none;
+}
+.bloglist-btn + .post-teaser {
+  padding-top: 0;
+}
+.bloglist-show {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+  font-size: 16px;
+}
+.bloglist-show svg {
+  flex: none;
+  width: 24px;
+  height: 24px;
+}
+.bloglist-show:hover {
+  color: #166bbf;
+}
+.bloglist-show, 
+.bloglist-close {
+  background: none;
+  border: none;
+}
+.bloglist p {
+  margin: 0;
+}
+.bloglist a {
+  display: block;
+  color: #096acc;
+  font-size: 1.1rem;
+}
+.bloglist a:hover {
+  color: #06498b;
+}
+.bloglist li {
+  padding: 8px 0;
+}
+.bloglist li + li {
+  border-top: 1px solid rgba(0,0,0,0.1);
+}
+.bloglist li:hover {
+  background-color: rgba(0,0,0,0.02);
+}
+.feature-image .post-content {
+  padding-top: 8px;
+}
+@media (max-width: 600px) {
+  .bloglist-wrapper {
+    padding: 0.1rem .6rem;
+  }
+}
