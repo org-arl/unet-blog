@@ -9,7 +9,6 @@ layout: default
     <div class="header-text">{{ site.theme_settings.header_text }}</div>
   </div>
   {% endif %}
-
   <div class="posts">
     {% for post in paginator.posts %}
     <div class="post-teaser">
@@ -32,8 +31,6 @@ layout: default
                 - <a class = "meta" rel="member" href="{{member.url}}"> {{ post.author }}</a>
               {% endif %}
             </p>
-
-
           </header>
           <div class="excerpt">
               {{ post.excerpt | strip_html | escape }}
