@@ -9,13 +9,13 @@ layout: default
 <div class="header-text">{{ site.theme_settings.header_text }}</div>
   </div>
   {% endif %}
-  <section class="post-content blog-list">
+  <section class="post-content articles-list">
     {% for post in site.posts %}
-    <a href="{{ post.url }}" class="blog-card">
+    <a href="{{ post.url }}" class="article-card">
       <header>
         <img src="{{site.baseurl}}/{{post.thumbnail}}">
       </header>
-      <div class="blog-body">
+      <div class="article-body">
         <div class="meta">
           <h3>{{ post.date | date: "%B %-d, %Y" }}</h3>
           {% if post.author %}  

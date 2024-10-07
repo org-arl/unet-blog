@@ -1,4 +1,4 @@
-.blog-list {
+.articles-list {
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -7,7 +7,7 @@
   padding: 2rem 1rem;
   margin: 0 auto;
 }
-.blog-card {
+.article-card {
   padding: 1rem;
   background-color: rgba(239, 246, 255, 0.4);
   border-radius: 8px;
@@ -40,7 +40,7 @@
     display: block;
     margin: 0;
   }
-  .blog-body {
+  .article-body {
     padding: 10px 0 0;
   }
   .meta {
