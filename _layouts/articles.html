@@ -1,0 +1,31 @@
+---
+layout: default
+---
+
+<div class="home">
+  {% if site.theme_settings.header_text %}
+  <div id="main" class="call-out"
+  style="background-image: url('{{ site.baseurl }}/{{ site.theme_settings.header_text_feature_image }}')">
+<div class="header-text">{{ site.theme_settings.header_text }}</div>
+  </div>
+  {% endif %}
+  <section class="post-content articles-list">
+    {% for post in site.posts %}
+    <a href="{{ post.url }}" class="article-card">
+      <header>
+        <img src="{{site.baseurl}}/{{post.thumbnail}}">
+      </header>
+      <div class="article-body">
+        <div class="meta">
+          <h3>{{ post.date | date: "%B %-d, %Y" }}</h3>
+          {% if post.author %}  
+          <h4 class="author">{{ post.author }}</h4>
+          {% endif %}
+        </div>
+        <p class="post-title">
+          {{ post.title }}
+        </p>
+      </div>
+    </a>
+    {% endfor %}
+  </section>
