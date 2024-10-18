@@ -16,9 +16,9 @@ In underwater communication, where environmental factors such as noise, multipat
 There are multiple methods for capturing incoming waveforms, each catering to specific use cases:
 
 ### 1. Recording a Set Number of Samples
-This method is ideal when you need to capture a specific number of samples. You can trigger the recording immediately or schedule it for a specific time using the `bbrec` command. For example, `bbrec 1000` will record 1000 baseband samples. The samples recorded are in the baseband format.
+If you need to capture a specific number of samples, this method is the ideal one. You can start the recording right away or schedule it for later using the `bbrec` command. For instance, running `bbrec 1000` will capture 1000 baseband samples. The samples are recorded in a baseband format.
 
-Subnero modems utilize the UnetStack framework, which employs internal messages for communication among different UnetStack agents. The bbrec command internally utilizes the `RecordBasebandSignalReq` to record the samples. `bbrec 1000` is analogous to `bb << new RecordBasebandSignalReq(1000)`.
+Subnero modems run on the UnetStack framework, which uses internal messages to let different agents communicate. The `bbrec` command internally utilizes the `RecordBasebandSignalReq` message to record the samples. So, `bbrec 1000` is same as `bb << new RecordBasebandSignalReq(1000)`.
 
 The recorded samples are returned as part of the `RxBasebandSignalNtf` notification and are not written to a file. To do that, you may send the notification to the baseband monitor agent as follows.
 
