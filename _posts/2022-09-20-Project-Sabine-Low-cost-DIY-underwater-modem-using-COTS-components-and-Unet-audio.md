@@ -280,7 +280,9 @@ We will need to configure Unet audio to use a frequency band within this space s
   sync = true
 ```
 
-The first tone denoted by `fmin` starts at 9440 Hz, with 13 hops of 160 Hz each. This will be outside the frequency band of our underwater speaker. Hence, we will need to configure it to start after 3.5 kHz and end before 6 kHz. Hence we set the following parameters in the command line.
+The first tone denoted by `fmin` starts at 9440 Hz, with 13 hops of 160 Hz each. This will be outside the frequency band of our underwater speaker. Hence, we will need to configure it to start after 3.5 kHz and end before 6 kHz. To achieve this, the frequency band of operation will need to be shifted slightly lower. This can be done by setting the `fc` to `6000` in `etc/modem.conf` file (The default value is set to 12000).
+
+Next, we set the following parameters in the command line.
 
 ```
 > phy[1].fmin = 4700
