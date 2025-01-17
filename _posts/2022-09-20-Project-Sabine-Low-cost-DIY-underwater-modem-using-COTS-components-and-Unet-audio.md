@@ -291,6 +291,15 @@ Next, we set the following parameters in the command line.
 80
 ```
 
+You will need to apply the same settings to `phy[2]` to ensure that the higher layer features utilizing `phy[2]` such as `tell` functions correctly.
+
+```
+> phy[2].fmin = 4700
+4700
+> phy[2].fstep = 80
+80
+```
+
 This will give us a starting frequency of 4700 Hz and a bandwidth of 1040 Hz. Now we are ready to transmit and receive.
 
 Depending on the environment of deployment, the transmit power level can also be adjusted as follows (A value of 0 denotes the maximum power).
