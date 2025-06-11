@@ -108,13 +108,17 @@ wait()
 Run the simulation:
 
 ```
-julia --project=. examples/2-node-network-1.jl
+> julia --project=. examples/2-node-network-1.jl
+Simulation running with these nodes:
+  - Node 1 at position (0.0, 0.0, -10.0) receiving on UDP port 9800
+  - Node 2 at position (1000.0, 0.0, -10.0) receiving on UDP port 9810
 ```
 
 3. Configure Subnero Modems
 
 Each modem needs to be configured to redirect its baseband interface to VAO. Access each modem's web interface and upload the following `modem.toml` to the Scripts folder:
 
+```
 [input]
 analoginterface = "UASP2DAQ"
 ip = "192.168.42.10"
@@ -122,56 +126,55 @@ port = 9810
 
 [output]
 ip = "192.168.42.10"
+```
+> NOTE: Use the IP address of the machine running VAO.
 
-Ensure each modem uses the correct port as defined in the VAO simulation script—9800 for the first node and 9810 for the second.
+Ensure each modem uses the correct port as defined in the VAO simulation script, 9800 for the first node and 9810 for the second. After uploading, reboot the modem.
 
-After uploading, reboot the modem.
+The modems should have connected to the VAO. You can verify this by typing the following in the webshell:
 
-Check the setup using the modem shell:
-
+```
 bb
+```
 
 You should see:
 
-Baseband service for SoundcardDAQ.AnalogInterface
+```
+> bb
+« Baseband »
 
-If not, the configuration may be incorrect.
+Baseband service for UASP2DAQ.AnalogInterface
+.
+.
+.
+```
 
-4. Set Transmit Power to Zero
+This means, the modem is connected to the VAO using the UASP2 protocol. Thats it, now you have 2 nodes deployed at 1km apart connected through VAO. Lets take it for a spin.
 
+
+4. Since they are 1 km apart, lets set them to full transmit power.
+
+```
 plvl 0
+```
 
 5. Test the Link
 
-This simulation script places two nodes 1 km apart. As such, full transmit power should be used:
-
-plvl 7
-
 To test the link, you can use the tell command from the shell of one modem to send a message to the other:
 
-tell 9800 "Hello from Node B"
+```
+tell 0 "Hello Sea"
+```
 
 You should see the message received on the other modem's shell, confirming that the simulated link is working.
 
-subscribe phy
+## Optional: UnetStack OEM Edition
 
-Optional: OEM Configuration
+If you do not have Subnero modems, you can still simulate the system using UnetStack OEM Edition on single-board computers (e.g., Jetson Orin Nano). The simulation behavior will be the same, enabling rapid prototyping.
 
-If you do not have Subnero modems, you can still simulate the system using UnetStack OEM Edition on single-board computers (e.g., Jetson Nano). The simulation behavior will be the same, enabling rapid prototyping.
+## Additional Resources
 
-Visual Setup
-
-Here's a sample setup diagram illustrating the components:
-
-
-
-Additional Resources
-
-VAO repository: https://github.com/org-arl/VirtualAcousticOcean.jl
-
-UnetStack: https://unetstack.net
-
-Subnero: https://subnero.com
-
-For questions, contact the Subnero support team or check out additional examples in the VAO GitHub repository.
+- VAO repository: https://github.com/org-arl/VirtualAcousticOcean.jl
+- UnetStack: https://unetstack.net
+- Subnero: https://subnero.com
 
