@@ -168,9 +168,9 @@ tell 0 "Hello Sea"
 
 You should see the message received on the other modem's shell, confirming that the simulated link is working.
 
-## Optional: UnetStack OEM Edition
+## UnetStack OEM Edition + VAO
 
-If you do not have Subnero modems, you can still simulate the system using UnetStack OEM Edition on single-board computers (e.g., Jetson Orin Nano). The simulation behavior will be the same, enabling rapid prototyping.
+If you do not have Subnero modems, you can still simulate the system using UnetStack OEM Edition on single-board computers (e.g., Jetson Orin Nano). The simulation behavior will be the same, enabling rapid prototyping. Contact [Subnero](mailto:info@subnero.com) for more details about the UnetStack OEM Edition.
 
 ## Additional Resources
 
