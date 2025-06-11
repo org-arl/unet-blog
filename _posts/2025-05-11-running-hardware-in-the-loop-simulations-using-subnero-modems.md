@@ -38,12 +38,12 @@ Subnero's modems run UnetStack, an open-architecture, software-defined acoustic 
 - Deploy the exact same software in simulation and in the ocean
 - Extend or override components with user-defined protocols
 
-[Virtual Acoustic Ocean (VAO)] (https://github.com/org-arl/VirtualAcousticOcean.jl) is an open-source acoustic channel simulator developed in Julia. It allows users to:
+[Virtual Acoustic Ocean (VAO)](https://github.com/org-arl/VirtualAcousticOcean.jl) is an open-source acoustic channel simulator developed in Julia. It allows users to:
 - Simulate channel propagation using models like Bellhop, Kraken, Pekeris RAT
 - Set up nodes with position, protocol stack, and acoustic properties
 - Run interactive or batch-mode simulations over UDP/IP
 
-Together, these tools unlock scalable, reproducible HIL simulations.
+With a Subnero modem running UnetStack v5 onwards and VAO, users are now able to unlock scalable, reproducible HIL simulations that can closely mirror real-world underwater communication scenarios while enabling rapid, repeatable testing without going to sea.
 
 ## Typical Use Cases
 - **Researchers** testing new communication algorithms (e.g. physical layer, network layer etc.) with realistic conditions
