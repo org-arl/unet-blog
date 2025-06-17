@@ -300,7 +300,7 @@ You will need to apply the same settings to `phy[2]` to ensure that the higher l
 80
 ```
 
-This will give us a starting frequency of 4700 Hz and a bandwidth of 1040 Hz. Now we are ready to transmit and receive.
+This will give us a starting frequency of 4700 Hz and a bandwidth of 1920 Hz. Now we are ready to transmit and receive.
 
 Depending on the environment of deployment, the transmit power level can also be adjusted as follows (A value of 0 denotes the maximum power).
 
