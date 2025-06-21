@@ -69,6 +69,7 @@ TODO:
 
 ```
 using Pkg
+Pkg.add("UnderwaterAcoustics")
 Pkg.add("VirtualAcousticOcean")
 ```
 
