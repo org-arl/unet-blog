@@ -39,9 +39,9 @@ Subnero's modems run UnetStack, an open-architecture, software-defined acoustic 
 - Extend or override components with user-defined protocols
 
 [Virtual Acoustic Ocean (VAO)](https://github.com/org-arl/VirtualAcousticOcean.jl) is an open-source acoustic channel simulator developed in Julia. It allows users to:
-- Simulate channel propagation using models like Bellhop, Kraken, Pekeris RAT
+- Simulate channel propagation using standard models
 - Set up nodes with position, protocol stack, and acoustic properties
-- Run interactive or batch-mode simulations over UDP/IP
+- Run interactive or batch-mode simulations
 
 With a Subnero modem running UnetStack v5 onwards and VAO, users are now able to unlock scalable, reproducible HIL simulations that can closely mirror real-world underwater communication scenarios while enabling rapid, repeatable testing without going to sea.
 
@@ -65,23 +65,17 @@ Here is a reference block diagram of a typical HIL simulation setup:
 
 TODO:
 
-1. Install VAO
+1. Install VAO using Julia's package manager. In a Julia session, run:
 
 ```
-git clone https://github.com/org-arl/VirtualAcousticOcean.jl.git
-cd VirtualAcousticOcean.jl
-julia --project=.
+using Pkg
+Pkg.add("VirtualAcousticOcean")
 ```
 
-Inside Julia's package manager:
-
-```
-pkg> instantiate
-```
 
 2. Add Example Scenario
 
-Copy the `2-node-network-1.jl` file to the `examples/` folder of the cloned VAO repository.
+Copy the `2-node-network.jl` file from the [github repo](https://github.com/org-arl/VirtualAcousticOcean.jl) examples folder to your working folder.
 
 Example content:
 
@@ -108,7 +102,7 @@ wait()
 Run the simulation:
 
 ```
-> julia --project=. examples/2-node-network-1.jl
+> julia --project=. 2-node-network-1.jl
 Simulation running with these nodes:
   - Node 1 at position (0.0, 0.0, -10.0) receiving on UDP port 9800
   - Node 2 at position (1000.0, 0.0, -10.0) receiving on UDP port 9810
