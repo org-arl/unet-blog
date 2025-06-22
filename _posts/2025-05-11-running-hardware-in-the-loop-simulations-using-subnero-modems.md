@@ -53,7 +53,7 @@ With a Subnero modem running UnetStack v5 onwards and VAO, users are now able to
 ## Step-by-Step Guide to HIL Simulation
 
 Before beginning the simulation, ensure you have the following setup:
-- Two Subnero modems running UnetStack v5
+- Two Subnero M25M series modems running UnetStack v5
 - A laptop or mini-PC with Julia installed, capable of running the Virtual Acoustic Ocean (VAO) simulator
 - An Ethernet switch to connect all devices to the same network
 
@@ -65,14 +65,14 @@ Here is a reference block diagram of a typical HIL simulation setup:
 
 TODO:
 
-1. Install VAO using Julia's package manager. In a Julia session, run:
+1. Install VAO and additional packages using Julia's package manager. In a Julia session, run:
 
 ```
 using Pkg
-Pkg.add("UnderwaterAcoustics")
 Pkg.add("VirtualAcousticOcean")
+Pkg.add("UnderwaterAcoustics")
+Pkg.add("Sockets")
 ```
-
 
 2. Add Example Scenario
 
@@ -85,11 +85,11 @@ using VirtualAcousticOcean
 using UnderwaterAcoustics
 using Sockets
 
-env = UnderwaterEnvironment()
-pm = PekerisRayModel(env, 7)
+env = UnderwaterEnvironment(seabed=SandyClay, bathymetry=40.0)
+pm = PekerisRayTracer(env)
 sim = Simulation(pm, 24000.0)
-addnode!(sim, (0.0, 0.0, -10.0), UASP2, 9800, ip"0.0.0.0")
-addnode!(sim, (1000.0, 0.0, -10.0), UASP2, 9810, ip"0.0.0.0")
+addnode!(sim, (0.0, 0.0, -10.0), UASP2, 9809, ip"0.0.0.0")
+addnode!(sim, (1000.0, 0.0, -10.0), UASP2, 9819, ip"0.0.0.0")
 run(sim)
 
 println("Simulation running with these nodes:")
@@ -100,31 +100,30 @@ end
 wait()
 ```
 
-Run the simulation:
+Run the simulation from a terminal:
 
 ```
-> julia --project=. 2-node-network-1.jl
+> julia 2-node-network-1.jl
 Simulation running with these nodes:
-  - Node 1 at position (0.0, 0.0, -10.0) receiving on UDP port 9800
-  - Node 2 at position (1000.0, 0.0, -10.0) receiving on UDP port 9810
+  - Node 1 at position (0.0, 0.0, -10.0) receiving on UDP port 9809
+  - Node 2 at position (1000.0, 0.0, -10.0) receiving on UDP port 9819
 ```
 
 3. Configure Subnero Modems
 
 Each modem needs to be configured to redirect its baseband interface to VAO. Access each modem's web interface and upload the following `modem.toml` to the Scripts folder:
 
+Example content:
+
 ```
 [input]
 analoginterface = "UASP2DAQ"
 ip = "192.168.42.10"
-port = 9810
-
-[output]
-ip = "192.168.42.10"
+port = 9809
 ```
 > NOTE: Use the IP address of the machine running VAO.
 
-Ensure each modem uses the correct port as defined in the VAO simulation script, 9800 for the first node and 9810 for the second. After uploading, reboot the modem.
+Ensure each modem uses the correct port as defined in the VAO simulation script, 9809 for the first node and 9819 for the second. After uploading, reboot the modem.
 
 The modems should have connected to the VAO. You can verify this by typing the following in the webshell:
 
@@ -144,7 +143,13 @@ Baseband service for UASP2DAQ.AnalogInterface
 .
 ```
 
-This means, the modem is connected to the VAO using the UASP2 protocol. Thats it, now you have 2 nodes deployed at 1km apart connected through VAO. Lets take it for a spin.
+This means, the modem is connected to the VAO using the UASP2 protocol. You can also check the log file in the modem and you should see the following line: 
+
+```
+1750584190212	INFO	UASP2DAQ@27:UASP2DAQ@1:57	Connecting to UASP2 DAQ at 192.168.42.10:9809...
+```
+
+Thats it, now you have 2 nodes deployed at 1km apart connected through VAO. Lets take it for a spin.
 
 
 4. Since they are 1 km apart, lets set them to full transmit power.
