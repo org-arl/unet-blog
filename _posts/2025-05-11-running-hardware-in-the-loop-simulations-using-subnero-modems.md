@@ -38,7 +38,7 @@ With a Subnero modem running UnetStack v5 onwards and VAO, users are now able to
 
 ## Typical Use Cases
 
-This simulation setup supports a variety of scenarios. Researchers can use it to develop and validate new communication algorithms such as those at the physical or network layers, under realistic acoustic conditions. Commercial teams can evaluate performance for AUV-based data harvesting or remote sensing missions before heading to the field. Defense teams can rehearse complex mission scenarios virtually, especially in environments where access or testing is restricted. where real-world testing is restricted or classified.
+This simulation setup supports a variety of scenarios. Researchers can use it to develop and validate new communication algorithms such as those at the physical or network layers, under realistic acoustic conditions. Commercial teams can evaluate performance for AUV-based data harvesting or remote sensing missions before heading to the field. Defense teams can rehearse complex mission scenarios virtually, especially in environments where access or testing is restricted.
 
 ## Step-by-Step Guide to HIL Simulation
 
