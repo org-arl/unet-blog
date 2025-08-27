@@ -38,9 +38,7 @@ With a Subnero modem running UnetStack v5 onwards and VAO, users are now able to
 
 ## Typical Use Cases
 
-- **Researchers** testing new communication algorithms (e.g. physical layer, network layer etc.) with realistic conditions.
-- **Commercial users** simulating data harvesting from sensors or AUVs in unknown environments.
-- **Defense teams** validating mission scenarios where real-world testing is restricted or classified.
+This simulation setup supports a variety of scenarios. Researchers can use it to develop and validate new communication algorithms such as those at the physical or network layers, under realistic acoustic conditions. Commercial teams can evaluate performance for AUV-based data harvesting or remote sensing missions before heading to the field. Defense teams can rehearse complex mission scenarios virtually, especially in environments where access or testing is restricted. where real-world testing is restricted or classified.
 
 ## Step-by-Step Guide to HIL Simulation
 
@@ -101,13 +99,16 @@ wait()
 
 ```bash
 > julia 2-node-network-1.jl
+Simulation running with these nodes:
+  - Node 1 at position (0.0, 0.0, -10.0) receiving on UDP port 9809
+  - Node 2 at position (1000.0, 0.0, -10.0) receiving on UDP port 9819
 ```
 
 ---
 
 ### 3. Configure Subnero Modems
 
-Access each modem’s web UI and upload this `modem.toml` to the Scripts folder:
+Each modem needs to be configured to redirect its baseband interface to VAO. Access each modem’s web UI and upload this `modem.toml` to the Scripts folder:
 
 ```toml
 [input]
@@ -116,7 +117,7 @@ ip = "192.168.42.10"
 port = 9809
 ```
 
-> Ensure this matches the VAO machine's IP and each modem uses the correct port (9809 and 9819).
+> Ensure this matches the VAO machine's IP and each modem uses the correct port (e.g. 9809).
 
 **Verify the setup via modem shell:**
 
@@ -140,11 +141,13 @@ Also check modem logs for an entry similar to:
 1750584190212	INFO	UASP2DAQ@27:UASP2DAQ@1:57	Connecting to UASP2 DAQ at 192.168.42.10:9809...
 ```
 
+That's it. Now you have 2 nodes deployed 1 km apart and connected through VAO. With the nodes now connected via VAO and properly configured, you can begin interactive testing and messaging between the modems.
+
 ---
 
 ### 4. Set Transmit Power
 
-Since the modems are deployed 1km apart, set full transmit power:
+Since the modems are deployed 1 km apart, set full transmit power:
 
 ```shell
 plvl 0
@@ -160,13 +163,13 @@ Send a test message from either of the modem's shell:
 tell 0 "Hello Sea"
 ```
 
-You should see the message on the receiving modem’s shell.
+You should see the message on the receiving modem’s shell, confirming that the simulated link is working.
 
 ---
 
-## UnetStack OEM Edition + VAO
+## UnetCube (UnetStack OEM Edition) + VAO
 
-If you do not have Subnero modems, you can still simulate the system using UnetStack OEM Edition on single-board computers (e.g., Jetson Orin Nano). The simulation behavior will be the same, enabling rapid prototyping.
+If you do not have Subnero modems, you can still simulate the system using UnetCube (UnetStack OEM Edition) on single-board computers (e.g., Jetson Orin Nano). The simulation behavior will be the same, enabling rapid prototyping.
 
 Contact [info@subnero.com](mailto:info@subnero.com) for more information.
 
