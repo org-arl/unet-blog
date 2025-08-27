@@ -98,7 +98,7 @@ wait()
 **Run it from the terminal:**
 
 ```bash
-> julia 2-node-network-1.jl
+> julia 2-node-network.jl
 Simulation running with these nodes:
   - Node 1 at position (0.0, 0.0, -10.0) receiving on UDP port 9809
   - Node 2 at position (1000.0, 0.0, -10.0) receiving on UDP port 9819
