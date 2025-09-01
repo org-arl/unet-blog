@@ -28,13 +28,13 @@ This is where HIL simulations shine. By keeping your real hardware in the loop, 
 
 If your modem is software-defined and open-architecture, such as Subnero's modems, HIL offers a development experience that closely mirrors actual deployment.
 
-## The Foundation: Subnero Modems + Virtual Acoustic Ocean
+## The Foundation: UnetStack v5 + Virtual Acoustic Ocean
 
-Subnero’s modems run UnetStack, a fully software-defined, open-architecture modem framework. This enables users to customize physical and network layers, extend built-in components, and use the exact same software stack in both simulated and real-world deployments.
+Modems running UnetStack v5 — such as those offered by Subnero — are fully software-defined and follow an open architecture. This enables users to customize physical and network layers, extend built-in components, and use the exact same software stack in both simulated and real-world deployments.
 
 [Virtual Acoustic Ocean (VAO)](https://github.com/org-arl/VirtualAcousticOcean.jl) is an open-source acoustic channel simulator. It supports standard propagation models, and allows users to define node positions, protocol stack parameters, and environmental conditions. Simulations can be run in interactive mode, making VAO suitable for everything from basic tests to complex protocol validation.
 
-With a Subnero modem running UnetStack v5 onwards and VAO, users are now able to unlock scalable, reproducible HIL simulations that can closely mirror real-world underwater communication scenarios while enabling rapid, repeatable testing without going to sea.
+With a modem running UnetStack v5 and VAO, users are now able to unlock scalable, reproducible HIL simulations that can closely mirror real-world underwater communication scenarios while enabling rapid, repeatable testing without going to sea.
 
 ## Typical Use Cases
 
