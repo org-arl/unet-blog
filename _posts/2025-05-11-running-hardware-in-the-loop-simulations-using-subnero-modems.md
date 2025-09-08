@@ -171,7 +171,7 @@ You should see the message on the receiving modem’s shell, confirming that the
 
 If you do not have Subnero modems, you can still simulate the system using UnetCube (UnetStack OEM Edition) on single-board computers (e.g., Jetson Orin Nano). The simulation behavior will be the same, enabling rapid prototyping.
 
-<figure> <img src="../assets/img/unetcube.jpg"></figure>
+<figure> <img width="70%" src="../assets/img/unetcube.jpg"></figure>
 
 
 Contact [info@subnero.com](mailto:info@subnero.com) for more information.
