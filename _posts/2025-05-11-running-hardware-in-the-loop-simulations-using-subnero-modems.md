@@ -160,7 +160,7 @@ plvl 0
 Send a test message from either of the modem's shell:
 
 ```shell
-tell 0 "Hello Sea"
+tell 0, "Hello Sea"
 ```
 
 You should see the message on the receiving modem’s shell, confirming that the simulated link is working.
