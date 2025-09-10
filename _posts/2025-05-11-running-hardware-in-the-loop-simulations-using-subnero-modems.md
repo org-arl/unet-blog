@@ -48,6 +48,8 @@ Before beginning the simulation, ensure you have the following setup:
 - A laptop or mini-PC with Julia installed, capable of running the Virtual Acoustic Ocean (VAO) simulator.
 - An Ethernet switch to connect all devices to the same network.
 
+<figure> <img width="70%" src="../assets/img/vao-setup.jpg"></figure>
+
 All components — modems and the VAO-running machine — should be on the same subnet to be able to reach each other using their IP address.
 
 > **TIP:** Use an isolated network switch (without internet access) to avoid interference from unrelated network traffic during simulation.
