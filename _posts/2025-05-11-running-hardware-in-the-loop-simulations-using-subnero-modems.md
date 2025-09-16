@@ -97,6 +97,7 @@ end
 wait()
 ```
 
+> Note: The example shown here is representative. The version available in the [VAO GitHub repository](https://github.com/org-arl/VirtualAcousticOcean.jl) may differ slightly depending on updates or version changes.
 **Run it from the terminal:**
 
 ```bash
