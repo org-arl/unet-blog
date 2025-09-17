@@ -120,7 +120,7 @@ ip = "192.168.42.10"
 port = 9809
 ```
 
-> Ensure this matches the VAO machine's IP and each modem uses the correct port (e.g. 9809).
+> Ensure this matches the VAO machine's IP and each modem uses the correct port (e.g. 9809). Additionally, the `[output]` section is optional and typically used when configuring a physical modem.
 
 **Verify the setup via modem shell:**
 
