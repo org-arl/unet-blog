@@ -5,8 +5,8 @@ title: Running Hardware-in-the-Loop Simulations Using Subnero Modems
 date: 11/06/2025
 author: Manu Ignatius
 categories: howto
-feature-img: "assets/img/search-map.jpg"
-thumbnail: "assets/img/search-map.jpg"
+feature-img: "assets/img/hil.jpg"
+thumbnail: "assets/img/hil.jpg"
 tags: [howto, modems, simulation]
 ---
 
