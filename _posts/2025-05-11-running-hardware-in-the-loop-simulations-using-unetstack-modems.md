@@ -118,6 +118,9 @@ Each modem needs to be configured to redirect its baseband interface to VAO. Acc
 analoginterface = "UASP2DAQ"
 ip = "192.168.42.10"
 port = 9809
+
+[output]
+analoginterface = "UASP2DAQ"
 ```
 
 > Ensure this matches the VAO machine's IP and each modem uses the correct port (e.g. 9809). Additionally, the `[output]` section is optional and typically used when configuring a physical modem.
