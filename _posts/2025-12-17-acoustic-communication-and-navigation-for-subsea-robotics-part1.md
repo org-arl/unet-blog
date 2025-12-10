@@ -20,7 +20,7 @@ For a long time, skepticism about acoustic links was justified. They were fragil
 
 ## Why Acoustics?
 
-Radio and most light simply don’t travel well underwater. Even visible light in clear water only gets you tens of meters; in turbid coastal waters like Singapore, it is even less. Acoustics, on the other hand, propagate hundreds of meters to tens of kilometers. Frames typically contain a preamble, data modulated onto a carrier, error correction, and checksums. Robust incoherent modulation schemes work well for commands and telemetry, while coherent modulation schemes are needed for images and high-rate data. Forward Error Correction (FEC) and erasure codes add robustness without long feedback cycles. This is critical because sound travels so much slower than light.
+Radio and most light simply don’t travel well underwater. Even visible light in clear water only gets you tens of meters; in turbid coastal waters like Singapore, it is even less. Acoustics, on the other hand, propagate hundreds of meters, to tens of kilometers. Frames typically contain a preamble, data modulated onto a carrier, error correction, and checksums. Robust incoherent modulation schemes work well for commands and telemetry, while coherent modulation schemes are needed for images and high-rate data. Forward Error Correction (FEC) and erasure codes add robustness without long feedback cycles. This is critical because sound travels so much slower than light.
 
 ## Acoustic communication
 
