@@ -1,7 +1,7 @@
 ---
 layout: post
 comments: true
-title: Acoustic Communication and Navigation for Subsea Robotics Part 2
+title: Acoustic Communication and Navigation for Subsea Robotics — Part 2
 date: 17/12/2025
 author: Manu Ignatius, Mandar Chitre
 categories: howto
