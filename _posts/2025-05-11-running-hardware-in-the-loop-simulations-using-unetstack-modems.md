@@ -64,7 +64,7 @@ At a Julia terminal:
 
 ```julia
 using Pkg
-Pkg.add(name = "VirtualAcousticOcean", version = "0.8")
+Pkg.add(name = "VirtualAcousticOcean", version = "0.8.1")
 Pkg.add("UnderwaterAcoustics")
 Pkg.add("Sockets")
 ```
