@@ -33,7 +33,7 @@ In this blog post, we will demonstrate how two minor modifications, some rigid s
 
 ## USBL Basics
 
-The basic working principle of a USBL system is that a transceiver sends out an interrogation signal and then waits for a response from a transponder unit attached to the tracking target. The overall delay between the interrogation and its response then informs the tracker about the range to the target, and the small differences in arrival times across an array of hydrophones on the transceiver allow it to estimate the bearing. Together, these two pieces of information pinpoint a unique target location in three-dimensional space.
+The basic working principle of a USBL system is that a transceiver sends out an interrogation signal and waits for a response from a transponder unit attached to the tracking target. The overall delay between the interrogation and its response then informs the tracker about the range to the target, and the small differences in arrival times across an array of hydrophones on the transceiver allow it to estimate the bearing. Together, these two pieces of information pinpoint a unique target location in three-dimensional space.
 
 <div style="width: 100%; display: flex; flex-direction: row; justify-content: center; align-items: center; gap: 0rem 2rem; flex-wrap: wrap;">
 <img src="../assets/img/usbl/usbl_range.svg" style="padding: 0px">
@@ -45,7 +45,7 @@ The basic working principle of a USBL system is that a transceiver sends out an 
 
 ## Installing the Dependencies
 
-Our goal is now to replicate a USBL system using a pair of UnetStack modems and a few [Julia](https://julialang.org/){:target="\_blank"} scripts available from the [`unet-contrib` GitHub repository](https://github.com/org-arl/unet-contrib/blob/master/contrib/usbl){:target="\_blank"}. Therefore, as a first step please download the repository and then run the provided `./install` script to install a Julia runtime plus a few Julia packages. Note that your modems must be running UnetStack v5 or later for the following scripts to work.
+Our goal in this post is to replicate such a USBL system using a pair of UnetStack modems and a few [Julia](https://julialang.org/){:target="\_blank"} scripts available from the [`unet-contrib` GitHub repository](https://github.com/org-arl/unet-contrib/blob/master/contrib/usbl){:target="\_blank"}. Therefore, as a first step please download the repository and then run the provided `./install` script to install a Julia runtime plus a few Julia packages. Note that your modems must be running UnetStack v5 or later for the following scripts to work.
 
 ## Setting Up the Multi-Receiver Modem
 
@@ -61,7 +61,7 @@ The provided script performs localization in the body frame of reference given b
 If your focus is more on software development rather than hardware and real-world tracking, then the `unet-contrib` repository also contains a turnkey script to deploy your modems in a virtual acoustic ocean. Please see the appendix at the end of this post for details. Regardless of which path you choose, we will assume for the remainder of this post that you now have a setup equivalent to the following.
 
 <div style="text-align: center;">
-<img src="../assets/img/usbl/setup.png" style="width: 700px">
+<img src="../assets/img/usbl/setup.png" style="width: 900px">
 </div>
 
 ## Launching the USBL Script
@@ -102,10 +102,10 @@ If you have managed to follow along until here, then congratulations: you have j
 
 1. For each incoming signal, it shows a `BearingNtf` reporting in degrees the `azimuth` (horizontal direction, 0° is positive x-axis and 90° is positive y-axis) and `elevation` (vertical direction, 90° is positive z-axis).
 
-  <div style="width: 100%; display: flex; flex-direction: row; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-bottom: 2rem;">
-  <img src="../assets/img/usbl/azimuth.svg" style="padding: 0px"/>
-  <img src="../assets/img/usbl/elevation.svg" style="padding: 0px"/>
-  </div>
+   <div style="width: 100%; display: flex; flex-direction: row; justify-content: center; gap: 4rem; flex-wrap: wrap; margin-bottom: 2rem;">
+   <img src="../assets/img/usbl/azimuth.svg" style="padding: 0px"/>
+   <img src="../assets/img/usbl/elevation.svg" style="padding: 0px"/>
+   </div>
 
 2. For each execution of `range`, it shows a `RangeNtf` reporting the `range` in meters to node `to`.
 3. Whenever we have both a `Bearing` and `RangeNtf`, the modem also shows a `PeerLocationNtf`.
@@ -120,7 +120,7 @@ To make it easier to interpret the USBL output, the `unet-contrib` repo provides
 
 To activate this UI, please proceed as follows.
 
-1. Upload [`ui/dist/USBL.html`](https://github.com/org-arl/unet-contrib/blob/master/contrib/usbl/ui/dist/USBL.html){:target="\_blank"} to the `scripts/` folder.
+1. Upload [`ui/dist/USBL.html`](https://github.com/org-arl/unet-contrib/blob/master/contrib/usbl/ui/dist/USBL.html){:target="\_blank"} to the `scripts/` folder of your modem.
 2. Refresh the UI, then go to Dashboards > USBL.html
 
 ## How Does This Work?
