@@ -14,7 +14,7 @@ Picture this: You are running a mission with a mobile underwater node. You have 
 
 Space, weight, and budget are always at a premium in subsea deployments. If you are using a multi-receiver communication system running UnetStack, it is highly likely that you have access to the raw acoustic data and the timing information from all your receiving channels. Because UnetStack natively supports these multi-receiver architectures, it is possible to use your existing communication hardware for the localization and tracking of targets too.
 
-Take the [Subnero multi-receiver modem](https://subnero.com/products/wnc/gen4x/accessories/multi-receiver.html){:target="_blank"} as a practical example. We are frequently asked if this system can be used as a USBL transceiver. The short answer is yes. While the primary purpose of its multi-receiver architecture is to enhance communication performance through spatial diversity, the hardware requirements for localization are almost identical. Therefore, converting it into an Ultra-Short Baseline (USBL) transceiver is remarkably straightforward.
+Take the [Subnero multi-receiver modem](https://subnero.com/products/wnc/gen4x/accessories/multi-receiver.html){:target="\_blank"} as a practical example. We are frequently asked if this system can be used as a USBL transceiver. The short answer is yes. While the primary purpose of its multi-receiver architecture is to enhance communication performance through spatial diversity, the hardware requirements for localization are almost identical. Therefore, converting it into an Ultra-Short Baseline (USBL) transceiver is remarkably straightforward.
 
 The resulting setup is basically a modern USBL system approached "from the other side." Most traditional USBL systems available today provide some basic communication capability in addition to their primary tracking functions. Conversely, a UnetStack-powered multi-receiver modem allows you to add tracking capabilities on top of the communication link.
 
@@ -45,7 +45,7 @@ The basic working principle of a USBL system is that a transceiver sends out an 
 
 ## Installing the Dependencies
 
-Our goal is now to replicate a USBL system using a pair of UnetStack modems and a few [Julia](https://julialang.org/){:target="_blank"} scripts available from the [`unet-contrib` GitHub repository](https://github.com/org-arl/unet-contrib/blob/master/contrib/usbl){:target="_blank"}. Therefore, as a first step please download the repository and then run the provided `./install` script to install a Julia runtime plus a few Julia packages. Note that your modems must be running UnetStack v5 or later for the following scripts to work.
+Our goal is now to replicate a USBL system using a pair of UnetStack modems and a few [Julia](https://julialang.org/){:target="\_blank"} scripts available from the [`unet-contrib` GitHub repository](https://github.com/org-arl/unet-contrib/blob/master/contrib/usbl){:target="\_blank"}. Therefore, as a first step please download the repository and then run the provided `./install` script to install a Julia runtime plus a few Julia packages. Note that your modems must be running UnetStack v5 or later for the following scripts to work.
 
 ## Setting Up the Multi-Receiver Modem
 
@@ -120,7 +120,7 @@ To make it easier to interpret the USBL output, the `unet-contrib` repo provides
 
 To activate this UI, please proceed as follows.
 
-1. Upload [`ui/dist/USBL.html`](https://github.com/org-arl/unet-contrib/blob/master/contrib/usbl/ui/dist/USBL.html){:target="_blank"} to the `scripts/` folder.
+1. Upload [`ui/dist/USBL.html`](https://github.com/org-arl/unet-contrib/blob/master/contrib/usbl/ui/dist/USBL.html){:target="\_blank"} to the `scripts/` folder.
 2. Refresh the UI, then go to Dashboards > USBL.html
 
 ## How Does This Work?
@@ -236,11 +236,11 @@ Our USBL code is based on this correlation maximization idea but applies two fur
 
   ![](../assets/img/usbl/subsampling.svg)
 
-That's it! With these modifications, we now have a complete set of algorithms for tracking a target underwater. If you'd like to know more about how to implement these algorithms, then we encourage you to take a look at the [`usbl-julia` folder](https://github.com/org-arl/unet-contrib/tree/master/contrib/usbl/usbl-julia){:target="_blank"} in `unet-contrib`. As you will see, UnetStack's open architecture makes it very easy to extend a modem's functionality using just a few lines of code!
+That's it! With these modifications, we now have a complete set of algorithms for tracking a target underwater. If you'd like to know more about how to implement these algorithms, then we encourage you to take a look at the [`usbl-julia` folder](https://github.com/org-arl/unet-contrib/tree/master/contrib/usbl/usbl-julia){:target="\_blank"} in `unet-contrib`. As you will see, UnetStack's open architecture makes it very easy to extend a modem's functionality using just a few lines of code!
 
 ## Appendix: Setting Up a VirtualAcousticOcean Test Environment
 
-Setting up a USBL mount and deploying it in a body of water large enough to support USBL testing can be logistically challenging. To facilitate testing in a lab, the `unet-contrib` repository contains a script that allows you to deploy your modems in a [VirtualAcousticOcean](https://github.com/org-arl/VirtualAcousticOcean.jl){:target="_blank"} simulation environment. This script reconfigures the very lowest layers of the modems' networking stacks such that rather than transmitting and receiving signals via the attached physical hardware, they instead communicate via a simulator that imitates the distortions that would have been observed if the modems had been deployed in a real ocean. All that is needed to activate this environment is to run the following command.
+Setting up a USBL mount and deploying it in a body of water large enough to support USBL testing can be logistically challenging. To facilitate testing in a lab, the `unet-contrib` repository contains a script that allows you to deploy your modems in a [VirtualAcousticOcean](https://github.com/org-arl/VirtualAcousticOcean.jl){:target="\_blank"} simulation environment. This script reconfigures the very lowest layers of the modems' networking stacks such that rather than transmitting and receiving signals via the attached physical hardware, they instead communicate via a simulator that imitates the distortions that would have been observed if the modems had been deployed in a real ocean. All that is needed to activate this environment is to run the following command.
 
 ```bash
 # Abstract command
