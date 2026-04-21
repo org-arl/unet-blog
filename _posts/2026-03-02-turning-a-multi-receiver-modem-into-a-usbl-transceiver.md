@@ -5,8 +5,8 @@ title: Turning a Multi-Receiver Modem into a USBL Transceiver
 date: 02/03/2026
 author: Simon Etter, Manu Ignatius
 categories: howto
-# feature-img: "assets/img/TODO"
-# thumbnail: "assets/img/TODO"
+feature-img: "assets/img/ship-and-auv.jpg"
+thumbnail: "assets/img/ship-and-auv.jpg"
 tags: [howto, localization, usbl, modems, auv]
 ---
 
