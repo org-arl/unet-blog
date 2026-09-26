@@ -97,4 +97,4 @@ sass:
   style: :compressed
 plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-sitemap]
 #theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
-exclude: ["LICENSE", "README.md", "screenshot.png", "gulpfile.js", ".idea/*", "Makefile", "support"]
+exclude: ["LICENSE", "README.md", "screenshot.png", "gulpfile.js", ".idea/*", "Makefile", "support", "assets/img/sabine/README.md"]
