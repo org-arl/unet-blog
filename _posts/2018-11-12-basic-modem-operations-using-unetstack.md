@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Basic modem operations using UnetStack
+description: "Learn the basics of an acoustic modem with UnetStack: sending and receiving frames and data between nodes using the UnetSocket API, with worked examples."
 date: 12/11/2018
 author: Prasad Anjangi
 categories: howto

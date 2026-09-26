@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Acoustic Communication and Navigation for Subsea Robotics — Part 1
+description: "Why acoustic links underwater don't “just work”, and the first three levels to confident connectivity: technology choices, integration and deployment planning."
 date: 17/12/2025
 author: Manu Ignatius, Mandar Chitre
 categories: howto

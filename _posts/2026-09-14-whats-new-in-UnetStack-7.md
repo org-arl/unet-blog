@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: What's new in UnetStack 7?
+description: "UnetStack 7 brings Julia agents, redesigned PHYSICAL and BASEBAND services, ECLink and Router, a new DATAGRAM service and the Virtual Acoustic Ocean."
 date: 14/09/2026
 author: Mandar Chitre
 categories: info

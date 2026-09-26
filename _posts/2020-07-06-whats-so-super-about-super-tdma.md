@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: What's so &quot;super&quot; about Super-TDMA ?
+description: "Long propagation delays usually hurt underwater acoustic networks. Super-TDMA is a MAC protocol that schedules transmissions to exploit them instead."
 date: 06/07/2020
 author: Prasad Anjangi
 categories: howto

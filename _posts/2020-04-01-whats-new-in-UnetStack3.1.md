@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: What's new in UnetStack 3.1?
+description: "UnetStack 3.1 adds dashboards, a localization framework, redefined routing, link-state information, wormholes, Unity spatial diversity and more."
 date: 1/4/2020
 author: Mandar Chitre
 categories: info

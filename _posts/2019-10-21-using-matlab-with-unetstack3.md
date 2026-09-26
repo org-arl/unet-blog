@@ -1,7 +1,8 @@
 ---
 layout: post
 comments: true
-title: Using MATLAB with UnetStack3
+title: "Controlling an acoustic modem from MATLAB with UnetStack"
+description: "Connect MATLAB to a UnetStack modem through the UnetSocket API to transmit and receive frames and signals, and analyse the results in MATLAB."
 date: 21/10/2019
 author: Prasad Anjangi
 categories: howto

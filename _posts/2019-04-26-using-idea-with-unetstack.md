@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Using IntelliJ IDEA with UnetStack
+description: "Set up IntelliJ IDEA to develop, run and debug UnetStack agents, as a more powerful alternative to the bundled UnetIDE for larger projects."
 date: 26/4/2019
 author: Arnav Dhamija
 categories: howto

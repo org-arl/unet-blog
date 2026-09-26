@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Developing location agent for UnetStack
+description: "Build a UnetStack agent that reads NMEA data from a GPS server and keeps the modem's location up to date, so field experiments log accurate positions."
 date: 14/09/2018
 author: Manu Ignatius
 categories: howto

@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Scheduling transmissions intelligently in UnetStack enabled modems
+description: "Automate transmissions on a UnetStack modem, such as periodic position updates, and trigger actions on reception, for hands-off testing at sea."
 date: 31/5/2021
 author: Manu Ignatius
 categories: howto

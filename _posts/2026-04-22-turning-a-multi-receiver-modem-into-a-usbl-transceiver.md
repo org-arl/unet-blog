@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Turning a Multi-Receiver Modem into a USBL Transceiver
+description: "Use a multi-receiver acoustic modem as a USBL system to track an AUV's range and bearing with the same hardware you communicate with. Step-by-step setup."
 date: 22/04/2026
 author: Simon Etter, Manu Ignatius
 categories: howto

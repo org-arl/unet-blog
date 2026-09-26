@@ -1,7 +1,8 @@
 ---
 layout: post
 comments: true
-title: Synchronizing physical clocks among different UnetStack-based modems
+title: "Synchronizing clocks between UnetStack modems"
+description: "Measure and compensate clock offset and drift between acoustic modems using phy.time, with a worked calibration example in UnetStack."
 date: 28/6/2021
 author: Prasad Anjangi
 categories: howto

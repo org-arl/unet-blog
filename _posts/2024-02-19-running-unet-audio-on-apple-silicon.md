@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Running Unet audio on Apple silicon
+description: "Set up Unet audio on a Mac with an Apple silicon (M-series) chip, including the macOS security permissions it needs, to use your sound card as a modem."
 date: 14/02/2024
 author: Chinmay Pendharkar
 categories: howto

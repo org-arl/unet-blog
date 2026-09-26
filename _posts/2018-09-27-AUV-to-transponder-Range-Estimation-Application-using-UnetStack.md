@@ -1,7 +1,8 @@
 ---
 layout: post
 comments: true
-title: AUV-to-transponder range estimation application using UnetStack
+title: "Ranging to an underwater transponder from an AUV"
+description: "Use a UnetStack modem to ping a standard underwater transponder and estimate its range, a building block for locating assets during search and recovery."
 date: 27/9/2018
 author: Manu Ignatius
 categories: howto

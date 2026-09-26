@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Simulating motion in Unet Simulator
+description: "Simulate moving underwater nodes in the Unet simulator, from the built-in NodeInfo dynamics model to fully custom motion functions."
 date: 27/4/2021
 author: Chinmay Pendharkar
 categories: howto
