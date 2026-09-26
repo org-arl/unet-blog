@@ -16,23 +16,23 @@ When we ask a room of subsea robotics developers and users how many have used un
 
 For a long time, skepticism about acoustic links was justified. They were fragile, unreliable, and unpredictable. But technology has evolved. With the right choices and a bit of discipline, it is now possible to achieve robust, dependable connectivity that not only supports communication but also navigation. In fact, when we use the word connectivity, we mean both. Acoustics underpins them together. Aerial drones exploded in use partly because of easy communication and GPS navigation. Underwater vehicles, by contrast, have been held back because we lacked the same level of confidence in connectivity. We believe that can change.  
 
-# The Basics
+## The Basics
 
-## Why Acoustics?
+### Why Acoustics?
 
 Radio and most light simply don’t travel well underwater. Even visible light in clear water only gets you tens of meters; in turbid coastal waters like Singapore, it is even less. Acoustics, on the other hand, propagate hundreds of meters, to tens of kilometers. Frames typically contain a preamble, data modulated onto a carrier, error correction, and checksums. Robust incoherent modulation schemes work well for commands and telemetry, while coherent modulation schemes are needed for images and high-rate data. Forward Error Correction (FEC) and erasure codes add robustness without long feedback cycles. This is critical because sound travels so much slower than light.
 
-## Acoustic communication
+### Acoustic communication
 
 When we talk about frames and packets underwater, it is useful to be precise. A packet is a unit of data, but modems often fragment it into smaller frames for transmission. Each frame has its own preamble, data, and error check. On the receiving side, fragments are reassembled into the original packet. Because underwater channels lose frames more often, we need mechanisms to deal with the loss. Automatic Repeat Request (ARQ) is one approach: the receiver asks for specific lost fragments to be re-sent. But given the long propagation delays, this can waste valuable time. Erasure correction coding provides another option: by adding some extra parity frames at the start, the receiver can reconstruct the whole packet as long as it collects enough of the transmitted frames, even if a few are missing. This avoids the need to wait for a round-trip of acknowledgements, which can often take long underwater.
 
 Next, there are also some terms that we need to define clearly. Robustness refers to the chance that a packet crosses cleanly the first time, without errors. Reliability, on the other hand, is the end-to-end guarantee that comes from feedback and retransmission if needed. Both are useful, but they come with different costs. Similarly, we care not about raw link rate, which is the number printed in the datasheet, but about throughput or “goodput”: the actual amount of useful data delivered correctly. A link claiming tens of kilobits per second may in practice give you only a fraction of that once protocol overheads and frame loss are accounted for. Understanding these distinctions avoids confusion when comparing modems or planning missions.
 
-## Acoustic navigation
+### Acoustic navigation
 
 Navigation is built on the same acoustic signals. The simplest method is two-way travel time ranging: one device transmits, the other responds, and the round-trip time divided by two gives you a range. With synchronized clocks, we can also do one-way travel time ranging, which halves the time taken for ranging, and reduces energy usage (but requires very stable oscillators). Using several surface nodes with GPS, we can build long-baseline (LBL) systems, where either the topside knows the vehicle’s location or the vehicle computes it itself in “inverse LBL.” With a single beacon, compact Ultra-Short Baseline (USBL) systems estimate bearing and range together, and again, they can be configured in normal or inverse modes depending on where you want the computation to happen. These methods are mature and well-proven in underwater systems, but they still face practical challenges in real deployments—from multipath and synchronization drift to environmental variability—so it’s important to account for these factors early in your system design.
 
-# Why doesn't it “just work”?
+## Why doesn't it “just work”?
 
 Many people are surprised when an underwater modem doesn’t “just work.” The reason is that the ocean is an entirely different medium from the air or fiber networks we are used to. Bandwidth is scarce, signals bounce off the surface and seabed creating echoes, vehicle motion causes Doppler, and noise from ships or even snapping shrimp can overwhelm weak signals. On top of this, sound travels 200,000 times slower than light, so protocols designed for the Internet break down. Unless these realities are accounted for, what looks good on paper quickly fails at sea.
 
@@ -40,11 +40,11 @@ One of the most useful ways we have found to explain the pitfalls is through a s
 
 These are practical steps starting from the technology choices you make, through integration and planning, and extending into advanced adaptive techniques that, if followed, can transform underwater communication from a gamble into something you can rely on.
 
-# The five levels of confidence
+## The five levels of confidence
 
 These five levels capture the progression from basic design decisions to advanced adaptive techniques that push performance further. The first three are essential; the last two are advanced. In this first part, we’ll cover the first three.
 
-## Level 1: Technology choices
+### Level 1: Technology choices
 
 Before you even build or buy, the technology choices you make set the upper bound for what your system can achieve. The first and most important is the frequency band. Higher frequencies in the hundreds of kiloHertz give you short-range but high-rate links, suitable for a few hundred meters and applications like image or file transfer. Mid-range frequencies in the tens of kiloHertz are the workhorse for kilometre-scale missions. At the other end, only a few kiloHertz will carry over tens of kilometres, but at the cost of data rate. Every choice is a trade-off between absorption, ambient noise, and usable bandwidth, so you need to pick the sweet spot that matches your mission profile. As shown in Figure 1, sound attenuation in warm shallow waters increases steeply with frequency. This relationship is what drives the trade-off between range and data rate when selecting an operating band.
 
@@ -63,7 +63,7 @@ Beyond frequency, power, and modulation, there are also important choices in how
 
 And if navigation is part of your mission, you also need to decide upfront whether the system should support ranging and localization, whether it can provide synchronized time across nodes, and how stable the clocks are in practice. These capabilities determine not just how you communicate, but how you localize vehicles underwater, so they must be considered at the same stage as frequency bands and modulation schemes.
 
-## Level 2: Integration hygiene
+### Level 2: Integration hygiene
 
 When it comes to mechanical integration, factors such as the placement of the transducer plays an important role. Simply mounting it wherever there is space on a vehicle rarely works well. Thrusters generate noise and, more critically, microbubbles that persist in the water and scatter sound, destroying coherent links even when SNR looks good. Flow noise from fast-moving vehicles, vibrations from mechanical structures, and even the rigidity of the mounting bracket all contribute to degraded performance. We have seen vehicles that lost their link whenever they moved away from the ship, only to recover it as soon as they turned slightly, simply because their thruster wake sat directly in the acoustic path. The wake was filled with microbubbles that scattered and distorted the sound waves, severely degrading the signal even though the signal-to-noise ratio appeared good. Paying attention to transducer location and characterizing flow and thruster noise early in the integration process prevents many of these headaches. Ambient noise in the operating environment can also vary dramatically, shipping lanes, construction sites, and even biological sources like snapping shrimp can raise the noise floor and reduce performance. On top of this, interference from other acoustic systems, whether they are echo sounders, sonars, or other modems, can overlap with your own signals if frequencies are not coordinated. Factoring these acoustic neighbours into integration and deployment decisions is critical.
 
@@ -98,7 +98,7 @@ while (true) {
 
 By tagging data this way, we give the modem the context it needs to adapt to current conditions, compressing an image if bandwidth is poor, discarding stale telemetry instead of wasting airtime, or prioritizing urgent commands. This transforms software integration from a simple “pipe” to a smarter, adaptive communication framework that supports confident operation in real-world deployments.
 
-## Level 3: Deployment planning
+### Level 3: Deployment planning
 
 Deployment planning is where theory meets the ocean, and it makes a huge difference to communication performance. Many users ask a simple question: what range will I get with this modem? Unfortunately, the answer is never a single number. Communication performance depends on much more than just distance. It is shaped by depth, bottom type, water column properties, and geometry. Acoustic energy refracts, reflects, and cancels in ways that create “hot spots” and “dark zones.” A link that looks strong at 500 meters might vanish entirely at 800 meters, only to return at 1,200 meters. Planning missions without considering this variability often leads to surprises in the field.
 

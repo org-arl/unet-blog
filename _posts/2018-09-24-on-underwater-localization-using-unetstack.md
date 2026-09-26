@@ -37,11 +37,11 @@ Node 3 --> Target node which needs to be localized
 At this point, a natural question that arises is how to convert the GPS coordinates to local coordinates.
 
 #### Using `Location` agent in UnetStack
-UnetStack comes equipped with `NodeInfo` agent and `NODE_INFO` service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. A simple Unet agent that will update the location parameter of the node agent, in a periodic manner using the GPS data stream from a GPS server running on terrestrial network is available as part of UnetStack as `Location` agent. The interested reader may find this [blog on developing `Location` agent](https://blog.unetstack.net/Developing-location-agent-for-UnetStack) useful for more details. The `Location` agent converts the GPS coordinates to local coordinate system and maintains it in the `location` parameter of the `NodeInfo` agent.
+UnetStack comes equipped with `NodeInfo` agent and `NODE_INFO` service that will keep track of the modem location (as well as other parameters like speed, heading etc.), which can be used to geotag individual transmissions or receptions. A simple Unet agent that will update the location parameter of the node agent, in a periodic manner using the GPS data stream from a GPS server running on terrestrial network is available as part of UnetStack as `Location` agent. The interested reader may find this [blog on developing `Location` agent](https://blog.unetstack.net/developing-location-agent-for-unetstack) useful for more details. The `Location` agent converts the GPS coordinates to local coordinate system and maintains it in the `location` parameter of the `NodeInfo` agent.
 
 ## Open connection to the modem or real-time simulator
 
-For the purpose of illustration, we deploy a 3-node network in [Unet simulator](https://www.unetstack.net/downloads.html) as per the locations in the above-shown figure. We connect to the Node 1 running on localhost port 1101 and Node 2 running on localhost port 1102.
+For the purpose of illustration, we deploy a 3-node network in [Unet simulator](https://unetstack.net/#downloads) as per the locations in the above-shown figure. We connect to the Node 1 running on localhost port 1101 and Node 2 running on localhost port 1102.
 
 
 ```python
