@@ -12,7 +12,7 @@ tags: [howto, modems, auv]
 
 In part 1, we discussed the first three levels, technology choices, integration hygiene, and deployment planning. Those alone get you most of the way to confident connectivity. In this post, we’ll describe the last two levels, where systems adapt in real time and missions flex slightly to help communication.  
 
-## Level 4: Adaptive communication links
+### Level 4: Adaptive communication links
 
 Once a vehicle is in the water, the ocean reveals its true character. Conditions change with depth, movement, and even the passing of ships. Instead of locking parameters before deployment, we can let the modem adapt in real time. Adaptive modulation schemes allow the system to step down to more robust modes when multipath or Doppler is high, and step up again when the channel clears to deliver higher throughput. Similarly, error control coding can be tuned dynamically: adding more redundancy when losses rise, and trimming it back to recover data rate when the link is clean. Erasure codes are particularly useful underwater; they let us transmit a little extra upfront, so the receiver can reconstruct the message even if several frames are lost, without the delay of waiting for acknowledgements. Together, these adaptive techniques turn a static link into one that bends with the ocean instead of breaking against it.
 
@@ -20,7 +20,7 @@ Adaptivity is not only about modulation; it’s also about choosing the right li
 
 All of these adaptive behaviours—whether changing modulation and coding in real time, dynamically routing across multiple links, or delivering content based on link availability—are already supported in UnetStack. In this article, we’ve focused on the why and what of adaptive communication, but in future blogs, we’ll dive into the how: demonstrating how these ideas are implemented in UnetStack.
 
-## Level 5: Adaptive command and control
+### Level 5: Adaptive command and control
 
 The highest level of confidence comes when vehicles themselves adapt their missions based on feedback from the communication system. Instead of treating comms as an independent subsystem, we can use information about link quality to make small but meaningful changes in behaviour. For example, if the modem detects that the channel is degrading, the vehicle might pause bulk transfers, climb or dive a few metres to escape a dead zone, or slightly adjust its course to maintain better connectivity. These interactions are illustrated in Figure 1, which shows how different onboard agents—command and control (C2), network, and sensing—communicate with each other to adjust plans dynamically. By keeping this feedback loop lightweight and local, vehicles can preserve their mission goals while still giving the communication system a chance to perform optimally. This idea of adaptive mission execution moves connectivity from being a fragile dependency to becoming an active part of mission planning.
 
@@ -46,7 +46,7 @@ Figure 4: Predicted signal strength integrated over the 9– 14 kHz band, over t
 
 This work demonstrates how data and physics can come together to make underwater communication systems proactive rather than reactive. Instead of waiting for a link to fail and then compensating, vehicles can now anticipate when and where communication will degrade, and adjust before it happens. These predictions close the loop between perception and control—turning what was once a static channel model into a living part of the mission logic. Combined with the adaptive mission behaviours discussed earlier, such models make it possible for underwater vehicles to plan smarter routes, schedule transfers more intelligently, and ultimately operate with a level of confidence that was previously out of reach.
 
-# Putting it all together
+## Putting it all together
 
 When you add adaptation to the first three levels, the operating picture changes. Operators declare intent and monitor goodput, not tweak knobs. Vehicles help themselves with minor depth or timing shifts. Multi-link stacks exploit whatever the environment offers. Most importantly, the link stops being an unreliable afterthought, and starts being trusted.  
 

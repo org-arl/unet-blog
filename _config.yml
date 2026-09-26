@@ -1,5 +1,5 @@
 # SITE CONFIGURATION
-url: "blog.unetstack.net"
+url: "https://blog.unetstack.net"
 baseurl: ""
 title: Unet Blog # site's title
 description: "The Underwater Networks Project" # used by search engines
@@ -37,7 +37,7 @@ theme_settings:
 
   navbar_links:
     UnetStack:
-      url: "https://www.unetstack.net/"
+      url: "https://unetstack.net/"
       enabled: true
     Unet-Contrib:
       url: "https://github.com/org-arl/unet-contrib"
@@ -95,6 +95,6 @@ highlighter: rouge
 sass:
   sass_dir: _sass
   style: :compressed
-plugins: [jekyll-paginate, jekyll-seo-tag]
+plugins: [jekyll-paginate, jekyll-seo-tag, jekyll-sitemap]
 #theme: type-on-strap # Uncomment if using the theme as a jekyll theme gem
-exclude: ["LICENSE", "README.md", "screenshot.png", "gulpfile.js", ".idea/*"]
+exclude: ["LICENSE", "README.md", "screenshot.png", "gulpfile.js", ".idea/*", "Makefile", "support"]

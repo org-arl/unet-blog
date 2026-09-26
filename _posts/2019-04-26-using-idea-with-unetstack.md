@@ -18,7 +18,7 @@ IntelliJ IDEA Community edition can be downloaded for free from the [IntelliJ do
 
 `sudo snap install intellij-idea-community --classic`
 
-Following this, download the latest copy of UnetStack for your operating system from [here](https://www.unetstack.net/downloads.html). Extract the files in a directory of your choice.
+Following this, download the latest copy of UnetStack for your operating system from [here](https://unetstack.net/#downloads). Extract the files in a directory of your choice.
 
 From here, we can look at how we can create a new `UnetAgent` using IntelliJ.
 
@@ -69,7 +69,7 @@ Create a new Groovy Class in the `src/` directory of your project by right-click
 
 ![](assets/img/idea-setup/project.png)
 
-In this example, the agent we're writing will be called `AwesomeAgent.groovy`. The code for it is below. For more information about writing agents, refer to the Unet [documentation](https://www.unetstack.net/unet-agents.html).
+In this example, the agent we're writing will be called `AwesomeAgent.groovy`. The code for it is below. For more information about writing agents, refer to the Unet [documentation](https://unetstack.net/handbook/unet-handbook_developing_your_own_agents.html).
 
 ```groovy
 import org.arl.fjage.Message

@@ -28,9 +28,11 @@
 
     .site-title {
         float: left;
+        font-family: $font-family-headings;
         font-weight: bold;
         font-size: 1em;
         line-height: 1.5;
+        margin: 0;
     }
 
     nav {

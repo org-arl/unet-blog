@@ -33,13 +33,13 @@ There are two major problems to be addressed to synchronize clocks among differe
 
 > NOTE: The 20% clock drift shown in the figure is for illustration purpose only. In practice, the clock drift is expected to be much smaller in parts per million.
 
-# Compensating for clock offset
+## Compensating for clock offset
 
 The `Ranging` agent in UnetStack running on the modem generates the clock offset information based on the message exchanges when range measurement is performed on the modem that initiates ranging. The clock offset between the two modems is populated in the ranging agent's parameter `ranging[host('B')].offset`. Where `host('B')` is the node address of modem B. More details on this can be found [here](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html). 
 
 Once, the clock offset is known, it can be used to adjust the time locally to synchronize the physical time (`phy.time`). However, if a low-drift clock is not used, there is a possibility that the clocks tick at different rates, and clocks drift faster. Let us take a look at how we can compensate for the clock drift next.
 
-# Compensating for clock drift
+## Compensating for clock drift
 
 Since the modems might tick at different rates, one modem's clock may be faster than the other. An example is shown in the figure above where Modem A's clock is faster than Modem B, i.e., a slope of 1.2 on Modem A's clock. To compensate for this, the user of the modem can utilize a `phy.clockCalib` parameter. This parameter is a multiplier on the physical clock. So its default value is 1. If you set it to 1.2 the clock will run at 1.2x the rate of the actual hardware clock.
 
@@ -48,7 +48,7 @@ Therefore, to compensate Modem A's clock to run slower so that it matches Modem 
 
 The users of the modem should make measurements to figure out the nomimal values that they should set for `phy.clockCalib`. 
 
-# An example of calibrating clock
+## An example of calibrating clock
 
 We will consider two modems A and B for this example. To synchronize modem A's clock with the modem B's clock the following procedure may be followed:
 
@@ -136,7 +136,7 @@ phy.clockCalib = mB/mA
 
 > NOTE: The RTCs are long-term synchronized through mechanism such as Network Time Protocol (NTP) and therefore provide stability for clock calibration.
 
-# Calibrating clock without relying on RTC
+## Calibrating clock without relying on RTC
 
 In the earlier section we relied on NTP to provide stability to the RTC clock which was used as a reference for clock calibration. However, in cases where there is no such means (e.g. NTP) to provide long-term synchronization for RTC, we can measure and compare the clocks of the two modems directly. In this section, we describe through a simple python script on how one can achieve this. 
 
