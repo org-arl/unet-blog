@@ -20,7 +20,7 @@ layout: default
       </div>
     </p>
   </header>
-  <section class="post-content">{{ content }}</section>
+  <section class="post-content">{{ content | replace: '<img ', '<img loading="lazy" decoding="async" ' }}</section>
 </article>
 <!-- Post navigation -->
 {% if site.theme_settings.post_navigation %}
