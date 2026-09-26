@@ -32,7 +32,7 @@ theme_settings:
   youtube:  "UCnwSva23AuUCFPqgI0kPvdw"
 
   # Scripts / Features
-  google_analytics: "UA-52885583-1" # Tracking ID, e.g. "UA-000000-01"
+  google_analytics: # Cloudflare Web Analytics is auto-injected at the edge
   katex: true # Enable if using math markup
 
   navbar_links:
