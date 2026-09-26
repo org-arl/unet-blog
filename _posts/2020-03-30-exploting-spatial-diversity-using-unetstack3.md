@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Exploiting Distributed Spatial Diversity Using UnetStack
+description: "Improve underwater link reliability by combining receptions from nearby nodes. How distributed spatial diversity works and how to enable Unity in UnetStack."
 date: 30/03/2020
 author: Prasad Anjangi
 categories: howto

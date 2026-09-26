@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Developing modem drivers for UnetStack
+description: "How to write a UnetStack driver for an acoustic modem it doesn't support yet, using a simple serial (RS232) modem as a worked example."
 date: 15/8/2018
 author: Mandar Chitre
 categories: howto

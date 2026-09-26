@@ -1,7 +1,8 @@
 ---
 layout: post
 comments: true
-title: Low-cost DIY underwater modem using COTS components and Unet audio
+title: "Build a low-cost DIY underwater acoustic modem"
+description: "Build an underwater acoustic modem for under USD 300 from a Raspberry Pi, USB sound card, amplifier and hydrophone, running UnetStack's Unet audio."
 date: 14/9/2022
 author: Manu Ignatius, Sukanta K. Hazra
 categories: howto

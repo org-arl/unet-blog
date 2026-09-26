@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Harnessing the power of Julia in UnetStack — Part I
+description: "Talk to UnetStack from Julia with UnetSockets.jl and Fjage.jl, then transmit and receive baseband signals and process them in Julia."
 date: 28/08/2020
 author: Mandar Chitre
 categories: howto

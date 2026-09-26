@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Developing your own acoustic PHY with UnetStack
+description: "Implement a custom physical layer on a software-defined open architecture modem with UnetStack: modulation, detection and demodulation in Groovy or Java."
 date: 31/10/2020
 author: Mandar Chitre
 categories: howto

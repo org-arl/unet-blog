@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: What's new in UnetStack3?
+description: "UnetStack 3 adds a software-defined modem that runs on a laptop, web-based tools, JANUS support and APIs for Python, Java, JavaScript and more."
 date: 26/9/2019
 author: Mandar Chitre
 categories: info

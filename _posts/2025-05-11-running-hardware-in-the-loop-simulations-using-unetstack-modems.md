@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Running Hardware-in-the-Loop Simulations Using UnetStack Modems
+description: "Test real acoustic modems against a simulated ocean channel with UnetStack and the Virtual Acoustic Ocean, before committing to sea trials."
 date: 11/06/2025
 author: Manu Ignatius
 categories: howto

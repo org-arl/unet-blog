@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Converting your laptop into a JANUS modem using Unet audio
+description: "Use Unet audio and your computer's sound card as an acoustic modem that speaks JANUS, the NATO underwater communications standard. No extra hardware needed."
 date: 06/12/2020
 author: Manu Ignatius
 categories: howto

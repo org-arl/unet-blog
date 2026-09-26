@@ -1,7 +1,8 @@
 ---
 layout: post
 comments: true
-title: On underwater localization using UnetStack
+title: "Underwater localization with UnetStack"
+description: "GPS doesn't work underwater. Learn how to localize nodes with acoustic ranging in UnetStack, with a worked 3-node example in the Unet simulator."
 date: 24/9/2018
 author: Prasad Anjangi
 categories: howto

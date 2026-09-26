@@ -8,13 +8,13 @@
     <meta name="twitter:site" content="@unetstack" />
     <meta name="twitter:creator" content="@unetstack" />
     <meta name="twitter:image" content="{{ page.feature-img | absolute_url }}" />
-     <meta name="twitter:description" content="{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
+     <meta name="twitter:description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
 
     <meta property="og:title" content="{{ page.title }}" />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="{{ page.url | replace:'index.html','' | absolute_url }}" />
     <meta property="og:image" content="{{ page.feature-img | absolute_url }}" />
-    <meta property="og:description" content="{{ page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
+    <meta property="og:description" content="{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 160 | escape }}" />
 
     <!-- Main JS (navbar.js, katex_init.js)-->
     <script defer=true src="{{ site.baseurl }}/assets/js/main.min.js"></script>

@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Frequency band control using UnetStack
+description: "Match your acoustic modem's transmit band to its transducer: how to set the carrier frequency and bandwidth of PHY schemes in UnetStack, with examples."
 date: 21/04/2021
 author: Shiraz S
 categories: howto

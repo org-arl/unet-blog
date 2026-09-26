@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Acoustic Communication and Navigation for Subsea Robotics — Part 2
+description: "The last two levels of confident underwater connectivity for subsea robots: adaptive communication links and adaptive command and control."
 date: 17/12/2025
 author: Manu Ignatius, Mandar Chitre
 categories: howto

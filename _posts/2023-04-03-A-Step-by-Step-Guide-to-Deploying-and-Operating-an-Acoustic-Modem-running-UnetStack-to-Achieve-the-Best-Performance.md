@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: A Step-by-Step Guide to Deploying and Operating an Acoustic Modem running UnetStack to Achieve the Best Performance
+description: "Field guide to deploying a pair of UnetStack acoustic modems: test the link with ping, tell and speedtest, tune it, pick profiles and troubleshoot."
 date: 3/4/2023
 author: Manu Ignatius
 categories: howto

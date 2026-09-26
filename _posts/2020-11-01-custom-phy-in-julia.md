@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: Harnessing the power of Julia in UnetStack — Part II
+description: "Rewrite the signal processing of a custom UnetStack acoustic PHY in Julia, keeping the agent in Groovy, for faster and easier algorithm development."
 date: 01/11/2020
 author: Mandar Chitre
 categories: howto

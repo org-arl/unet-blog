@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: What's new in UnetStack 3.3?
+description: "UnetStack 3.3 adds JSON event logging for protocol analysis, signal strength and noise reporting in the simulator, and experimental Julia agents."
 date: 1/4/2021
 author: Mandar Chitre
 categories: info

@@ -2,6 +2,7 @@
 layout: post
 comments: true
 title: 12 cool things about UnetStack simulator you probably didn't know
+description: "Practical Unet simulator tips: simulation time and clocks, random node placement, GPS coordinates, PDU encoding, plotting with MATLAB and more."
 date: 24/7/2019
 author: Mandar Chitre, Manu Ignatius
 categories: howto
