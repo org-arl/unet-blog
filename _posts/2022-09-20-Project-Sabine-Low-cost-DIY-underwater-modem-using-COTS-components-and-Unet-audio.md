@@ -36,7 +36,7 @@ A modem has three main functions
 
 To transmit a message, the user can use the various interfaces provided by Unet audio such as the web interface, shell, or various APIs in a variety of computer languages such as Java, Groovy, Python, C, Julia, Javascript, etc. The same interfaces can be used to configure various communication parameters to achieve the best performance in a given environment.
 
-> NOTE: UnetStack refers to a collection of technologies for extending networks underwater of which Unet audio is one of the components. An interested user may refer to the [Unet handbook](https://unetstack.net/handbook/unet-handbook_unet_basics.html) to gain a deeper understanding of it.
+> NOTE: UnetStack refers to a collection of technologies for extending networks underwater of which Unet audio is one of the components. An interested user may refer to the [Unet handbook](https://unetstack.net/handbook-ed1v3/unet-handbook_unet_basics.html) to gain a deeper understanding of it.
 
 The user-provided data is then converted to passband signals in Unet audio. This includes transport and network layer processing (as required), fragmentation and reassembly, forward error correction (FEC), modulation, and demodulation depending on the communication scheme used. The passband signal (digital) is then converted to an analog signal using a sound card and passed through a power amplifier before being fed to the transducer/underwater speaker for transmission through the medium.
 

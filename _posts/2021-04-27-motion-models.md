@@ -15,7 +15,7 @@ The Unet simulator supports various ways of simulating the motion of the simulat
 
 ## Dynamics Model
 
-The [NodeInfo](https://unetstack.net/handbook/unet-handbook_node_information.html) agent (which is typically run in each simulated node) implements a basic dynamics model. The functionality can be turned on using the [mobility parameter](https://unetstack.net/javadoc/3.2/org/arl/unet/nodeinfo/NodeInfo.html#setMobility(boolean)) which can be set in a simulation script or directly on the `NodeInfo` agent in a running simulation. 
+The [NodeInfo](https://unetstack.net/handbook-ed1v3/unet-handbook_node_information.html) agent (which is typically run in each simulated node) implements a basic dynamics model. The functionality can be turned on using the [mobility parameter](https://unetstack.net/javadoc/3.2/org/arl/unet/nodeinfo/NodeInfo.html#setMobility(boolean)) which can be set in a simulation script or directly on the `NodeInfo` agent in a running simulation. 
 
 When `mobility` is enabled, the `NodeInfo` agent automatically updates its `location` parameter based on motion parameters such as `speed` and `heading` using the simple dynamics model. This can be handy to simulate the motion of a node, for example, an AUV swimming away from an underwater modem.
 
@@ -32,11 +32,11 @@ node.speed = 10
 
 ![](assets/img/mobility/node.jpg)
 
-Most [channel models](https://unetstack.net/handbook/unet-handbook_modems_and_channel_models.html#_channel_models) in UnetStack take into account the distance between the nodes for calculating successful receptions. Hence simulating the motion of nodes in a network simulation can be very useful to measure and verify network behavior and performance more accurately.
+Most [channel models](https://unetstack.net/handbook-ed1v3/unet-handbook_modems_and_channel_models.html#_channel_models) in UnetStack take into account the distance between the nodes for calculating successful receptions. Hence simulating the motion of nodes in a network simulation can be very useful to measure and verify network behavior and performance more accurately.
 
 ## Setpoints
 
-While the NodeInfo agent only exposes a basic dynamics model, the Unet simulation scripts allow for much more control by letting the user set a series of Setpoints of motion parameters on a node. This is done using the `motionModel` parameter on the `node` Object in the simulation script. The Unet Handbook has a few examples of this in [Chapter 30](https://unetstack.net/handbook/unet-handbook_writing_simulation_scripts.html#_node_mobility). 
+While the NodeInfo agent only exposes a basic dynamics model, the Unet simulation scripts allow for much more control by letting the user set a series of Setpoints of motion parameters on a node. This is done using the `motionModel` parameter on the `node` Object in the simulation script. The Unet Handbook has a few examples of this in [Chapter 30](https://unetstack.net/handbook-ed1v3/unet-handbook_writing_simulation_scripts.html#_node_mobility). 
 
 Setting `motionModel` to a `List` of `Maps` with various motion properties for each of the Setpoint will automatically set the properties onto the `NodeInfo` agent in the simulated node at/for the appropriate time/duration. This in turn drives the dynamics model in the `NodeInfo` agent, giving the interpolated location between the Setpoints. 
 

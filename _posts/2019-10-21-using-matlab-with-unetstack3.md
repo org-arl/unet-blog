@@ -101,7 +101,7 @@ In MATLAB, open a unet socket connection to the modem (e.g. 192.168.0.42):
 >> sock = org.arl.unet.api.UnetSocket('192.168.0.42', 1100)
 ```
 
-The `sock` object can be used to send and receive datagrams as explained in more detail in the [unet handbook](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html).
+The `sock` object can be used to send and receive datagrams as explained in more detail in the [unet handbook](https://unetstack.net/handbook-ed1v3/unet-handbook_unetsocket_api.html).
 
 
 ### Access the gateway class

@@ -19,13 +19,13 @@ As we expanded UnetStack this way, people were able to do a lot more with it. Ho
 
 UnetStack 7 brings all of that work to the community release, and to several commercial offerings from Subnero.
 
-There is a lot more in v7 than we can fit into one article. So we'll look at the things we think matter most, mention a few smaller ones in passing, and leave the rest for you to find in the [new handbook](https://org-arl.github.io/unet/handbook/).
+There is a lot more in v7 than we can fit into one article. So we'll look at the things we think matter most, mention a few smaller ones in passing, and leave the rest for you to find in the [new handbook](https://unetstack.net/handbook/).
 
-Given that UnetStack 7 is a major release, some of your UnetStack 3 code may need porting. We did not make breaking changes lightly. The way UnetStack works is unchanged -- agents talk to each other using messages, agents provide services, and you can access the stack from the shell, from scripts, or through UnetSockets. What has changed is that several APIs and message contracts have been tidied up, so that agents and applications can depend on consistent behavior rather than provider-specific quirks. A few new services have been added to support exciting new features. If you have existing code, start with the [What's changed since v3?](https://org-arl.github.io/unet/handbook/A1_porting.html) chapter in the handbook.
+Given that UnetStack 7 is a major release, some of your UnetStack 3 code may need porting. We did not make breaking changes lightly. The way UnetStack works is unchanged -- agents talk to each other using messages, agents provide services, and you can access the stack from the shell, from scripts, or through UnetSockets. What has changed is that several APIs and message contracts have been tidied up, so that agents and applications can depend on consistent behavior rather than provider-specific quirks. A few new services have been added to support exciting new features. If you have existing code, start with the [What's changed since v3?](https://unetstack.net/handbook/A1_porting.html) chapter in the handbook.
 
 ## What changed, at a glance
 
-The [default stack](https://org-arl.github.io/unet/handbook/301_stack.html) looks a little different now:
+The [default stack](https://unetstack.net/handbook/301_stack.html) looks a little different now:
 
 | | v3 (community / OEM) | v7 (community / OEM) |
 |---|---|---|
@@ -36,7 +36,7 @@ The [default stack](https://org-arl.github.io/unet/handbook/301_stack.html) look
 
 So, `ECLink`, which was previously only available to OEM users, is now available to all users. `Caddy` is a brand new agent that provides production-grade transport and remote access services, with `CaddyLite` being a community version with a few QoS-related features trimmed down.
 
-There are also three new services -- [`LINK_TUNING`](https://org-arl.github.io/unet/handbook/308_tuner.html), [`DEVICE_INFO`](https://org-arl.github.io/unet/handbook/316_device.html) and [`DOA`](https://org-arl.github.io/unet/handbook/314_doa.html) -- and a number of smaller changes:
+There are also three new services -- [`LINK_TUNING`](https://unetstack.net/handbook/308_tuner.html), [`DEVICE_INFO`](https://unetstack.net/handbook/316_device.html) and [`DOA`](https://unetstack.net/handbook/314_doa.html) -- and a number of smaller changes:
 
 - Datagrams addressed to a node are now published on the global `Topics.DATAGRAM` topic, while provider topics only carry overheard traffic (previously on `Physical.SNOOP`) and other informational notifications (e.g. bad receptions).
 - Some messages, parameters and fields have been renamed for consistency. For example, `DatagramCancelReq` is now `CancelReq`, and `DatagramProgressNtf` is now `ProgressNtf`. Node orientation uses `yaw` and `yawRate` instead of `heading` and `turnRate`, with 0° = East, measured anticlockwise.
@@ -88,7 +88,7 @@ The service contracts are now stable enough that a Julia agent can implement one
 
 ## 2. PHYSICAL and BASEBAND services
 
-An agent like the one above is only easy to write because UnetStack 7 draws a much clearer line between the [`PHYSICAL`](https://org-arl.github.io/unet/handbook/305_phy.html) and [`BASEBAND`](https://org-arl.github.io/unet/handbook/315_bb.html) services. If you have ever wondered where framing ends and signal processing begins, this release answers the question.
+An agent like the one above is only easy to write because UnetStack 7 draws a much clearer line between the [`PHYSICAL`](https://unetstack.net/handbook/305_phy.html) and [`BASEBAND`](https://unetstack.net/handbook/315_bb.html) services. If you have ever wondered where framing ends and signal processing begins, this release answers the question.
 
 `PHYSICAL` deals with frames, and it does so on four named channels: `CONTROL` is a low-rate but robust channel for signalling and small control messages, `DATA` is a higher-rate channel for bulk transfers, `AUX` is for standardized schemes, and `CUSTOM` is yours to use as you please. Each is an indexed parameter set, so you can simply ask for `phy[CONTROL].dataRate` or `phy[DATA].MTU` instead of having to know it. The messages are correspondingly tidy: `TxFrameReq` to transmit, `RxFrameNtf` when a frame is decoded, `BadFrameNtf` when a frame is detected but cannot be decoded, and `TxFrameStartNtf` and `RxFrameStartNtf` to mark exactly when transmission and reception started. Those last two are what ranging and navigation are built on.
 
@@ -102,7 +102,7 @@ The practical result is that writing a custom PHY is now a well-defined job. You
 
 ## 3. ECLink and Router
 
-`ECLink` is not new -- premium users have had it for some time. What is new is that it is now the default underwater acoustic [link](https://org-arl.github.io/unet/handbook/306_link.html) in the community release, replacing `ReliableLink`. It is still accessed as `uwlink`, and provides the same services, but it behaves rather better.
+`ECLink` is not new -- premium users have had it for some time. What is new is that it is now the default underwater acoustic [link](https://unetstack.net/handbook/306_link.html) in the community release, replacing `ReliableLink`. It is still accessed as `uwlink`, and provides the same services, but it behaves rather better.
 
 The problem it solves is that stop-and-wait does not suit the ocean. If you acknowledge each fragment before sending the next, every fragment costs a round trip, and underwater a round trip is seconds rather than milliseconds. Most of your airtime is spent waiting for sound to travel.
 
@@ -112,7 +112,7 @@ The problem it solves is that stop-and-wait does not suit the ocean. If you ackn
 
 The stack is also a lot more forthcoming about what it knows. `uwlink[peer]` tells you about the transfer currently in progress with that neighbour -- `to`, `from`, `size`, `progress` and `status` -- so a monitoring agent or a user interface can just ask, instead of working it out from notifications.
 
-The [router](https://org-arl.github.io/unet/handbook/309_router.html) does the same for each destination. Every route carries a `metric`, along with `hops`, `dataRate`, `reliability`, `MTU` and `RTU`, so choosing a route is a decision based on more than just a hop count. If our default trade-off between hops and data rate isn't the one you want, you can supply your own metric as a closure. Routes marked `auto` enable and disable themselves as `LinkStatusNtf` messages report links coming up and going down. Disabled routes with a non-zero `poll` are re-checked periodically with small reliable datagrams, so a link that comes back is noticed without anyone having to ask. When a `DatagramFailureNtf` arrives, the router will try an alternative route and retransmit, up to `retryTimeout`. And when you want to know what actually happened rather than what should have, `DatagramTraceReq` traces the path and reports every node along the way.
+The [router](https://unetstack.net/handbook/309_router.html) does the same for each destination. Every route carries a `metric`, along with `hops`, `dataRate`, `reliability`, `MTU` and `RTU`, so choosing a route is a decision based on more than just a hop count. If our default trade-off between hops and data rate isn't the one you want, you can supply your own metric as a closure. Routes marked `auto` enable and disable themselves as `LinkStatusNtf` messages report links coming up and going down. Disabled routes with a non-zero `poll` are re-checked periodically with small reliable datagrams, so a link that comes back is noticed without anyone having to ask. When a `DatagramFailureNtf` arrives, the router will try an alternative route and retransmit, up to `retryTimeout`. And when you want to know what actually happened rather than what should have, `DatagramTraceReq` traces the path and reports every node along the way.
 
 Each of these seems like a small change on its own. But together, they are the difference between a network that recovers by itself and one that needs someone to go and manually fix it.
 
@@ -122,7 +122,7 @@ Each of these seems like a small change on its own. But together, they are the d
 
 Fragmentation, end-to-end acknowledgement (`ackTimeout`, `retry`), compression, mailboxes, routing rules and file transfers are all decisions about the same queue of data waiting to go out, and one agent that can see all of them makes better decisions than three agents negotiating with each other. The most useful consequence is that a large file transfer can run in the background while short, time-sensitive messages continue to flow in the foreground. Bulk data no longer holds up the network when your vehicle or sensor has something urgent to say.
 
-A good place to start is with two new shell commands. `dtx` sends a datagram with whatever attributes you specify, and `dshow` controls which protocols you see arriving. Between them, you can drive and watch the whole [datagram service](https://org-arl.github.io/unet/handbook/304_datagram.html) from the shell:
+A good place to start is with two new shell commands. `dtx` sends a datagram with whatever attributes you specify, and `dshow` controls which protocols you see arriving. Between them, you can drive and watch the whole [datagram service](https://unetstack.net/handbook/304_datagram.html) from the shell:
 
 ```
 > dtx host('B'), [1,2,3]
@@ -137,9 +137,9 @@ The datagram service itself is not new, and neither are most of its attributes -
 
 `robustness` is worth a moment, because it is not the same as reliability. Reliability is about acknowledgement. Robustness chooses the communication scheme, trading data rate against the chance that a fragment survives at all. The handbook gives a nice illustration: the same 32-byte datagram goes out as a single DATA frame at about 1004 bps in roughly a second, or as several CONTROL frames at about 247 bps over roughly 3.5 seconds. Same data, same reliability setting, quite a different bet on the channel.
 
-The rest of what you can ask for is [covered in detail in the handbook](https://org-arl.github.io/unet/handbook/205_qos.html) -- `priority` at five levels, `ttl` for time-sensitive data, `progress` for long transfers, and `route` and `shortcircuit` for control over the path and the headers.
+The rest of what you can ask for is [covered in detail in the handbook](https://unetstack.net/handbook/205_qos.html) -- `priority` at five levels, `ttl` for time-sensitive data, `progress` for long transfers, and `route` and `shortcircuit` for control over the path and the headers.
 
-Much of what makes `caddy` useful shows up in [remote messaging](https://org-arl.github.io/unet/handbook/312_remote.html). Set `ttl: RemoteMessageReq.TTL_MAILBOX` along with `mailbox: 'STATUS'`, and a queued status message is replaced by the next one instead of piling up. A vehicle that has been busy communicating sensor data sends its latest status, rather than the six it had queued up minutes ago. `mimeType` lets an application say what kind of data it is sending, and `RemoteTextReq` (chat messages, packed as 7-bit for ASCII) and `RemoteExecReq` (`rsh`, which now returns its output by default) are proper message types rather than conventions. File transfers can be resumed, so an interrupted `fget` picks up where it left off once the vehicle surfaces again.
+Much of what makes `caddy` useful shows up in [remote messaging](https://unetstack.net/handbook/312_remote.html). Set `ttl: RemoteMessageReq.TTL_MAILBOX` along with `mailbox: 'STATUS'`, and a queued status message is replaced by the next one instead of piling up. A vehicle that has been busy communicating sensor data sends its latest status, rather than the six it had queued up minutes ago. `mimeType` lets an application say what kind of data it is sending, and `RemoteTextReq` (chat messages, packed as 7-bit for ASCII) and `RemoteExecReq` (`rsh`, which now returns its output by default) are proper message types rather than conventions. File transfers can be resumed, so an interrupted `fget` picks up where it left off once the vehicle surfaces again.
 
 And with `messageClass`, routing policy becomes something you can write down:
 
@@ -158,7 +158,7 @@ Tag your bulky telemetry as `STATUS2`, and it waits for the WiFi link when the v
 
 This one needs a modem at the other end, so it isn't something you can try with the community simulator (UnetSim) alone. But if you build systems that eventually get wet, it may be the most useful thing in v7.
 
-The [Virtual Acoustic Ocean](https://org-arl.github.io/unet/handbook/403_vao.html) (VAO) is a realtime acoustic simulator. It replaces the analog front-end of each node, propagates transmitted signals through an acoustic propagation model, adds ambient noise, and streams the received signals back to each node over Ethernet.
+The [Virtual Acoustic Ocean](https://unetstack.net/handbook/403_vao.html) (VAO) is a realtime acoustic simulator. It replaces the analog front-end of each node, propagates transmitted signals through an acoustic propagation model, adds ambient noise, and streams the received signals back to each node over Ethernet.
 
 VAO replaces the power amplifier, the transducer, the hydrophone and the ocean. Everything above that is real: real modem processors, real firmware, real physical layer signal processing, real agents, real timing. It connects at the data acquisition level using the UASP2 protocol, with commands sent as JSON over TCP and received signals streamed as timestamped UDP packets, so the PHY has no idea that it isn't in the water. That is quite different from a channel model in UnetSim, which abstracts away the PHY and lumps all the details of the real ocean into a probability of packet loss.
 
@@ -190,10 +190,10 @@ Since this is hardware-in-the-loop, VAO needs modem firmware at the other end. R
 There is a lot more in UnetStack 7 that we won't cover here, but a few things are worth a passing mention:
 
 - **`unet.js` has matured.** Version 4 is a well-documented library. `UnetMessages` mirrors the UnetStack class hierarchy, so `rxNtf instanceof UnetMessages.DatagramNtf` does what you would expect. It works over WebSockets in the browser and over TCP under Node, and it includes a `CachingGateway` that fetches an agent's parameters together and serves them back with a `maxage` that you control. If you have ever watched a web dashboard send forty parameter requests over an acoustic link, you will appreciate this.
-- **Acoustic navigation is now a stack service.** The [`DOA`](https://org-arl.github.io/unet/handbook/314_doa.html) service reports `BearingNtf` and `PeerLocationNtf` in the body frame, and in the world frame when the node's orientation is known. This is what turns a multi-receiver modem into a USBL transceiver, as we described in [Turning a Multi-Receiver Modem into a USBL Transceiver](https://blog.unetstack.net/turning-a-multi-receiver-modem-into-a-usbl-transceiver).
-- **Nodes provide hardware/platform information.** [`DEVICE_INFO`](https://org-arl.github.io/unet/handbook/316_device.html) provides vendor, model, serial number, health, temperature, voltage, storage and uptime, using the same parameter mechanism as everything else. A small thing, until you are trying to work out what is wrong with a node at sea.
-- **Agents can document themselves.** The [`DOCUMENTATION`](https://org-arl.github.io/unet/handbook/319_doc.html) service is how `help` in the shell knows about an agent's parameters and commands. The reference tables in the handbook are generated from the same source, so the documentation and the code cannot drift apart. If you write agents, give them a `__doc__`.
-- **On modems**, the [`LINK_TUNING`](https://org-arl.github.io/unet/handbook/308_tuner.html) service measures link quality using test frames and picks a scheme that gives good throughput while keeping errors low -- just type `tune 74` and wait. The `profiles` agent saves and switches between named PHY configurations, and `speedtest` measures what you are actually getting. On the transport side, `CaddyLite` provides reliable multi-hop transport, remote access and file transfer, while the licensed `Caddy` adds quality of service (priority, TTL and fairness), user-defined routing rules, and resumable file transfers. The handbook marks which is which, and `CapabilityReq` will tell you at runtime what a provider actually supports.
+- **Acoustic navigation is now a stack service.** The [`DOA`](https://unetstack.net/handbook/314_doa.html) service reports `BearingNtf` and `PeerLocationNtf` in the body frame, and in the world frame when the node's orientation is known. This is what turns a multi-receiver modem into a USBL transceiver, as we described in [Turning a Multi-Receiver Modem into a USBL Transceiver](https://blog.unetstack.net/turning-a-multi-receiver-modem-into-a-usbl-transceiver).
+- **Nodes provide hardware/platform information.** [`DEVICE_INFO`](https://unetstack.net/handbook/316_device.html) provides vendor, model, serial number, health, temperature, voltage, storage and uptime, using the same parameter mechanism as everything else. A small thing, until you are trying to work out what is wrong with a node at sea.
+- **Agents can document themselves.** The [`DOCUMENTATION`](https://unetstack.net/handbook/319_doc.html) service is how `help` in the shell knows about an agent's parameters and commands. The reference tables in the handbook are generated from the same source, so the documentation and the code cannot drift apart. If you write agents, give them a `__doc__`.
+- **On modems**, the [`LINK_TUNING`](https://unetstack.net/handbook/308_tuner.html) service measures link quality using test frames and picks a scheme that gives good throughput while keeping errors low -- just type `tune 74` and wait. The `profiles` agent saves and switches between named PHY configurations, and `speedtest` measures what you are actually getting. On the transport side, `CaddyLite` provides reliable multi-hop transport, remote access and file transfer, while the licensed `Caddy` adds quality of service (priority, TTL and fairness), user-defined routing rules, and resumable file transfers. The handbook marks which is which, and `CapabilityReq` will tell you at runtime what a provider actually supports.
 
 ## Closing thoughts
 
@@ -201,6 +201,6 @@ UnetStack 7 is a big release, but it is not a new stack. It is the same agent-ba
 
 Some of the tidying up may look fussy if you read the porting guide on its own. It isn't. For the stack to make good decisions below the application layer, it needs to know what it is carrying, what its links are doing, and what the application actually wants. Most of what changed in v7 is about making those three things knowable. We will have more to say about what that enables before long.
 
-If you have UnetStack 3 code, start with the [porting guide](https://org-arl.github.io/unet/handbook/A1_porting.html). Most of what you have will move across with modest changes. If you are new to all this, the [handbook](https://org-arl.github.io/unet/handbook/) has been rewritten for v7, and there is a lot in there that we have not even mentioned here.
+If you have UnetStack 3 code, start with the [porting guide](https://unetstack.net/handbook/A1_porting.html). Most of what you have will move across with modest changes. If you are new to all this, the [handbook](https://unetstack.net/handbook/) has been rewritten for v7, and there is a lot in there that we have not even mentioned here.
 
 We are delighted to finally get all of this into your hands. Do let us know how you get on with it!

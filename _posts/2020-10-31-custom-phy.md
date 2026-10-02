@@ -15,7 +15,7 @@ UnetStack enables software-defined open architecture modems (SDOAMs). While such
 
 ### Background
 
-In an acoustic communication system, the PHY is responsible for converting data bits into an acoustic signal to be transmitted through the channel, and the received signal back into data bits. In UnetStack based modems, this functionality is usually provided by the `phy` agent. The `phy` agent implements the [PHYSICAL service](https://unetstack.net/handbook/unet-handbook_physical_service.html), and other agents such as `uwlink`, `mac` and `ranging` use this service to provide communication and navigation services to the user (and to others agents in the network stack).
+In an acoustic communication system, the PHY is responsible for converting data bits into an acoustic signal to be transmitted through the channel, and the received signal back into data bits. In UnetStack based modems, this functionality is usually provided by the `phy` agent. The `phy` agent implements the [PHYSICAL service](https://unetstack.net/handbook-ed1v3/unet-handbook_physical_service.html), and other agents such as `uwlink`, `mac` and `ranging` use this service to provide communication and navigation services to the user (and to others agents in the network stack).
 
 At this point, it may be useful to fire up a [Unet audio](https://unetstack.net/#downloads) instance, or connect to a UnetStack powered modem if you've one handy.
 
@@ -30,7 +30,7 @@ uwlink: org.arl.unet.link.ReliableLink - IDLE
   ⋮
 ```
 
-We see the `phy` agent among all the agents running on the modem. The Unet audio community edition, as well as most UnetStack based underwater modems (e.g. [Subnero M25M series modems](https://subnero.com/products/modem.html)), use Yoda PHY (`org.arl.yoda.Physical`) as the default PHY. The Yoda PHY not only provides the [PHYSICAL service](https://unetstack.net/handbook/unet-handbook_physical_service.html), but also the [BASEBAND service](https://unetstack.net/handbook/unet-handbook_baseband_service.html) and a signal detection capability that we'll be using shortly.
+We see the `phy` agent among all the agents running on the modem. The Unet audio community edition, as well as most UnetStack based underwater modems (e.g. [Subnero M25M series modems](https://subnero.com/products/modem.html)), use Yoda PHY (`org.arl.yoda.Physical`) as the default PHY. The Yoda PHY not only provides the [PHYSICAL service](https://unetstack.net/handbook-ed1v3/unet-handbook_physical_service.html), but also the [BASEBAND service](https://unetstack.net/handbook-ed1v3/unet-handbook_baseband_service.html) and a signal detection capability that we'll be using shortly.
 
 Just typing `phy` on the shell tells us more about the active PHY:
 ```bash
@@ -85,7 +85,7 @@ phy
 
 Our aim is to write our own custom PHY agent (we'll call it `phy2`), load it on the modem, and then ask `uwlink`, `mac` and `ranging` to use it instead!
 
-Our `phy2` will use the [BASEBAND service](https://unetstack.net/handbook/unet-handbook_baseband_service.html) provided by Yoda PHY (`phy`) to transmit and record acoustic signals. We will also use `phy` to sense the acoustic channel, accurately timestamp transmissions and receptions, and continuously monitor the acoustic channel for incoming signals. However, we will implement our own frame format and modulation scheme in `phy2`.
+Our `phy2` will use the [BASEBAND service](https://unetstack.net/handbook-ed1v3/unet-handbook_baseband_service.html) provided by Yoda PHY (`phy`) to transmit and record acoustic signals. We will also use `phy` to sense the acoustic channel, accurately timestamp transmissions and receptions, and continuously monitor the acoustic channel for incoming signals. However, we will implement our own frame format and modulation scheme in `phy2`.
 
 We'll be writing our `phy2` agent here in Groovy, but you could choose to write yours in Java if you wish. While our example here will be 100% pure Groovy for illustration, you may prefer to [develop complex signal processing components in Julia]({% post_url 2020-11-01-custom-phy-in-julia %}) or C (invoked via [JNI](https://docs.oracle.com/javase/8/docs/technotes/guides/jni/)) if you need higher performance or access to GPUs.
 
@@ -162,9 +162,9 @@ The second argument `start` tells the function where in the `signal` array to st
 
 ### Writing the agent
 
-Now that we have our modulator and demodulator functions, we are ready to put together our `phy2` agent (we call the agent class `MyPhy`). If you're not familar with developing agents, now would be a good time to [familiarize yourself](https://unetstack.net/handbook/unet-handbook_developing_your_own_agents.html) with the key concepts.
+Now that we have our modulator and demodulator functions, we are ready to put together our `phy2` agent (we call the agent class `MyPhy`). If you're not familar with developing agents, now would be a good time to [familiarize yourself](https://unetstack.net/handbook-ed1v3/unet-handbook_developing_your_own_agents.html) with the key concepts.
 
-Any PHY agent needs to implement the [PHYSICAL service](https://unetstack.net/handbook/unet-handbook_physical_service.html) and the [DATAGRAM service](https://unetstack.net/handbook/unet-handbook_datagram_service.html). We'll limit ourselves to the basic functionality and honor the `TxFrameReq` (subclass of `DatagramReq`), `TxRawFrameReq` and `ClearReq` requests. We'll generate `RxFrameNtf` (subcalss of `DatagramNtf`) and `BadFrameNtf` notifications. The other `TxFrameStartNtf`, `RxFrameStartNtf` and `CollisionNtf` are generated by the Yoda PHY automatically, and we do not need to generate those. We will also need to implement all the parameters in both services.
+Any PHY agent needs to implement the [PHYSICAL service](https://unetstack.net/handbook-ed1v3/unet-handbook_physical_service.html) and the [DATAGRAM service](https://unetstack.net/handbook-ed1v3/unet-handbook_datagram_service.html). We'll limit ourselves to the basic functionality and honor the `TxFrameReq` (subclass of `DatagramReq`), `TxRawFrameReq` and `ClearReq` requests. We'll generate `RxFrameNtf` (subcalss of `DatagramNtf`) and `BadFrameNtf` notifications. The other `TxFrameStartNtf`, `RxFrameStartNtf` and `CollisionNtf` are generated by the Yoda PHY automatically, and we do not need to generate those. We will also need to implement all the parameters in both services.
 
 Let's start by registering the services we provide, as well as the parameters we support:
 ```groovy
