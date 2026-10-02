@@ -60,7 +60,7 @@ For Unet audio, the same settings will shift the center by 1 kHz to 13 kHz with 
 
 Note that if there is a frequency band to be avoided, we can position the used band to the "left" or "right" of it by adjusting `nc`, `dc0`, and `bw`. Note that going far away from the ideal transducer resonance region will reduce transmission efficiency. 
 
-The usage and meaning of parameters can be found in [Command Reference](https://unetstack.net/handbook/unet-handbook.html#_command_reference)
+The usage and meaning of parameters can be found in [Command Reference](https://unetstack.net/handbook-ed1v3/unet-handbook.html#_command_reference)
 
 ## FHBFSK frequency band control
 
@@ -124,7 +124,7 @@ In the Diagnostic Scope dashboard, let us look at the passband PSD. With an appr
 
 The user can also generate and set custom preambles. 
 
-> NOTE: Details of the custom preamble are available in section 16.4. Transmitting and detecting preambles` of the [Unet handbook](https://unetstack.net/handbook/unet-handbook_baseband_service.html).
+> NOTE: Details of the custom preamble are available in section 16.4. Transmitting and detecting preambles` of the [Unet handbook](https://unetstack.net/handbook-ed1v3/unet-handbook_baseband_service.html).
 
 
 ## Conclusion

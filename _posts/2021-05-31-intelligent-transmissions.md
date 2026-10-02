@@ -25,7 +25,7 @@ Figure 1 shows our assumptions on how the various components are connected withi
 
 To start with, let us assume the user would like to send periodic updates from AUV as a broadcast message. There are mainly two ways to do this.
 
-1. Run a program in the SBC and connect to the modem using a UnetStack Gateway to send periodic commands to the modem, using Unet socket APIs. This can be done using any of the programming languages supported by UnetStack such as C, Java, Groovy, Python, Julia, etc. as detailed [here](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html). In this case, the user has access to various sensors of the AUV directly.
+1. Run a program in the SBC and connect to the modem using a UnetStack Gateway to send periodic commands to the modem, using Unet socket APIs. This can be done using any of the programming languages supported by UnetStack such as C, Java, Groovy, Python, Julia, etc. as detailed [here](https://unetstack.net/handbook-ed1v3/unet-handbook_unetsocket_api.html). In this case, the user has access to various sensors of the AUV directly.
 2. Running a groovy script in the modem to do the periodic transmissions. The advantage of this method is that you now have direct access to the modem and can deploy your own [fjåge](https://github.com/org-arl/fjage) agents. This is a lot more flexible as compared to what is offered by the APIs.
 
 To send a simple broadcast message once, you can use the `tell` command as follows.
@@ -61,7 +61,7 @@ In UnetStack, the `NODE_INFO` service provides a single place to collate node-re
 }
 ```
 
-> NOTE: Depth is indicated as 0 (at water surface), -1 (1 m below the water surface), -2 (2 m below the water surface), and so on. See [Section 5.6](https://unetstack.net/handbook/unet-handbook_setting_up_small_networks.html#_node_locations_coordinate_systems) of the unet handbook for a discussion on origin, location, and coordinate systems.
+> NOTE: Depth is indicated as 0 (at water surface), -1 (1 m below the water surface), -2 (2 m below the water surface), and so on. See [Section 5.6](https://unetstack.net/handbook-ed1v3/unet-handbook_setting_up_small_networks.html#_node_locations_coordinate_systems) of the unet handbook for a discussion on origin, location, and coordinate systems.
 
 What if your modem does not have a depth sensor (e.g. [embedded configuration](https://subnero.com/products/wnc-m25mse3.html)) and you would like to use the sensor data from your AUV? In this case, you will have to run a program in the AUV's SBC to get the location data from AUV's sensors and use Unet socket APIs to update the `node.location` parameter, periodically. A pseudo-code (in python) for doing this is as follows. 
 
@@ -136,7 +136,7 @@ unetsocket_close(sock);
 
 > NOTE: The user will have to replace the above code with appropriate function calls to get the AUV sensor data.
 
-The above examples can easily be adapted to check the range to a receiver (using [`range`](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html) command) and adjust the transmit power level accordingly, to avoid saturating a receiver.
+The above examples can easily be adapted to check the range to a receiver (using [`range`](https://unetstack.net/handbook-ed1v3/unet-handbook_ranging_and_synchronization.html) command) and adjust the transmit power level accordingly, to avoid saturating a receiver.
 
 ## Conclusion
 

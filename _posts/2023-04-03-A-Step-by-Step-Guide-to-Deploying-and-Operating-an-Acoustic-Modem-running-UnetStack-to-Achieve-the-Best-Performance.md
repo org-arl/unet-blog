@@ -43,7 +43,7 @@ This shows that modem A was able to ping modem B and get the response back. It h
 
 The `ping` command uses the `CONTROL` channel, which is the robust communication channel provided by UnetStack, typically used to exchange control information between the modems. 
 
-> The `CONTROL` channel is meant for low-rate robust data transmission, whereas the `DATA` channel is typically configured for higher-rate data transmission. You can read more about these in the [unet handbook](https://unetstack.net/handbook).
+> The `CONTROL` channel is meant for low-rate robust data transmission, whereas the `DATA` channel is typically configured for higher-rate data transmission. You can read more about these in the [unet handbook](https://unetstack.net/handbook-ed1v3/unet-handbook_preface.html).
 
 However, most of the actual payload transmissions are done using the `DATA` channel. So, our next step is to verify that the `DATA` channel works fine between the modems. This can be achieved using the `tell` command. Type the following command in the web shell of modem A.
 
@@ -59,13 +59,13 @@ On successful reception on modem B, you will see the following:
 
 You can repeat the same from modem B to modem A or use the "Messages" section in the lower right corner of the Overview dashboard. The `tell` command uses a combination of `CONTROL` and `DATA` channels to transfer the payload.
 
->  You can find more about the `tell` command in section `2.6. Using acoustic modems` in the [unet handbook](https://unetstack.net/handbook/unet-handbook.html).
+>  You can find more about the `tell` command in section `2.6. Using acoustic modems` in the [unet handbook](https://unetstack.net/handbook-ed1v3/unet-handbook.html).
 
 ## File transfer using `fput`
 
-Now that we have a working link, you can transfer data or files between the modems. To transmit data, the [UnetSocket APIs](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html) are a good starting point. These are supported in a variety of languages and levels.
+Now that we have a working link, you can transfer data or files between the modems. To transmit data, the [UnetSocket APIs](https://unetstack.net/handbook-ed1v3/unet-handbook_unetsocket_api.html) are a good starting point. These are supported in a variety of languages and levels.
 
-To transmit a file, we can use the `fput` command. First, you will need to enable the [remote agent](https://unetstack.net/handbook/unet-handbook_remote_access.html) in the receiving modem. On modem B, type the following:
+To transmit a file, we can use the `fput` command. First, you will need to enable the [remote agent](https://unetstack.net/handbook-ed1v3/unet-handbook_remote_access.html) in the receiving modem. On modem B, type the following:
 
 ```
 > remote.enable = true

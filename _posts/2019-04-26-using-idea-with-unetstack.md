@@ -70,7 +70,7 @@ Create a new Groovy Class in the `src/` directory of your project by right-click
 
 ![](assets/img/idea-setup/project.png)
 
-In this example, the agent we're writing will be called `AwesomeAgent.groovy`. The code for it is below. For more information about writing agents, refer to the Unet [documentation](https://unetstack.net/handbook/unet-handbook_developing_your_own_agents.html).
+In this example, the agent we're writing will be called `AwesomeAgent.groovy`. The code for it is below. For more information about writing agents, refer to the Unet [documentation](https://unetstack.net/handbook-ed1v3/unet-handbook_developing_your_own_agents.html).
 
 ```groovy
 import org.arl.fjage.Message

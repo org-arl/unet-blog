@@ -28,7 +28,7 @@ and one unsolicited notification:
 
 ## The modem driver
 
-A modem driver is simply a [Unet agent](https://unetstack.net/handbook/unet-handbook_unetstack_basics.html) that supports the [Physical](https://unetstack.net/handbook/unet-handbook_physical_service.html) and [Datagram](https://unetstack.net/handbook/unet-handbook_datagram_service.html) services.
+A modem driver is simply a [Unet agent](https://unetstack.net/handbook-ed1v3/unet-handbook_unetstack_basics.html) that supports the [Physical](https://unetstack.net/handbook-ed1v3/unet-handbook_physical_service.html) and [Datagram](https://unetstack.net/handbook-ed1v3/unet-handbook_datagram_service.html) services.
 
 There are several libraries for Java/Groovy that allow RS232 communications. We'll use [jSerialComm](http://fazecast.github.io/jSerialComm/) in our example here.
 
@@ -270,12 +270,12 @@ AGREE
 There's much more that modem drivers may support, depending on the capabilities of the modem. Once you understand how to write the simple modem driver above, the rest should be straightforward. Here are some additional functionalities that you may want to consider supporting:
 
 * `CONTROL` and `DATA` channels, if the modem supports various levels of modulation/FEC robustness
-* Optional `ClearReq`, `TxRawFrameReq`, `RxFrameStartNtf`, `BadFrameNtf` and `CollisionNtf` messages of the [Physical](https://unetstack.net/handbook/unet-handbook_physical_service.html) service
+* Optional `ClearReq`, `TxRawFrameReq`, `RxFrameStartNtf`, `BadFrameNtf` and `CollisionNtf` messages of the [Physical](https://unetstack.net/handbook-ed1v3/unet-handbook_physical_service.html) service
 * Populating optional `to`, `protocol`, `timestamp` and `errors` fields of the [`RxFrameNtf`](https://www.unetstack.net/javadoc/3.0/org/arl/unet/phy/RxFrameNtf.html)
 * More accurate timestamps, if the modem provides a µs accuracy clock for timestamping frames
-* Optional `TIMED_TX` and `TIMESTAMPED_TX` capability of the [Physical](https://unetstack.net/handbook/unet-handbook_physical_service.html) service
-* Optional `PRIORITY`, `TTL` and `CANCELATION` capabilities of the [Datagram](https://unetstack.net/handbook/unet-handbook_datagram_service.html) service
-* [Baseband](https://unetstack.net/handbook/unet-handbook_baseband_service.html) service, if the modem supports acoustic recording or arbitrary signal transmission
-* [Ranging](https://unetstack.net/handbook/unet-handbook_ranging_and_synchronization.html) service, if the modem supports acoustic ranging
+* Optional `TIMED_TX` and `TIMESTAMPED_TX` capability of the [Physical](https://unetstack.net/handbook-ed1v3/unet-handbook_physical_service.html) service
+* Optional `PRIORITY`, `TTL` and `CANCELATION` capabilities of the [Datagram](https://unetstack.net/handbook-ed1v3/unet-handbook_datagram_service.html) service
+* [Baseband](https://unetstack.net/handbook-ed1v3/unet-handbook_baseband_service.html) service, if the modem supports acoustic recording or arbitrary signal transmission
+* [Ranging](https://unetstack.net/handbook-ed1v3/unet-handbook_ranging_and_synchronization.html) service, if the modem supports acoustic ranging
 
 And if your modem supports new functionality and parameters, you can define your own parameters to expose and requests, responses and notifications to offer.

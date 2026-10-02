@@ -26,7 +26,7 @@ So let’s get started...
 
 ### UnetSocket API
 
-If you’ve interfaced with UnetStack from Python or Java or Groovy or C, you perhaps are already familiar with the [UnetSocket](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html) API. This API is also available from Julia by using the [`UnetSockets.jl`](https://github.com/org-arl/UnetSockets.jl) package. To install it (need to do this only once), we fire up a Julia terminal and add the package:
+If you’ve interfaced with UnetStack from Python or Java or Groovy or C, you perhaps are already familiar with the [UnetSocket](https://unetstack.net/handbook-ed1v3/unet-handbook_unetsocket_api.html) API. This API is also available from Julia by using the [`UnetSockets.jl`](https://github.com/org-arl/UnetSockets.jl) package. To install it (need to do this only once), we fire up a Julia terminal and add the package:
 
 ```julia
 $ julia
@@ -139,7 +139,7 @@ search: UnetSocket UnetSockets
 
 ### Baseband signal processing in Julia
 
-In the previous example, we broadcasted a “hello world” message, but with just one `unet audio` modem running, there wasn’t anyone to receive it. If you have multiple modems, or multiple laptops to run `unet audio` on, you should be able to receive that message on the other modems. However, it is more likely that you’d want to harness the power of Julia for generating some signals to transmit using UnetStack’s [baseband service](https://unetstack.net/handbook/unet-handbook_baseband_service.html), or process signal received by the modem. Let’s try some examples of this next.
+In the previous example, we broadcasted a “hello world” message, but with just one `unet audio` modem running, there wasn’t anyone to receive it. If you have multiple modems, or multiple laptops to run `unet audio` on, you should be able to receive that message on the other modems. However, it is more likely that you’d want to harness the power of Julia for generating some signals to transmit using UnetStack’s [baseband service](https://unetstack.net/handbook-ed1v3/unet-handbook_baseband_service.html), or process signal received by the modem. Let’s try some examples of this next.
 
 Let’s start off by adding a couple of useful Julia packages:
 

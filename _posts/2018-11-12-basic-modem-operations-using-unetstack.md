@@ -25,7 +25,7 @@ In order to open a connection to the modem (assuming the computer and modem are 
 sock = new UnetSocket(ip_address, 1100)
 modem = sock.getGateway()
 ```
-The `sock` object created can be used to send datagrams and receive datagrams. A more detailed explanation can be found in the [unet handbook](https://unetstack.net/handbook/unet-handbook_unetsocket_api.html).
+The `sock` object created can be used to send datagrams and receive datagrams. A more detailed explanation can be found in the [unet handbook](https://unetstack.net/handbook-ed1v3/unet-handbook_unetsocket_api.html).
 The instance `modem` created can be used to access all the methods provided of the Gateway class to interact with the agents running on the modem. The Gateway class methods are documented [here](http://org-arl.github.io/fjage/javadoc/).
 
 Note that the same interfaces are also available in `Python` and `C`. For example, to open a connection to the modem using `Python`:

@@ -13,7 +13,7 @@ tags: [howto, unetaudio, unetstack, modems, phy, janus]
 
 Imagine you are developing an application for an underwater use case such as messaging or file transfer and you intend to eventually deploy the app on a network of [JANUS](http://www.januswiki.com/) compliant modems in the field. Or you may be developing a new routing protocol that is intended to work on a network of JANUS compliant modems. Or you might be a university Professor designing an exercise for your students to learn about underwater communications and networking.
 
-Along with developing the app or the protocol, a common step is to simulate its performance using simulators like [UnetSim](https://unetstack.net/handbook/unet-handbook_getting_started.html#_setting_up_a_simple_simulated_network). However, before deploying the app on actual modems and going to the field for testing, you want to make sure it works on actual devices as intended. If you are in a classroom, having a hardware component that can actually transmit and receive the frames would be extremely useful. This is where [Unet audio](https://unetstack.net/) comes in handy.
+Along with developing the app or the protocol, a common step is to simulate its performance using simulators like [UnetSim](https://unetstack.net/handbook-ed1v3/unet-handbook_getting_started.html#_setting_up_a_simple_simulated_network). However, before deploying the app on actual modems and going to the field for testing, you want to make sure it works on actual devices as intended. If you are in a classroom, having a hardware component that can actually transmit and receive the frames would be extremely useful. This is where [Unet audio](https://unetstack.net/) comes in handy.
 
 <p align="center"><iframe width="720" height="360" src="https://www.youtube.com/embed/8bR5uV_h5hM" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
 
@@ -52,7 +52,7 @@ You should hear the transmission from your computer speaker! If you don’t, che
 
 Great, you have just transmitted a message using the default settings of Unet audio.
 
-> NOTE: If you have two computers with speakers and microphones, you can run Unet audio on both, and communicate between the two. If you happen to have only one computer handy,  we can get one Unet audio instance to transmit and receive at the same time as detailed in [section 15.4. Transmitting & receiving using Unet audio](https://unetstack.net/handbook/unet-handbook_physical_service.html) of the [Unet handbook](https://unetstack.net/handbook/unet-handbook_preface.html).
+> NOTE: If you have two computers with speakers and microphones, you can run Unet audio on both, and communicate between the two. If you happen to have only one computer handy,  we can get one Unet audio instance to transmit and receive at the same time as detailed in [section 15.4. Transmitting & receiving using Unet audio](https://unetstack.net/handbook-ed1v3/unet-handbook_physical_service.html) of the [Unet handbook](https://unetstack.net/handbook-ed1v3/unet-handbook_preface.html).
 
 
 ## Transmitting & receiving JANUS frames

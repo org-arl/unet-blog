@@ -44,20 +44,20 @@ Configuring and using `Unity` agent to exploit spatial diversity is easy with ju
 
 #### 1. Set up for receiver nodes to cooperate (an example):
 
-To set up the group of receivers to cooperate over a short-range network, we use [`Wormhole`](https://unetstack.net/handbook//unet-handbook_wormholes.html)  agent provided in UnetStack.  Transmitter node makes a transmission that is heard at all the receiver nodes. However, none of the nodes are able to successfully recover the information received, as the communication link is noisy.  In order to share the received noisy signals among the receivers, we can connect the receiver nodes using a `Wormhole`. A UDP connection between the two receiver nodes, over any IP based network (Ethernet, WiFi), can be established by adding just a few lines of code on the receiver nodes as shown below:
+To set up the group of receivers to cooperate over a short-range network, we use [`Wormhole`](https://unetstack.net/handbook-ed1v3/unet-handbook_wormholes.html)  agent provided in UnetStack.  Transmitter node makes a transmission that is heard at all the receiver nodes. However, none of the nodes are able to successfully recover the information received, as the communication link is noisy.  In order to share the received noisy signals among the receivers, we can connect the receiver nodes using a `Wormhole`. A UDP connection between the two receiver nodes, over any IP based network (Ethernet, WiFi), can be established by adding just a few lines of code on the receiver nodes as shown below:
 
 ```groovy
 container.add 'udp', new org.arl.unet.link.UdpLink()
 container.add 'wormhole', new org.arl.unet.wormhole.Wormhole()
 wormhole.dsp = 'udp'
 ```
-Line (1) adds a [`UdpLink`](https://unetstack.net/handbook/unet-handbook_wired_and_over_the_air_links.html) agent that implements a link protocol over UDP/IP for use over wired/wireless IP networks.
+Line (1) adds a [`UdpLink`](https://unetstack.net/handbook-ed1v3/unet-handbook_wired_and_over_the_air_links.html) agent that implements a link protocol over UDP/IP for use over wired/wireless IP networks.
 
 An example when you run the above on three simulated modems is shown below:
 
 ![Overview](../assets/img/sd/sd-2.png)
 
-Line (2) adds a `Wormhole` agent which allows the [fjåge](https://fjage.readthedocs.io/en/latest/) messages to be sent between containers over a [Unet link](https://unetstack.net/handbook/unet-handbook_introduction.html) as shown below:
+Line (2) adds a `Wormhole` agent which allows the [fjåge](https://fjage.readthedocs.io/en/latest/) messages to be sent between containers over a [Unet link](https://unetstack.net/handbook-ed1v3/unet-handbook_introduction.html) as shown below:
 
 ![Overview](../assets/img/sd/sd-3.png)
 
